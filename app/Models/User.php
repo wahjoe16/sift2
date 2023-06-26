@@ -70,4 +70,24 @@ class User extends Authenticatable
             return 'http://placehold.it/850x618';
         }
     }
+
+    public function daftar_seminar_dosen1()
+    {
+        return $this->hasMany(DaftarSeminar::class, 'id', 'dosen1_id');
+    }
+
+    public function daftar_seminar_dosen2()
+    {
+        return $this->hasMany(DaftarSeminar::class, 'id', 'dosen2_id');
+    }
+
+    public function daftar_sidang_dosen1()
+    {
+        return $this->hasMany(DaftarSidang::class, 'id', 'dosen1_id');
+    }
+
+    public function daftar_sidang_dosen2()
+    {
+        return $this->hasMany(DaftarSidang::class, 'id', 'dosen2_id');
+    }
 }

@@ -17,7 +17,8 @@
     <!-- Style -->
     <link rel="stylesheet" href="{{ url('login_form/css/style.css') }}">
 
-    <title>Satuan Kegiatan Dosen</title>
+    <title>Fakultas Teknik | UNISBA</title>
+    <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}" type="image/x-icon">
 </head>
 
 <body>

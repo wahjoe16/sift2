@@ -31,6 +31,9 @@ Route::group(['middleware' => 'ceklevel:1,2,3'], function () {
     Route::get('/password', [UserController::class, 'password'])->name('user.password');
     Route::post('/update-password', [UserController::class, 'updatePassword'])->name('update.password');
     Route::get('/dashboard-sidang', [DashboardController::class, 'indexSidang'])->name('dashboard.sidang');
+    Route::get('/dashboard/mahasiswa-data', [DashboardController::class, 'dataMahasiswa'])->name('dashboard.mahasiswa');
+    Route::get('/donut-chart/mahasiswa', [DashboardController::class, 'donutMahasiswa'])->name('donut.mahasiswa');
+    Route::get('/dashboard/dosen-data', [DashboardController::class, 'dataDosen'])->name('dashboard.dosen');
 });
 
 Route::group(['prefix' => '/datamaster', 'middleware' => 'ceklevel:1'], function () {

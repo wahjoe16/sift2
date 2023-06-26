@@ -9,7 +9,7 @@
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <div class="btn-group">
-                        @if (is_null($dataSeminar))
+                        @if (is_null($dataLog))
                         <a href="{{ route('seminar_tmb.daftar') }}" class="btn btn-success btn-sm btn-flat"><i class="fa fa-upload"></i> Ajukan</a>
                         @else
                         <a href="#" class="btn btn-success btn-sm btn-flat disabled"><i class="fa fa-upload"></i> Ajukan</a>

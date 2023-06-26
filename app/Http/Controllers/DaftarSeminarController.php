@@ -15,10 +15,9 @@ class DaftarSeminarController extends Controller
     {
         $dataMhs = auth()->user();
         $dataSeminar = DaftarSeminar::where('mahasiswa_id', $dataMhs->id)->get();
-        // dd($dataSeminar);
-        $lastData = DaftarSeminar::where('mahasiswa_id', $dataMhs->id)->orderBy('id', 'desc')->first();
+        $dataLog = DaftarSeminar::where('mahasiswa_id', auth()->user()->id)->first();
 
-        return view('daftar_seminar.tmb.index', compact('dataSeminar', 'lastData'));
+        return view('daftar_seminar.tmb.index', compact('dataSeminar', 'dataLog'));
     }
 
     public function daftarTmb()
@@ -500,8 +499,8 @@ class DaftarSeminarController extends Controller
     {
         $dataMhs = auth()->user();
         $dataSeminar = DaftarSeminar::where('mahasiswa_id', $dataMhs->id)->get();
-        $lastData = DaftarSeminar::where('mahasiswa_id', $dataMhs->id)->orderBy('id', 'desc')->first();
-        return view('daftar_seminar.ti.index', compact('dataSeminar', 'lastData'));
+        $dataLog = DaftarSeminar::where('mahasiswa_id', auth()->user()->id)->first();
+        return view('daftar_seminar.ti.index', compact('dataSeminar', 'dataLog'));
     }
 
     public function daftarTi()
@@ -844,10 +843,9 @@ class DaftarSeminarController extends Controller
     {
         $dataMhs = auth()->user();
         $dataSeminar = DaftarSeminar::where('mahasiswa_id', $dataMhs->id)->get();
-        // dd($dataSeminar);
-        $lastData = DaftarSeminar::where('mahasiswa_id', $dataMhs->id)->orderBy('id', 'desc')->first();
+        $dataLog = DaftarSeminar::where('mahasiswa_id', auth()->user()->id)->first();
 
-        return view('daftar_seminar.pwk.index', compact('dataSeminar', 'lastData'));
+        return view('daftar_seminar.pwk.index', compact('dataSeminar', 'dataLog'));
     }
 
     public function daftarPwk()

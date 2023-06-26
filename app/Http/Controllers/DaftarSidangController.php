@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DaftarSidang;
+use App\Models\DaftarSeminar;
 use App\Models\Semester;
 use App\Models\TahunAjaran;
 use App\Models\User;
@@ -14,12 +15,11 @@ class DaftarSidangController extends Controller
     public function indexTmb()
     {
         $dataMhs = auth()->user();
-        // dd($dataMhs);
         $dataSidang = DaftarSidang::where('mahasiswa_id', $dataMhs->id)->get();
-        // dd($dataSidang);
-        $lastData = DaftarSidang::where('mahasiswa_id', $dataMhs->id)->orderBy('id', 'desc')->first();
+        $dataLog = DaftarSidang::where('mahasiswa_id', $dataMhs->id)->first();
+        $dataSeminar = DaftarSeminar::where('mahasiswa_id', $dataMhs->id)->where('status', 1);
 
-        return view('daftar_sidang.tmb.index', compact('dataSidang', 'lastData'));
+        return view('daftar_sidang.tmb.index', compact('dataSidang', 'dataLog', 'dataSeminar'));
     }
 
     public function daftarTmb()

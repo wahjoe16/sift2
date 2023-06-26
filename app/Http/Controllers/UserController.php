@@ -26,7 +26,7 @@ class UserController extends Controller
 
         $request->validate([
             'nama' => 'required',
-            'program_studi' => 'required',
+            'program_studi' => 'required_if:level, 2, 3',
             'email' => 'required',
             'telepon' => 'required',
             'foto' => 'required|mimes:png,jpg',
