@@ -16,10 +16,12 @@ class DaftarSidangController extends Controller
     {
         $dataMhs = auth()->user();
         $dataSidang = DaftarSidang::where('mahasiswa_id', $dataMhs->id)->get();
-        $dataLog = DaftarSidang::where('mahasiswa_id', $dataMhs->id)->first();
-        $dataSeminar = DaftarSeminar::where('mahasiswa_id', $dataMhs->id)->where('status', 1);
+        $dataLogSidang = DaftarSidang::where('mahasiswa_id', $dataMhs->id)->first();
+        $dataLogSeminar = DaftarSeminar::where('mahasiswa_id', $dataMhs->id)->first();
+        $dataSeminar = DaftarSeminar::where('mahasiswa_id', $dataMhs->id)->where('status', 1)->first();
+        // dd($dataSeminar);
 
-        return view('daftar_sidang.tmb.index', compact('dataSidang', 'dataLog', 'dataSeminar'));
+        return view('daftar_sidang.tmb.index', compact('dataSidang', 'dataLogSidang', 'dataLogSeminar', 'dataSeminar'));
     }
 
     public function daftarTmb()
@@ -171,8 +173,10 @@ class DaftarSidangController extends Controller
     {
         $dataMhs = auth()->user();
         $dataSidang = DaftarSidang::where('mahasiswa_id', $dataMhs->id)->get();
-        $lastData = DaftarSidang::where('mahasiswa_id', $dataMhs->id)->orderBy('id', 'desc')->first();
-        return view('daftar_sidang.ti.index', compact('dataSidang', 'lastData'));
+        $dataLogSidang = DaftarSidang::where('mahasiswa_id', $dataMhs->id)->first();
+        $dataLogSeminar = DaftarSeminar::where('mahasiswa_id', $dataMhs->id)->first();
+        $dataSeminar = DaftarSeminar::where('mahasiswa_id', $dataMhs->id)->where('status', 1)->first();
+        return view('daftar_sidang.ti.index', compact('dataSidang', 'dataLogSidang', 'dataLogSeminar', 'dataSeminar'));
     }
 
     public function daftarTi()
@@ -659,10 +663,11 @@ class DaftarSidangController extends Controller
     public function indexPwk()
     {
         $dataMhs = auth()->user();
-        $dataSeminar = DaftarSidang::where('mahasiswa_id', $dataMhs->id)->get();
-        $lastData = DaftarSidang::where('mahasiswa_id', $dataMhs->id)->orderBy('id', 'desc')->first();
-
-        return view('daftar_sidang.pwk.index', compact('dataSeminar', 'lastData'));
+        $dataSidang = DaftarSidang::where('mahasiswa_id', $dataMhs->id)->get();
+        $dataLogSidang = DaftarSidang::where('mahasiswa_id', $dataMhs->id)->first();
+        $dataLogSeminar = DaftarSeminar::where('mahasiswa_id', $dataMhs->id)->first();
+        $dataSeminar = DaftarSeminar::where('mahasiswa_id', $dataMhs->id)->where('status', 1)->first();
+        return view('daftar_sidang.pwk.index', compact('dataSidang', 'dataLogSidang', 'dataLogSeminar', 'dataSeminar'));
     }
 
     public function daftarPwk()

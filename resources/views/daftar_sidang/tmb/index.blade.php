@@ -6,10 +6,14 @@
     @includeIf('layouts.alert')
     <div class="row">
         <div class="col-md-12 col-sm-12">
-            <div class="box box-primary">
+            <div class="box box-warning">
                 <div class="box-header with-border">
                     <div class="btn-group">
+                        @if (is_null($dataLogSeminar) || !is_null($dataLogSidang) || !$dataSeminar)
+                        <a href="#" class="btn btn-success btn-sm btn-flat disabled"><i class="fa fa-upload"></i> Ajukan</a>
+                        @elseif (is_null($dataLogSidang) || $dataSeminar)
                         <a href="{{ route('sidang_tmb.daftar') }}" class="btn btn-success btn-sm btn-flat"><i class="fa fa-upload"></i> Ajukan</a>
+                        @endif
                     </div>
                 </div>
                 <div class="box-body table-responsive">
@@ -18,8 +22,8 @@
                             <tr>
                                 <th>Tahun Akademik</th>
                                 <th>Semester</th>
-                                <th>Dosen Pembimbing 1</th>
-                                <th>Dosen Pembimbing 2</th>
+                                <th>Pembimbing</th>
+                                <th>Co. Pembimbing</th>
                                 <th>Tanggal Pengajuan</th>
                                 <th>Status</th>
                                 <th width="15%"><i class="fa fa-cogs"></i></th>

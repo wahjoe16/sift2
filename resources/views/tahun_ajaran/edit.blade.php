@@ -8,13 +8,13 @@
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="text-muted">
-                        Edit data Tahun Ajaran
+                        Edit data Tahun Akademik
                     </h3>
                 </div>
                 <div class="box-body">
                     <form action="{{ route('tahunajaran.update', $data->id) }}" method="post">@csrf
                         <div class="form-group row">
-                            <label for="tahun_ajaran" class="col-lg-2 col-lg-offset-1 control-label">Aahun Ajaran</label>
+                            <label for="tahun_ajaran" class="col-lg-2 col-lg-offset-1 control-label">Tahun Akademik</label>
                             <div class="col-lg-6">
                                 <input type="text" name="tahun_ajaran" id="tahun_ajaran" class="form-control" value="{{ $data->tahun_ajaran }}" required autofocus>
                                 <span class="help-block with-errors"></span>

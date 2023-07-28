@@ -1,4 +1,8 @@
 $(document).ready(function(){
+  // datatables client side
+  $('.table-dashboard-bimbingan').DataTable();
+
+  
     // Konfirmasi Delete
     $(".delete").click(function(){
         var module = $(this).attr("module");

@@ -1,5 +1,8 @@
 @extends('layouts.master')
 
+<!-- Select2 -->
+<link rel="stylesheet" href="{{ asset('AdminLTE-2/bower_components/select2/dist/css/select2.min.css') }}">
+
 @section('content')
 
 <section class="content">
@@ -10,19 +13,50 @@
                     <h3>Data Seminar Tugas Akhir</h3>
                 </div>
                 <div class="box-body table-responsive">
+                    <div class="col-md-12">
+                        <form action="">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="tahunajaran">Filter Tahun Akademik</label>
+                                    <select name="tahunajaran" id="tahunajaran" class="form-control select2">
+                                        <option value="">Pilih</option>
+                                        @foreach ($ta as $t)
+                                        <option value="{{ $t->id }}">{{ $t->tahun_ajaran }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="semester">Filter Semester</label>
+                                    <select name="semester" id="semester" class="form-control select2">
+                                        <option value="">Pilih</option>
+                                        @foreach ($smt as $s)
+                                        <option value="{{ $s->id }}">{{ $s->semester }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                     <table class="table table-striped table-bordered table-rekap-seminar">
                         <thead>
                             <tr>
                                 <th>No</th>
                                 <th>NPM</th>
                                 <th>Nama</th>
-                                <th>Tahun Ajaran</th>
+                                <th>Tahun Akademik</th>
                                 <th>Semester</th>
                                 <th>Tanggal Pengajuan</th>
                                 <th width="15%"><i class="fa fa-cogs"></i> Aksi</th>
                             </tr>
                         </thead>
                     </table>
+                </div>
+
+                <div class="box-footer">
+                    <div class="btn-group">
+                        <a href="{{ route('seminarTiExcel.export') }}" class="btn btn-success btn-sm btn-flat"><i class="fa fa-file-excel-o"></i> Export Excel</a>
+                        <!-- <a href="{{ route('seminarTmbPdf.export') }}" class="btn btn-danger btn-sm btn-flat"><i class="fa fa-file-pdf-o"></i> Export PDF</a> -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -34,15 +68,26 @@
 @endsection
 
 @push('scripts_page')
+
+<script src="{{ asset('AdminLTE-2/bower_components/select2/dist/js/select2.full.min.js') }}"></script>
+
 <script>
     let table;
 
     $(function() {
+
+        //Initialize Select2 Elements
+        $('.select2').select2()
+
         table = $('.table-rekap-seminar').DataTable({
             processing: true,
             autoWidth: false,
             ajax: {
-                url: "{{ route('rekap-seminarTi.data') }}"
+                url: "{{ route('rekap-seminarTi.data') }}",
+                data: function(d) {
+                    d.tahun_ajaran_id = $('#tahunajaran').val();
+                    d.semester_id = $('#semester').val();
+                }
             },
             columns: [{
                     data: 'DT_RowIndex',
@@ -50,16 +95,16 @@
                     'sortable': false
                 },
                 {
-                    data: 'nik'
+                    data: 'mahasiswa.nik'
                 },
                 {
-                    data: 'nama'
+                    data: 'mahasiswa.nama'
                 },
                 {
-                    data: 'tahun_ajaran'
+                    data: 'tahun_ajaran.tahun_ajaran'
                 },
                 {
-                    data: 'semester'
+                    data: 'semester.semester'
                 },
                 {
                     data: 'tanggal_pengajuan'
@@ -68,6 +113,16 @@
                     data: 'aksi'
                 }
             ]
+        })
+
+        $('#tahunajaran').change(function() {
+            table.ajax.reload();
+            // table.column(3).search($(this).val()).draw();
+        })
+
+        $('#semester').change(function() {
+            table.ajax.reload();
+            // table.column(4).search($(this).val()).draw();
         })
     })
 </script>

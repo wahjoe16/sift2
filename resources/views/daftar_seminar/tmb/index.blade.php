@@ -6,7 +6,7 @@
     @includeIf('layouts.alert')
     <div class="row">
         <div class="col-md-12 col-sm-12">
-            <div class="box box-primary">
+            <div class="box box-warning">
                 <div class="box-header with-border">
                     <div class="btn-group">
                         @if (is_null($dataLog))

@@ -90,4 +90,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(DaftarSidang::class, 'id', 'dosen2_id');
     }
+
+    public function mahasiswa()
+    {
+        return $this->hasMany(User::class);
+    }
 }

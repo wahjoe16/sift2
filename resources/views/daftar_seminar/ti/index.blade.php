@@ -19,7 +19,7 @@
                 <div class="box-body table-responsive">
                     <table class="table table-striped table-bordered table-seminar">
                         <thead>
-                            <th>Tahun Ajaran</th>
+                            <th>Tahun Akademik</th>
                             <th>Semester</th>
                             <th>Dosen Pembimbing 1</th>
                             <th>Dosen Pembimbing 2</th>

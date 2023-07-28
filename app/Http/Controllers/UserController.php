@@ -218,7 +218,8 @@ class UserController extends Controller
             ->addColumn('aksi', function ($mahasiswa) {
                 return '
                     <div class="btn-group">
-                        <a href="' . route('mahasiswa.edit', $mahasiswa->id) . '" class="btn btn-xs btn-info btn-flat"><i class="fa fa-edit"></i></a>
+                        <a href="' . route('dashboardMahasiswa.show', $mahasiswa->id) . '" class="btn btn-xs btn-info btn-flat"><i class="fa fa-search"></i></a>
+                        <a href="' . route('mahasiswa.edit', $mahasiswa->id) . '" class="btn btn-xs btn-warning btn-flat"><i class="fa fa-edit"></i></a>
                         <a href="' . route('mahasiswa.destroy', $mahasiswa->id) . '" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></a>
                     </div>
             ';
@@ -314,7 +315,8 @@ class UserController extends Controller
             ->addColumn('aksi', function ($dosen) {
                 return '
                 <div class="btn-group">
-                    <a href="' . route('dosen.edit', $dosen->id) . '" class="btn btn-xs btn-info btn-flat"><i class="fa fa-edit"></i></a>
+                    <a href="' . route('dashboardDosen.show', $dosen->id) . '" class="btn btn-xs btn-info btn-flat"><i class="fa fa-search"></i></a>
+                    <a href="' . route('dosen.edit', $dosen->id) . '" class="btn btn-xs btn-warning btn-flat"><i class="fa fa-edit"></i></a>
                     <a href="' . route('dosen.destroy', $dosen->id) . '" class="btn btn-xs btn-danger btn-flat" data-confirm-delete="true"><i class="fa fa-trash"></i></a>
                 </div>
             ';

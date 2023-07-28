@@ -17,7 +17,7 @@
                         <table class="table table-striped table-bordered table-tahun-ajaran">
                             <thead>
                                 <th width="5%">No</th>
-                                <th>Tahun Ajaran</th>
+                                <th>Tahun Akademik</th>
                                 <th width="15%"><i class="fa fa-cogs"></i></th>
                             </thead>
                         </table>
@@ -82,7 +82,7 @@
 
     function addForm(url) {
         $('#modal-form').modal('show');
-        $('#modal-form .modal-title').text('Tambah Data Tahun Ajaran');
+        $('#modal-form .modal-title').text('Tambah Data Tahun Akademik');
 
         $('#modal-form form')[0].reset();
         $('#modal-form form').attr('action', url);

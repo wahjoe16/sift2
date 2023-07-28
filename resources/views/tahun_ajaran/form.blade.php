@@ -11,7 +11,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label for="tahun_ajaran" class="col-lg-2 col-lg-offset-1 control-label">Tahun Ajaran</label>
+                        <label for="tahun_ajaran" class="col-lg-2 col-lg-offset-1 control-label">Tahun Akademik</label>
                         <div class="col-lg-6">
                             <input type="text" name="tahun_ajaran" id="tahun_ajaran" class="form-control" required autofocus>
                             <span class="help-block with-errors"></span>

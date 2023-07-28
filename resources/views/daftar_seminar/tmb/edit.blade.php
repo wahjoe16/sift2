@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-sm-12 col-xs-12">
             <form class="form-horizontal" action="{{ route('seminar_tmb.update', $data->id) }}" method="post" enctype="multipart/form-data">@csrf
-                <div class="box box-primary">
+                <div class="box box-warning">
                     <div class="box-header with-border">
                         <h3 class="box-title">Informasi Kolokium Skripsi</h3>
                     </div>

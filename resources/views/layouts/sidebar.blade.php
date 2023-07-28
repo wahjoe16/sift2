@@ -26,8 +26,13 @@
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">Main Menu</li>
             <li>
-                <a href="{{ url('/dashboard') }}">
+                <a href="{{ route('dashboard') }}">
                     <i class="fa fa-home"></i> <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('dashboard.sidang') }}">
+                    <i class="fa fa-dashboard"></i> <span>Dashboard Sidang</span>
                 </a>
             </li>
             @if (auth()->user()->level == 1)
@@ -49,7 +54,7 @@
             </li>
             <li>
                 <a href="{{ route('tahunajaran.index') }}">
-                    <i class="fa fa-hourglass"></i> <span>Tahun Ajaran</span>
+                    <i class="fa fa-hourglass"></i> <span>Tahun Akademik</span>
                 </a>
             </li>
             <li>
@@ -121,6 +126,15 @@
             </li>
             @endif
 
+            @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Teknik Pertambangan' && auth()->user()->status_kaprodi == 1 || auth()->user()->status_sekprodi == 1)
+            <li class="header">Data Lulusan</li>
+            <li>
+                <a href="{{ route('rekap-sidangTmb.index') }}">
+                    <i class="fa  fa-file-text"></i> <span>Rekap Lulusan</span>
+                </a>
+            </li>
+            @endif
+
             @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Teknik Industri' && auth()->user()->status_koordinator_skripsi == 1)
             <li class="header">Seminar Tugas Akhir</li>
             <li>
@@ -142,6 +156,15 @@
             <li>
                 <a href="{{ route('rekap-sidangTi.index') }}">
                     <i class="fa  fa-file-text"></i> <span>Rekapitulasi</span>
+                </a>
+            </li>
+            @endif
+
+            @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Teknik Industri' && auth()->user()->status_kaprodi == 1 || auth()->user()->status_sekprodi == 1)
+            <li class="header">Data Lulusan</li>
+            <li>
+                <a href="{{ route('rekap-sidangTi.index') }}">
+                    <i class="fa  fa-file-text"></i> <span>Rekap Lulusan</span>
                 </a>
             </li>
             @endif
@@ -169,6 +192,40 @@
                     <i class="fa  fa-file-text"></i> <span>Rekapitulasi</span>
                 </a>
             </li>
+            @endif
+
+            @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Perencanaan Wilayah dan Kota' && auth()->user()->status_kaprodi == 1 || auth()->user()->status_sekprodi == 1)
+            <li class="header">Data Lulusan</li>
+            <li>
+                <a href="{{ route('rekap-sidangPwk.index') }}">
+                    <i class="fa  fa-file-text"></i> <span>Rekap Lulusan</span>
+                </a>
+            </li>
+            @endif
+
+            @if (auth()->user()->level == 2)
+            <li class="header">Bimbingan</li>
+            @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Teknik Pertambangan')
+            <li>
+                <a href="{{ route('bimbinganTmb.index') }}">
+                    <i class="fa fa-users"></i> <span>Data Mahasiswa Bimbingan</span>
+                </a>
+            </li>
+            @endif
+            @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Teknik Industri')
+            <li>
+                <a href="{{ route('bimbinganTi.index') }}">
+                    <i class="fa fa-users"></i> <span>Data Mahasiswa Bimbingan</span>
+                </a>
+            </li>
+            @endif
+            @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Perencanaan Wilayah dan Kota')
+            <li>
+                <a href="{{ route('bimbinganPwk.index') }}">
+                    <i class="fa fa-users"></i> <span>Data Mahasiswa Bimbingan</span>
+                </a>
+            </li>
+            @endif
             @endif
 
         </ul>

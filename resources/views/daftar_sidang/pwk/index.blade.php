@@ -9,7 +9,11 @@
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <div class="btn-group">
+                        @if (is_null($dataLogSeminar) || !is_null($dataLogSidang) || !$dataSeminar)
+                        <a href="#" class="btn btn-success btn-sm btn-flat disabled"><i class="fa fa-upload"></i> Ajukan</a>
+                        @elseif (is_null($dataLogSidang) || $dataSeminar)
                         <a href="{{ route('sidang_pwk.daftar') }}" class="btn btn-success btn-sm btn-flat"><i class="fa fa-upload"></i> Ajukan</a>
+                        @endif
                     </div>
                 </div>
                 <div class="box-body table-responsive">
@@ -24,7 +28,7 @@
                             <th width="15%"><i class="fa fa-cogs"></i></th>
                         </thead>
                         <tbody>
-                            @foreach ($dataSeminar as $d)
+                            @foreach ($dataSidang as $d)
                             <tr>
                                 <td>{{ $d->tahun_ajaran->tahun_ajaran }}</td>
                                 <td>{{ $d->semester->semester }}</td>

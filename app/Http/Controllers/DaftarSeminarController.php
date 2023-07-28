@@ -41,8 +41,6 @@ class DaftarSeminarController extends Controller
         $npm = $mhs->nik;
 
         if ($request->isMethod('POST')) {
-            $data = $request->all();
-
             $rules = [
                 'tahun_ajaran_id' => 'required',
                 'dosen1_id' => 'required',
@@ -286,6 +284,7 @@ class DaftarSeminarController extends Controller
         $npm = $mhs->nik;
 
         if ($request->isMethod('POST')) {
+
             $daftarSeminar = DaftarSeminar::find($id);
             $daftarSeminar->mahasiswa_id = auth()->user()->id;
             $daftarSeminar->program_studi_id = auth()->user()->program_studi;
@@ -1173,7 +1172,7 @@ class DaftarSeminarController extends Controller
 
             $daftarSeminar->save();
 
-            return redirect()->route('seminar_ti.index')->with('success', 'Sukses mengajukan pendaftaran kolokium skripsi!');
+            return redirect()->route('seminar_pwk.index')->with('success', 'Sukses mengajukan pendaftaran kolokium skripsi!');
         }
     }
 }

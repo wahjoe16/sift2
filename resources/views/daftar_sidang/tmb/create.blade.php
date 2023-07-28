@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-sm-12 col-xs-12">
             <form class="form-horizontal" action="{{ route('sidang_tmb.store') }}" method="post" enctype="multipart/form-data">@csrf
-                <div class="box box-primary">
+                <div class="box box-warning">
                     <div class="box-header with-border">
                         <h3 class="box-title">Informasi Sidang Skripsi</h3>
                     </div>
@@ -87,7 +87,7 @@
                         <li>Jika diharuskan upload file transkrip nilai, file tersebut harus sudah diketahui sekretariat program studi.</li>
                     </ol>
                 </div>
-                <div class="box box-primary">
+                <div class="box box-warning">
                     <div class="box-header with-border">
                         <h3 class="box-title">Upload persyaratan</h3>
                     </div>

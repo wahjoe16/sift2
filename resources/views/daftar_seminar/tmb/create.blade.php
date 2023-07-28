@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-sm-12 col-xs-12">
             <form class="form-horizontal" action="{{ route('seminar_tmb.store') }}" method="post" enctype="multipart/form-data">@csrf
-                <div class="box box-primary">
+                <div class="box box-warning">
                     <div class="box-header with-border">
                         <h3 class="box-title">Informasi Kolokium Skripsi</h3>
                     </div>
@@ -87,7 +87,7 @@
                         <li>Jika diharuskan upload file transkrip nilai, file tersebut harus sudah diketahui sekretariat program studi.</li>
                     </ol>
                 </div>
-                <div class="box box-primary">
+                <div class="box box-warning">
                     <div class="box-header with-border">
                         <h3 class="box-title">Upload persyaratan</h3>
                     </div>
@@ -164,7 +164,7 @@
 
                     <div class="box-footer">
                         <button type="submit" class="btn btn-info btn-flat">Ajukan</button>
-                        <a href="{{ route('dashboard.sidang') }}" class="btn btn-default">Batal</a>
+                        <a href="{{ route('dashboard.sidang') }}" class="btn btn-light btn-flat">Batal</a>
 
                     </div>
                     <!-- /.box-footer -->

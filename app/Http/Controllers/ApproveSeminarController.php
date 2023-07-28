@@ -2,8 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\RekapSeminarPwkExport;
+use App\Exports\RekapSeminarTiExport;
+use App\Exports\RekapSeminarTmbExport;
 use App\Models\DaftarSeminar;
+use App\Models\Semester;
+use App\Models\TahunAjaran;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Barryvdh\DomPDF\PDF as DomPDFPDF;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ApproveSeminarController extends Controller
 {
@@ -147,22 +155,54 @@ class ApproveSeminarController extends Controller
 
     public function rekapTmb()
     {
-        return view('approve_seminar.tmb.rekap');
+        $ta = TahunAjaran::get();
+        $smt = Semester::get();
+        return view('approve_seminar.tmb.rekap', compact('ta', 'smt'));
+    }
+
+    public function getDataRekapTmb()
+    {
+        $data = DaftarSeminar::with([
+            'mahasiswa',
+            'tahun_ajaran',
+            'semester'
+        ])->where([
+            'program_studi_id' => 'Teknik Pertambangan',
+            'status' => 1
+        ]);
+
+        if (request('tahun_ajaran_id')) {
+            $data->whereRelation('tahun_ajaran', 'id', request('tahun_ajaran_id'));
+        }
+
+        if (request('semester_id')) {
+            $data->whereRelation('semester', 'id', request('semester_id'));
+        }
+
+        return $data;
     }
 
     public function dataRekapTmb()
     {
-        $data = DaftarSeminar::select('daftar_seminar.*', 'users.nik', 'users.nama', 'tahun_ajaran.tahun_ajaran', 'semester.semester')
-            ->leftJoin('users', 'users.id', 'daftar_seminar.mahasiswa_id')
-            ->leftJoin('tahun_ajaran', 'tahun_ajaran.id', 'daftar_seminar.tahun_ajaran_id')
-            ->leftJoin('semester', 'semester.id', 'daftar_seminar.semester_id')
-            ->where([
-                'program_studi_id' => 'Teknik Pertambangan',
-                'status' => 1,
-            ])->get();
+        // $data = DaftarSeminar::select('daftar_seminar.*', 'users.nik', 'users.nama', 'tahun_ajaran.tahun_ajaran', 'semester.semester')
+        //     ->leftJoin('users', 'users.id', 'daftar_seminar.mahasiswa_id')
+        //     ->leftJoin('tahun_ajaran', 'tahun_ajaran.id', 'daftar_seminar.tahun_ajaran_id')
+        //     ->leftJoin('semester', 'semester.id', 'daftar_seminar.semester_id')
+        //     ->where([
+        //         'program_studi_id' => 'Teknik Pertambangan',
+        //         'status' => 1,
+        //     ]);      
+
+        $data = $this->getDataRekapTmb();
 
         return datatables()
             ->of($data)
+            ->filterColumn('tahun_ajaran.tahun_ajaran', function ($query, $keyword) {
+                $query->whereRelation('tahun_ajaran', 'id', $keyword);
+            })
+            ->filterColumn('semester.semester', function ($query, $keyword) {
+                $query->whereRelation('semester', 'id', $keyword);
+            })
             ->addIndexColumn()
             ->addColumn('tanggal_pengajuan', function ($data) {
                 return tanggal_indonesia($data->created_at, false);
@@ -180,6 +220,36 @@ class ApproveSeminarController extends Controller
     {
         $data = DaftarSeminar::find($id);
         return view('approve_seminar.tmb.show', compact('data'));
+    }
+
+    public function exportExcelTmb()
+    {
+        return Excel::download(new RekapSeminarTmbExport, 'rekap_kolokium_' . date('Y-m-d-his') . '.xlsx');
+    }
+
+    public function exportPdfTmb()
+    {
+        $data = DaftarSeminar::with([
+            'mahasiswa',
+            'tahun_ajaran',
+            'semester'
+        ])->where([
+            'program_studi_id' => 'Teknik Pertambangan',
+            'status' => 1
+        ]);
+
+        if (request('tahun_ajaran_id')) {
+            $data->whereRelation('tahun_ajaran', 'id', request('tahun_ajaran_id'));
+        }
+
+        if (request('semester_id')) {
+            $data->whereRelation('semester', 'id', request('semester_id'));
+        }
+
+        $pdf = PDF::loadView('rekap_seminar.tambang_pdf', compact('data'));
+        $pdf->setPaper(0, 0, 609, 440, 'potrait');
+
+        return $pdf->stream('rekap_kolokium_' . date('Y-m-d-his') . '.pdf');
     }
 
 
@@ -293,19 +363,29 @@ class ApproveSeminarController extends Controller
 
     public function rekapTi()
     {
-        return view('approve_seminar.ti.rekap');
+        $ta = TahunAjaran::get();
+        $smt = Semester::get();
+        return view('approve_seminar.ti.rekap', compact('ta', 'smt'));
     }
 
     public function dataRekapTi()
     {
-        $data = DaftarSeminar::select('daftar_seminar.*', 'users.nik', 'users.nama', 'tahun_ajaran.tahun_ajaran', 'semester.semester')
-            ->leftJoin('users', 'users.id', 'daftar_seminar.mahasiswa_id')
-            ->leftJoin('tahun_ajaran', 'tahun_ajaran.id', 'daftar_seminar.tahun_ajaran_id')
-            ->leftJoin('semester', 'semester.id', 'daftar_seminar.semester_id')
-            ->where([
-                'program_studi_id' => 'Teknik Industri',
-                'status' => 1,
-            ])->get();
+        $data = DaftarSeminar::with([
+            'mahasiswa',
+            'tahun_ajaran',
+            'semester'
+        ])->where([
+            'program_studi_id' => 'Teknik Industri',
+            'status' => 1
+        ]);
+
+        if (request('tahun_ajaran_id')) {
+            $data->whereRelation('tahun_ajaran', 'id', request('tahun_ajaran_id'));
+        }
+
+        if (request('semester_id')) {
+            $data->whereRelation('semester', 'id', request('semester_id'));
+        }
 
         return datatables()
             ->of($data)
@@ -326,6 +406,11 @@ class ApproveSeminarController extends Controller
     {
         $data = DaftarSeminar::find($id);
         return view('approve_seminar.ti.show', compact('data'));
+    }
+
+    public function exportExcelTi()
+    {
+        return Excel::download(new RekapSeminarTiExport, 'rekap_seminar_' . date('Y-m-d-his') . '.xlsx');
     }
 
 
@@ -439,19 +524,29 @@ class ApproveSeminarController extends Controller
 
     public function rekapPwk()
     {
-        return view('approve_seminar.pwk.rekap');
+        $ta = TahunAjaran::get();
+        $smt = Semester::get();
+        return view('approve_seminar.pwk.rekap', compact('ta', 'smt'));
     }
 
     public function dataRekapPwk()
     {
-        $data = DaftarSeminar::select('daftar_seminar.*', 'users.nik', 'users.nama', 'tahun_ajaran.tahun_ajaran', 'semester.semester')
-            ->leftJoin('users', 'users.id', 'daftar_seminar.mahasiswa_id')
-            ->leftJoin('tahun_ajaran', 'tahun_ajaran.id', 'daftar_seminar.tahun_ajaran_id')
-            ->leftJoin('semester', 'semester.id', 'daftar_seminar.semester_id')
-            ->where([
-                'program_studi_id' => 'Perencanaan Wilayah dan Kota',
-                'status' => 1,
-            ])->get();
+        $data = DaftarSeminar::with([
+            'mahasiswa',
+            'tahun_ajaran',
+            'semester'
+        ])->where([
+            'program_studi_id' => 'Perencanaan Wilayah dan Kota',
+            'status' => 1
+        ]);
+
+        if (request('tahun_ajaran_id')) {
+            $data->whereRelation('tahun_ajaran', 'id', request('tahun_ajaran_id'));
+        }
+
+        if (request('semester_id')) {
+            $data->whereRelation('semester', 'id', request('semester_id'));
+        }
 
         return datatables()
             ->of($data)
@@ -472,5 +567,10 @@ class ApproveSeminarController extends Controller
     {
         $data = DaftarSeminar::find($id);
         return view('approve_seminar.pwk.show', compact('data'));
+    }
+
+    public function exportExcelPwk()
+    {
+        return Excel::download(new RekapSeminarPwkExport, 'rekap_sidang_pembahasan_' . date('Y-m-d-his') . '.xlsx');
     }
 }

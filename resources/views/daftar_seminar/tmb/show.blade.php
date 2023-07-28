@@ -401,7 +401,7 @@
                             </tr>
                             <tr>
                                 <td>16</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat16', $data->syarat_16) }}" target="_blank">Bukti pembayaran Kolokium Skripsi</a></td>
+                                <td><a href="{{ url('/mahasiswa/seminar/syarat16', $data->syarat_16) }}" target="_blank">Surat Penunjukan Pembimbing</a></td>
                                 <td>
                                     @if($data->status_16 == '')
                                     -
