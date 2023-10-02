@@ -9,6 +9,28 @@
 
 <section class="content">
     @includeIf('layouts.alert')
+    @if (is_null($dataLogSeminar) || !is_null($dataLogSidang) || !$dataSeminar)
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="error-page">
+            <h2 class="headline text-red">500</h2>
+
+            <div class="error-content">
+                <h3><i class="fa fa-warning text-red"></i> Halaman di Block.</h3>
+
+                <p>
+                    Mungkin anda sudah melakukan upload dokumen atau belum upload dokumen seminar tugas akhir.
+                    Tunggu informasi selanjutnya, Silahkan <a href="{{ route('dashboard.sidang') }}">kembali ke halaman dashboard</a>.
+                </p>
+
+            </div>
+        </div>
+        <!-- /.error-page -->
+
+    </section>
+    <!-- /.content -->
+    @elseif (is_null($dataLogSidang) || $dataSeminar)
     <div class="row">
         <div class="col-sm-12 col-xs-12">
             <form class="form-horizontal" action="{{ route('sidang_ti.store') }}" method="post" enctype="multipart/form-data">@csrf
@@ -176,7 +198,7 @@
             </form>
         </div>
     </div>
-
+    @endif
 </section>
 
 @endsection

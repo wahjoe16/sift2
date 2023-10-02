@@ -9,6 +9,8 @@
 
 <section class="content">
     @includeIf('layouts.alert')
+
+    @if(is_null($dataLog))
     <div class="row">
         <div class="col-sm-12 col-xs-12">
             <form class="form-horizontal" action="{{ route('seminar_tmb.store') }}" method="post" enctype="multipart/form-data">@csrf
@@ -154,10 +156,6 @@
                                     <input type="file" name="syarat_15" class="dropify" id="syarat_15">
                                     <p class="col-form-label text-center" for="syarat_15">Sertifikat SKKFT</p>
                                 </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <input type="file" name="syarat_16" class="dropify" id="syarat_16">
-                                    <p class="col-form-label text-center" for="syarat_16">Surat Penunjukan Pembimbing</p>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -172,6 +170,28 @@
             </form>
         </div>
     </div>
+    @else
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="error-page">
+            <h2 class="headline text-red">500</h2>
+
+            <div class="error-content">
+                <h3><i class="fa fa-warning text-red"></i> Halaman di Block.</h3>
+
+                <p>
+                    Mungkin anda sudah melakukan upload dokumen.
+                    Tunggu informasi selanjutnya, Silahkan <a href="{{ route('dashboard.sidang') }}">kembali ke halaman dashboard</a>.
+                </p>
+
+            </div>
+        </div>
+        <!-- /.error-page -->
+
+    </section>
+    <!-- /.content -->
+    @endif
 
 </section>
 

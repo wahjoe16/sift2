@@ -31,58 +31,82 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('dashboard.sidang') }}">
+                <a href="{{ route('dashboard.sidang') }}" @if(Session::get('page')=='dashboardSidang' ) style="background: #3c8dbc !important; color:white !important" @endif>
                     <i class="fa fa-dashboard"></i> <span>Dashboard Sidang</span>
                 </a>
             </li>
-            @if (auth()->user()->level == 1)
-            <li class="header">Data Master</li>
+            @if (auth()->user()->level == 1 && auth()->user()->status_superadmin == 1)
+            <li class="header">Data User</li>
             <li>
-                <a href="{{ route('admin.index') }}">
+                <a href="{{ route('admin.index') }}" @if(Session::get('page')=='indexAdmin' ) style="background: #3c8dbc !important; color:white !important" @endif>
                     <i class="fa fa-street-view"></i> <span>Admin</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('dosen.index') }}">
+                <a href="{{ route('dosen.index') }}" @if(Session::get('page')=='indexDosen' ) style="background: #3c8dbc !important; color:white !important" @endif>
                     <i class="fa fa-user"></i> <span>Dosen</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('mahasiswa.index') }}">
+                <a href="{{ route('mahasiswa.index') }}" @if(Session::get('page')=='indexMhs' ) style="background: #3c8dbc !important; color:white !important" @endif>
                     <i class="fa fa-users"></i> <span>Mahasiswa</span>
                 </a>
             </li>
+            @endif
+            @if (auth()->user()->level == 1)
+            <li class="header">Data Master</li>
             <li>
-                <a href="{{ route('tahunajaran.index') }}">
+                <a href="{{ route('tahunajaran.index') }}" @if(Session::get('page')=='indexTa' ) style="background: #3c8dbc !important; color:white !important" @endif>
                     <i class="fa fa-hourglass"></i> <span>Tahun Akademik</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('semester.index') }}">
+                <a href="{{ route('semester.index') }}" @if(Session::get('page')=='indexSemester' ) style="background: #3c8dbc !important; color:white !important" @endif>
                     <i class="fa fa-hourglass-end"></i> <span>Semester</span>
+                </a>
+            </li>
+            <li class="header">Data Arsip</li>
+            <li>
+                <a href="{{ route('ft-arsip.index') }}" @if(Session::get('page')=='indexArsip' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                    <i class="fa fa-book"></i> <span>Arsip Fakultas</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('sections.index') }}" @if(Session::get('page')=='indexSection' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                    <i class="fa fa-folder"></i> <span>Bidang Arsip</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('category-archive.index') }}" @if(Session::get('page')=='indexCatArsip' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                    <i class="fa fa-cube"></i> <span>Kategori Arsip</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('sub-category-archive.index') }}" @if(Session::get('page')=='indexSubCatArsip' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                    <i class="fa fa-navicon"></i> <span>Sub Kategori Arsip</span>
                 </a>
             </li>
             @endif
             @if (auth()->user()->level == 3 && auth()->user()->program_studi == 'Teknik Pertambangan')
             <li>
-                <a href="{{ route('seminar_tmb.index') }}">
+                <a href="{{ route('seminar_tmb.index') }}" @if(Session::get('page')=='indexKolokium' ) style="background: #3c8dbc !important; color:white !important" @endif>
                     <i class="fa fa-upload"></i> <span>Kolokium Skripsi</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('sidang_tmb.index') }}">
+                <a href="{{ route('sidang_tmb.index') }}" @if(Session::get('page')=='indexSkripsi' ) style="background: #3c8dbc !important; color:white !important" @endif>
                     <i class="fa  fa-file-text"></i> <span>Sidang Skripsi</span>
                 </a>
             </li>
             @endif
             @if (auth()->user()->level == 3 && auth()->user()->program_studi == 'Teknik Industri')
             <li>
-                <a href="{{ route('seminar_ti.index') }}">
+                <a href="{{ route('seminar_ti.index') }}" @if(Session::get('page')=='seminarTA' ) style="background: #3c8dbc !important; color:white !important" @endif>
                     <i class="fa fa-upload"></i> <span>Seminar Tugas Akhir</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('sidang_ti.index') }}">
+                <a href="{{ route('sidang_ti.index') }}" @if(Session::get('page')=='sidangTA' ) style="background: #3c8dbc !important; color:white !important" @endif>
                     <i class="fa  fa-file-text"></i> <span>Sidang Tugas Akhir</span>
                 </a>
             </li>
@@ -90,12 +114,12 @@
 
             @if (auth()->user()->level == 3 && auth()->user()->program_studi == 'Perencanaan Wilayah dan Kota')
             <li>
-                <a href="{{ route('seminar_pwk.index') }}">
+                <a href="{{ route('seminar_pwk.index') }}" @if(Session::get('page')=='SP' ) style="background: #3c8dbc !important; color:white !important" @endif>
                     <i class="fa fa-upload"></i> <span>Sidang Pembahasan</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('sidang_pwk.index') }}">
+                <a href="{{ route('sidang_pwk.index') }}" @if(Session::get('page')=='ST' ) style="background: #3c8dbc !important; color:white !important" @endif>
                     <i class="fa  fa-file-text"></i> <span>Sidang Terbuka</span>
                 </a>
             </li>
@@ -104,23 +128,23 @@
             @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Teknik Pertambangan' && auth()->user()->status_koordinator_skripsi == 1)
             <li class="header">Kolokium Skripsi</li>
             <li>
-                <a href="{{ route('view-seminarTmb.index') }}">
+                <a href="{{ route('view-seminarTmb.index') }}" @if(Session::get('page')=='appKolokium' ) style="background: #3c8dbc !important; color:white !important" @endif>
                     <i class="fa fa-upload"></i> <span>Pengajuan</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('rekap-seminarTmb.index') }}">
+                <a href="{{ route('rekap-seminarTmb.index') }}" @if(Session::get('page')=='rekapKolokium' ) style="background: #3c8dbc !important; color:white !important" @endif>
                     <i class="fa  fa-file-text"></i> <span>Rekapitulasi</span>
                 </a>
             </li>
             <li class="header">Sidang Skripsi</li>
             <li>
-                <a href="{{ route('view-sidangTmb.index') }}">
+                <a href="{{ route('view-sidangTmb.index') }}" @if(Session::get('page')=='appSkripsi' ) style="background: #3c8dbc !important; color:white !important" @endif>
                     <i class="fa fa-upload"></i> <span>Pengajuan</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('rekap-sidangTmb.index') }}">
+                <a href="{{ route('rekap-sidangTmb.index') }}" @if(Session::get('page')=='rekapSkripsi' ) style="background: #3c8dbc !important; color:white !important" @endif>
                     <i class="fa  fa-file-text"></i> <span>Rekapitulasi</span>
                 </a>
             </li>
@@ -129,7 +153,7 @@
             @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Teknik Pertambangan' && auth()->user()->status_kaprodi == 1 || auth()->user()->status_sekprodi == 1)
             <li class="header">Data Lulusan</li>
             <li>
-                <a href="{{ route('rekap-sidangTmb.index') }}">
+                <a href="{{ route('rekap-sidangTmb.index') }}" @if(Session::get('page')=='rekapSkripsi' ) style="background: #3c8dbc !important; color:white !important" @endif>
                     <i class="fa  fa-file-text"></i> <span>Rekap Lulusan</span>
                 </a>
             </li>
@@ -138,23 +162,23 @@
             @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Teknik Industri' && auth()->user()->status_koordinator_skripsi == 1)
             <li class="header">Seminar Tugas Akhir</li>
             <li>
-                <a href="{{ route('view-seminarTi.index') }}">
+                <a href="{{ route('view-seminarTi.index') }}" @if(Session::get('page')=='appSeminarTA' ) style="background: #3c8dbc !important; color:white !important" @endif>
                     <i class="fa fa-upload"></i> <span>Pengajuan</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('rekap-seminarTi.index') }}">
+                <a href="{{ route('rekap-seminarTi.index') }}" @if(Session::get('page')=='rekapSeminarTA' ) style="background: #3c8dbc !important; color:white !important" @endif>
                     <i class="fa  fa-file-text"></i> <span>Rekapitulasi</span>
                 </a>
             </li>
             <li class="header">Sidang Tugas Akhir</li>
             <li>
-                <a href="{{ route('view-sidangTi.index') }}">
+                <a href="{{ route('view-sidangTi.index') }}" @if(Session::get('page')=='appSidangTA' ) style="background: #3c8dbc !important; color:white !important" @endif>
                     <i class="fa fa-upload"></i> <span>Pengajuan</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('rekap-sidangTi.index') }}">
+                <a href="{{ route('rekap-sidangTi.index') }}" @if(Session::get('page')=='rekapSidangTA' ) style="background: #3c8dbc !important; color:white !important" @endif>
                     <i class="fa  fa-file-text"></i> <span>Rekapitulasi</span>
                 </a>
             </li>
@@ -163,7 +187,7 @@
             @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Teknik Industri' && auth()->user()->status_kaprodi == 1 || auth()->user()->status_sekprodi == 1)
             <li class="header">Data Lulusan</li>
             <li>
-                <a href="{{ route('rekap-sidangTi.index') }}">
+                <a href="{{ route('rekap-sidangTi.index') }}" @if(Session::get('page')=='rekapSidangTA' ) style="background: #3c8dbc !important; color:white !important" @endif>
                     <i class="fa  fa-file-text"></i> <span>Rekap Lulusan</span>
                 </a>
             </li>
@@ -172,23 +196,23 @@
             @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Perencanaan Wilayah dan Kota' && auth()->user()->status_koordinator_skripsi == 1)
             <li class="header">Sidang Pembahasan</li>
             <li>
-                <a href="{{ route('view-seminarPwk.index') }}">
+                <a href="{{ route('view-seminarPwk.index') }}" @if(Session::get('page')=='appPembahasan' ) style="background: #3c8dbc !important; color:white !important" @endif>
                     <i class="fa fa-upload"></i> <span>Pengajuan</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('rekap-seminarPwk.index') }}">
+                <a href="{{ route('rekap-seminarPwk.index') }}" @if(Session::get('page')=='rekapPembahasan' ) style="background: #3c8dbc !important; color:white !important" @endif>
                     <i class="fa  fa-file-text"></i> <span>Rekapitulasi</span>
                 </a>
             </li>
             <li class="header">Sidang Terbuka</li>
             <li>
-                <a href="{{ route('view-sidangPwk.index') }}">
+                <a href="{{ route('view-sidangPwk.index') }}" @if(Session::get('page')=='appTerbuka' ) style="background: #3c8dbc !important; color:white !important" @endif>
                     <i class="fa fa-upload"></i> <span>Pengajuan</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('rekap-sidangPwk.index') }}">
+                <a href="{{ route('rekap-sidangPwk.index') }}" @if(Session::get('page')=='rekapTerbuka' ) style="background: #3c8dbc !important; color:white !important" @endif>
                     <i class="fa  fa-file-text"></i> <span>Rekapitulasi</span>
                 </a>
             </li>
@@ -197,7 +221,7 @@
             @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Perencanaan Wilayah dan Kota' && auth()->user()->status_kaprodi == 1 || auth()->user()->status_sekprodi == 1)
             <li class="header">Data Lulusan</li>
             <li>
-                <a href="{{ route('rekap-sidangPwk.index') }}">
+                <a href="{{ route('rekap-sidangPwk.index') }}" @if(Session::get('page')=='rekapTerbuka' ) style="background: #3c8dbc !important; color:white !important" @endif>
                     <i class="fa  fa-file-text"></i> <span>Rekap Lulusan</span>
                 </a>
             </li>
@@ -207,25 +231,36 @@
             <li class="header">Bimbingan</li>
             @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Teknik Pertambangan')
             <li>
-                <a href="{{ route('bimbinganTmb.index') }}">
+                <a href="{{ route('bimbinganTmb.index') }}" @if(Session::get('page')=='bimbinganTmb' ) style="background: #3c8dbc !important; color:white !important" @endif>
                     <i class="fa fa-users"></i> <span>Data Mahasiswa Bimbingan</span>
                 </a>
             </li>
             @endif
             @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Teknik Industri')
             <li>
-                <a href="{{ route('bimbinganTi.index') }}">
+                <a href="{{ route('bimbinganTi.index') }}" @if(Session::get('page')=='bimbinganTi' ) style="background: #3c8dbc !important; color:white !important" @endif>
                     <i class="fa fa-users"></i> <span>Data Mahasiswa Bimbingan</span>
                 </a>
             </li>
             @endif
             @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Perencanaan Wilayah dan Kota')
             <li>
-                <a href="{{ route('bimbinganPwk.index') }}">
+                <a href="{{ route('bimbinganPwk.index') }}" @if(Session::get('page')=='bimbinganPwk' ) style="background: #3c8dbc !important; color:white !important" @endif>
                     <i class="fa fa-users"></i> <span>Data Mahasiswa Bimbingan</span>
                 </a>
             </li>
             @endif
+            <li class="header">Arsip</li>
+            <li>
+                <a href="{{ route('all-archive.index') }}" @if(Session::get('page')=='allArchive' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                    <i class="fa fa-book"></i> <span>Arsip Fakultas</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('my-archive.index') }}" @if(Session::get('page')=='myArchive' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                    <i class="fa fa-folder"></i> <span>Arsip Saya</span>
+                </a>
+            </li>
             @endif
 
         </ul>

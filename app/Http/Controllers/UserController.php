@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -91,6 +92,7 @@ class UserController extends Controller
 
     public function indexAdmin()
     {
+        Session::put('page', 'indexAdmin');
         $title = "Hapus data admin!";
         $text = "Apakah anda Yakin?";
         confirmDelete($title, $text);
@@ -108,7 +110,7 @@ class UserController extends Controller
                 return '<input type="checkbox" name="id[]" value="' . $admin->id . '" />';
             })
             ->addColumn('foto', function ($admin) {
-                $path = asset("$admin->foto");
+                $path = asset("/user/foto/$admin->foto");
                 return '<img src=' . $path . ' class="img-circle img-bordered-sm" width="40"/>';
             })
             ->addColumn('status_superadmin', function ($admin) {
@@ -139,6 +141,7 @@ class UserController extends Controller
         $admin->nama = $data['nama'];
         $admin->email = $data['email'];
         $admin->telepon = $data['telepon'];
+        $admin->program_studi = $data['program_studi'];
         $admin->level = 1;
         $admin->status_superadmin = $data['status_superadmin'];
         $admin->password = bcrypt($admin->nik);
@@ -168,6 +171,7 @@ class UserController extends Controller
         $admin->nama = $data['nama'];
         $admin->email = $data['email'];
         $admin->telepon = $data['telepon'];
+        $admin->program_studi = $data['program_studi'];
         $admin->level = 1;
         $admin->status_superadmin = $data['status_superadmin'];
         $admin->password = bcrypt($admin->nik);
@@ -199,6 +203,7 @@ class UserController extends Controller
         // $title = "Hapus data mahasiswa?";
         // $text = "Apakah anda yakin?";
         // confirmDelete($title, $text);
+        Session::put('page', 'indexMhs');
         return view('mahasiswa.index');
     }
 
@@ -212,7 +217,7 @@ class UserController extends Controller
                 return '<input type="checkbox" name="id[]" value="' . $mahasiswa->id . '" />';
             })
             ->addColumn('foto', function ($mahasiswa) {
-                $path = asset("$mahasiswa->foto");
+                $path = asset("/user/foto/$mahasiswa->foto");
                 return '<img src=' . $path . ' class="img-circle img-bordered-sm" width="40"/>';
             })
             ->addColumn('aksi', function ($mahasiswa) {
@@ -295,6 +300,7 @@ class UserController extends Controller
         $title = 'Delete User!';
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
+        Session::put('page', 'indexDosen');
         return view('dosen.index');
     }
 
@@ -309,7 +315,7 @@ class UserController extends Controller
                 return '<input type="checkbox" name="id[]" value="' . $dosen->id . '" />';
             })
             ->addColumn('foto', function ($dosen) {
-                $path = asset("$dosen->foto");
+                $path = asset("/user/foto/$dosen->foto");
                 return '<img src=' . $path . ' class="img-circle img-bordered-sm" width="40"/>';
             })
             ->addColumn('aksi', function ($dosen) {
@@ -372,6 +378,16 @@ class UserController extends Controller
 
         User::where('id', $id)->delete();
         return redirect()->route('dosen.index')->with('success', 'Data dosen berhasil dihapus!');
+    }
+
+    public function deleteSelectedDosen(Request $request)
+    {
+        foreach ($request->id as $id) {
+            $dosen = User::find($id);
+            $dosen->delete();
+        }
+
+        return redirect()->route('dosen.index')->with('success', 'Data Dosen berhasil dihapus!');
     }
 
     public function importPageDosen()

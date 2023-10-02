@@ -38,24 +38,24 @@
                                 </div>
                             </div>
 
-                            @if (auth()->user()->level == 2 || auth()->user()->level == 3)
                             <div class="form-group">
                                 <label for="program_studi" class="col-sm-2 control-label">Program Studi</label>
 
                                 <div class="col-sm-10">
-                                    <select name="program_studi" id="program_studi" class="form-control text-dark" required>
+                                    <select name="program_studi" id="program_studi" class="form-control text-dark">
                                         <option value="">Select</option>
                                         @foreach ([
                                         "Teknik Pertambangan"=>"Teknik Pertambangan",
                                         "Perencanaan Wilayah dan Kota"=>"Perencanaan Wilayah dan Kota",
-                                        "Teknik Industri"=>"Teknik Industri"
+                                        "Teknik Industri"=>"Teknik Industri",
+                                        "Program Profesi Insinyur"=>"Program Profesi Insinyur",
+                                        "Magister Perencanaan Wilayah dan Kota"=>"Magister Perencanaan Wilayah dan Kota"
                                         ] as $programStudi => $prodiLabel)
                                         <option value="{{ $programStudi }}" {{ old("program_studi", auth()->user()->program_studi)==$programStudi ? "selected" : "" }}>{{ $prodiLabel }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
-                            @endif
 
                             @if (auth()->user()->level == 2)
                             <div class="form-group">

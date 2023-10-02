@@ -30,7 +30,7 @@
                             @enderror
                         </div>
 
-                        <div class="d-flex mb-5 align-items-center">
+                        <!-- <div class="d-flex mb-5 align-items-center">
                             <label class="control control--checkbox mb-0"><span class="caption">Remember me</span>
                                 <input type="checkbox" checked="checked" />
                                 <div class="control__indicator"></div>
@@ -40,7 +40,7 @@
                                 {{ __('Lupa Password?') }}
                             </a>
                             @endif
-                        </div>
+                        </div> -->
 
                         <button type="submit" class="btn btn-primary">
                             {{ __('Login') }}

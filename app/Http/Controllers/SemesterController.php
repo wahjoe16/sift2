@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Semester;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class SemesterController extends Controller
@@ -12,6 +13,7 @@ class SemesterController extends Controller
     {
         $title = "Hapus data semester!";
         $text = "Apakah anda yakin?";
+        Session::put('page', 'indexSemester');
         confirmDelete($title, $text);
 
         return view('semester.index');
@@ -60,7 +62,7 @@ class SemesterController extends Controller
         return redirect()->route('semester.index')->with('success', 'Data semester berhasil diubah!');
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
         $data = Semester::find($id);
         $data->delete();

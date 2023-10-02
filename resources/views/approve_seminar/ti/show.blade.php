@@ -103,12 +103,7 @@
                             </tr>
                             <tr>
                                 <td>9</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat09', $data->syarat_9) }}" target="_blank">Sertifikat SKKFT</a></td>
-
-                            </tr>
-                            <tr>
-                                <td>10</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat10', $data->syarat_10) }}" target="_blank">Surat Penunjukan Pembimbing</a></td>
+                                <td><a href="{{ url('/mahasiswa/seminar/syarat09', $data->syarat_9) }}" target="_blank">Bukti Penyerahan Draft</a></td>
 
                             </tr>
                         </tbody>

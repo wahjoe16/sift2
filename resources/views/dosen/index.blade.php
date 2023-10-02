@@ -15,7 +15,8 @@
                     </div>
                 </div>
                 <div class="box-body table-responsive">
-                    <form action="" method="post" class="form-admin">
+                    <form action="" method="post" class="form-dosen">
+                        @csrf
                         <table class="table table-striped table-bordered table-dosen">
                             <thead>
                                 <th>
@@ -47,6 +48,12 @@
 
     $(function() {
 
+        // select all Checkbox
+        $('[name = select_all]').on('click', function() {
+            $(':checkbox').prop('checked', this.checked);
+        })
+
+        // datatable dosen
         table = $('.table-dosen').DataTable({
             processing: true,
             autoWidth: false,
@@ -107,6 +114,24 @@
         $('#modal-form form').attr('action', url);
         $('#modal-form [name=_method]').val('post');
         $('#modal-form [name=nik]').focus();
+    }
+
+    function deleteSelected(url) {
+        if ($('input:checked').length > 1) {
+            if (confirm('Yakin akan menghapus data terpilih?')) {
+                $.post(url, $('.form-dosen').serialize())
+                    .done((response) => {
+                        table.ajax.reload();
+                    })
+                    .fail((errors) => {
+                        alert('Tidak dapat menghapus data');
+                        return;
+                    });
+            }
+        } else {
+            alert('Pilih data yang akan dihapus');
+            return;
+        }
     }
 </script>
 @endpush

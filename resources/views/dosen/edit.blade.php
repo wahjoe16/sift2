@@ -36,6 +36,8 @@
                                     "Teknik Pertambangan"=>"Teknik Pertambangan",
                                     "Teknik Industri"=>"Teknik Industri",
                                     "Perencanaan Wilayah dan Kota"=>"Perencanaan Wilayah dan Kota",
+                                    "Program Profesi Insinyur"=>"Program Profesi Insinyur",
+                                    "Magister Perencanaan Wilayah dan Kota"=>"Magister Perencanaan Wilayah dan Kota"
                                     ] as $prodi => $prodiLabel)
                                     <option value="{{ $prodi }}" {{ old('program_studi', $dosen->program_studi)==$prodi ? "selected" : "" }}>{{ $prodiLabel }}</option>
                                     @endforeach

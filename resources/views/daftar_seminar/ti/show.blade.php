@@ -248,7 +248,7 @@
                             </tr>
                             <tr>
                                 <td>9</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat09', $data->syarat_9) }}" target="_blank">Sertifikat SKKFT</a></td>
+                                <td><a href="{{ url('/mahasiswa/seminar/syarat09', $data->syarat_9) }}" target="_blank">Bukti Penyerahan Draft</a></td>
                                 <td>
                                     @if($data->status_9 == '')
                                     -
@@ -263,28 +263,6 @@
                                 <td>
                                     @if ($data->keterangan_9 != '')
                                     <p>{{ $data->keterangan_9 }}</p>
-                                    @else
-                                    <p>-</p>
-                                    @endif
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>10</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat10', $data->syarat_10) }}" target="_blank">Bukti perwalian</a></td>
-                                <td>
-                                    @if($data->status_10 == '')
-                                    -
-                                    @elseif($data->status_10 == 1)
-                                    <span class="label bg-green">Diterima</span>
-                                    @elseif($data->status_10 == 2)
-                                    <span class="label bg-red">Ditolak</span>
-                                    @else
-                                    <span class="label bg-yellow text-black">Menunggu</span>
-                                    @endif
-                                </td>
-                                <td>
-                                    @if ($data->keterangan_10 != '')
-                                    <p>{{ $data->keterangan_10 }}</p>
                                     @else
                                     <p>-</p>
                                     @endif

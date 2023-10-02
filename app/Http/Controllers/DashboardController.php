@@ -11,6 +11,7 @@ use App\Models\DaftarSidang;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
 
 class DashboardController extends Controller
@@ -22,6 +23,7 @@ class DashboardController extends Controller
 
     public function indexSidang(MahasiswaPieChart $mahasiswaPieChart, DosenPieChart $dosenPieChart, TrenLulusanChart $trenLulusanChart)
     {
+        Session::put('page', 'dashboardSidang');
         return view('sidang', [
             'mahasiswaPieChart' => $mahasiswaPieChart->build(),
             'dosenPieChart' => $dosenPieChart->build(),

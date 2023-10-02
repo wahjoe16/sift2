@@ -25,6 +25,23 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="program_studi" class="col-lg-2 col-lg-offset-1 control-label">Program Studi</label>
+                        <div class="col-lg-6">
+                            <select name="program_studi" id="program_studi" class="form-control text-black">
+                                <option value="">Select</option>
+                                @foreach ([
+                                "Teknik Pertambangan"=>"Teknik Pertambangan",
+                                "Perencanaan Wilayah dan Kota"=>"Perencanaan Wilayah dan Kota",
+                                "Teknik Industri"=>"Teknik Industri",
+                                "Program Profesi Insinyur"=>"Program Profesi Insinyur",
+                                "Magister Perencanaan Wilayah dan Kota"=>"Magister Perencanaan Wilayah dan Kota"
+                                ] as $programStudi => $prodiLabel)
+                                <option value="{{ $programStudi }}">{{ $prodiLabel }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label for="email" class="col-lg-2 col-lg-offset-1 control-label">Email</label>
                         <div class="col-lg-6">
                             <input type="email" name="email" id="email" class="form-control" autofocus>
@@ -39,7 +56,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="status_superadmin" class="col-lg-2 col-lg-offset-1 control-label">Status Superadmin</label>
+                        <label for="status_superadmin" class="col-lg-2 col-lg-offset-1 control-label">Status Super Admin</label>
                         <div class="col-lg-6">
                             <select name="status_superadmin" id="status_superadmin" class="form-control" required>
                                 <option value="">== Pilih ==</option>

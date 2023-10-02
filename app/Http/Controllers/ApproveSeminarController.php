@@ -11,12 +11,14 @@ use App\Models\TahunAjaran;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Barryvdh\DomPDF\PDF as DomPDFPDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ApproveSeminarController extends Controller
 {
     public function viewTmb()
     {
+        Session::put('page', 'appKolokium');
         return view('approve_seminar.tmb.index');
     }
 
@@ -66,7 +68,6 @@ class ApproveSeminarController extends Controller
             'status_13',
             'status_14',
             'status_15',
-            'status_16',
         ]);
 
         if ($request->isMethod('POST')) {
@@ -86,7 +87,6 @@ class ApproveSeminarController extends Controller
                 'status_13' => 'required',
                 'status_14' => 'required',
                 'status_15' => 'required',
-                'status_16' => 'required',
                 'keterangan_1' => 'required_if:status_1,2',
                 'keterangan_2' => 'required_if:status_2,2',
                 'keterangan_3' => 'required_if:status_3,2',
@@ -102,7 +102,6 @@ class ApproveSeminarController extends Controller
                 'keterangan_13' => 'required_if:status_13,2',
                 'keterangan_14' => 'required_if:status_14,2',
                 'keterangan_15' => 'required_if:status_15,2',
-                'keterangan_16' => 'required_if:status_16,2',
             ], [
                 'status_1.required' => 'Status approval harus diverifikasi',
                 'status_2.required' => 'Status approval harus diverifikasi',
@@ -119,7 +118,6 @@ class ApproveSeminarController extends Controller
                 'status_13.required' => 'Status approval harus diverifikasi',
                 'status_14.required' => 'Status approval harus diverifikasi',
                 'status_15.required' => 'Status approval harus diverifikasi',
-                'status_16.required' => 'Status approval harus diverifikasi',
                 'keterangan_1.required_if' => 'Keterangan harus diisi',
                 'keterangan_2.required_if' => 'Keterangan harus diisi',
                 'keterangan_3.required_if' => 'Keterangan harus diisi',
@@ -135,7 +133,6 @@ class ApproveSeminarController extends Controller
                 'keterangan_13.required_if' => 'Keterangan harus diisi',
                 'keterangan_14.required_if' => 'Keterangan harus diisi',
                 'keterangan_15.required_if' => 'Keterangan harus diisi',
-                'keterangan_16.required_if' => 'Keterangan harus diisi',
             ]);
 
             $data->fill($request->input());
@@ -157,6 +154,7 @@ class ApproveSeminarController extends Controller
     {
         $ta = TahunAjaran::get();
         $smt = Semester::get();
+        Session::put('page', 'rekapKolokium');
         return view('approve_seminar.tmb.rekap', compact('ta', 'smt'));
     }
 
@@ -255,6 +253,7 @@ class ApproveSeminarController extends Controller
 
     public function viewTi()
     {
+        Session::put('page', 'appSeminarTA');
         return view('approve_seminar.ti.index');
     }
 
@@ -298,7 +297,6 @@ class ApproveSeminarController extends Controller
             'status_7',
             'status_8',
             'status_9',
-            'status_10',
         ]);
 
         if ($request->isMethod('POST')) {
@@ -312,7 +310,6 @@ class ApproveSeminarController extends Controller
                 'status_7' => 'required',
                 'status_8' => 'required',
                 'status_9' => 'required',
-                'status_10' => 'required',
                 'keterangan_1' => 'required_if:status_1,2',
                 'keterangan_2' => 'required_if:status_2,2',
                 'keterangan_3' => 'required_if:status_3,2',
@@ -322,7 +319,6 @@ class ApproveSeminarController extends Controller
                 'keterangan_7' => 'required_if:status_7,2',
                 'keterangan_8' => 'required_if:status_8,2',
                 'keterangan_9' => 'required_if:status_9,2',
-                'keterangan_10' => 'required_if:status_10,2',
             ], [
                 'status_1.required' => 'Status approval harus diverifikasi',
                 'status_2.required' => 'Status approval harus diverifikasi',
@@ -333,7 +329,6 @@ class ApproveSeminarController extends Controller
                 'status_7.required' => 'Status approval harus diverifikasi',
                 'status_8.required' => 'Status approval harus diverifikasi',
                 'status_9.required' => 'Status approval harus diverifikasi',
-                'status_10.required' => 'Status approval harus diverifikasi',
                 'keterangan_1.required_if' => 'Keterangan harus diisi',
                 'keterangan_2.required_if' => 'Keterangan harus diisi',
                 'keterangan_3.required_if' => 'Keterangan harus diisi',
@@ -343,7 +338,6 @@ class ApproveSeminarController extends Controller
                 'keterangan_7.required_if' => 'Keterangan harus diisi',
                 'keterangan_8.required_if' => 'Keterangan harus diisi',
                 'keterangan_9.required_if' => 'Keterangan harus diisi',
-                'keterangan_10.required_if' => 'Keterangan harus diisi',
             ]);
 
             $data->fill($request->input());
@@ -365,6 +359,7 @@ class ApproveSeminarController extends Controller
     {
         $ta = TahunAjaran::get();
         $smt = Semester::get();
+        Session::put('page', 'rekapSeminarTA');
         return view('approve_seminar.ti.rekap', compact('ta', 'smt'));
     }
 
@@ -416,6 +411,7 @@ class ApproveSeminarController extends Controller
 
     public function viewPwk()
     {
+        Session::put('page', 'appPembahasan');
         return view('approve_seminar.pwk.index');
     }
 
@@ -526,6 +522,7 @@ class ApproveSeminarController extends Controller
     {
         $ta = TahunAjaran::get();
         $smt = Semester::get();
+        Session::put('page', 'rekapPembahasan');
         return view('approve_seminar.pwk.rekap', compact('ta', 'smt'));
     }
 

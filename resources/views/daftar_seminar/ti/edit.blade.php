@@ -218,7 +218,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <label class="col-sm-3 col-form-label">Sertifikat SKKFT</label>
+                                <label class="col-sm-3 col-form-label">Bukti Penyerahan Draft</label>
                                 <p class="col-sm-5 col-form-label ">{{ $data->syarat_9 }}</p>
                                 @if ($data->status_9 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
@@ -228,21 +228,6 @@
 
                                 @if ($data->status_9 == 2)
                                 <input type="file" name="syarat_9" class="col-sm-3" id="syarat_9">
-                                @endif
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <label class="col-sm-3 col-form-label">Surat Penunjukan Pembimbing</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_10 }}</p>
-                                @if ($data->status_10 == 1)
-                                <span class="label bg-green col-sm-1">Diterima</span>
-                                @else
-                                <span class="label bg-red col-sm-1">Ditolak</span>
-                                @endif
-
-                                @if ($data->status_10 == 2)
-                                <input type="file" name="syarat_10" class="col-sm-3" id="syarat_10">
                                 @endif
                             </div>
                         </div>

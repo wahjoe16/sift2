@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\DaftarSidang;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class BimbinganController extends Controller
 {
     public function indexTmb()
     {
-
+        Session::put('page', 'bimbinganTmb');
         return view('bimbingan.index_tmb');
     }
 
@@ -28,10 +29,10 @@ class BimbinganController extends Controller
             ->addIndexColumn()
             ->addColumn('aksi', function ($data) {
                 return '
-            <div class="btn-group">
-                <a href="' . route('rekap-sidangTmb.show', $data->id) . '"><i class="fa fa-search"></i></a>
-            </div>
-    ';
+                    <div class="btn-group">
+                        <a href="' . route('rekap-sidangTmb.show', $data->id) . '"><i class="fa fa-search"></i></a>
+                    </div>
+                ';
             })
             ->rawColumns(['aksi'])
             ->make(true);
@@ -61,6 +62,7 @@ class BimbinganController extends Controller
 
     public function indexTi()
     {
+        Session::put('page', 'bimbinganTi');
         return view('bimbingan.index_ti');
     }
 
@@ -78,10 +80,10 @@ class BimbinganController extends Controller
             ->addIndexColumn()
             ->addColumn('aksi', function ($data) {
                 return '
-            <div class="btn-group">
-                <a href="' . route('rekap-sidangTi.show', $data->id) . '"><i class="fa fa-search"></i></a>
-            </div>
-    ';
+                        <div class="btn-group">
+                            <a href="' . route('rekap-sidangTi.show', $data->id) . '"><i class="fa fa-search"></i></a>
+                        </div>
+                ';
             })
             ->rawColumns(['aksi'])
             ->make(true);
@@ -100,10 +102,10 @@ class BimbinganController extends Controller
             ->addIndexColumn()
             ->addColumn('aksi', function ($data) {
                 return '
-            <div class="btn-group">
-                <a href="' . route('rekap-sidangTi.show', $data->id) . '"><i class="fa fa-search"></i></a>
-            </div>
-    ';
+                        <div class="btn-group">
+                            <a href="' . route('rekap-sidangTi.show', $data->id) . '"><i class="fa fa-search"></i></a>
+                        </div>
+                ';
             })
             ->rawColumns(['aksi'])
             ->make(true);
@@ -111,6 +113,7 @@ class BimbinganController extends Controller
 
     public function indexPwk()
     {
+        Session::put('page', 'bimbinganPwk');
         return view('bimbingan.index_pwk');
     }
 

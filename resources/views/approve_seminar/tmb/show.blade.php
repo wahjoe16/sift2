@@ -135,11 +135,6 @@
                                 <td><a href="{{ url('/mahasiswa/seminar/syarat15', $data->syarat_15) }}" target="_blank">Sertifikat SKKFT</a></td>
 
                             </tr>
-                            <tr>
-                                <td>16</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat16', $data->syarat_16) }}" target="_blank">Bukti pembayaran Kolokium Skripsi</a></td>
-
-                            </tr>
                         </tbody>
                     </table>
                 </div>

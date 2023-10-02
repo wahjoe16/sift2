@@ -30,6 +30,9 @@
                         </div>
                     </form>
                 </div>
+                <div class="box-footer">
+                    <h4><a href="{{ asset('') }}">Download file sample untuk import data dosen</a></h4>
+                </div>
             </div>
         </div>
     </div>

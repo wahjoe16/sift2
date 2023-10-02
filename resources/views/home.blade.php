@@ -22,18 +22,34 @@
                         </a>
                     </div>
                 </div>
-                @if (auth()->user()->level == 1 || auth()->user()->level == 2)
+                @if (auth()->user()->level == 2)
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="small-box bg-green">
                         <div class="inner">
                             <h3>Arsip</h3>
 
-                            <p>Fakultas</p>
+                            <p>Fakultas Teknik</p>
                         </div>
                         <div class="icon">
                             <i class="fa fa-book"></i>
                         </div>
-                        <a href="#" class="small-box-footer">
+                        <a href="{{ route('my-archive.index') }}" class="small-box-footer">
+                            Klik Disini <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+                @elseif (auth()->user()->level == 1)
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="small-box bg-green">
+                        <div class="inner">
+                            <h3>Arsip</h3>
+
+                            <p>Fakultas Teknik</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-book"></i>
+                        </div>
+                        <a href="{{ route('ft-arsip.index') }}" class="small-box-footer">
                             Klik Disini <i class="fa fa-arrow-circle-right"></i>
                         </a>
                     </div>
@@ -42,7 +58,7 @@
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="small-box bg-red">
                         <div class="inner">
-                            <h3>Mahasiswa</h3>
+                            <h3>SKKFT</h3>
 
                             <p>Satuan Kegiatan Kemahasiswaan Fakultas Teknik</p>
                         </div>

@@ -20,7 +20,7 @@ class DaftarSidangController extends Controller
         $dataLogSeminar = DaftarSeminar::where('mahasiswa_id', $dataMhs->id)->first();
         $dataSeminar = DaftarSeminar::where('mahasiswa_id', $dataMhs->id)->where('status', 1)->first();
         // dd($dataSeminar);
-
+        Session::put('page', 'indexSkripsi');
         return view('daftar_sidang.tmb.index', compact('dataSidang', 'dataLogSidang', 'dataLogSeminar', 'dataSeminar'));
     }
 
@@ -35,8 +35,13 @@ class DaftarSidangController extends Controller
         $dosen2 = User::where('level', 2)->get();
         $tahun_ajaran = TahunAjaran::get();
         $semester = Semester::get();
+        $dataMhs = auth()->user();
+        $dataSidang = DaftarSidang::where('mahasiswa_id', $dataMhs->id)->get();
+        $dataLogSidang = DaftarSidang::where('mahasiswa_id', $dataMhs->id)->first();
+        $dataLogSeminar = DaftarSeminar::where('mahasiswa_id', $dataMhs->id)->first();
+        $dataSeminar = DaftarSeminar::where('mahasiswa_id', $dataMhs->id)->where('status', 1)->first();
 
-        return view('daftar_sidang.tmb.create', compact('title', 'semester', 'tahun_ajaran', 'dosen1', 'dosen2'));
+        return view('daftar_sidang.tmb.create', compact('title', 'semester', 'tahun_ajaran', 'dosen1', 'dosen2', 'dataSidang', 'dataLogSidang', 'dataLogSeminar', 'dataSeminar'));
     }
 
     public function storeTmb(Request $request)
@@ -82,16 +87,14 @@ class DaftarSidangController extends Controller
 
             // upload syarat 
             $syarat_1 = $request->file('syarat_1');
-            $ext_syarat_1 = $syarat_1->getClientOriginalExtension();
-            $nama_syarat_1 = $npm . "_" . $syarat_1->getClientOriginalName() . "." . $ext_syarat_1;
+            $nama_syarat_1 = $npm . "_" . $syarat_1->getClientOriginalName();
             $syarat_1_path = 'mahasiswa/sidang/syarat01';
             $syarat_1->move($syarat_1_path, $nama_syarat_1);
             $daftarSidang->syarat_1 = $nama_syarat_1;
 
             // upload syarat 2
             $syarat_2 = $request->file('syarat_2');
-            $ext_syarat_2 = $syarat_2->getClientOriginalExtension();
-            $nama_syarat_2 = $npm . "_" . $syarat_2->getClientOriginalName() . "." . $ext_syarat_2;
+            $nama_syarat_2 = $npm . "_" . $syarat_2->getClientOriginalName();
             $syarat_2_path = 'mahasiswa/sidang/syarat02';
             $syarat_2->move($syarat_2_path, $nama_syarat_2);
             $daftarSidang->syarat_2 = $nama_syarat_2;
@@ -143,8 +146,7 @@ class DaftarSidangController extends Controller
             // upload syarat 
             $syarat_1 = $request->file('syarat_1');
             if (!is_null($syarat_1)) {
-                $ext_syarat_1 = $syarat_1->getClientOriginalExtension();
-                $nama_syarat_1 = $npm . "_" . $syarat_1->getClientOriginalName() . "." . $ext_syarat_1;
+                $nama_syarat_1 = $npm . "_" . $syarat_1->getClientOriginalName();
                 $syarat_1_path = 'mahasiswa/sidang/syarat01';
                 $syarat_1->move($syarat_1_path, $nama_syarat_1);
                 $daftarSidang->syarat_1 = $nama_syarat_1;
@@ -155,8 +157,7 @@ class DaftarSidangController extends Controller
             // upload syarat 2
             $syarat_2 = $request->file('syarat_2');
             if (!is_null($syarat_2)) {
-                $ext_syarat_2 = $syarat_2->getClientOriginalExtension();
-                $nama_syarat_2 = $npm . "_" . $syarat_2->getClientOriginalName() . "." . $ext_syarat_2;
+                $nama_syarat_2 = $npm . "_" . $syarat_2->getClientOriginalName();
                 $syarat_2_path = 'mahasiswa/sidang/syarat02';
                 $syarat_2->move($syarat_2_path, $nama_syarat_2);
                 $daftarSidang->syarat_2 = $nama_syarat_2;
@@ -176,6 +177,7 @@ class DaftarSidangController extends Controller
         $dataLogSidang = DaftarSidang::where('mahasiswa_id', $dataMhs->id)->first();
         $dataLogSeminar = DaftarSeminar::where('mahasiswa_id', $dataMhs->id)->first();
         $dataSeminar = DaftarSeminar::where('mahasiswa_id', $dataMhs->id)->where('status', 1)->first();
+        Session::put('page', 'sidangTA');
         return view('daftar_sidang.ti.index', compact('dataSidang', 'dataLogSidang', 'dataLogSeminar', 'dataSeminar'));
     }
 
@@ -190,8 +192,13 @@ class DaftarSidangController extends Controller
         $dosen2 = User::where('level', 2)->get();
         $tahun_ajaran = TahunAjaran::get();
         $semester = Semester::get();
+        $dataMhs = auth()->user();
+        $dataSidang = DaftarSidang::where('mahasiswa_id', $dataMhs->id)->get();
+        $dataLogSidang = DaftarSidang::where('mahasiswa_id', $dataMhs->id)->first();
+        $dataLogSeminar = DaftarSeminar::where('mahasiswa_id', $dataMhs->id)->first();
+        $dataSeminar = DaftarSeminar::where('mahasiswa_id', $dataMhs->id)->where('status', 1)->first();
 
-        return view('daftar_sidang.ti.create', compact('title', 'semester', 'tahun_ajaran', 'dosen1', 'dosen2'));
+        return view('daftar_sidang.ti.create', compact('title', 'semester', 'tahun_ajaran', 'dosen1', 'dosen2', 'dataSidang', 'dataLogSidang', 'dataLogSeminar', 'dataSeminar'));
     }
 
     public function storeTi(Request $request)
@@ -284,136 +291,119 @@ class DaftarSidangController extends Controller
 
             // upload syarat 
             $syarat_1 = $request->file('syarat_1');
-            $ext_syarat_1 = $syarat_1->getClientOriginalExtension();
-            $nama_syarat_1 = $npm . "_" . $syarat_1->getClientOriginalName() . "." . $ext_syarat_1;
+            $nama_syarat_1 = $npm . "_" . $syarat_1->getClientOriginalName();
             $syarat_1_path = 'mahasiswa/sidang/syarat01';
             $syarat_1->move($syarat_1_path, $nama_syarat_1);
             $daftarSidang->syarat_1 = $nama_syarat_1;
 
             // upload syarat 2
             $syarat_2 = $request->file('syarat_2');
-            $ext_syarat_2 = $syarat_2->getClientOriginalExtension();
-            $nama_syarat_2 = $npm . "_" . $syarat_2->getClientOriginalName() . "." . $ext_syarat_2;
+            $nama_syarat_2 = $npm . "_" . $syarat_2->getClientOriginalName();
             $syarat_2_path = 'mahasiswa/sidang/syarat02';
             $syarat_2->move($syarat_2_path, $nama_syarat_2);
             $daftarSidang->syarat_2 = $nama_syarat_2;
 
             // upload syarat 3
             $syarat_3 = $request->file('syarat_3');
-            $ext_syarat_3 = $syarat_3->getClientOriginalExtension();
-            $nama_syarat_3 = $npm . "_" . $syarat_3->getClientOriginalName() . "." . $ext_syarat_3;
+            $nama_syarat_3 = $npm . "_" . $syarat_3->getClientOriginalName();
             $syarat_3_path = 'mahasiswa/sidang/syarat03';
             $syarat_3->move($syarat_3_path, $nama_syarat_3);
             $daftarSidang->syarat_3 = $nama_syarat_3;
 
             // upload syarat 
             $syarat_4 = $request->file('syarat_4');
-            $ext_syarat_4 = $syarat_4->getClientOriginalExtension();
-            $nama_syarat_4 = $npm . "_" . $syarat_4->getClientOriginalName() . "." . $ext_syarat_4;
+            $nama_syarat_4 = $npm . "_" . $syarat_4->getClientOriginalName();
             $syarat_4_path = 'mahasiswa/sidang/syarat04';
             $syarat_4->move($syarat_4_path, $nama_syarat_4);
             $daftarSidang->syarat_4 = $nama_syarat_4;
 
             // upload syarat 
             $syarat_5 = $request->file('syarat_5');
-            $ext_syarat_5 = $syarat_5->getClientOriginalExtension();
-            $nama_syarat_5 = $npm . "_" . $syarat_5->getClientOriginalName() . "." . $ext_syarat_5;
+            $nama_syarat_5 = $npm . "_" . $syarat_5->getClientOriginalName();
             $syarat_5_path = 'mahasiswa/sidang/syarat05';
             $syarat_5->move($syarat_5_path, $nama_syarat_5);
             $daftarSidang->syarat_5 = $nama_syarat_5;
 
             // upload syarat 
             $syarat_6 = $request->file('syarat_6');
-            $ext_syarat_6 = $syarat_6->getClientOriginalExtension();
-            $nama_syarat_6 = $npm . "_" . $syarat_6->getClientOriginalName() . "." . $ext_syarat_6;
+            $nama_syarat_6 = $npm . "_" . $syarat_6->getClientOriginalName();
             $syarat_6_path = 'mahasiswa/sidang/syarat06';
             $syarat_6->move($syarat_6_path, $nama_syarat_6);
             $daftarSidang->syarat_6 = $nama_syarat_6;
 
             // upload syarat 
             $syarat_7 = $request->file('syarat_7');
-            $ext_syarat_7 = $syarat_7->getClientOriginalExtension();
-            $nama_syarat_7 = $npm . "_" . $syarat_7->getClientOriginalName() . "." . $ext_syarat_7;
+            $nama_syarat_7 = $npm . "_" . $syarat_7->getClientOriginalName();
             $syarat_7_path = 'mahasiswa/sidang/syarat07';
             $syarat_7->move($syarat_7_path, $nama_syarat_7);
             $daftarSidang->syarat_7 = $nama_syarat_7;
 
             // upload syarat 
             $syarat_8 = $request->file('syarat_8');
-            $ext_syarat_8 = $syarat_8->getClientOriginalExtension();
-            $nama_syarat_8 = $npm . "_" . $syarat_8->getClientOriginalName() . "." . $ext_syarat_8;
+            $nama_syarat_8 = $npm . "_" . $syarat_8->getClientOriginalName();
             $syarat_8_path = 'mahasiswa/sidang/syarat08';
             $syarat_8->move($syarat_8_path, $nama_syarat_8);
             $daftarSidang->syarat_8 = $nama_syarat_8;
 
             // upload syarat 
             $syarat_9 = $request->file('syarat_9');
-            $ext_syarat_9 = $syarat_9->getClientOriginalExtension();
-            $nama_syarat_9 = $npm . "_" . $syarat_9->getClientOriginalName() . "." . $ext_syarat_9;
+            $nama_syarat_9 = $npm . "_" . $syarat_9->getClientOriginalName();
             $syarat_9_path = 'mahasiswa/sidang/syarat09';
             $syarat_9->move($syarat_9_path, $nama_syarat_9);
             $daftarSidang->syarat_9 = $nama_syarat_8;
 
             // upload syarat 
             $syarat_10 = $request->file('syarat_10');
-            $ext_syarat_10 = $syarat_10->getClientOriginalExtension();
-            $nama_syarat_10 = $npm . "_" . $syarat_10->getClientOriginalName() . "." . $ext_syarat_10;
+            $nama_syarat_10 = $npm . "_" . $syarat_10->getClientOriginalName();
             $syarat_10_path = 'mahasiswa/sidang/syarat10';
             $syarat_10->move($syarat_10_path, $nama_syarat_10);
             $daftarSidang->syarat_10 = $nama_syarat_10;
 
             // upload syarat 
             $syarat_11 = $request->file('syarat_11');
-            $ext_syarat_11 = $syarat_11->getClientOriginalExtension();
-            $nama_syarat_11 = $npm . "_" . $syarat_11->getClientOriginalName() . "." . $ext_syarat_11;
+            $nama_syarat_11 = $npm . "_" . $syarat_11->getClientOriginalName();
             $syarat_11_path = 'mahasiswa/sidang/syarat11';
             $syarat_11->move($syarat_11_path, $nama_syarat_11);
             $daftarSidang->syarat_11 = $nama_syarat_11;
 
             // upload syarat 2
             $syarat_12 = $request->file('syarat_12');
-            $ext_syarat_12 = $syarat_12->getClientOriginalExtension();
-            $nama_syarat_12 = $npm . "_" . $syarat_12->getClientOriginalName() . "." . $ext_syarat_12;
+            $nama_syarat_12 = $npm . "_" . $syarat_12->getClientOriginalName();
             $syarat_12_path = 'mahasiswa/sidang/syarat12';
             $syarat_12->move($syarat_12_path, $nama_syarat_12);
             $daftarSidang->syarat_12 = $nama_syarat_12;
 
             // upload syarat 3
             $syarat_13 = $request->file('syarat_13');
-            $ext_syarat_13 = $syarat_13->getClientOriginalExtension();
-            $nama_syarat_13 = $npm . "_" . $syarat_13->getClientOriginalName() . "." . $ext_syarat_13;
+            $nama_syarat_13 = $npm . "_" . $syarat_13->getClientOriginalName();
             $syarat_13_path = 'mahasiswa/sidang/syarat13';
             $syarat_13->move($syarat_13_path, $nama_syarat_13);
             $daftarSidang->syarat_13 = $nama_syarat_13;
 
             // upload syarat 
             $syarat_14 = $request->file('syarat_14');
-            $ext_syarat_14 = $syarat_14->getClientOriginalExtension();
-            $nama_syarat_14 = $npm . "_" . $syarat_14->getClientOriginalName() . "." . $ext_syarat_14;
+            $nama_syarat_14 = $npm . "_" . $syarat_14->getClientOriginalName();
             $syarat_14_path = 'mahasiswa/sidang/syarat14';
             $syarat_14->move($syarat_14_path, $nama_syarat_14);
             $daftarSidang->syarat_14 = $nama_syarat_14;
 
             // upload syarat 
             $syarat_15 = $request->file('syarat_15');
-            $ext_syarat_15 = $syarat_15->getClientOriginalExtension();
-            $nama_syarat_15 = $npm . "_" . $syarat_15->getClientOriginalName() . "." . $ext_syarat_15;
+            $nama_syarat_15 = $npm . "_" . $syarat_15->getClientOriginalName();
             $syarat_15_path = 'mahasiswa/sidang/syarat15';
             $syarat_15->move($syarat_15_path, $nama_syarat_15);
             $daftarSidang->syarat_15 = $nama_syarat_15;
 
             // upload syarat 
             $syarat_16 = $request->file('syarat_16');
-            $ext_syarat_16 = $syarat_16->getClientOriginalExtension();
-            $nama_syarat_16 = $npm . "_" . $syarat_16->getClientOriginalName() . "." . $ext_syarat_16;
+            $nama_syarat_16 = $npm . "_" . $syarat_16->getClientOriginalName();
             $syarat_16_path = 'mahasiswa/sidang/syarat16';
             $syarat_16->move($syarat_16_path, $nama_syarat_16);
             $daftarSidang->syarat_16 = $nama_syarat_16;
 
             // upload syarat 
             $syarat_17 = $request->file('syarat_17');
-            $ext_syarat_17 = $syarat_17->getClientOriginalExtension();
-            $nama_syarat_17 = $npm . "_" . $syarat_17->getClientOriginalName() . "." . $ext_syarat_17;
+            $nama_syarat_17 = $npm . "_" . $syarat_17->getClientOriginalName();
             $syarat_17_path = 'mahasiswa/sidang/syarat17';
             $syarat_17->move($syarat_17_path, $nama_syarat_17);
             $daftarSidang->syarat_17 = $nama_syarat_17;
@@ -667,6 +657,7 @@ class DaftarSidangController extends Controller
         $dataLogSidang = DaftarSidang::where('mahasiswa_id', $dataMhs->id)->first();
         $dataLogSeminar = DaftarSeminar::where('mahasiswa_id', $dataMhs->id)->first();
         $dataSeminar = DaftarSeminar::where('mahasiswa_id', $dataMhs->id)->where('status', 1)->first();
+        Session::put('page', 'ST');
         return view('daftar_sidang.pwk.index', compact('dataSidang', 'dataLogSidang', 'dataLogSeminar', 'dataSeminar'));
     }
 
@@ -681,8 +672,13 @@ class DaftarSidangController extends Controller
         $dosen2 = User::where('level', 2)->get();
         $tahun_ajaran = TahunAjaran::get();
         $semester = Semester::get();
+        $dataMhs = auth()->user();
+        $dataSidang = DaftarSidang::where('mahasiswa_id', $dataMhs->id)->get();
+        $dataLogSidang = DaftarSidang::where('mahasiswa_id', $dataMhs->id)->first();
+        $dataLogSeminar = DaftarSeminar::where('mahasiswa_id', $dataMhs->id)->first();
+        $dataSeminar = DaftarSeminar::where('mahasiswa_id', $dataMhs->id)->where('status', 1)->first();
 
-        return view('daftar_sidang.pwk.create', compact('title', 'semester', 'tahun_ajaran', 'dosen1', 'dosen2'));
+        return view('daftar_sidang.pwk.create', compact('title', 'semester', 'tahun_ajaran', 'dosen1', 'dosen2', 'dataSidang', 'dataLogSidang', 'dataLogSeminar', 'dataSeminar'));
     }
 
     public function storePwk(Request $request)
@@ -740,48 +736,42 @@ class DaftarSidangController extends Controller
 
             // upload syarat 
             $syarat_1 = $request->file('syarat_1');
-            $ext_syarat_1 = $syarat_1->getClientOriginalExtension();
-            $nama_syarat_1 = $npm . "_" . $syarat_1->getClientOriginalName() . "." . $ext_syarat_1;
+            $nama_syarat_1 = $npm . "_" . $syarat_1->getClientOriginalName();
             $syarat_1_path = 'mahasiswa/sidang/syarat01';
             $syarat_1->move($syarat_1_path, $nama_syarat_1);
             $daftarSeminar->syarat_1 = $nama_syarat_1;
 
             // upload syarat 2
             $syarat_2 = $request->file('syarat_2');
-            $ext_syarat_2 = $syarat_2->getClientOriginalExtension();
-            $nama_syarat_2 = $npm . "_" . $syarat_2->getClientOriginalName() . "." . $ext_syarat_2;
+            $nama_syarat_2 = $npm . "_" . $syarat_2->getClientOriginalName();
             $syarat_2_path = 'mahasiswa/sidang/syarat02';
             $syarat_2->move($syarat_2_path, $nama_syarat_2);
             $daftarSeminar->syarat_2 = $nama_syarat_2;
 
             // upload syarat 3
             $syarat_3 = $request->file('syarat_3');
-            $ext_syarat_3 = $syarat_3->getClientOriginalExtension();
-            $nama_syarat_3 = $npm . "_" . $syarat_3->getClientOriginalName() . "." . $ext_syarat_3;
+            $nama_syarat_3 = $npm . "_" . $syarat_3->getClientOriginalName();
             $syarat_3_path = 'mahasiswa/sidang/syarat03';
             $syarat_3->move($syarat_3_path, $nama_syarat_3);
             $daftarSeminar->syarat_3 = $nama_syarat_3;
 
             // upload syarat 
             $syarat_4 = $request->file('syarat_4');
-            $ext_syarat_4 = $syarat_4->getClientOriginalExtension();
-            $nama_syarat_4 = $npm . "_" . $syarat_4->getClientOriginalName() . "." . $ext_syarat_4;
+            $nama_syarat_4 = $npm . "_" . $syarat_4->getClientOriginalName();
             $syarat_4_path = 'mahasiswa/sidang/syarat04';
             $syarat_4->move($syarat_4_path, $nama_syarat_4);
             $daftarSeminar->syarat_4 = $nama_syarat_4;
 
             // upload syarat 
             $syarat_5 = $request->file('syarat_5');
-            $ext_syarat_5 = $syarat_5->getClientOriginalExtension();
-            $nama_syarat_5 = $npm . "_" . $syarat_5->getClientOriginalName() . "." . $ext_syarat_5;
+            $nama_syarat_5 = $npm . "_" . $syarat_5->getClientOriginalName();
             $syarat_5_path = 'mahasiswa/sidang/syarat05';
             $syarat_5->move($syarat_5_path, $nama_syarat_5);
             $daftarSeminar->syarat_5 = $nama_syarat_5;
 
             // upload syarat 
             $syarat_6 = $request->file('syarat_6');
-            $ext_syarat_6 = $syarat_6->getClientOriginalExtension();
-            $nama_syarat_6 = $npm . "_" . $syarat_6->getClientOriginalName() . "." . $ext_syarat_6;
+            $nama_syarat_6 = $npm . "_" . $syarat_6->getClientOriginalName();
             $syarat_6_path = 'mahasiswa/sidang/syarat06';
             $syarat_6->move($syarat_6_path, $nama_syarat_6);
             $daftarSeminar->syarat_6 = $nama_syarat_6;
@@ -833,8 +823,7 @@ class DaftarSidangController extends Controller
             // upload syarat 
             $syarat_1 = $request->file('syarat_1');
             if (!is_null($syarat_1)) {
-                $ext_syarat_1 = $syarat_1->getClientOriginalExtension();
-                $nama_syarat_1 = $npm . "_" . $syarat_1->getClientOriginalName() . "." . $ext_syarat_1;
+                $nama_syarat_1 = $npm . "_" . $syarat_1->getClientOriginalName();
                 $syarat_1_path = 'mahasiswa/seminar/syarat01';
                 $syarat_1->move($syarat_1_path, $nama_syarat_1);
                 $daftarSidang->syarat_1 = $nama_syarat_1;
@@ -845,8 +834,7 @@ class DaftarSidangController extends Controller
             // upload syarat 2
             $syarat_2 = $request->file('syarat_2');
             if (!is_null($syarat_2)) {
-                $ext_syarat_2 = $syarat_2->getClientOriginalExtension();
-                $nama_syarat_2 = $npm . "_" . $syarat_2->getClientOriginalName() . "." . $ext_syarat_2;
+                $nama_syarat_2 = $npm . "_" . $syarat_2->getClientOriginalName();
                 $syarat_2_path = 'mahasiswa/seminar/syarat02';
                 $syarat_2->move($syarat_2_path, $nama_syarat_2);
                 $daftarSidang->syarat_2 = $nama_syarat_2;
@@ -857,8 +845,7 @@ class DaftarSidangController extends Controller
             // upload syarat 3
             $syarat_3 = $request->file('syarat_3');
             if (!is_null($syarat_3)) {
-                $ext_syarat_3 = $syarat_3->getClientOriginalExtension();
-                $nama_syarat_3 = $npm . "_" . $syarat_3->getClientOriginalName() . "." . $ext_syarat_3;
+                $nama_syarat_3 = $npm . "_" . $syarat_3->getClientOriginalName();
                 $syarat_3_path = 'mahasiswa/seminar/syarat03';
                 $syarat_3->move($syarat_3_path, $nama_syarat_3);
                 $daftarSidang->syarat_3 = $nama_syarat_3;
@@ -869,8 +856,7 @@ class DaftarSidangController extends Controller
             // upload syarat 
             $syarat_4 = $request->file('syarat_4');
             if (!is_null($syarat_4)) {
-                $ext_syarat_4 = $syarat_4->getClientOriginalExtension();
-                $nama_syarat_4 = $npm . "_" . $syarat_4->getClientOriginalName() . "." . $ext_syarat_4;
+                $nama_syarat_4 = $npm . "_" . $syarat_4->getClientOriginalName();
                 $syarat_4_path = 'mahasiswa/seminar/syarat04';
                 $syarat_4->move($syarat_4_path, $nama_syarat_4);
                 $daftarSidang->syarat_4 = $nama_syarat_4;
@@ -881,8 +867,7 @@ class DaftarSidangController extends Controller
             // upload syarat 
             $syarat_5 = $request->file('syarat_5');
             if (!is_null($syarat_5)) {
-                $ext_syarat_5 = $syarat_5->getClientOriginalExtension();
-                $nama_syarat_5 = $npm . "_" . $syarat_5->getClientOriginalName() . "." . $ext_syarat_5;
+                $nama_syarat_5 = $npm . "_" . $syarat_5->getClientOriginalName();
                 $syarat_5_path = 'mahasiswa/seminar/syarat05';
                 $syarat_5->move($syarat_5_path, $nama_syarat_5);
                 $daftarSidang->syarat_5 = $nama_syarat_5;
@@ -893,8 +878,7 @@ class DaftarSidangController extends Controller
             // upload syarat 
             $syarat_6 = $request->file('syarat_6');
             if (!is_null($syarat_6)) {
-                $ext_syarat_6 = $syarat_6->getClientOriginalExtension();
-                $nama_syarat_6 = $npm . "_" . $syarat_6->getClientOriginalName() . "." . $ext_syarat_6;
+                $nama_syarat_6 = $npm . "_" . $syarat_6->getClientOriginalName();
                 $syarat_6_path = 'mahasiswa/seminar/syarat06';
                 $syarat_6->move($syarat_6_path, $nama_syarat_6);
                 $daftarSidang->syarat_6 = $nama_syarat_6;

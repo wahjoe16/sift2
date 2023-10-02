@@ -12,7 +12,9 @@
                     </h3>
                 </div>
                 <div class="box-body">
-                    <form action="{{ route('semester.update', $data->id) }}" method="post">@csrf
+                    <form action="{{ route('semester.update', $data->id) }}" method="post">
+                        @csrf
+                        @method('PUT')
                         <div class="form-group row">
                             <label for="semester" class="col-lg-2 col-lg-offset-1 control-label">Semester</label>
                             <div class="col-lg-6">

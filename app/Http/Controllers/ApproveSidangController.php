@@ -9,12 +9,14 @@ use App\Models\DaftarSidang;
 use App\Models\Semester;
 use App\Models\TahunAjaran;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ApproveSidangController extends Controller
 {
     public function viewTmb()
     {
+        Session::put('page', 'appSkripsi');
         return view('approve_sidang.tmb.index');
     }
 
@@ -89,6 +91,7 @@ class ApproveSidangController extends Controller
     {
         $ta = TahunAjaran::get();
         $smt = Semester::get();
+        Session::put('page', 'rekapSkripsi');
         return view('approve_sidang.tmb.rekap', compact('ta', 'smt'));
     }
 
@@ -146,6 +149,7 @@ class ApproveSidangController extends Controller
 
     public function viewTi()
     {
+        Session::put('page', 'appSidangTA');
         return view('approve_sidang.ti.index');
     }
 
@@ -291,6 +295,7 @@ class ApproveSidangController extends Controller
     {
         $ta = TahunAjaran::get();
         $smt = Semester::get();
+        Session::put('page', 'rekapSidangTA');
         return view('approve_sidang.ti.rekap', compact('ta', 'smt'));
     }
 
@@ -347,6 +352,7 @@ class ApproveSidangController extends Controller
 
     public function viewPwk()
     {
+        Session::put('page', 'appTerbuka');
         return view('approve_sidang.pwk.index');
     }
 
@@ -437,6 +443,7 @@ class ApproveSidangController extends Controller
     {
         $ta = TahunAjaran::get();
         $smt = Semester::get();
+        Session::put('page', 'rekapTerbuka');
         return view('approve_sidang.pwk.rekap', compact('ta', 'smt'));
     }
 

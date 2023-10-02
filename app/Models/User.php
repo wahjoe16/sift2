@@ -95,4 +95,18 @@ class User extends Authenticatable
     {
         return $this->hasMany(User::class);
     }
+
+    public function archives()
+    {
+        return $this->belongsToMany(Archive::class, 'my_archives');
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+        static::deleting(function ($model) {
+            // menghapus relasi ke archive
+            $model->archives()->detach();
+        });
+    }
 }

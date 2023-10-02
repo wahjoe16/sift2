@@ -12,7 +12,9 @@
                     </h3>
                 </div>
                 <div class="box-body">
-                    <form action="{{ route('tahunajaran.update', $data->id) }}" method="post">@csrf
+                    <form action="{{ route('tahunajaran.update', $data->id) }}" method="post">
+                        @csrf
+                        @method('PUT')
                         <div class="form-group row">
                             <label for="tahun_ajaran" class="col-lg-2 col-lg-offset-1 control-label">Tahun Akademik</label>
                             <div class="col-lg-6">
