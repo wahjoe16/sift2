@@ -6,6 +6,7 @@
 @section('content')
 
 <section class="content">
+    @includeIf('layouts.alert')
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="box">
@@ -21,13 +22,13 @@
                         <div class="form-group row">
                             <label class="col-lg-2 col-lg-offset-1 control-label" for="name">Nama</label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" name="name" id="name" value="{{ $data->name }}">
+                                <input type="text" class="form-control" name="name" id="name" value="{{ $data->name }}" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-2 col-lg-offset-1 control-label" for="section_id">Bidang Arsip</label>
                             <div class="col-sm-6">
-                                <select name="section_id" id="section_id" class="form-control select2">
+                                <select name="section_id" id="section_id" class="form-control select2" required>
                                     <option value="">Pilih</option>
                                     @foreach($section as $s)
                                     <option value="{{ $s['id'] }}" @if(!empty($s['id']==$data['section_id'])) selected @endif>{{ $s['name'] }}</option>
@@ -38,7 +39,7 @@
                         <div class="form-group row">
                             <label class="col-lg-2 col-lg-offset-1 control-label" for="category_archive_id">Kategori Arsip</label>
                             <div class="col-sm-6">
-                                <select name="category_archive_id" id="category_archive_id" class="form-control select2">
+                                <select name="category_archive_id" id="category_archive_id" class="form-control select2" required>
                                     <option value="">Pilih</option>
                                     @foreach($category as $c)
                                     <option value="{{ $c['id'] }}" @if(!empty($c['id']==$data['category_archive_id'])) selected @endif>{{ $c['name'] }}</option>
@@ -49,7 +50,7 @@
                         <div class="form-group row">
                             <label class="col-lg-2 col-lg-offset-1 control-label" for="subcategory_archive_id">Subkategori Arsip</label>
                             <div class="col-sm-6">
-                                <select name="subcategory_archive_id" id="subcategory_archive_id" class="form-control select2">
+                                <select name="subcategory_archive_id" id="subcategory_archive_id" class="form-control select2" required>
                                     <option value="">Pilih</option>
                                     @foreach($subcategory as $s)
                                     <option value="{{ $s['id'] }}" @if(!empty($s['id']==$data['subcategory_archive_id'])) selected @endif>{{ $s['name'] }}</option>
@@ -60,7 +61,7 @@
                         <div class="form-group row">
                             <label class="col-lg-2 col-lg-offset-1 control-label" for="tahun_ajaran_id">Tahun Akademik</label>
                             <div class="col-sm-6">
-                                <select name="tahun_ajaran_id" id="tahun_ajaran_id" class="form-control select2">
+                                <select name="tahun_ajaran_id" id="tahun_ajaran_id" class="form-control select2" required>
                                     <option value="">Pilih</option>
                                     @foreach($ta as $t)
                                     <option value="{{ $t['id'] }}" @if(!empty($t['id']==$data['tahun_ajaran_id'])) selected @endif>{{ $t['tahun_ajaran'] }}</option>
@@ -71,7 +72,7 @@
                         <div class="form-group row">
                             <label class="col-lg-2 col-lg-offset-1 control-label" for="semester_id">Semester</label>
                             <div class="col-sm-6">
-                                <select name="semester_id" id="semester_id" class="form-control select2">
+                                <select name="semester_id" id="semester_id" class="form-control select2" required>
                                     <option value="">Pilih</option>
                                     @foreach($smt as $s)
                                     <option value="{{ $s['id'] }}" @if(!empty($s['id']==$data['semester_id'])) selected @endif>{{ $s['semester'] }}</option>
@@ -95,7 +96,7 @@
                         <div class="form-group row">
                             <label class="col-lg-2 col-lg-offset-1 control-label" for="description">Upload File Arsip</label>
                             <div class="col-sm-6">
-                                <input type="file" name="file" class="dropify">
+                                <input type="file" name="file" class="dropify" required>
                             </div>
                         </div>
                         <div class="form-group row">

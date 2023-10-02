@@ -8,7 +8,7 @@
         <div class="container">
             <div class="row align-items-center justify-content-center">
                 <div class="col-md-7">
-                    <h3>Login <strong>Sistem Informasi Fakultas Teknik</strong></h3>
+                    <h3>Login <strong>Sistem Informasi Fakultas Teknik UNISBA</strong></h3>
 
                     <form method="post" action="{{ route('login') }}">@csrf
                         <div class="form-group first">
