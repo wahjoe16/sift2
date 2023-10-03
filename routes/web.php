@@ -49,6 +49,11 @@ Route::group(['middleware' => 'ceklevel:1,2,3'], function () {
 // DATA MASTER Role ADMIN
 Route::group(['prefix' => '/datamaster', 'middleware' => 'ceklevel:1'], function () {
     Route::get('/dashboard', [DashboardController::class, 'indexData'])->name('dashboard.datamaster');
+    // View All Users
+    Route::get('/users', [UserController::class, 'indexUsers'])->name('users.index');
+    Route::get('/data-users', [UserController::class, 'dataUsers'])->name('users.data');
+    Route::get('/data-users/{id}', [UserController::class, 'showUsers'])->name('users.show');
+    Route::post('/reset-password-user/{id}', [UserController::class, 'resetPassword'])->name('user-password.reset');
     // CRUD mahasiswa
     Route::get('/mahasiswa/index', [UserController::class, 'indexMahasiswa'])->name('mahasiswa.index');
     Route::get('/mahasiswa/data', [UserController::class, 'dataMahasiswa'])->name('mahasiswa.data');
@@ -92,11 +97,10 @@ Route::group(['prefix' => '/datamaster', 'middleware' => 'ceklevel:1'], function
     // CRUD category arsip
     Route::resource('category-archive', CategoryArsipController::class);
     Route::get('data/category-archive', [CategoryArsipController::class, 'data'])->name('category-archive.data');
-    Route::get('dropdownlist/category-archive/{id}', [CategoryArsipController::class, 'getDataCategory'])->name('get-category.data');
+
     // CRUD sub category arsip
     Route::resource('sub-category-archive', SubcategoryArsipController::class);
     Route::get('data/sub-category-archive', [SubcategoryArsipController::class, 'data'])->name('sub-category-archive.data');
-    Route::get('dropdownlist/sub-category-archive/{id}', [SubcategoryArsipController::class, 'getDataSubcategory'])->name('get-subcategory.data');
 });
 
 // Dokumentasi Sidang Role MAHASISWA
@@ -232,6 +236,8 @@ Route::group(['prefix' => '/archives', 'middleware' => 'ceklevel:1,2'], function
     Route::put('my-archive/{id}/update', [MyArchiveController::class, 'updateArchive'])->name('my-archive.update');
     Route::get('my-archive/{id}/delete', [MyArchiveController::class, 'deleteArchive'])->name('my-archive.destroy');
     Route::match(['get', 'post'], 'my-archive/download-selected', [MyArchiveController::class, 'downloadSelected'])->name('myarchive.downloadselected');
+    Route::get('dropdownlist/category-archive/{id}', [CategoryArsipController::class, 'getDataCategory'])->name('get-category.data');
+    Route::get('dropdownlist/sub-category-archive/{id}', [SubcategoryArsipController::class, 'getDataSubcategory'])->name('get-subcategory.data');
 });
 
 

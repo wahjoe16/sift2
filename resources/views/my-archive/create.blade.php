@@ -112,4 +112,50 @@
     })
 </script>
 
+<!-- Dependent Dropdown -->
+<script>
+    jQuery(document).ready(function() {
+        jQuery('select[name="section_id"]').on('change', function() {
+            var category = jQuery(this).val();
+            if (category) {
+                jQuery.ajax({
+                    url: '/archives/dropdownlist/category-archive/' + category,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log(data);
+                        jQuery('select[name="category_archive_id"]').empty();
+                        jQuery.each(data, function(key, value) {
+                            $('select[name="category_archive_id"]').append('<option value="' + key + '">' + value + '</option>');
+                        })
+                    }
+                })
+            } else {
+                $('select[name="category_archive_id"]').empty();
+            }
+        })
+
+        jQuery('select[name="category_archive_id"]').on('change', function() {
+            var subcategory = jQuery(this).val();
+            if (subcategory) {
+                jQuery.ajax({
+                    url: '/archives/dropdownlist/sub-category-archive/' + subcategory,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log(data);
+                        jQuery('select[name="subcategory_archive_id"]').empty();
+                        jQuery.each(data, function(key, value) {
+                            $('select[name="subcategory_archive_id"]').append('<option value="' + key + '">' + value + '</option>');
+                        })
+                    }
+                })
+            } else {
+                $('select[name="subcategory_archive_id"]').empty();
+            }
+        })
+    })
+</script>
+<!-- end Dependent Dropdown -->
+
 @endpush

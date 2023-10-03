@@ -254,7 +254,7 @@
             var category = jQuery(this).val();
             if (category) {
                 jQuery.ajax({
-                    url: '/datamaster/dropdownlist/category-archive/' + category,
+                    url: '/archives/dropdownlist/category-archive/' + category,
                     type: 'GET',
                     dataType: 'json',
                     success: function(data) {
@@ -274,7 +274,7 @@
             var subcategory = jQuery(this).val();
             if (subcategory) {
                 jQuery.ajax({
-                    url: '/datamaster/dropdownlist/sub-category-archive/' + subcategory,
+                    url: '/archives/dropdownlist/sub-category-archive/' + subcategory,
                     type: 'GET',
                     dataType: 'json',
                     success: function(data) {

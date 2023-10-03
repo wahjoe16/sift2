@@ -406,4 +406,58 @@ class UserController extends Controller
 
         return redirect()->route('dosen.index')->with('success', 'Data dosen berhasil diimport!');
     }
+
+    public function indexUsers()
+    {
+        $title = 'Delete User!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+        Session::put('page', 'indexUsers');
+        return view('users.index');
+    }
+
+    public function dataUsers()
+    {
+        $data = User::orderBy('level')->get();
+
+        return datatables()
+            ->of($data)
+            ->addIndexColumn()
+            ->addColumn('foto', function ($data) {
+                $path = asset("/user/foto/$data->foto");
+                return '<img src=' . $path . ' class="img-circle img-bordered-sm" width="40"/>';
+            })
+            ->addColumn('level', function ($data) {
+                if ($data->level == 1) {
+                    return 'Tenaga Kependidikan';
+                } else if ($data->level == 2) {
+                    return 'Dosen';
+                } else if ($data->level == 3) {
+                    return 'Mahasiswa';
+                }
+            })
+            ->addColumn('aksi', function ($data) {
+                return '
+                    <div class="btn-group">
+                        <a href="' . route('users.show', $data->id) . '" class="btn btn-xs btn-info btn-flat"><i class="fa fa-search"></i></a>
+                    </div>
+                ';
+            })
+            ->rawColumns(['foto', 'aksi'])
+            ->make(true);
+    }
+
+    public function showUsers($id)
+    {
+        $data = User::find($id);
+        return view('users.show', compact('data'));
+    }
+
+    public function resetPassword($id)
+    {
+        $data = User::find($id);
+        $data->password = bcrypt($data->nik);
+        $data->save();
+        return redirect()->route('users.index')->with('success', 'Password user berhasil direset!');
+    }
 }

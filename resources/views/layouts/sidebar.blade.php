@@ -32,7 +32,7 @@
             </li>
             <li>
                 <a href="{{ route('dashboard.sidang') }}" @if(Session::get('page')=='dashboardSidang' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                    <i class="fa fa-dashboard"></i> <span>Dashboard Sidang</span>
+                    <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                 </a>
             </li>
             @if (auth()->user()->level == 1 && auth()->user()->status_superadmin == 1)
@@ -50,6 +50,11 @@
             <li>
                 <a href="{{ route('mahasiswa.index') }}" @if(Session::get('page')=='indexMhs' ) style="background: #3c8dbc !important; color:white !important" @endif>
                     <i class="fa fa-users"></i> <span>Mahasiswa</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('users.index') }}" @if(Session::get('page')=='indexUser' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                    <i class="fa fa-users"></i> <span>Semua User</span>
                 </a>
             </li>
             @endif

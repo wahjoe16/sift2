@@ -126,7 +126,7 @@ class ArchiveController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'file' => 'required|max:255',
+            'file' => 'required',
             'file.*' => 'mimes:pdf,xls,xlxs,doc,docx,csv,jpg,jpeg,png',
             'section_id' => 'required',
             'tahun_ajaran_id' => 'required',
@@ -143,7 +143,6 @@ class ArchiveController extends Controller
             'category_archive_id' => 'Kategori arsip tidak boleh kosong',
             'subcategory_archive_id' => 'Sub Kategori arsip tidak boleh kosong',
             'name.required' => 'Nama arsip tidak boleh kosong',
-            'file.max' => 'Nama file arsip tidak boleh lebih dari 255 karakter',
             'name.max' => 'Nama arsip tidak boleh lebih dari 255 karakter',
         ]);
 

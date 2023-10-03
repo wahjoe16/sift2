@@ -4,7 +4,7 @@
 
 <section class="content-header">
     <h1>
-        Dokumentasi Persyaratan Sidang Sistem Informasi Fakultas Teknik</b>
+        Sistem Informasi Fakultas Teknik UNISBA</b>
     </h1>
     <ol class="breadcrumb">
         @section('breadcrumb')
@@ -15,6 +15,56 @@
 
 <section class="content">
     @includeIf('layouts.alert')
+    <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="small-box bg-aqua">
+                <div class="inner">
+                    <h3>{{ $dosen }}</h3>
+
+                    <p>Dosen</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-user"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h3>{{ $mhs }}</h3>
+
+                    <p>Mahasiswa</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-users"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h3>{{ $admin }}</h3>
+
+                    <p>Tenaga Kependidikan</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-street-view"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="small-box bg-red">
+                <div class="inner">
+                    <h3>{{ $arsip }}</h3>
+
+                    <p>Arsip Fakultas</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-book"></i>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="box box-info">

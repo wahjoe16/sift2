@@ -70,23 +70,6 @@
                         </a>
                     </div>
                 </div>
-                @if (auth()->user()->level == 1)
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div class="small-box bg-yellow">
-                        <div class="inner">
-                            <h3>Data Master</h3>
-
-                            <p>Fakultas Teknik</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fa fa-file-text-o"></i>
-                        </div>
-                        <a href="{{ route('dashboard.datamaster') }}" class="small-box-footer">
-                            Klik Disini <i class="fa fa-arrow-circle-right"></i>
-                        </a>
-                    </div>
-                </div>
-                @endif
             </div>
         </div>
         <div class="col-md-4 col-sm-12 col-xs-12">

@@ -147,4 +147,28 @@
         })
     })
 </script>
+
+<!-- Dependent dropdown -->
+<script>
+    jQuery('select[name="kategori"]').on('change', function() {
+        var subcategory = jQuery(this).val();
+        if (subcategory) {
+            jQuery.ajax({
+                url: '/archives/dropdownlist/sub-category-archive/' + subcategory,
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                    jQuery('select[name="subkategori"]').empty();
+                    jQuery.each(data, function(key, value) {
+                        $('select[name="subkategori"]').append('<option value="' + key + '">' + value + '</option>');
+                    })
+                }
+            })
+        } else {
+            $('select[name="subkategori"]').empty();
+        }
+    })
+</script>
+<!-- end of dependen dropsown -->
 @endpush

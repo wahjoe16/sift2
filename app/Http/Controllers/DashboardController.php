@@ -6,6 +6,7 @@ use App\Charts\DosenPieChart;
 use App\Charts\MahasiswaPieChart;
 use App\Charts\TrenLulusanChart;
 use App\Exports\RekapLulusanExport;
+use App\Models\Archive;
 use App\Models\DaftarSeminar;
 use App\Models\DaftarSidang;
 use App\Models\User;
@@ -24,10 +25,18 @@ class DashboardController extends Controller
     public function indexSidang(MahasiswaPieChart $mahasiswaPieChart, DosenPieChart $dosenPieChart, TrenLulusanChart $trenLulusanChart)
     {
         Session::put('page', 'dashboardSidang');
+        $dosen = User::where('level', 2)->count();
+        $mhs = User::where('level', 3)->count();
+        $admin = User::where('level', 1)->count();
+        $arsip = Archive::count();
         return view('sidang', [
             'mahasiswaPieChart' => $mahasiswaPieChart->build(),
             'dosenPieChart' => $dosenPieChart->build(),
             'trenLulusanChart' => $trenLulusanChart->build(),
+            'dosen' => $dosen,
+            'mhs' => $mhs,
+            'admin' => $admin,
+            'arsip' => $arsip
         ]);
     }
 
