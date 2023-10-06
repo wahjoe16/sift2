@@ -79,6 +79,7 @@ class ArchiveController extends Controller
             ->addColumn('action', function ($data) {
                 $path = asset("/file/archives/$data->file");
                 return '
+                <a href="' . route('my-archive.show', $data->id) . '" target="_blank" class="btn btn-info btn-flat"><i class="fa fa-search"></i></a>
                 <a href="' . $path . '" class="btn btn-primary btn-flat" target="_blank"><i class="fa fa-download"></i></a>
                 <a href="' . route('ft-arsip.edit', $data->id) . '" class="btn btn-warning btn-flat"><i class="fa fa-edit"></i></a>
                 <a href="' . route('ft-arsip.destroy', $data->id) . '" class="btn btn-danger btn-flat" data-confirm-delete="true"><i class="fa fa-trash"></i></a>
