@@ -38,9 +38,10 @@ class RekapSeminarPwkExport implements FromCollection, WithHeadings, WithMapping
             'Tahun Akademik',
             'Semester',
             'Dosen Pembimbing 1',
-            'Dosen Pembimbing 1',
+            'Dosen Pembimbing 2',
             'Judul Skripsi',
-            'Tanggal Pengajuan'
+            'Tanggal Pengajuan',
+            'Tanggal Approve'
         ];
     }
 
@@ -55,6 +56,7 @@ class RekapSeminarPwkExport implements FromCollection, WithHeadings, WithMapping
             $row->dosen_2->nama,
             $row->judul_skripsi,
             tanggal_indonesia($row->created_at),
+            tanggal_indonesia($row->updated_at),
         ];
     }
 

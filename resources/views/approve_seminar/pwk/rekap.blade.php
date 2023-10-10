@@ -46,6 +46,7 @@
                                 <th>Tahun Akademik</th>
                                 <th>Semester</th>
                                 <th>Tanggal Pengajuan</th>
+                                <th>Tanggal Approve</th>
                                 <th width="15%"><i class="fa fa-cogs"></i> Aksi</th>
                             </tr>
                         </thead>
@@ -107,6 +108,9 @@
                 },
                 {
                     data: 'tanggal_pengajuan'
+                },
+                {
+                    data: 'tanggal_approve'
                 },
                 {
                     data: 'aksi'

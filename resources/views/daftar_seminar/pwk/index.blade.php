@@ -25,7 +25,7 @@
                             <th>Dosen Pembimbing 2</th>
                             <th>Tanggal Pengajuan</th>
                             <th>Status</th>
-                            <th width="15%"><i class="fa fa-cogs"></i></th>
+                            <th width="15%"><i class="fa fa-cogs"></i> Aksi</th>
                         </thead>
                         <tbody>
                             @foreach ($dataSeminar as $d)

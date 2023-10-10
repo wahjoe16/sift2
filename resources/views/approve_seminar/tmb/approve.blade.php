@@ -380,6 +380,27 @@
                                         <textarea name="keterangan_15" id="keterangan_15" cols="30" rows="1" class="form-control"></textarea>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>16</td>
+                                    <td><a href="{{ url('/mahasiswa/seminar/syarat16', $data->syarat_16) }}" target="_blank">Transkrip Nilai</a></td>
+                                    <td>
+                                        @if ($data->status_16 == 2)
+                                        <input type="radio" name="status_16" value="2" class="minimal-red" checked="checked" readonly>
+                                        @elseif ($data->status_16 == 0)
+                                        <input type="radio" name="status_16" value="2" class="minimal-red">
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($data->status_16 == 1)
+                                        <input type="radio" name="status_16" value="1" class="flat-red" checked="checked" readonly>
+                                        @elseif ($data->status_16 == 0)
+                                        <input type="radio" name="status_16" value="1" class="flat-red">
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <textarea name="keterangan_16" id="keterangan_16" cols="30" rows="1" class="form-control"></textarea>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

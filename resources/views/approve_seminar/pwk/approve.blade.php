@@ -57,7 +57,6 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>#</th>
                                     <th>Dokumen</th>
                                     <th><i class="fa fa-close text-red"></i></th>
                                     <th><i class="fa fa-check text-green"></i></th>
@@ -65,8 +64,8 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if ($data->syarat_1 != '')
                                 <tr>
-                                    <td>1</td>
                                     <td><a href="{{ url('/mahasiswa/seminar/syarat01', $data->syarat_1) }}" target="_blank">Lembar bimbingan skripsi</a></td>
                                     <td>
                                         @if ($data->status_1 == 2)
@@ -86,8 +85,9 @@
                                         <textarea name="keterangan_1" id="keterangan_1" cols="30" rows="1" class="form-control"></textarea>
                                     </td>
                                 </tr>
+                                @endif
+                                @if ($data->syarat_2 != '')
                                 <tr>
-                                    <td>2</td>
                                     <td><a href="{{ url('/mahasiswa/seminar/syarat02', $data->syarat_2) }}" target="_blank">Sertifikat pesantren mahasiswa baru</a></td>
                                     <td>
                                         @if ($data->status_2 == 2)
@@ -107,8 +107,9 @@
                                         <textarea name="keterangan_2" id="keterangan_2" cols="30" rows="1" class="form-control"></textarea>
                                     </td>
                                 </tr>
+                                @endif
+                                @if ($data->syarat_3 != '')
                                 <tr>
-                                    <td>3</td>
                                     <td><a href="{{ url('/mahasiswa/seminar/syarat03', $data->syarat_3) }}" target="_blank">Sertifikat pesantren calon sarjana</a></td>
                                     <td>
                                         @if ($data->status_3 == 2)
@@ -128,8 +129,9 @@
                                         <textarea name="keterangan_3" id="keterangan_3" cols="30" rows="1" class="form-control"></textarea>
                                     </td>
                                 </tr>
+                                @endif
+                                @if ($data->syarat_4 != '')
                                 <tr>
-                                    <td>4</td>
                                     <td><a href="{{ url('/mahasiswa/seminar/syarat04', $data->syarat_4) }}" target="_blank">Transkrip nilai</a></td>
                                     <td>
                                         @if ($data->status_4 == 2)
@@ -149,8 +151,9 @@
                                         <textarea name="keterangan_4" id="keterangan_4" cols="30" rows="1" class="form-control"></textarea>
                                     </td>
                                 </tr>
+                                @endif
+                                @if ($data->syarat_5 != '')
                                 <tr>
-                                    <td>5</td>
                                     <td><a href="{{ url('/mahasiswa/seminar/syarat05', $data->syarat_5) }}" target="_blank">Sertifikat TOEFL</a></td>
                                     <td>
                                         @if ($data->status_5 == 2)
@@ -170,8 +173,9 @@
                                         <textarea name="keterangan_5" id="keterangan_5" cols="30" rows="1" class="form-control"></textarea>
                                     </td>
                                 </tr>
+                                @endif
+                                @if ($data->syarat_6 != '')
                                 <tr>
-                                    <td>6</td>
                                     <td><a href="{{ url('/mahasiswa/seminar/syarat06', $data->syarat_6) }}" target="_blank">Bukti bebas pinjaman perpustakaan</a></td>
                                     <td>
                                         @if ($data->status_6 == 2)
@@ -191,8 +195,9 @@
                                         <textarea name="keterangan_6" id="keterangan_6" cols="30" rows="1" class="form-control"></textarea>
                                     </td>
                                 </tr>
+                                @endif
+                                @if ($data->syarat_7 != '')
                                 <tr>
-                                    <td>7</td>
                                     <td><a href="{{ url('/mahasiswa/seminar/syarat07', $data->syarat_7) }}" target="_blank">Sertifikat SKKFT</a>
                                     </td>
                                     <td>
@@ -213,8 +218,9 @@
                                         <textarea name="keterangan_7" id="keterangan_7" cols="30" rows="1" class="form-control"></textarea>
                                     </td>
                                 </tr>
+                                @endif
+                                @if ($data->syarat_8 != '')
                                 <tr>
-                                    <td>8</td>
                                     <td><a href="{{ url('/mahasiswa/seminar/syarat08', $data->syarat_8) }}" target="_blank">Bukti KRS (pengambilan MK. Skripsi)</a></td>
                                     <td>
                                         @if ($data->status_8 == 2)
@@ -234,8 +240,9 @@
                                         <textarea name="keterangan_8" id="keterangan_8" cols="30" rows="1" class="form-control"></textarea>
                                     </td>
                                 </tr>
+                                @endif
+                                @if ($data->syarat_9 != '')
                                 <tr>
-                                    <td>9</td>
                                     <td><a href="{{ url('/mahasiswa/seminar/syarat09', $data->syarat_9) }}" target="_blank">Bukti pembayaran DPP Mk. Skripsi</a></td>
                                     <td>
                                         @if ($data->status_9 == 2)
@@ -255,8 +262,9 @@
                                         <textarea name="keterangan_9" id="keterangan_9" cols="30" rows="1" class="form-control"></textarea>
                                     </td>
                                 </tr>
+                                @endif
+                                @if ($data->syarat_10 != '')
                                 <tr>
-                                    <td>10</td>
                                     <td><a href="{{ url('/mahasiswa/seminar/syarat10', $data->syarat_10) }}" target="_blank">Bukti pembayaran sidang pembahasan</a></td>
                                     <td>
                                         @if ($data->status_10 == 2)
@@ -276,6 +284,7 @@
                                         <textarea name="keterangan_10" id="keterangan_10" cols="30" rows="1" class="form-control"></textarea>
                                     </td>
                                 </tr>
+                                @endif
                             </tbody>
                         </table>
                     </div>

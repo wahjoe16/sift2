@@ -104,15 +104,15 @@
                                 </div>
                                 <div class="col-md-6 col-sm-12">
                                     <input type="file" name="syarat_3" class="dropify" id="syarat_3">
-                                    <p class="col-form-label text-center" for="syarat_3">Sertifikat pesantren calon sarjana<sup class="text-red"> (Jika sudah ada)</sup></p>
+                                    <p class="col-form-label text-center" for="syarat_3">Sertifikat pesantren calon sarjana<sub class="text-red"> (Jika sudah ada)</sub></p>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
                                     <input type="file" name="syarat_4" class="dropify" id="syarat_4">
-                                    <p class="col-form-label text-center" for="syarat_4">Transkrip nilai yang di print SIAA program studi<sup class="text-red"> (Jika sudah ada)</sup></p>
+                                    <p class="col-form-label text-center" for="syarat_4">Transkrip nilai <sub class="text-red">(Dicap dan ditanda tangan Operator SIAA)</sub></p>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
                                     <input type="file" name="syarat_5" class="dropify" id="syarat_5">
-                                    <p class="col-form-label text-center" for="syarat_5">Sertifikat TOEFL (Skor Minimal 475)<sup class="text-red"> (Jika sudah ada)</sup></p>
+                                    <p class="col-form-label text-center" for="syarat_5">Sertifikat TOEFL (Skor Minimal 475)<sub class="text-red"> (Jika sudah ada)</sub></p>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
                                     <input type="file" name="syarat_6" class="dropify" id="syarat_6">
@@ -120,7 +120,7 @@
                                 </div>
                                 <div class="col-md-6 col-sm-12">
                                     <input type="file" name="syarat_7" class="dropify" id="syarat_7">
-                                    <p class="col-form-label text-center" for="syarat_7">Sertifikat SKKFT<sub> (Jika sudah ada)</sub></p>
+                                    <p class="col-form-label text-center" for="syarat_7">Sertifikat SKKFT<sub class="text-red"> (Jika sudah ada)</sub></p>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
                                     <input type="file" name="syarat_8" class="dropify" id="syarat_8">

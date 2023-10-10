@@ -42,6 +42,10 @@
                             <p>Tanggal Pengajuan</p>
                             <b>{{ tanggal_indonesia($data->created_at) }}</b>
                         </li>
+                        <li class="list-group-item">
+                            <p>Tanggal Approve</p>
+                            <b>{{ tanggal_indonesia($data->updated_at) }}</b>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -133,6 +137,11 @@
                             <tr>
                                 <td>15</td>
                                 <td><a href="{{ url('/mahasiswa/seminar/syarat15', $data->syarat_15) }}" target="_blank">Sertifikat SKKFT</a></td>
+
+                            </tr>
+                            <tr>
+                                <td>16</td>
+                                <td><a href="{{ url('/mahasiswa/seminar/syarat16', $data->syarat_16) }}" target="_blank">Transkrip Nilai</a></td>
 
                             </tr>
                         </tbody>

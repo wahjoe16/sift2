@@ -113,7 +113,7 @@
                                 </div>
                                 <div class="col-md-6 col-sm-12">
                                     <input type="file" name="syarat_5" class="dropify" id="syarat_5">
-                                    <p for="exampleInputEmail2" class="col-form-label text-center" for="syarat_5">Transkrip Nilai terakhir yang sudah lulus MK Semester 1-6 dan KP</p>
+                                    <p for="exampleInputEmail2" class="col-form-label text-center" for="syarat_5">Transkrip Nilai terakhir yang sudah lulus MK Semester 1-6 dan KP <sub>(Dicap dan ditanda tangan Operator SIAA)</sub></p>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
                                     <input type="file" name="syarat_6" class="dropify" id="syarat_6">

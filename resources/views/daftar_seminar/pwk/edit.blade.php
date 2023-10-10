@@ -96,6 +96,7 @@
                         <h3 class="box-title">Upload persyaratan</h3>
                     </div>
                     <div class="box-body">
+                        @if ($data->syarat_1 != '')
                         <div class="row">
                             <div class="col-12">
                                 <label class="col-sm-3 col-form-label">Lembar bimbingan skripsi (minimal 10x bimbingan)</label>
@@ -111,6 +112,8 @@
                                 @endif
                             </div>
                         </div>
+                        @endif
+                        @if ($data->syarat_2 != '')
                         <div class="row">
                             <div class="col-12">
                                 <label class="col-sm-3 col-form-label">Sertifikat pesantren mahasiswa baru</label>
@@ -126,6 +129,8 @@
                                 @endif
                             </div>
                         </div>
+                        @endif
+                        @if ($data->syarat_3 != '')
                         <div class="row">
                             <div class="col-12">
                                 <label class="col-sm-3 col-form-label">Sertifikat pesantren calon sarjana (Jika sudah ada)</label>
@@ -141,6 +146,8 @@
                                 @endif
                             </div>
                         </div>
+                        @endif
+                        @if ($data->syarat_4 != '')
                         <div class="row">
                             <div class="col-12">
                                 <label class="col-sm-3 col-form-label">Transkrip nilai yang di print SIAA program studi (Jika sudah ada)</label>
@@ -156,6 +163,8 @@
                                 @endif
                             </div>
                         </div>
+                        @endif
+                        @if ($data->syarat_5 != '')
                         <div class="row">
                             <div class="col-12">
                                 <label class="col-sm-3 col-form-label">Sertifikat TOEFL (Skor Minimal 475) (Jika sudah ada)</label>
@@ -171,6 +180,8 @@
                                 @endif
                             </div>
                         </div>
+                        @endif
+                        @if ($data->syarat_6 != '')
                         <div class="row">
                             <div class="col-12">
                                 <label class="col-sm-3 col-form-label">Bukti bebas pinjaman perpustakaan</label>
@@ -186,6 +197,8 @@
                                 @endif
                             </div>
                         </div>
+                        @endif
+                        @if ($data->syarat_7 != '')
                         <div class="row">
                             <div class="col-12">
                                 <label class="col-sm-3 col-form-label">Sertifikat SKKFT (Jika sudah ada)</label>
@@ -201,6 +214,8 @@
                                 @endif
                             </div>
                         </div>
+                        @endif
+                        @if ($data->syarat_8 != '')
                         <div class="row">
                             <div class="col-12">
                                 <label class="col-sm-3 col-form-label">Bukti KRS (pengambilan MK. Skripsi)</label>
@@ -216,6 +231,8 @@
                                 @endif
                             </div>
                         </div>
+                        @endif
+                        @if ($data->syarat_9 != '')
                         <div class="row">
                             <div class="col-12">
                                 <label class="col-sm-3 col-form-label">Bukti pembayaran DPP Mk. Skripsi</label>
@@ -231,6 +248,8 @@
                                 @endif
                             </div>
                         </div>
+                        @endif
+                        @if ($data->syarat_10 != '')
                         <div class="row">
                             <div class="col-12">
                                 <label class="col-sm-3 col-form-label">Bukti pembayaran sidang pembahasan</label>
@@ -246,6 +265,8 @@
                                 @endif
                             </div>
                         </div>
+                        @endif
+
 
                     </div>
 

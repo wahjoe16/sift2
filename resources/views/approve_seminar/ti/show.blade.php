@@ -42,6 +42,10 @@
                             <p>Tanggal Pengajuan</p>
                             <b>{{ tanggal_indonesia($data->created_at) }}</b>
                         </li>
+                        <li class="list-group-item">
+                            <p>Tanggal Approve</p>
+                            <b>{{ tanggal_indonesia($data->updated_at) }}</b>
+                        </li>
                     </ul>
                 </div>
             </div>

@@ -321,6 +321,21 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <label class="col-sm-3 col-form-label">Transkrip Nilai <sub>(Dicap dan ditanda tangan Operator SIAA)</label>
+                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_16 }}</p>
+                                @if ($data->status_16 == 1)
+                                <span class="label bg-green col-sm-1">Diterima</span>
+                                @else
+                                <span class="label bg-red col-sm-1">Ditolak</span>
+                                @endif
+
+                                @if ($data->status_16 == 2)
+                                <input type="file" name="syarat_16" class="col-sm-3" id="syarat_16">
+                                @endif
+                            </div>
+                        </div>
                     </div>
 
                     <div class="box-footer">

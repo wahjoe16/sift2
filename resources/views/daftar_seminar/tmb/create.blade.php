@@ -156,6 +156,10 @@
                                     <input type="file" name="syarat_15" class="dropify" id="syarat_15">
                                     <p class="col-form-label text-center" for="syarat_15">Sertifikat SKKFT</p>
                                 </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <input type="file" name="syarat_16" class="dropify" id="syarat_16">
+                                    <p class="col-form-label text-center" for="syarat_16">Transkrip Nilai <sub>(Dicap dan ditanda tangan Operator SIAA)</sub></p>
+                                </div>
                             </div>
                         </div>
                     </div>
