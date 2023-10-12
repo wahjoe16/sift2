@@ -23,8 +23,9 @@
                             <th>Semester</th>
                             <th>Dosen Pembimbing 1</th>
                             <th>Dosen Pembimbing 2</th>
+                            <th>Tanggal Pengajuan</th>
                             <th>Status</th>
-                            <th width="15%"><i class="fa fa-cogs"></i></th>
+                            <th width="15%"><i class="fa fa-cogs"></i> Aksi</th>
                         </thead>
                         <tbody>
                             @foreach ($dataSidang as $d)
@@ -32,7 +33,13 @@
                                 <td>{{ $d->tahun_ajaran->tahun_ajaran }}</td>
                                 <td>{{ $d->semester->semester }}</td>
                                 <td>{{ $d->dosen_1->nama }}</td>
+                                @if ($d->dosen_2 != '')
                                 <td>{{ $d->dosen_2->nama }}</td>
+                                @else
+                                <td>-</td>
+                                @endif
+
+                                <td>{{ tanggal_indonesia($d->created_at, false) }}</td>
 
                                 @if ($d->status == 0)
                                 <td><span class="label bg-yellow text-black">Menunggu</span></td>

@@ -27,12 +27,16 @@
                             <b>{{ $data->semester->semester }}</b>
                         </li>
                         <li class="list-group-item">
-                            <p>Dosen Pembimbing 1</p>
+                            <p>Pembimbing</p>
                             <b>{{ $data->dosen_1->nama }}</b>
                         </li>
                         <li class="list-group-item">
-                            <p>Dosen Pembimbing 2</p>
+                            <p>Co. Pembimbing</p>
+                            @if ($data->dosen_2 != '')
                             <b>{{ $data->dosen_2->nama }}</b>
+                            @else
+                            <b>-</b>
+                            @endif
                         </li>
                         <li class="list-group-item">
                             <p>Judul Skripsi</p>

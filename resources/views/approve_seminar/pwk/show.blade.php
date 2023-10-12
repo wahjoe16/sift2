@@ -32,7 +32,11 @@
                         </li>
                         <li class="list-group-item">
                             <p>Dosen Pembimbing 2</p>
+                            @if ($data->dosen_2 != '')
                             <b>{{ $data->dosen_2->nama }}</b>
+                            @else
+                            <b>-</b>
+                            @endif
                         </li>
                         <li class="list-group-item">
                             <p>Judul Skripsi</p>

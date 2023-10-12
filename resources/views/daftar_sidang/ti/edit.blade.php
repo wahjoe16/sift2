@@ -49,9 +49,8 @@
                                     <div class="col-sm-7">
                                         <select name="dosen1_id" id="dosen1_id" class="form-control select2">
                                             <option value="">Pilih</option>
-                                            <option value="{{ $data['dosen1_id'] }}" selected>{{ $data['dosen_1']['nama'] }}</option>
                                             @foreach($dosen1 as $d)
-                                            <option value="{{ $d['id'] }}">{{ $d['nama'] }}</option>
+                                            <option value="{{ $d['id'] }}" @if(!empty($d['id']==$data['dosen1_id'])) selected @endif>{{ $d['nama'] }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -61,9 +60,8 @@
                                     <div class="col-sm-7">
                                         <select name="dosen2_id" id="dosen2_id" class="form-control select2">
                                             <option value="">Pilih</option>
-                                            <option value="{{ $data['dosen2_id'] }}" selected>{{ $data['dosen_2']['nama'] }}</option>
                                             @foreach($dosen2 as $d)
-                                            <option value="{{ $d['id'] }}">{{ $d['nama'] }}</option>
+                                            <option value="{{ $d['id'] }}" @if(!empty($d['id']==$data['dosen2_id'])) selected @endif>{{ $d['nama'] }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -189,7 +187,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <label class="col-sm-3 col-form-label">Bukti Bebas Perpustakaan Pusat UNISBA</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_6 }}</p>
+                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_7 }}</p>
                                 @if ($data->status_7 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else
@@ -204,7 +202,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <label class="col-sm-3 col-form-label">Bukti Bebas Perpustakaan TI</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_6 }}</p>
+                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_8 }}</p>
                                 @if ($data->status_8 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else
@@ -219,7 +217,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <label class="col-sm-3 col-form-label">Transkrip Nilai Terakhir</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_6 }}</p>
+                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_9 }}</p>
                                 @if ($data->status_9 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else
@@ -234,7 +232,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <label class="col-sm-3 col-form-label">Persetujuan Sidang dari Dosen Pembimbing (Kartu Bimbingan Asli)</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_6 }}</p>
+                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_10 }}</p>
                                 @if ($data->status_10 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else
@@ -249,7 +247,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <label class="col-sm-3 col-form-label">Fotocopy Sertifikat TOEFL (paling lama 1 Tahun setelah terbit)</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_6 }}</p>
+                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_11 }}</p>
                                 @if ($data->status_11 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else
@@ -264,7 +262,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <label class="col-sm-3 col-form-label">Foto Berwarna / Latar Belakang Biru berukuran 3x4 = 4 buah</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_6 }}</p>
+                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_12 }}</p>
                                 @if ($data->status_12 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else
@@ -279,7 +277,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <label class="col-sm-3 col-form-label">Bukti Bebas Pinjaman / Tunggakan</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_6 }}</p>
+                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_13 }}</p>
                                 @if ($data->status_13 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else
@@ -294,7 +292,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <label class="col-sm-3 col-form-label">Menghadiri Seminar / Sidang minimal 3 kali</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_6 }}</p>
+                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_14 }}</p>
                                 @if ($data->status_14 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else
@@ -309,7 +307,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <label class="col-sm-3 col-form-label">Form Hafalan Surat Al-Quran (minimal 25 surat)</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_6 }}</p>
+                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_15 }}</p>
                                 @if ($data->status_15 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else
@@ -324,7 +322,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <label class="col-sm-3 col-form-label">Print out bukti pengecekan Plagiarisme < 25% (sebelum sidang)</label>
-                                        <p class="col-sm-5 col-form-label ">{{ $data->syarat_6 }}</p>
+                                        <p class="col-sm-5 col-form-label ">{{ $data->syarat_16 }}</p>
                                         @if ($data->status_16 == 1)
                                         <span class="label bg-green col-sm-1">Diterima</span>
                                         @else
@@ -339,7 +337,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <label class="col-sm-3 col-form-label">Sertifikat SKKFT yang ditandatangani oleh Wadek III</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_6 }}</p>
+                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_17 }}</p>
                                 @if ($data->status_17 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else

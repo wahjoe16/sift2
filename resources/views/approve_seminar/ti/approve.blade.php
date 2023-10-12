@@ -34,7 +34,11 @@
                             </li>
                             <li class="list-group-item">
                                 <p>Dosen Pembimbing 2</p>
+                                @if ($data->dosen_2 != '')
                                 <b>{{ $data->dosen_2->nama }}</b>
+                                @else
+                                <b>-</b>
+                                @endif
                             </li>
                             <li class="list-group-item">
                                 <p>Judul Skripsi</p>
@@ -236,7 +240,7 @@
                                 </tr>
                                 <tr>
                                     <td>9</td>
-                                    <td><a href="{{ url('/mahasiswa/seminar/syarat09', $data->syarat_9) }}" target="_blank">Sertifikat SKKFT</a></td>
+                                    <td><a href="{{ url('/mahasiswa/seminar/syarat09', $data->syarat_9) }}" target="_blank">Bukti Penyerahan Draft</a></td>
                                     <td>
                                         @if ($data->status_9 == 2)
                                         <input type="radio" name="status_9" value="2" class="minimal-red" checked="checked" readonly>

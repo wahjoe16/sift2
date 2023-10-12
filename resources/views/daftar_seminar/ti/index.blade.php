@@ -33,7 +33,11 @@
                                 <td>{{ $d->tahun_ajaran->tahun_ajaran }}</td>
                                 <td>{{ $d->semester->semester }}</td>
                                 <td>{{ $d->dosen_1->nama }}</td>
+                                @if ($d->dosen_2 != '')
                                 <td>{{ $d->dosen_2->nama }}</td>
+                                @else
+                                <td>-</td>
+                                @endif
                                 <td>{{ tanggal_indonesia($d->created_at, false) }}</td>
 
                                 @if ($d->status == 0)

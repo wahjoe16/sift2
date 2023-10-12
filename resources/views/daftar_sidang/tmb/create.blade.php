@@ -67,7 +67,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-5 col-form-label" for="dosen1_id">Dosen Pembimbing 1</label>
+                                    <label class="col-sm-5 col-form-label" for="dosen1_id">Pembimbing</label>
                                     <div class="col-sm-7">
                                         <select name="dosen1_id" id="dosen1_id" class="form-control select2">
                                             <option value="">Pilih</option>
@@ -78,7 +78,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-5 col-form-label" for="dosen2_id">Dosen Pembimbing 2</label>
+                                    <label class="col-sm-5 col-form-label" for="dosen2_id">Co. Pembimbing</label>
                                     <div class="col-sm-7">
                                         <select name="dosen2_id" id="dosen2_id" class="form-control select2">
                                             <option value="">Pilih</option>
@@ -120,7 +120,7 @@
                             <div class="box-body">
                                 <div class="col-md-6 col-sm-12">
                                     <input type="file" name="syarat_1" class="dropify" id="syarat_1">
-                                    <p class="col-form-label text-center" for="syarat_1">Transkrip Nilai</p>
+                                    <p class="col-form-label text-center" for="syarat_1">Transkrip Nilai Terakhir</p>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
                                     <input type="file" name="syarat_2" class="dropify" id="syarat_2">

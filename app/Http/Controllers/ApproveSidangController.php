@@ -104,7 +104,7 @@ class ApproveSidangController extends Controller
         ])->where([
             'program_studi_id' => 'Teknik Pertambangan',
             'status' => 1
-        ]);
+        ])->orderBy('tahun_ajaran_id', 'desc');
 
         if (request('tahun_ajaran_id')) {
             $data->whereRelation('tahun_ajaran', 'id', request('tahun_ajaran_id'));
@@ -125,6 +125,9 @@ class ApproveSidangController extends Controller
             ->addIndexColumn()
             ->addColumn('tanggal_pengajuan', function ($data) {
                 return tanggal_indonesia($data->created_at, false);
+            })
+            ->addColumn('tanggal_approve', function ($data) {
+                return tanggal_indonesia($data->updated_at, false);
             })
             ->addColumn('aksi', function ($data) {
                 return '
@@ -263,17 +266,17 @@ class ApproveSidangController extends Controller
                 'keterangan_4.required_if' => 'Keterangan harus diisi',
                 'keterangan_5.required_if' => 'Keterangan harus diisi',
                 'keterangan_6.required_if' => 'Keterangan harus diisi',
-                'keterangan_7required_if' => 'Keterangan harus diisi',
-                'keterangan_8required_if' => 'Keterangan harus diisi',
-                'keterangan_9required_if' => 'Keterangan harus diisi',
-                'keterangan_10required_if' => 'Keterangan harus diisi',
-                'keterangan_11required_if' => 'Keterangan harus diisi',
-                'keterangan_12required_if' => 'Keterangan harus diisi',
-                'keterangan_13required_if' => 'Keterangan harus diisi',
-                'keterangan_14required_if' => 'Keterangan harus diisi',
-                'keterangan_15required_if' => 'Keterangan harus diisi',
-                'keterangan_16required_if' => 'Keterangan harus diisi',
-                'keterangan_17required_if' => 'Keterangan harus diisi'
+                'keterangan_7.required_if' => 'Keterangan harus diisi',
+                'keterangan_8.required_if' => 'Keterangan harus diisi',
+                'keterangan_9.required_if' => 'Keterangan harus diisi',
+                'keterangan_10.required_if' => 'Keterangan harus diisi',
+                'keterangan_11.required_if' => 'Keterangan harus diisi',
+                'keterangan_12.required_if' => 'Keterangan harus diisi',
+                'keterangan_13.required_if' => 'Keterangan harus diisi',
+                'keterangan_14.required_if' => 'Keterangan harus diisi',
+                'keterangan_15.required_if' => 'Keterangan harus diisi',
+                'keterangan_16.required_if' => 'Keterangan harus diisi',
+                'keterangan_17.required_if' => 'Keterangan harus diisi'
             ]);
 
             $data->fill($request->input());
@@ -308,7 +311,7 @@ class ApproveSidangController extends Controller
         ])->where([
             'program_studi_id' => 'Teknik Industri',
             'status' => 1
-        ]);
+        ])->orderBy('tahun_ajaran_id', 'desc');;
 
         if (request('tahun_ajaran_id')) {
             $data->whereRelation('tahun_ajaran', 'id', request('tahun_ajaran_id'));
@@ -330,6 +333,9 @@ class ApproveSidangController extends Controller
             ->addColumn('tanggal_pengajuan', function ($data) {
                 return tanggal_indonesia($data->created_at, false);
             })
+            ->addColumn('tanggal_approve', function ($data) {
+                return tanggal_indonesia($data->updated_at, false);
+            })
             ->addColumn('aksi', function ($data) {
                 return '
                     <a href="' . route('rekap-sidangTi.show', $data->id) . '" class="btn btn-info btn-xs btn-flat"><i class="fa fa-search"></i></a>
@@ -342,7 +348,7 @@ class ApproveSidangController extends Controller
     public function showRekapTi($id)
     {
         $data = DaftarSidang::find($id);
-        return view('approve_seminar.ti.show', compact('data'));
+        return view('approve_sidang.ti.show', compact('data'));
     }
 
     public function exportExcelTi()
@@ -456,7 +462,7 @@ class ApproveSidangController extends Controller
         ])->where([
             'program_studi_id' => 'Perencanaan Wilayah dan Kota',
             'status' => 1
-        ]);
+        ])->orderBy('tahun_ajaran_id', 'desc');;
 
         if (request('tahun_ajaran_id')) {
             $data->whereRelation('tahun_ajaran', 'id', request('tahun_ajaran_id'));

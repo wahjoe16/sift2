@@ -40,21 +40,28 @@ class RekapSidangPwkExport implements FromCollection, WithHeadings, WithMapping,
             'Dosen Pembimbing 1',
             'Dosen Pembimbing 2',
             'Judul Skripsi',
-            'Tanggal Pengajuan'
+            'Tanggal Pengajuan',
+            'Tanggal Approve'
         ];
     }
 
     public function map($row): array
     {
+        if (!isset($row->dosen_2->nama)) {
+            $dosen2 = '-';
+        } else {
+            $dosen2 = $row->dosen_2->nama;
+        }
         return [
             $row->mahasiswa->nama,
             $row->mahasiswa->nik,
             $row->tahun_ajaran->tahun_ajaran,
             $row->semester->semester,
             $row->dosen_1->nama,
-            $row->dosen_2->nama,
+            $dosen2,
             $row->judul_skripsi,
             tanggal_indonesia($row->created_at),
+            tanggal_indonesia($row->updated_at)
         ];
     }
 

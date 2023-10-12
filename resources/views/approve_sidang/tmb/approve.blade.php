@@ -34,7 +34,11 @@
                             </li>
                             <li class="list-group-item">
                                 <p>Dosen Pembimbing 2</p>
+                                @if ($data->dosen_2 != '')
                                 <b>{{ $data->dosen_2->nama }}</b>
+                                @else
+                                <b>-</b>
+                                @endif
                             </li>
                             <li class="list-group-item">
                                 <p>Judul Skripsi</p>
@@ -67,7 +71,7 @@
                             <tbody>
                                 <tr>
                                     <td>1</td>
-                                    <td><a href="{{ url('/mahasiswa/sidang/syarat01', $data->syarat_1) }}" target="_blank">Transkrip Nilai</a></td>
+                                    <td><a href="{{ url('/mahasiswa/sidang/syarat01', $data->syarat_1) }}" target="_blank">Transkrip Nilai Terakhir</a></td>
                                     <td>
                                         @if ($data->status_1 == 2)
                                         <input type="radio" name="status_1" value="2" class="minimal-red" checked="checked" readonly>

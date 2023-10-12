@@ -45,25 +45,23 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-5 col-form-label" for="dosen1_id">Dosen Pembimbing 1</label>
+                                    <label class="col-sm-5 col-form-label" for="dosen1_id">Pembimbing</label>
                                     <div class="col-sm-7">
                                         <select name="dosen1_id" id="dosen1_id" class="form-control select2">
                                             <option value="">Pilih</option>
-                                            <option value="{{ $data['dosen1_id'] }}" selected>{{ $data['dosen_1']['nama'] }}</option>
                                             @foreach($dosen1 as $d)
-                                            <option value="{{ $d['id'] }}">{{ $d['nama'] }}</option>
+                                            <option value="{{ $d['id'] }}" @if(!empty($d['id']==$data['dosen1_id'])) selected @endif>{{ $d['nama'] }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-5 col-form-label" for="dosen2_id">Dosen Pembimbing 2</label>
+                                    <label class="col-sm-5 col-form-label" for="dosen2_id">Co. Pembimbing</label>
                                     <div class="col-sm-7">
                                         <select name="dosen2_id" id="dosen2_id" class="form-control select2">
                                             <option value="">Pilih</option>
-                                            <option value="{{ $data['dosen2_id'] }}" selected>{{ $data['dosen_2']['nama'] }}</option>
                                             @foreach($dosen2 as $d)
-                                            <option value="{{ $d['id'] }}">{{ $d['nama'] }}</option>
+                                            <option value="{{ $d['id'] }}" @if(!empty($d['id']==$data['dosen2_id'])) selected @endif>{{ $d['nama'] }}</option>
                                             @endforeach
                                         </select>
                                     </div>

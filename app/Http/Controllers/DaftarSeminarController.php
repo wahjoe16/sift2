@@ -63,7 +63,6 @@ class DaftarSeminarController extends Controller
                 'syarat_14' => 'required|mimes:docx,doc',
                 'syarat_15' => 'required|mimes:pdf',
                 'syarat_16' => 'required|mimes:pdf',
-
             ];
 
             $customMessage = [
@@ -179,7 +178,7 @@ class DaftarSeminarController extends Controller
             $nama_syarat_9 = $npm . "_" . $syarat_9->getClientOriginalName();
             $syarat_9_path = 'mahasiswa/seminar/syarat09';
             $syarat_9->move($syarat_9_path, $nama_syarat_9);
-            $daftarSeminar->syarat_9 = $nama_syarat_8;
+            $daftarSeminar->syarat_9 = $nama_syarat_9;
 
             // upload syarat 
             $syarat_10 = $request->file('syarat_10');
@@ -607,7 +606,7 @@ class DaftarSeminarController extends Controller
             $nama_syarat_9 = $npm . "_" . $syarat_9->getClientOriginalName();
             $syarat_9_path = 'mahasiswa/seminar/syarat09';
             $syarat_9->move($syarat_9_path, $nama_syarat_9);
-            $daftarSeminar->syarat_9 = $nama_syarat_8;
+            $daftarSeminar->syarat_9 = $nama_syarat_9;
 
 
             $daftarSeminar->save();
@@ -754,7 +753,7 @@ class DaftarSeminarController extends Controller
 
             $daftarSeminar->save();
 
-            return redirect()->route('seminar_ti.index')->with('success', 'Sukses mengajukan pendaftaran kolokium skripsi!');
+            return redirect()->route('seminar_ti.index')->with('success', 'Sukses mengajukan pendaftaran seminar tugas akhir!');
         }
     }
 
@@ -921,7 +920,7 @@ class DaftarSeminarController extends Controller
                 $nama_syarat_9 = $npm . "_" . $syarat_9->getClientOriginalName();
                 $syarat_9_path = 'mahasiswa/seminar/syarat09';
                 $syarat_9->move($syarat_9_path, $nama_syarat_9);
-                $daftarSeminar->syarat_9 = $nama_syarat_8;
+                $daftarSeminar->syarat_9 = $nama_syarat_9;
             }
 
             // upload syarat 
@@ -937,7 +936,7 @@ class DaftarSeminarController extends Controller
 
             $daftarSeminar->save();
 
-            return redirect()->route('seminar_pwk.index')->with('success', 'Sukses mengajukan pendaftaran seminar tugas akhir!');
+            return redirect()->route('seminar_pwk.index')->with('success', 'Sukses mengajukan pendaftaran sidang pembahasan!');
         }
     }
 
@@ -1091,7 +1090,7 @@ class DaftarSeminarController extends Controller
 
             $daftarSeminar->save();
 
-            return redirect()->route('seminar_pwk.index')->with('success', 'Sukses mengajukan pendaftaran kolokium skripsi!');
+            return redirect()->route('seminar_pwk.index')->with('success', 'Sukses mengajukan pendaftaran sidang pembahasan!');
         }
     }
 

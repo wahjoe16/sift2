@@ -172,7 +172,7 @@ class ApproveSeminarController extends Controller
         ])->where([
             'program_studi_id' => 'Teknik Pertambangan',
             'status' => 1
-        ]);
+        ])->orderBy('tahun_ajaran_id', 'desc');
 
         if (request('tahun_ajaran_id')) {
             $data->whereRelation('tahun_ajaran', 'id', request('tahun_ajaran_id'));
@@ -380,7 +380,7 @@ class ApproveSeminarController extends Controller
         ])->where([
             'program_studi_id' => 'Teknik Industri',
             'status' => 1
-        ]);
+        ])->orderBy('tahun_ajaran_id', 'desc');
 
         if (request('tahun_ajaran_id')) {
             $data->whereRelation('tahun_ajaran', 'id', request('tahun_ajaran_id'));
@@ -480,8 +480,11 @@ class ApproveSeminarController extends Controller
                 'status_10' => 'required',
                 'keterangan_1' => 'required_if:status_1,2',
                 'keterangan_2' => 'required_if:status_2,2',
+                'keterangan_3' => 'required_if:status_3,2',
                 'keterangan_4' => 'required_if:status_4,2',
+                'keterangan_5' => 'required_if:status_5,2',
                 'keterangan_6' => 'required_if:status_6,2',
+                'keterangan_7' => 'required_if:status_7,2',
                 'keterangan_8' => 'required_if:status_8,2',
                 'keterangan_9' => 'required_if:status_9,2',
                 'keterangan_10' => 'required_if:status_10,2',
@@ -495,8 +498,11 @@ class ApproveSeminarController extends Controller
                 'status_10.required' => 'Status approval harus dipilih',
                 'keterangan_1.required_if' => 'Keterangan harus diisi',
                 'keterangan_2.required_if' => 'Keterangan harus diisi',
+                'keterangan_3.required_if' => 'Keterangan harus diisi',
                 'keterangan_4.required_if' => 'Keterangan harus diisi',
+                'keterangan_5.required_if' => 'Keterangan harus diisi',
                 'keterangan_6.required_if' => 'Keterangan harus diisi',
+                'keterangan_7.required_if' => 'Keterangan harus diisi',
                 'keterangan_8.required_if' => 'Keterangan harus diisi',
                 'keterangan_9.required_if' => 'Keterangan harus diisi',
                 'keterangan_10.required_if' => 'Keterangan harus diisi',
@@ -512,7 +518,7 @@ class ApproveSeminarController extends Controller
 
             $data->save();
 
-            return redirect()->route('view-seminarPwk.index')->with('success', 'Pengajuan seminar tugas akhir berhasil diapprove');
+            return redirect()->route('view-seminarPwk.index')->with('success', 'Pengajuan sidang pembahasan berhasil diapprove');
         }
         return view('approve_seminar.pwk.approve', compact('data'));
     }
@@ -534,7 +540,7 @@ class ApproveSeminarController extends Controller
         ])->where([
             'program_studi_id' => 'Perencanaan Wilayah dan Kota',
             'status' => 1
-        ]);
+        ])->orderBy('tahun_ajaran_id', 'desc');
 
         if (request('tahun_ajaran_id')) {
             $data->whereRelation('tahun_ajaran', 'id', request('tahun_ajaran_id'));

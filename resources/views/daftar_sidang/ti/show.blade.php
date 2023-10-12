@@ -29,7 +29,11 @@
                         </li>
                         <li class="list-group-item">
                             <p>Dosen Pembimbing 2</p>
+                            @if ($data->dosen_2 != '')
                             <b>{{ $data->dosen_2->nama }}</b>
+                            @else
+                            <b>-</b>
+                            @endif
                         </li>
                         <li class="list-group-item">
                             <p>Judul Skripsi</p>
@@ -38,6 +42,10 @@
                         <li class="list-group-item">
                             <p>Tanggal Pengajuan</p>
                             <b>{{ tanggal_indonesia($data->created_at) }}</b>
+                        </li>
+                        <li class="list-group-item">
+                            <p>Tanggal Approve</p>
+                            <b>{{ tanggal_indonesia($data->updated_at) }}</b>
                         </li>
                         <li class="list-group-item">
                             <p>Status</p>
