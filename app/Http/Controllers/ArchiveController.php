@@ -89,6 +89,74 @@ class ArchiveController extends Controller
             ->make(true);
     }
 
+    public function indexGeneral()
+    {
+        // $arsip = Archive::orderBy('section_id')->doesntHave('users');
+        // dd($arsip);
+        $ta = TahunAjaran::get();
+        $smt = Semester::get();
+        $category = CategoryArchive::get();
+        $subcategory = SubcategoryArchive::get();
+        $title2 = "Delete Arsip!";
+        $text = "Anda yakin akan menghapus arsip?";
+        confirmDelete($title2, $text);
+
+        Session::put('page', 'generalArsip');
+        return view('archive.general', compact('ta', 'smt', 'category', 'subcategory'));
+    }
+
+    public function dataGeneral()
+    {
+        $data = Archive::with([
+            'section',
+            'category_archive',
+            'subcategory_archive',
+            'tahun_ajaran',
+            'semester'
+        ])->doesntHave('users');
+
+        if (request('tahun_ajaran_id')) {
+            $data->whereRelation('tahun_ajaran', 'id', request('tahun_ajaran_id'));
+        }
+
+        if (request('semester_id')) {
+            $data->whereRelation('semester', 'id', request('semester_id'));
+        }
+
+        if (request('category_archive_id')) {
+            $data->whereRelation('category_archive', 'id', request('category_archive_id'));
+        }
+
+        if (request('subcategory_archive_id')) {
+            $data->whereRelation('subcategory_archive', 'id', request('subcategory_archive_id'));
+        }
+
+        return datatables()
+            ->of($data)
+            ->filterColumn('tahun_ajaran.tahun_ajaran', function ($query, $keyword) {
+                $query->whereRelation('tahun_ajaran', 'id', $keyword);
+            })
+            ->filterColumn('semester.semester', function ($query, $keyword) {
+                $query->whereRelation('semester', 'id', $keyword);
+            })
+            ->filterColumn('category_archives.name', function ($query, $keyword) {
+                $query->whereRelation('category', 'id', $keyword);
+            })
+            ->filterColumn('subcategory_archives.name', function ($query, $keyword) {
+                $query->whereRelation('subcategory', 'id', $keyword);
+            })
+            ->addIndexColumn()
+            ->addColumn('action', function ($data) {
+                $path = asset("/file/archives/$data->file");
+                return '
+                <a href="' . route('my-archive.show', $data->id) . '" target="_blank" class="btn btn-info btn-flat"><i class="fa fa-search"></i></a>
+                <a href="' . $path . '" class="btn btn-primary btn-flat" target="_blank"><i class="fa fa-download"></i></a>
+            ';
+            })
+            ->rawColumns(['select_all', 'action'])
+            ->make(true);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

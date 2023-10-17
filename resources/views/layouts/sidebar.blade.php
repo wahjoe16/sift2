@@ -73,7 +73,12 @@
             <li class="header">Data Arsip</li>
             <li>
                 <a href="{{ route('ft-arsip.index') }}" @if(Session::get('page')=='indexArsip' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                    <i class="fa fa-book"></i> <span>Arsip Fakultas</span>
+                    <i class="fa fa-book"></i> <span>Semua Arsip Fakultas</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('ft-arsip.general') }}" @if(Session::get('page')=='generalArsip' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                    <i class="fa fa-file"></i> <span>Arsip Umum Fakultas</span>
                 </a>
             </li>
             <li>
@@ -258,7 +263,12 @@
             <li class="header">Arsip</li>
             <li>
                 <a href="{{ route('all-archive.index') }}" @if(Session::get('page')=='allArchive' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                    <i class="fa fa-book"></i> <span>Arsip Fakultas</span>
+                    <i class="fa fa-book"></i> <span> Semua Arsip</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('ft-arsip.general') }}" @if(Session::get('page')=='generalArsip' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                    <i class="fa fa-file"></i> <span>Arsip Umum Fakultas</span>
                 </a>
             </li>
             <li>

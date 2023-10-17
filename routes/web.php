@@ -222,6 +222,8 @@ Route::group(['prefix' => '/archives', 'middleware' => 'ceklevel:1,2'], function
     // CRUD ARCHIVE
     Route::resource('ft-arsip', ArchiveController::class);
     Route::get('data/ft-arsip', [ArchiveController::class, 'data'])->name('ft-arsip.data');
+    Route::get('general', [ArchiveController::class, 'indexGeneral'])->name('ft-arsip.general');
+    Route::get('data-general', [ArchiveController::class, 'dataGeneral'])->name('ft-arsip-general.data');
 
     // ARSIP Fakultas Role DOSEN
     Route::get('all-archive', [MyArchiveController::class, 'indexArchive'])->name('all-archive.index');

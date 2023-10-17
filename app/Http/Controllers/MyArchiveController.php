@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Archive;
 use App\Models\CategoryArchive;
 use App\Models\MyArchive;
@@ -205,8 +206,9 @@ class MyArchiveController extends Controller
 
     public function showArchive($id)
     {
-        $data = Archive::findOrFail($id);
-        return view('my-archive.show', compact('data'));
+        $data = Archive::with('users')->findOrFail($id);
+        $users = User::get();
+        return view('my-archive.show', compact('data', 'users'));
     }
 
     public function editArchive($id)

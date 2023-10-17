@@ -172,7 +172,7 @@
                         <div class="form-group row">
                             <label class="col-lg-2 col-lg-offset-1 control-label" for="description">Upload File Arsip</label>
                             <div class="col-sm-6">
-                                <input type="file" name="file" class="dropify" required>
+                                <input type="file" name="file" class="dropify">
                             </div>
                         </div>
                         <div class="form-group row">
