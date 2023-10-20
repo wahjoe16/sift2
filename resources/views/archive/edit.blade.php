@@ -101,7 +101,7 @@
                                                 <h5><b>Teknik Pertambangan</b></h5>
                                                 @foreach ($dosenTmb as $tmb)
                                                 <li>
-                                                    <input type="checkbox" name="dosen_id[]" id="select_tmb" value="{{ $tmb->id }}"> {{ $tmb->nama }} <br>
+                                                    <input type="checkbox" name="dosen_id[]" id="select_tmb" value="{{ $tmb->id }}" @if(in_array($tmb->id, $userArchive)) checked @endif> {{ $tmb->nama }} <br>
                                                 </li>
                                                 @endforeach
                                             </ul>
@@ -112,7 +112,7 @@
                                                 <h5><b>Teknik Industri</b></h5>
                                                 @foreach ($dosenTi as $ti)
                                                 <li>
-                                                    <input type="checkbox" name="dosen_id[]" id="select_ti" value="{{ $ti->id }}"> {{ $ti->nama }} <br>
+                                                    <input type="checkbox" name="dosen_id[]" id="select_ti" value="{{ $ti->id }}" @if(in_array($ti->id, $userArchive)) checked @endif> {{ $ti->nama }} <br>
                                                 </li>
                                                 @endforeach
                                             </ul>
@@ -123,7 +123,7 @@
                                                 <h5><b>Perencanaan Wilayah dan Kota</b></h5>
                                                 @foreach ($dosenPwk as $pwk)
                                                 <li>
-                                                    <input type="checkbox" name="dosen_id[]" id="select_pwk" value="{{ $pwk->id }}"> {{ $pwk->nama }} <br>
+                                                    <input type="checkbox" name="dosen_id[]" id="select_pwk" value="{{ $pwk->id }}" @if(in_array($pwk->id, $userArchive)) checked @endif> {{ $pwk->nama }} <br>
                                                 </li>
                                                 @endforeach
                                             </ul>
@@ -136,7 +136,7 @@
                                                 <h5><b>Program Profesi Insinyur</b></h5>
                                                 @foreach ($dosenPsppi as $psppi)
                                                 <li>
-                                                    <input type="checkbox" name="dosen_id[]" id="select_psppi" value="{{ $psppi->id }}"> {{ $psppi->nama }} <br>
+                                                    <input type="checkbox" name="dosen_id[]" id="select_psppi" value="{{ $psppi->id }}" @if(in_array($psppi->id, $userArchive)) checked @endif> {{ $psppi->nama }} <br>
                                                 </li>
                                                 @endforeach
                                             </ul>
@@ -147,7 +147,7 @@
                                                 <h5><b>Magister Perencanaan Wilayah dan Kota</b></h5>
                                                 @foreach ($dosenMpwk as $mpwk)
                                                 <li>
-                                                    <input type="checkbox" name="dosen_id[]" id="select_mpwk" value="{{ $mpwk->id }}"> {{ $mpwk->nama }} <br>
+                                                    <input type="checkbox" name="dosen_id[]" id="select_mpwk" value="{{ $mpwk->id }}" @if(in_array($mpwk->id, $userArchive)) checked @endif> {{ $mpwk->nama }} <br>
                                                 </li>
                                                 @endforeach
                                             </ul>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Archive;
+use App\Models\MyArchive;
 use App\Models\CategoryArchive;
 use App\Models\Section;
 use App\Models\Semester;
@@ -265,6 +266,8 @@ class ArchiveController extends Controller
     {
         $title = "Edit Data Arsip";
         $data = Archive::find($id);
+        $userArchive = MyArchive::where('archive_id', $id)->pluck('user_id')->toArray();
+        // dd($userArchive);
         $userData = $data->users;
         // dd($userData);
         $section = Section::get();
@@ -277,7 +280,7 @@ class ArchiveController extends Controller
         $dosenPwk = User::where(['level' => 2, 'program_studi' => 'Perencanaan Wilayah dan Kota'])->get();
         $dosenPsppi = User::where(['level' => 2, 'program_studi' => 'Program Profesi Insinyur'])->get();
         $dosenMpwk = User::where(['level' => 2, 'program_studi' => 'Magister Perencanaan Wilayah dan Kota'])->get();
-        return view('archive.edit', compact('data', 'userData', 'title', 'section', 'category', 'subcategory', 'ta', 'smt', 'dosenTmb', 'dosenTi', 'dosenPwk', 'dosenPsppi', 'dosenMpwk'));
+        return view('archive.edit', compact('data', 'userData', 'userArchive', 'title', 'section', 'category', 'subcategory', 'ta', 'smt', 'dosenTmb', 'dosenTi', 'dosenPwk', 'dosenPsppi', 'dosenMpwk'));
     }
 
     /**

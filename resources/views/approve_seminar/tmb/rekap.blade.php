@@ -80,7 +80,6 @@
         $('.select2').select2()
 
         table = $('.table-rekap-seminar').DataTable({
-            dom: 'bfrtip',
             processing: true,
             autoWidth: false,
             ajax: {

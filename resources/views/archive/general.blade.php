@@ -89,7 +89,6 @@
         $('.select2').select2()
 
         table = $('.table-general-archive').DataTable({
-            dom: 'bfrtip',
             processing: true,
             autoWidth: false,
             ajax: {

@@ -17,6 +17,48 @@
                     </div>
                 </div>
                 <div class="box-body table-responsive">
+                    <div class="col-md-12">
+                        <form action="">
+                            <div class="form-row">
+                                <div class="form-group col-md-3 col-sm-12 col-xs-12">
+                                    <label for="tahunajaran">Filter Tahun Akademik</label>
+                                    <select name="tahunajaran" id="tahunajaran" class="form-control select2">
+                                        <option value="">Pilih</option>
+                                        @foreach ($ta as $t)
+                                        <option value="{{ $t->id }}">{{ $t->tahun_ajaran }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3 col-sm-12 col-xs-12">
+                                    <label for="semester">Filter Semester</label>
+                                    <select name="semester" id="semester" class="form-control select2">
+                                        <option value="">Pilih</option>
+                                        @foreach ($smt as $s)
+                                        <option value="{{ $s->id }}">{{ $s->semester }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3 col-sm-12 col-xs-12">
+                                    <label for="kategori">Filter Kategori</label>
+                                    <select name="kategori" id="kategori" class="form-control select2">
+                                        <option value="">Pilih</option>
+                                        @foreach ($category as $c)
+                                        <option value="{{ $c->id }}">{{ $c->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3 col-sm-12 col-xs-12">
+                                    <label for="subkategori">Filter Sub-Kategori</label>
+                                    <select name="subkategori" id="subkategori" class="form-control select2">
+                                        <option value="">Pilih</option>
+                                        @foreach ($subcategory as $s)
+                                        <option value="{{ $s->id }}">{{ $s->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                     <form action="" class="form-archive">
                         @csrf
                         <table class="table table-striped table-bordered table-myarchive">
@@ -71,6 +113,12 @@
             autoWidth: false,
             ajax: {
                 url: '{{ route("my-archive.data") }}',
+                data: function(d) {
+                    d.tahun_ajaran_id = $('#tahunajaran').val();
+                    d.semester_id = $('#semester').val();
+                    d.category_archive_id = $('#kategori').val();
+                    d.subcategory_archive_id = $('#subkategori').val();
+                }
             },
             columns: [{
                     data: 'select_all',
@@ -105,6 +153,23 @@
                 }
             ]
         })
+
+        $('#tahunajaran').change(function() {
+            table.ajax.reload();
+        })
+
+        $('#semester').change(function() {
+            table.ajax.reload();
+        })
+
+        $('#kategori').change(function() {
+            table.ajax.reload();
+        })
+
+        $('#subkategori').change(function() {
+            table.ajax.reload();
+        })
+
     })
 
     function downloadSelected(url) {

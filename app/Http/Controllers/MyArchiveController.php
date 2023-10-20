@@ -108,33 +108,50 @@ class MyArchiveController extends Controller
     public function myDataArchive()
     {
         $user = auth()->user();
-        $myarchive = $user->archives;
+        $myarchive = Archive::select('archives.id', 'archives.name as a_name', 'sections.name as s_name', 'category_archives.name as c_name', 'subcategory_archives.name as sa_name', 'tahun_ajaran.tahun_ajaran as ta', 'semester.semester as smt')
+            ->leftJoin('my_archives', 'my_archives.archive_id', 'archives.id')
+            ->leftJoin('sections', 'sections.id', 'archives.section_id')
+            ->leftJoin('category_archives', 'category_archives.id', 'archives.category_archive_id')
+            ->leftJoin('subcategory_archives', 'subcategory_archives.id', 'archives.subcategory_archive_id')
+            ->leftJoin('tahun_ajaran', 'tahun_ajaran.id', 'archives.tahun_ajaran_id')
+            ->leftJoin('semester', 'semester.id', 'archives.semester_id')
+            ->where('my_archives.user_id', $user->id);
+
+        if (request('tahun_ajaran_id')) {
+            $myarchive->whereRelation('tahun_ajaran', 'id', request('tahun_ajaran_id'));
+        }
+
+        if (request('semester_id')) {
+            $myarchive->whereRelation('semester', 'id', request('semester_id'));
+        }
+
+        if (request('category_archive_id')) {
+            $myarchive->whereRelation('category_archive', 'id', request('category_archive_id'));
+        }
+
+        if (request('subcategory_archive_id')) {
+            $myarchive->whereRelation('subcategory_archive', 'id', request('subcategory_archive_id'));
+        }
 
         return datatables()
             ->of($myarchive)
+            ->filterColumn('tahun_ajaran.tahun_ajaran', function ($query, $keyword) {
+                $query->whereRelation('tahun_ajaran',  'id', $keyword);
+            })
+            ->filterColumn('semester.semester', function ($query, $keyword) {
+                $query->whereRelation('semester', 'id', $keyword);
+            })
+            ->filterColumn('category_archives.name', function ($query, $keyword) {
+                $query->whereRelation('category_archives', 'id', $keyword);
+            })
+            ->filterColumn('subcategory_archives.name', function ($query, $keyword) {
+                $query->whereRelation('subcategory_archives', 'id', $keyword);
+            })
             ->addIndexColumn()
             ->addColumn('select_all', function ($myarchive) {
                 return '
                     <input type="checkbox" name="archive_id[]" value="' . $myarchive->id . '">
                 ';
-            })
-            ->addColumn('a_name', function ($myarchive) {
-                return $myarchive->name;
-            })
-            ->addColumn('s_name', function ($myarchive) {
-                return $myarchive->section->name;
-            })
-            ->addColumn('c_name', function ($myarchive) {
-                return $myarchive->category_archive->name;
-            })
-            ->addColumn('sa_name', function ($myarchive) {
-                return $myarchive->subcategory_archive->name;
-            })
-            ->addColumn('ta', function ($myarchive) {
-                return $myarchive->tahun_ajaran->tahun_ajaran;
-            })
-            ->addColumn('smt', function ($myarchive) {
-                return $myarchive->semester->semester;
             })
             ->addColumn('aksi', function ($myarchive) {
                 $path = asset("/file/archives/$myarchive->file");
@@ -145,7 +162,7 @@ class MyArchiveController extends Controller
                 <a href="' . route('my-archive.destroy', $myarchive->id) . '" class="btn btn-danger btn-flat" data-confirm-delete="true"><i class="fa fa-trash"></i></a>
                 ';
             })
-            ->rawColumns(['select_all', 'a_name', 's_name', 'c_name', 'sa_name', 'ta', 'smt', 'aksi'])
+            ->rawColumns(['select_all', 'aksi'])
             ->make(true);
     }
 
