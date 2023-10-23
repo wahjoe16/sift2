@@ -27,7 +27,7 @@ class TahunAjaranController extends Controller
             ->addIndexColumn()
             ->addColumn('aksi', function ($data) {
                 return '
-                    <a href="' . route('tahunajaran.edit', $data->id) . '" class="btn btn-xs btn-info btn-flat"><i class="fa fa-edit"></i></a>
+                    <a href="' . route('tahunajaran.edit', $data->id) . '" class="btn btn-xs btn-warning btn-flat"><i class="fa fa-edit"></i></a>
                     <a href="' . route('tahunajaran.destroy', $data->id) . '" class="btn btn-xs btn-danger btn-flat" data-confirm-delete="true"><i class="fa fa-trash"></i></a>  
             ';
             })

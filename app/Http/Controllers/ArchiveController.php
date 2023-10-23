@@ -12,6 +12,7 @@ use App\Models\TahunAjaran;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -80,10 +81,10 @@ class ArchiveController extends Controller
             ->addColumn('action', function ($data) {
                 $path = asset("/file/archives/$data->file");
                 return '
-                <a href="' . route('my-archive.show', $data->id) . '" target="_blank" class="btn btn-info btn-flat"><i class="fa fa-search"></i></a>
-                <a href="' . $path . '" class="btn btn-primary btn-flat" target="_blank"><i class="fa fa-download"></i></a>
-                <a href="' . route('ft-arsip.edit', $data->id) . '" class="btn btn-warning btn-flat"><i class="fa fa-edit"></i></a>
-                <a href="' . route('ft-arsip.destroy', $data->id) . '" class="btn btn-danger btn-flat" data-confirm-delete="true"><i class="fa fa-trash"></i></a>
+                <a href="' . route('ft-arsip.show', $data->id) . '" target="_blank" class="btn btn-info btn-flat btn-sm"><i class="fa fa-search"></i></a>
+                <a href="' . route('ft-arsip.download', $data->id) . '" class="btn btn-primary btn-flat btn-sm"><i class="fa fa-download"></i></a>
+                <a href="' . route('ft-arsip.edit', $data->id) . '" class="btn btn-warning btn-flat btn-sm"><i class="fa fa-edit"></i></a>
+                <a href="' . route('ft-arsip.destroy', $data->id) . '" class="btn btn-danger btn-flat btn-sm" data-confirm-delete="true"><i class="fa fa-trash"></i></a>
             ';
             })
             ->rawColumns(['action', 'file'])
@@ -94,7 +95,7 @@ class ArchiveController extends Controller
     {
         // $arsip = Archive::orderBy('section_id')->doesntHave('users');
         // dd($arsip);
-        $ta = TahunAjaran::get();
+        $ta = TahunAjaran::orderBy('tahun_ajaran')->get();
         $smt = Semester::get();
         $category = CategoryArchive::get();
         $subcategory = SubcategoryArchive::get();
@@ -150,8 +151,10 @@ class ArchiveController extends Controller
             ->addColumn('action', function ($data) {
                 $path = asset("/file/archives/$data->file");
                 return '
-                <a href="' . route('my-archive.show', $data->id) . '" target="_blank" class="btn btn-info btn-flat"><i class="fa fa-search"></i></a>
-                <a href="' . $path . '" class="btn btn-primary btn-flat" target="_blank"><i class="fa fa-download"></i></a>
+                <a href="' . route('ft-arsip.show', $data->id) . '" target="_blank" class="btn btn-info btn-flat btn-sm"><i class="fa fa-search"></i></a>
+                <a href="' . route('ft-arsip.download', $data->id) . '" class="btn btn-primary btn-flat btn-sm"><i class="fa fa-download"></i></a>
+                <a href="' . route('ft-arsip.edit', $data->id) . '" class="btn btn-warning btn-flat btn-sm"><i class="fa fa-edit"></i></a>
+                <a href="' . route('ft-arsip.destroy', $data->id) . '" class="btn btn-danger btn-flat btn-sm" data-confirm-delete="true"><i class="fa fa-trash"></i></a>
             ';
             })
             ->rawColumns(['select_all', 'action'])
@@ -253,7 +256,8 @@ class ArchiveController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Archive::with('users')->findOrFail($id);
+        return view('archive.show', compact('data'));
     }
 
     /**
@@ -331,5 +335,12 @@ class ArchiveController extends Controller
         if ($data->file !== '') $this->deleteFile($data->file);
         $data->delete();
         return redirect()->back()->with('success', 'File Archive successfully deleted!');
+    }
+
+    public function downloadFile($id)
+    {
+        $data = Archive::findOrFail($id);
+        $filePath = 'file/archives/' . $data->file;
+        return Response::download($filePath);
     }
 }

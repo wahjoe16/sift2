@@ -19,7 +19,7 @@
                                 <th width="5%">No</th>
                                 <th>Nama Bidang Arsip</th>
                                 <th>Deskripsi Bidang Arsip</th>
-                                <th width="15%"><i class="fa fa-cogs"></i></th>
+                                <th width="9%"><i class="fa fa-cogs"></i> Aksi</th>
                             </thead>
                         </table>
                     </form>

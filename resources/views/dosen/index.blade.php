@@ -28,7 +28,7 @@
                                 <th>Nama</th>
                                 <th>Program Studi</th>
                                 <th>Email</th>
-                                <th width="15%"><i class="fa fa-cogs"></i></th>
+                                <th width="15%"><i class="fa fa-cogs"></i> Aksi</th>
                             </thead>
                         </table>
                     </form>

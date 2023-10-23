@@ -21,7 +21,7 @@
                                 <th>Kategori Arsip</th>
                                 <th>Sub Kategori Arsip</th>
                                 <th>Deskripsi Sub Kategori Arsip</th>
-                                <th width="15%"><i class="fa fa-cogs"></i></th>
+                                <th width="9%"><i class="fa fa-cogs"></i> Aksi</th>
                             </thead>
                         </table>
                     </form>

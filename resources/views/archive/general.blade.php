@@ -65,7 +65,7 @@
                             <th>Sub Kategori Arsip</th>
                             <th>Tahun Akademik</th>
                             <th>Semester</th>
-                            <th width="15%"><i class="fa fa-cogs"></i> Aksi</th>
+                            <th width="16%"><i class="fa fa-cogs"></i> Aksi</th>
                         </thead>
                     </table>
                 </div>

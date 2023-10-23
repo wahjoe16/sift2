@@ -218,26 +218,46 @@ Route::group(['prefix' => '/dokumentasi_sidang', 'middleware' => 'ceklevel:2'], 
 });
 
 // ARSIP Fakultas Role ADMIN, DOSEN
-Route::group(['prefix' => '/archives', 'middleware' => 'ceklevel:1,2'], function () {
-    // CRUD ARCHIVE
-    Route::resource('ft-arsip', ArchiveController::class);
-    Route::get('data/ft-arsip', [ArchiveController::class, 'data'])->name('ft-arsip.data');
-    Route::get('general', [ArchiveController::class, 'indexGeneral'])->name('ft-arsip.general');
-    Route::get('data-general', [ArchiveController::class, 'dataGeneral'])->name('ft-arsip-general.data');
+Route::group(['prefix' => '/archives'], function () {
 
-    // ARSIP Fakultas Role DOSEN
-    Route::get('all-archive', [MyArchiveController::class, 'indexArchive'])->name('all-archive.index');
-    Route::get('all-archive/data', [MyArchiveController::class, 'indexDataArchive'])->name('all-archive.data');
-    Route::get('my-archive', [MyArchiveController::class, 'myArchive'])->name('my-archive.index');
-    Route::get('my-archive/data', [MyArchiveController::class, 'myDataArchive'])->name('my-archive.data');
-    Route::get('my-archive/{id}/add', [MyArchiveController::class, 'addArchive'])->name('my-archive.add');
-    Route::get('my-archive/create', [MyArchiveController::class, 'createArchive'])->name('my-archive.create');
-    Route::get('my-archive/show/{id}', [MyArchiveController::class, 'showArchive'])->name('my-archive.show');
-    Route::post('my-archive/store', [MyArchiveController::class, 'storeArchive'])->name('my-archive.store');
-    Route::get('my-archive/{id}/edit', [MyArchiveController::class, 'editArchive'])->name('my-archive.edit');
-    Route::put('my-archive/{id}/update', [MyArchiveController::class, 'updateArchive'])->name('my-archive.update');
-    Route::get('my-archive/{id}/delete', [MyArchiveController::class, 'deleteArchive'])->name('my-archive.destroy');
-    Route::match(['get', 'post'], 'my-archive/download-selected', [MyArchiveController::class, 'downloadSelected'])->name('myarchive.downloadselected');
+    Route::group(['middleware' => 'ceklevel:1'], function () {
+        // CRUD ARCHIVE
+        Route::resource('ft-arsip', ArchiveController::class);
+        Route::get('data/ft-arsip', [ArchiveController::class, 'data'])->name('ft-arsip.data');
+
+        // download Archive
+        Route::get('download/{id}/ft-arsip', [ArchiveController::class, 'downloadFile'])->name('ft-arsip.download');
+
+        Route::get('general', [ArchiveController::class, 'indexGeneral'])->name('ft-arsip.general');
+        Route::get('data-general', [ArchiveController::class, 'dataGeneral'])->name('ft-arsip-general.data');
+    });
+
+    Route::group(['middleware' => 'ceklevel:2'], function () {
+        // ARSIP Fakultas Role DOSEN
+        Route::get('all-archive', [MyArchiveController::class, 'indexArchive'])->name('all-archive.index');
+        Route::get('all-archive/data', [MyArchiveController::class, 'indexDataArchive'])->name('all-archive.data');
+        Route::get('my-archive', [MyArchiveController::class, 'myArchive'])->name('my-archive.index');
+        Route::get('my-archive/data', [MyArchiveController::class, 'myDataArchive'])->name('my-archive.data');
+        Route::get('my-archive/{id}/add', [MyArchiveController::class, 'addArchive'])->name('my-archive.add');
+        Route::get('my-archive/create', [MyArchiveController::class, 'createArchive'])->name('my-archive.create');
+        Route::get('my-archive/show/{id}', [MyArchiveController::class, 'showArchive'])->name('my-archive.show');
+        Route::post('my-archive/store', [MyArchiveController::class, 'storeArchive'])->name('my-archive.store');
+        Route::get('my-archive/{id}/edit', [MyArchiveController::class, 'editArchive'])->name('my-archive.edit');
+        Route::put('my-archive/{id}/update', [MyArchiveController::class, 'updateArchive'])->name('my-archive.update');
+        Route::get('my-archive/{id}/delete', [MyArchiveController::class, 'deleteArchive'])->name('my-archive.destroy');
+        Route::get('generals', [MyArchiveController::class, 'indexGeneral'])->name('my-archive.general');
+        Route::get('data-generals', [MyArchiveController::class, 'dataGeneral'])->name('my-archive-general.data');
+        Route::get('download/{id}/my-archive', [MyArchiveController::class, 'downloadFile'])->name('my-archive.download');
+        Route::match(['get', 'post'], 'my-archive/download-selected', [MyArchiveController::class, 'downloadSelected'])->name('myarchive.downloadselected');
+    });
+
+    Route::group(['middleware' => 'ceklevel:1,2'], function () {
+    });
+
+
+
+
+
     Route::get('dropdownlist/category-archive/{id}', [CategoryArsipController::class, 'getDataCategory'])->name('get-category.data');
     Route::get('dropdownlist/sub-category-archive/{id}', [SubcategoryArsipController::class, 'getDataSubcategory'])->name('get-subcategory.data');
 });

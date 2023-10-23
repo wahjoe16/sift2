@@ -20,7 +20,7 @@
                                 <th>Nama Bidang</th>
                                 <th>Nama Kategori Arsip</th>
                                 <th>Deskripsi Kategori Arsip</th>
-                                <th width="15%"><i class="fa fa-cogs"></i></th>
+                                <th width="9%"><i class="fa fa-cogs"></i> Aksi</th>
                             </thead>
                         </table>
                     </form>

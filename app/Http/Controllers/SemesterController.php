@@ -28,11 +28,9 @@ class SemesterController extends Controller
             ->addIndexColumn()
             ->addColumn('aksi', function ($data) {
                 return '
-                    <div class="btn-group">
-                        <a href="' . route('semester.edit', $data->id) . '" class="btn btn-xs btn-info btn-flat"><i class="fa fa-edit"></i></a>
-                        <a href="' . route('semester.destroy', $data->id) . '" class="btn btn-xs btn-danger btn-flat" data-confirm-delete="true"><i class="fa fa-trash"></i></a>
-                    </div>
-            ';
+                    <a href="' . route('semester.edit', $data->id) . '" class="btn btn-xs btn-warning btn-flat"><i class="fa fa-edit"></i></a>
+                    <a href="' . route('semester.destroy', $data->id) . '" class="btn btn-xs btn-danger btn-flat" data-confirm-delete="true"><i class="fa fa-trash"></i></a>
+                ';
             })
             ->rawColumns(['aksi'])
             ->make(true);

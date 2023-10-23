@@ -18,7 +18,7 @@
                                 <th>Nama</th>
                                 <th>Program Studi</th>
                                 <th>Jabatan</th>
-                                <th width="15%"><i class="fa fa-cogs"></i></th>
+                                <th width="7%"><i class="fa fa-cogs"></i> Aksi</th>
                             </thead>
                         </table>
                     </form>

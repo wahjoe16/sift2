@@ -122,11 +122,9 @@ class UserController extends Controller
             })
             ->editColumn('aksi', function ($admin) {
                 return '
-                    <div class="btn-group">
-                        <a href="' . route('admin.edit', $admin->id) . '" class="btn btn-xs btn-info btn-flat"><i class="fa fa-edit"></i></a>
-                        <a href="' . route('admin.destroy', $admin->id) . '" class="btn btn-xs btn-danger btn-flat" data-confirm-delete="true"><i class="fa fa-trash"></i></a>
-                    </div>
-            ';
+                    <a href="' . route('admin.edit', $admin->id) . '" class="btn btn-xs btn-warning btn-flat"><i class="fa fa-edit"></i></a>
+                    <a href="' . route('admin.destroy', $admin->id) . '" class="btn btn-xs btn-danger btn-flat" data-confirm-delete="true"><i class="fa fa-trash"></i></a>
+                ';
             })
             ->rawColumns(['aksi', 'select_all', 'foto', 'status_superadmin'])
             ->make(true);
@@ -222,12 +220,10 @@ class UserController extends Controller
             })
             ->addColumn('aksi', function ($mahasiswa) {
                 return '
-                    <div class="btn-group">
-                        <a href="' . route('dashboardMahasiswa.show', $mahasiswa->id) . '" class="btn btn-xs btn-info btn-flat"><i class="fa fa-search"></i></a>
-                        <a href="' . route('mahasiswa.edit', $mahasiswa->id) . '" class="btn btn-xs btn-warning btn-flat"><i class="fa fa-edit"></i></a>
-                        <a href="' . route('mahasiswa.destroy', $mahasiswa->id) . '" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></a>
-                    </div>
-            ';
+                    <a href="' . route('dashboardMahasiswa.show', $mahasiswa->id) . '" class="btn btn-xs btn-info btn-flat"><i class="fa fa-search"></i></a>
+                    <a href="' . route('mahasiswa.edit', $mahasiswa->id) . '" class="btn btn-xs btn-warning btn-flat"><i class="fa fa-edit"></i></a>
+                    <a href="' . route('mahasiswa.destroy', $mahasiswa->id) . '" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></a>
+                ';
             })
             ->rawColumns(['aksi', 'select_all', 'foto'])
             ->make(true);
@@ -320,12 +316,10 @@ class UserController extends Controller
             })
             ->addColumn('aksi', function ($dosen) {
                 return '
-                <div class="btn-group">
                     <a href="' . route('dashboardDosen.show', $dosen->id) . '" class="btn btn-xs btn-info btn-flat"><i class="fa fa-search"></i></a>
                     <a href="' . route('dosen.edit', $dosen->id) . '" class="btn btn-xs btn-warning btn-flat"><i class="fa fa-edit"></i></a>
                     <a href="' . route('dosen.destroy', $dosen->id) . '" class="btn btn-xs btn-danger btn-flat" data-confirm-delete="true"><i class="fa fa-trash"></i></a>
-                </div>
-            ';
+                ';
             })
             ->rawColumns(['aksi', 'select_all', 'foto'])
             ->make(true);
@@ -438,10 +432,8 @@ class UserController extends Controller
             })
             ->addColumn('aksi', function ($data) {
                 return '
-                    <div class="btn-group">
-                        <a href="' . route('users.show', $data->id) . '" class="btn btn-xs btn-info btn-flat"><i class="fa fa-search"></i></a>
-                    </div>
-                ';
+                        <a href="' . route('users.show', $data->id) . '"><i class="fa fa-search"></i></a>
+                    ';
             })
             ->rawColumns(['foto', 'aksi'])
             ->make(true);

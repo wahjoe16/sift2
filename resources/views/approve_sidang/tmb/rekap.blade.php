@@ -40,14 +40,14 @@
                     <table class="table table-striped table-bordered table-rekap-sidang">
                         <thead>
                             <tr>
-                                <th>No</th>
+                                <th width="5%">No</th>
                                 <th>NPM</th>
                                 <th>Nama</th>
                                 <th>Tahun Akademik</th>
                                 <th>Semester</th>
                                 <th>Tanggal Pengajuan</th>
                                 <th>Tanggal Approve</th>
-                                <th width="15%"><i class="fa fa-cogs"></i> Aksi</th>
+                                <th width="9%"><i class="fa fa-cogs"></i> Aksi</th>
                             </tr>
                         </thead>
                     </table>
@@ -113,7 +113,9 @@
                     data: 'tanggal_approve'
                 },
                 {
-                    data: 'aksi'
+                    data: 'aksi',
+                    'searchable': false,
+                    'sortable': false
                 }
             ]
         })

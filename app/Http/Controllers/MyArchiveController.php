@@ -12,6 +12,7 @@ use App\Models\SubcategoryArchive;
 use App\Models\TahunAjaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use ZipArchive;
@@ -73,9 +74,9 @@ class MyArchiveController extends Controller
             })
             ->addIndexColumn()
             ->addColumn('action', function ($data) {
-                $path = asset("/file/archives/$data->file");
                 return '
-                <a href="' . $path . '" class="btn btn-primary btn-flat btn-sm" target="_blank"><i class="fa fa-download"></i></a>
+                <a href="' . route('my-archive.show', $data->id) . '" target="_blank" class="btn btn-info btn-flat btn-sm"><i class="fa fa-search"></i></a>
+                <a href="' . route('my-archive.download', $data->id) . '" class="btn btn-primary btn-flat btn-sm" target="_blank"><i class="fa fa-download"></i></a>
                 <a href="' . route('my-archive.add', $data->id) . '" class="btn btn-success btn-flat btn-sm"><i class="fa fa-plus"></i></a>
             ';
             })
@@ -156,10 +157,10 @@ class MyArchiveController extends Controller
             ->addColumn('aksi', function ($myarchive) {
                 $path = asset("/file/archives/$myarchive->file");
                 return '
-                <a href="' . route('my-archive.show', $myarchive->id) . '" target="_blank" class="btn btn-info btn-flat"><i class="fa fa-search"></i></a>
-                <a href="' . $path . '" class="btn btn-primary btn-flat" target="_blank"><i class="fa fa-download"></i></a>
-                <a href="' . route('my-archive.edit', $myarchive->id) . '" class="btn btn-warning btn-flat"><i class="fa fa-edit"></i></a>
-                <a href="' . route('my-archive.destroy', $myarchive->id) . '" class="btn btn-danger btn-flat" data-confirm-delete="true"><i class="fa fa-trash"></i></a>
+                <a href="' . route('my-archive.show', $myarchive->id) . '" target="_blank" class="btn btn-info btn-flat btn-sm"><i class="fa fa-search"></i></a>
+                <a href="' . route('my-archive.download', $myarchive->id) . '" class="btn btn-primary btn-flat btn-sm"><i class="fa fa-download"></i></a>
+                <a href="' . route('my-archive.edit', $myarchive->id) . '" class="btn btn-warning btn-flat btn-sm"><i class="fa fa-edit"></i></a>
+                <a href="' . route('my-archive.destroy', $myarchive->id) . '" class="btn btn-danger btn-flat btn-sm" data-confirm-delete="true"><i class="fa fa-trash"></i></a>
                 ';
             })
             ->rawColumns(['select_all', 'aksi'])
@@ -172,7 +173,7 @@ class MyArchiveController extends Controller
         $section = Section::get();
         $category = CategoryArchive::get();
         $subcategory = SubcategoryArchive::get();
-        $ta = TahunAjaran::get();
+        $ta = TahunAjaran::orderBy('tahun_ajaran', 'desc')->get();
         $smt = Semester::get();
 
         return view('my-archive.create', compact('subcategory', 'ta', 'smt', 'category', 'section', 'title'));
@@ -235,7 +236,7 @@ class MyArchiveController extends Controller
         $section = Section::get();
         $category = CategoryArchive::get();
         $subcategory = SubcategoryArchive::get();
-        $ta = TahunAjaran::get();
+        $ta = TahunAjaran::orderBy('tahun_ajaran', 'desc')->get();
         $smt = Semester::get();
         return view('my-archive.edit', compact('data', 'title', 'section', 'category', 'subcategory', 'ta', 'smt'));
     }
@@ -243,6 +244,7 @@ class MyArchiveController extends Controller
     public function updateArchive(Request $request, $id)
     {
         $archive = Archive::find($id);
+        $user = auth()->user();
         $this->validate($request, [
             'file.*' => 'mimes:pdf,xls,xlxs,doc,docx,csv,jpg,jpeg,png',
             'section_id' => 'required',
@@ -259,6 +261,7 @@ class MyArchiveController extends Controller
         }
 
         $archive->update($data);
+        $archive->users()->sync($user->id);
         return redirect()->route('my-archive.index')->with('success', 'Archive updated successfully!');
     }
 
@@ -282,6 +285,78 @@ class MyArchiveController extends Controller
         if ($data->file !== '') $this->deleteFile($data->file);
         $data->delete();
         return redirect()->back()->with('success', 'Archive deleted successfully!');
+    }
+
+    public function indexGeneral()
+    {
+        $ta = TahunAjaran::orderBy('tahun_ajaran')->get();
+        $smt = Semester::get();
+        $category = CategoryArchive::get();
+        $subcategory = SubcategoryArchive::get();
+        $title2 = "Delete Arsip!";
+        $text = "Anda yakin akan menghapus arsip?";
+        confirmDelete($title2, $text);
+
+        Session::put('page', 'generalArsip');
+        return view('my-archive.general', compact('ta', 'smt', 'category', 'subcategory'));
+    }
+
+    public function dataGeneral()
+    {
+        $data = Archive::with([
+            'section',
+            'category_archive',
+            'subcategory_archive',
+            'tahun_ajaran',
+            'semester'
+        ])->doesntHave('users');
+
+        if (request('tahun_ajaran_id')) {
+            $data->whereRelation('tahun_ajaran', 'id', request('tahun_ajaran_id'));
+        }
+
+        if (request('semester_id')) {
+            $data->whereRelation('semester', 'id', request('semester_id'));
+        }
+
+        if (request('category_archive_id')) {
+            $data->whereRelation('category_archive', 'id', request('category_archive_id'));
+        }
+
+        if (request('subcategory_archive_id')) {
+            $data->whereRelation('subcategory_archive', 'id', request('subcategory_archive_id'));
+        }
+
+        return datatables()
+            ->of($data)
+            ->filterColumn('tahun_ajaran.tahun_ajaran', function ($query, $keyword) {
+                $query->whereRelation('tahun_ajaran', 'id', $keyword);
+            })
+            ->filterColumn('semester.semester', function ($query, $keyword) {
+                $query->whereRelation('semester', 'id', $keyword);
+            })
+            ->filterColumn('category_archives.name', function ($query, $keyword) {
+                $query->whereRelation('category', 'id', $keyword);
+            })
+            ->filterColumn('subcategory_archives.name', function ($query, $keyword) {
+                $query->whereRelation('subcategory', 'id', $keyword);
+            })
+            ->addIndexColumn()
+            ->addColumn('action', function ($data) {
+                return '
+                    <a href="' . route('my-archive.show', $data->id) . '" target="_blank" class="btn btn-info btn-flat btn-sm"><i class="fa fa-search"></i></a>
+                    <a href="' . route('my-archive.download', $data->id) . '" class="btn btn-primary btn-flat btn-sm"><i class="fa fa-download"></i></a>
+                    ';
+            })
+            ->rawColumns(['select_all', 'action'])
+            ->make(true);
+    }
+
+    public function downloadFile($id)
+    {
+        $data = Archive::findOrFail($id);
+        $filePath = 'file/archives/' . $data->file;
+        return Response::download($filePath);
     }
 
     public function downloadSelected(Request $request)

@@ -53,7 +53,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('users.index') }}" @if(Session::get('page')=='indexUser' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                <a href="{{ route('users.index') }}" @if(Session::get('page')=='indexUsers' ) style="background: #3c8dbc !important; color:white !important" @endif>
                     <i class="fa fa-users"></i> <span>Semua User</span>
                 </a>
             </li>
@@ -267,7 +267,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('ft-arsip.general') }}" @if(Session::get('page')=='generalArsip' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                <a href="{{ route('my-archive.general') }}" @if(Session::get('page')=='generalArsip' ) style="background: #3c8dbc !important; color:white !important" @endif>
                     <i class="fa fa-file"></i> <span>Arsip Umum Fakultas</span>
                 </a>
             </li>

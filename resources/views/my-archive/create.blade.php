@@ -23,7 +23,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-lg-2 col-lg-offset-1 control-label" for="section_id">Sesi Arsip</label>
+                            <label class="col-lg-2 col-lg-offset-1 control-label" for="section_id">Bidang Arsip</label>
                             <div class="col-sm-6">
                                 <select name="section_id" id="section_id" class="form-control select2" required>
                                     <option value="">Pilih</option>

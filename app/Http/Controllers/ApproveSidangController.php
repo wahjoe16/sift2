@@ -131,7 +131,7 @@ class ApproveSidangController extends Controller
             })
             ->addColumn('aksi', function ($data) {
                 return '
-                    <a href="' . route('rekap-sidangTmb.show', $data->id) . '" class="btn btn-info btn-xs btn-flat"><i class="fa fa-search"></i></a>
+                    <a href="' . route('rekap-sidangTmb.show', $data->id) . '"><i class="fa fa-search"></i></a>
                 ';
             })
             ->rawColumns(['tanggal_pengajuan', 'aksi'])

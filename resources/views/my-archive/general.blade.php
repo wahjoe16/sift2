@@ -11,9 +11,7 @@
         <div class="col-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <div class="btn-group">
-                        <a href="{{ route('ft-arsip.create') }}" class="btn btn-success btn-sm btn-flat"><i class="fa fa-plus-circle"></i> Tambah</a>
-                    </div>
+                    <h3 class="box-title">Arsip Umum Fakultas Teknik</h3>
                 </div>
                 <div class="box-body table-responsive">
                     <div class="col-md-12">
@@ -58,16 +56,16 @@
                             </div>
                         </form>
                     </div>
-                    <table class="table table-striped table-bordered table-archive">
+                    <table class="table table-striped table-bordered table-general-archive">
                         <thead>
                             <th width="5%">No</th>
                             <th>Nama</th>
-                            <th>Sesi</th>
+                            <th>Bidang</th>
                             <th>Kategori Arsip</th>
                             <th>Sub Kategori Arsip</th>
                             <th>Tahun Akademik</th>
                             <th>Semester</th>
-                            <th width="16%"><i class="fa fa-cogs"></i> Aksi</th>
+                            <th width="9%"><i class="fa fa-cogs"></i> Aksi</th>
                         </thead>
                     </table>
                 </div>
@@ -90,11 +88,11 @@
         //Initialize Select2 Elements
         $('.select2').select2()
 
-        table = $('.table-archive').DataTable({
+        table = $('.table-general-archive').DataTable({
             processing: true,
             autoWidth: false,
             ajax: {
-                url: '{{ route("ft-arsip.data") }}',
+                url: '{{ route("my-archive-general.data") }}',
                 data: function(d) {
                     d.tahun_ajaran_id = $('#tahunajaran').val();
                     d.semester_id = $('#semester').val();

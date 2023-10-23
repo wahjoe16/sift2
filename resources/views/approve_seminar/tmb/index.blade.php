@@ -14,13 +14,13 @@
                     <table class="table table-striped table-bordered table-approve-seminar">
                         <thead>
                             <tr>
-                                <th>No</th>
+                                <th width="5%">No</th>
                                 <th>NPM</th>
                                 <th>Nama</th>
                                 <th>Tahun Akademik</th>
                                 <th>Semester</th>
                                 <th>Tanggal Pengajuan</th>
-                                <th width="15%"><i class="fa fa-cogs"></i> Approve</th>
+                                <th width="9%"><i class="fa fa-cogs"></i> Approve</th>
                             </tr>
                         </thead>
                     </table>
@@ -66,7 +66,9 @@
                     data: 'tanggal_pengajuan'
                 },
                 {
-                    data: 'approve'
+                    data: 'approve',
+                    'searchable': false,
+                    'sortable': false
                 }
             ]
         })
