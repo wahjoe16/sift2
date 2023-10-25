@@ -104,7 +104,14 @@ class DashboardController extends Controller
         $data = User::find($id);
         $bimbingan = DaftarSidang::with(['mahasiswa', 'tahun_ajaran', 'semester'])->where('dosen1_id', $id)->get();
         // dd($bimbingan);
-        return view('dashboard.show_dosen', compact('data', 'bimbingan'));
+        $arsip = Archive::select('archives.id', 'archives.name as a_name', 'archives.file as a_file', 'subcategory_archives.name as s_name', 'tahun_ajaran.tahun_ajaran as ta', 'semester.semester as smt')
+            ->leftJoin('my_archives', 'my_archives.archive_id', 'archives.id')
+            ->leftJoin('subcategory_archives', 'subcategory_archives.id', 'archives.subcategory_archive_id')
+            ->leftJoin('tahun_ajaran', 'tahun_ajaran.id', 'archives.tahun_ajaran_id')
+            ->leftJoin('semester', 'semester.id', 'archives.semester_id')
+            ->where('my_archives.user_id', $data->id)->get();
+        // dd($arsip);
+        return view('dashboard.show_dosen', compact('data', 'bimbingan', 'arsip'));
     }
 
     public function rekapLulusan()

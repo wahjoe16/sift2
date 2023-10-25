@@ -30,7 +30,7 @@ class DosenPieChart
             ->setTitle('Persentasi Dosen')
             ->setSubtitle(date('Y'))
             ->addData($data)
-            ->setColors(['#f5d505', '#026dc4', '#06b8a9', '#8a652b', '#bf320f'])
+            ->setColors(['#f5d505', '#026dc4', '#06b8a9', '#71eb34', '#f25c11'])
             ->setLabels($label);
     }
 }

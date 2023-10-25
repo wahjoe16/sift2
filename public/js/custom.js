@@ -1,6 +1,7 @@
 $(document).ready(function(){
   // datatables client side
   $('.table-dashboard-bimbingan').DataTable();
+  $('.table-dashboard-arsip').DataTable();
 
   
     // Konfirmasi Delete

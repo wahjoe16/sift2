@@ -67,7 +67,35 @@
                                     </div>
                                     <!-- /.tab-pane -->
                                     <div class="tab-pane" id="tab_2">
-                                        ...
+                                        <table class="table table-striped table-bordered table-dashboard-arsip">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nama Arsip</th>
+                                                    <th>File</th>
+                                                    <th>Sub Kategori Arsip</th>
+                                                    <th>Tahun Akademik</th>
+                                                    <th>Semester</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($arsip as $a)
+                                                <tr>
+                                                    <td>{{ $a->a_name }}</td>
+                                                    <td><a href="{{ asset('/file/archives/')."/".$a->a_file }}" target="_blank">{{ $a->a_file }}</a></td>
+
+                                                    @if ($a->s_name == '')
+                                                    <td>-</td>
+                                                    @else
+
+                                                    <td>{{ $a->s_name }}</td>
+                                                    @endif
+
+                                                    <td>{{ $a->ta }}</td>
+                                                    <td>{{ $a->smt }}</td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
                                     </div>
                                     <!-- /.tab-pane -->
                                 </div>
