@@ -445,6 +445,91 @@ class UserController extends Controller
         return view('users.show', compact('data'));
     }
 
+    public function tendikMahasiswa()
+    {
+        Session::put('page', 'tendikMahasiswa');
+        return view('mahasiswa.tendik');
+    }
+
+    public function tendikDataMahasiswa()
+    {
+        $mahasiswa = User::where('level', 3)->orderBy('nik', 'asc')->get();
+
+        return datatables()
+            ->of($mahasiswa)
+            ->addIndexColumn()
+            ->addColumn('foto', function ($mahasiswa) {
+                $path = asset("/user/foto/$mahasiswa->foto");
+                return '<img src=' . $path . ' class="img-circle img-bordered-sm" width="40"/>';
+            })
+            ->addColumn('aksi', function ($mahasiswa) {
+                return '
+                    <a href="' . route('dashboardMahasiswa.show', $mahasiswa->id) . '"><i class="fa fa-search"></i></a>
+                    ';
+            })
+            ->rawColumns(['aksi', 'foto'])
+            ->make(true);
+    }
+
+    public function tendikDosen()
+    {
+        Session::put('page', 'tendikDosen');
+        return view('dosen.tendik');
+    }
+
+    public function tendikDataDosen()
+    {
+        $dosen = User::where('level', 2)->orderBy('nik', 'asc')->get();
+
+        return datatables()
+            ->of($dosen)
+            ->addIndexColumn()
+            ->addColumn('foto', function ($dosen) {
+                $path = asset("/user/foto/$dosen->foto");
+                return '<img src=' . $path . ' class="img-circle img-bordered-sm" width="40"/>';
+            })
+            ->addColumn('aksi', function ($dosen) {
+                return '
+                    <a href="' . route('dashboardDosen.show', $dosen->id) . '"><i class="fa fa-search"></i></a>
+                    ';
+            })
+            ->rawColumns(['aksi', 'foto'])
+            ->make(true);
+    }
+
+    public function tendikAdmin()
+    {
+        Session::put('page', 'tendikAdmin');
+        return view('admin.tendik');
+    }
+
+    public function tendikDataAdmin()
+    {
+        $admin = User::where('level', 1)->orderBy('nik', 'asc')->get();
+
+        return datatables()
+            ->of($admin)
+            ->addIndexColumn()
+            ->addColumn('foto', function ($admin) {
+                $path = asset("/user/foto/$admin->foto");
+                return '<img src=' . $path . ' class="img-circle img-bordered-sm" width="40"/>';
+            })
+            ->addColumn('status_superadmin', function ($admin) {
+                if ($admin->status_superadmin == 1) {
+                    return 'Aktif';
+                } else if ($admin->status_superadmin == 0) {
+                    return 'Tidak Aktif';
+                }
+            })
+            ->addColumn('aksi', function ($admin) {
+                return '
+                    <a href="' . route('dashboardAdmin.show', $admin->id) . '"><i class="fa fa-search"></i></a>
+                    ';
+            })
+            ->rawColumns(['aksi', 'foto', 'status_superadmin'])
+            ->make(true);
+    }
+
     public function resetPassword($id)
     {
         $data = User::find($id);

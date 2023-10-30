@@ -41,66 +41,79 @@ Route::group(['middleware' => 'ceklevel:1,2,3'], function () {
     Route::get('/dashboard/mahasiswa/{id}', [DashboardController::class, 'showMahasiswa'])->name('dashboardMahasiswa.show');
     Route::get('/dashboard/dosen-data', [DashboardController::class, 'dataDosen'])->name('dashboard.dosen');
     Route::get('/dashboard/dosen/{id}', [DashboardController::class, 'showDosen'])->name('dashboardDosen.show');
+    Route::get('/dashboard/admin/{id}', [DashboardController::class, 'showAdmin'])->name('dashboardAdmin.show');
     Route::get('/dashboard/rekap-lulusan', [DashboardController::class, 'rekapLulusan'])->name('dashboard.rekapLulusan');
     Route::get('/dashboard/rekap-lulusan/{id}', [DashboardController::class, 'showRekapLulusan'])->name('rekapLulusan.show');
     Route::get('/dashboard/excel-export-sidang', [DashboardController::class, 'exportExcelLulusan'])->name('lulusanExcel.export');
 });
 
 // DATA MASTER Role ADMIN
-Route::group(['prefix' => '/datamaster', 'middleware' => 'ceklevel:1'], function () {
-    Route::get('/dashboard', [DashboardController::class, 'indexData'])->name('dashboard.datamaster');
-    // View All Users
-    Route::get('/users', [UserController::class, 'indexUsers'])->name('users.index');
-    Route::get('/data-users', [UserController::class, 'dataUsers'])->name('users.data');
-    Route::get('/data-users/{id}', [UserController::class, 'showUsers'])->name('users.show');
-    Route::post('/reset-password-user/{id}', [UserController::class, 'resetPassword'])->name('user-password.reset');
-    // CRUD mahasiswa
-    Route::get('/mahasiswa/index', [UserController::class, 'indexMahasiswa'])->name('mahasiswa.index');
-    Route::get('/mahasiswa/data', [UserController::class, 'dataMahasiswa'])->name('mahasiswa.data');
-    Route::post('/mahasiswa/store', [UserController::class, 'storeMahasiswa'])->name('mahasiswa.store');
-    Route::get('/mahasiswa/show/{id}', [UserController::class, 'showMahasiswa'])->name('mahasiswa.show');
-    Route::get('/mahasiswa/edit/{id}', [UserController::class, 'editMahasiswa'])->name('mahasiswa.edit');
-    Route::post('/mahasiswa/update/{id}', [UserController::class, 'updateMahasiswa'])->name('mahasiswa.update');
-    Route::post('/mahasiswa/delete/{id}', [UserController::class, 'deleteMahasiswa'])->name('mahasiswa.destroy');
-    Route::post('/mahasiswa/delete_selected', [UserController::class, 'deleteSelectedMahasiswa'])->name('mahasiswa.delete-selected');
-    Route::get('/mahasiswa/page/import', [UserController::class, 'importPageMhs'])->name('mahasiswa.import-page');
-    Route::post('/mahasiswa/import', [UserController::class, 'importMhs'])->name('mahasiswa.import');
-    // CRUD admin
-    Route::get('/admin/index', [UserController::class, 'indexAdmin'])->name('admin.index');
-    Route::get('/admin/data', [UserController::class, 'dataAdmin'])->name('admin.data');
-    Route::post('/admin/store', [UserController::class, 'storeAdmin'])->name('admin.store');
-    Route::get('/admin/show/{id}', [UserController::class, 'showAdmin'])->name('admin.show');
-    Route::get('/admin/edit/{id}', [UserController::class, 'editAdmin'])->name('admin.edit');
-    Route::post('/admin/update/{id}', [UserController::class, 'updateAdmin'])->name('admin.update');
-    Route::post('/admin/delete/{id}', [UserController::class, 'deleteAdmin'])->name('admin.destroy');
-    Route::post('/admin/delete/selected', [UserController::class, 'deleteSelectedAdmin'])->name('admin.delete-selected');
-    // CRUD dosen
-    Route::get('/dosen/index', [UserController::class, 'indexDosen'])->name('dosen.index');
-    Route::get('/dosen/data', [UserController::class, 'dataDosen'])->name('dosen.data');
-    Route::post('/dosen/store', [UserController::class, 'storeDosen'])->name('dosen.store');
-    Route::get('/dosen/show/{id}', [UserController::class, 'showDosen'])->name('dosen.show');
-    Route::get('/dosen/edit/{id}', [UserController::class, 'editDosen'])->name('dosen.edit');
-    Route::post('/dosen/update/{id}', [UserController::class, 'updateDosen'])->name('dosen.update');
-    Route::get('/dosen/delete/{id}', [UserController::class, 'deleteDosen'])->name('dosen.destroy');
-    Route::post('/dosen/delete/selected', [UserController::class, 'deleteSelectedDosen'])->name('dosen.delete-selected');
-    Route::get('/dosen/page/import', [UserController::class, 'importPageDosen'])->name('dosen.import-page');
-    Route::post('/dosen/import', [UserController::class, 'importDosen'])->name('dosen.import');
-    // CRUD SEMESTER
-    Route::resource('/semester', SemesterController::class);
-    Route::get('/semester-data', [SemesterController::class, 'data'])->name('semester.data');
-    // CRUD tahun ajaran
-    Route::resource('/tahunajaran', TahunAjaranController::class);
-    Route::get('/tahun_ajaran-data', [TahunAjaranController::class, 'data'])->name('tahunajaran.data');
-    // CRUD SECTION arsip
-    Route::resource('sections', SectionController::class);
-    Route::get('data/sections', [SectionController::class, 'data'])->name('sections.data');
-    // CRUD category arsip
-    Route::resource('category-archive', CategoryArsipController::class);
-    Route::get('data/category-archive', [CategoryArsipController::class, 'data'])->name('category-archive.data');
+Route::group(['prefix' => '/datamaster'], function () {
 
-    // CRUD sub category arsip
-    Route::resource('sub-category-archive', SubcategoryArsipController::class);
-    Route::get('data/sub-category-archive', [SubcategoryArsipController::class, 'data'])->name('sub-category-archive.data');
+    Route::group(['middleware' => 'ceklevel:1'], function () {
+        Route::get('/dashboard', [DashboardController::class, 'indexData'])->name('dashboard.datamaster');
+        // View All Users
+        Route::get('/users', [UserController::class, 'indexUsers'])->name('users.index');
+        Route::get('/data-users', [UserController::class, 'dataUsers'])->name('users.data');
+        Route::get('/data-users/{id}', [UserController::class, 'showUsers'])->name('users.show');
+        Route::post('/reset-password-user/{id}', [UserController::class, 'resetPassword'])->name('user-password.reset');
+        // CRUD mahasiswa
+        Route::get('/mahasiswa/index', [UserController::class, 'indexMahasiswa'])->name('mahasiswa.index');
+        Route::get('/mahasiswa/data', [UserController::class, 'dataMahasiswa'])->name('mahasiswa.data');
+        Route::post('/mahasiswa/store', [UserController::class, 'storeMahasiswa'])->name('mahasiswa.store');
+        Route::get('/mahasiswa/show/{id}', [UserController::class, 'showMahasiswa'])->name('mahasiswa.show');
+        Route::get('/mahasiswa/edit/{id}', [UserController::class, 'editMahasiswa'])->name('mahasiswa.edit');
+        Route::post('/mahasiswa/update/{id}', [UserController::class, 'updateMahasiswa'])->name('mahasiswa.update');
+        Route::post('/mahasiswa/delete/{id}', [UserController::class, 'deleteMahasiswa'])->name('mahasiswa.destroy');
+        Route::post('/mahasiswa/delete_selected', [UserController::class, 'deleteSelectedMahasiswa'])->name('mahasiswa.delete-selected');
+        Route::get('/mahasiswa/page/import', [UserController::class, 'importPageMhs'])->name('mahasiswa.import-page');
+        Route::post('/mahasiswa/import', [UserController::class, 'importMhs'])->name('mahasiswa.import');
+        // CRUD admin
+        Route::get('/admin/index', [UserController::class, 'indexAdmin'])->name('admin.index');
+        Route::get('/admin/data', [UserController::class, 'dataAdmin'])->name('admin.data');
+        Route::post('/admin/store', [UserController::class, 'storeAdmin'])->name('admin.store');
+        Route::get('/admin/show/{id}', [UserController::class, 'showAdmin'])->name('admin.show');
+        Route::get('/admin/edit/{id}', [UserController::class, 'editAdmin'])->name('admin.edit');
+        Route::post('/admin/update/{id}', [UserController::class, 'updateAdmin'])->name('admin.update');
+        Route::post('/admin/delete/{id}', [UserController::class, 'deleteAdmin'])->name('admin.destroy');
+        Route::post('/admin/delete/selected', [UserController::class, 'deleteSelectedAdmin'])->name('admin.delete-selected');
+        // CRUD dosen
+        Route::get('/dosen/index', [UserController::class, 'indexDosen'])->name('dosen.index');
+        Route::get('/dosen/data', [UserController::class, 'dataDosen'])->name('dosen.data');
+        Route::post('/dosen/store', [UserController::class, 'storeDosen'])->name('dosen.store');
+        Route::get('/dosen/show/{id}', [UserController::class, 'showDosen'])->name('dosen.show');
+        Route::get('/dosen/edit/{id}', [UserController::class, 'editDosen'])->name('dosen.edit');
+        Route::post('/dosen/update/{id}', [UserController::class, 'updateDosen'])->name('dosen.update');
+        Route::get('/dosen/delete/{id}', [UserController::class, 'deleteDosen'])->name('dosen.destroy');
+        Route::post('/dosen/delete/selected', [UserController::class, 'deleteSelectedDosen'])->name('dosen.delete-selected');
+        Route::get('/dosen/page/import', [UserController::class, 'importPageDosen'])->name('dosen.import-page');
+        Route::post('/dosen/import', [UserController::class, 'importDosen'])->name('dosen.import');
+        // CRUD SEMESTER
+        Route::resource('/semester', SemesterController::class);
+        Route::get('/semester-data', [SemesterController::class, 'data'])->name('semester.data');
+        // CRUD tahun ajaran
+        Route::resource('/tahunajaran', TahunAjaranController::class);
+        Route::get('/tahun_ajaran-data', [TahunAjaranController::class, 'data'])->name('tahunajaran.data');
+        // CRUD SECTION arsip
+        Route::resource('sections', SectionController::class);
+        Route::get('data/sections', [SectionController::class, 'data'])->name('sections.data');
+        // CRUD category arsip
+        Route::resource('category-archive', CategoryArsipController::class);
+        Route::get('data/category-archive', [CategoryArsipController::class, 'data'])->name('category-archive.data');
+
+        // CRUD sub category arsip
+        Route::resource('sub-category-archive', SubcategoryArsipController::class);
+        Route::get('data/sub-category-archive', [SubcategoryArsipController::class, 'data'])->name('sub-category-archive.data');
+    });
+
+    Route::group(['middleware' => 'ceklevel:1,2'], function () {
+        Route::get('/data-user/mahasiswa', [UserController::class, 'tendikMahasiswa'])->name('tendikMahasiswa');
+        Route::get('/data-user/mahasiswa-data', [UserController::class, 'tendikDataMahasiswa'])->name('tendikDataMahasiswa');
+        Route::get('/data-user/dosen', [UserController::class, 'tendikDosen'])->name('tendikDosen');
+        Route::get('/data-user/dosen-data', [UserController::class, 'tendikDataDosen'])->name('tendikDataDosen');
+        Route::get('/data-user/admin', [UserController::class, 'tendikAdmin'])->name('tendikAdmin');
+        Route::get('/data-user/admin-data', [UserController::class, 'tendikDataAdmin'])->name('tendikDataAdmin');
+    });
 });
 
 // Dokumentasi Sidang Role MAHASISWA
@@ -253,10 +266,6 @@ Route::group(['prefix' => '/archives'], function () {
 
     Route::group(['middleware' => 'ceklevel:1,2'], function () {
     });
-
-
-
-
 
     Route::get('dropdownlist/category-archive/{id}', [CategoryArsipController::class, 'getDataCategory'])->name('get-category.data');
     Route::get('dropdownlist/sub-category-archive/{id}', [SubcategoryArsipController::class, 'getDataSubcategory'])->name('get-subcategory.data');

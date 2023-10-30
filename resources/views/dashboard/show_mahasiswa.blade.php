@@ -67,6 +67,8 @@
                                                 <p>Dosen Pembimbing 2</p>
                                                 @if (is_null($sidang))
                                                 <b> - </b>
+                                                @elseif (is_null($sidang->dosen_2))
+                                                <b>-</b>
                                                 @else
                                                 <b>{{ $sidang->dosen_2->nama }}</b>
                                                 @endif
