@@ -151,7 +151,7 @@ class MyArchiveController extends Controller
             ->addIndexColumn()
             ->addColumn('select_all', function ($myarchive) {
                 return '
-                    <input type="checkbox" name="archive_id[]" value="' . $myarchive->id . '">
+                    <input class="indi_check" type="checkbox" name="archive_id[]" value="' . $myarchive->id . '">
                 ';
             })
             ->addColumn('aksi', function ($myarchive) {
@@ -361,14 +361,14 @@ class MyArchiveController extends Controller
 
     public function downloadSelected(Request $request)
     {
-        foreach ($request->input('archive_id', []) as $id) {
+        foreach ($request->archive_id as $id) {
             $archive = Archive::find($id);
             $archiveFile = 'file/archives/' . $archive->file;
             // return $archiveFile;
-            return response()->download($archiveFile);
-        }
 
-        return redirect()->back();
+        }
+        return Response::download($archiveFile);
+        // return redirect()->back();
 
         // $user = auth()->user();
         // $myarchive = $user->archives;

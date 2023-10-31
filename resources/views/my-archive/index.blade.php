@@ -79,10 +79,10 @@
                     </form>
                 </div>
                 <div class="box-footer with-border">
-                    <div class="btn-group">
-                        <button onclick="downloadSelected('{{ route('myarchive.downloadselected') }}')" class="btn btn-primary btn-flat"><i class="fa fa-download"></i> Download Selected</button>
-                        <!-- <a href="{{ route('myarchive.downloadselected') }}" class="btn btn-info btn-flat"><i class="fa fa-download"></i> Download as Zip</a> -->
-                    </div>
+                    <!-- <div class="btn-group">
+                        <button onclick="downloadSelected('{{ route('myarchive.downloadselected') }}')" name="btn-action" class="btn btn-primary btn-flat"><i class="fa fa-download"></i> Download Selected</button>
+                        
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -96,6 +96,10 @@
 <script src="{{ asset('AdminLTE-2/bower_components/select2/dist/js/select2.full.min.js') }}"></script>
 
 <script>
+
+</script>
+
+<script>
     let table;
 
     $(function() {
@@ -105,9 +109,11 @@
 
         // select all checkbox
         $('[name=select_all]').on('click', function() {
+            // console.log($(this).prop('checked'));
             $(':checkbox').prop('checked', this.checked);
         })
 
+        // dataTable arsip saya(dosen)
         table = $('.table-myarchive').DataTable({
             processing: true,
             autoWidth: false,
@@ -176,7 +182,7 @@
 
     function downloadSelected(url) {
         if ($('input:checked').length >= 1) {
-            if (confirm('Yakin?')) {
+            if (confirm('Yakin, Akan men-download data arsip yang dipilih?')) {
                 $.post(url, $('.form-archive').serialize())
                     .done((response) => {
                         table.ajax.reload();
@@ -187,7 +193,7 @@
                     })
             }
         } else {
-            alert('Pilih data yang akan didownload');
+            alert('Pilih data arsip yang akan didownload');
             return;
         }
     }
