@@ -27,7 +27,7 @@ class DaftarSidangController extends Controller
     public function daftarTmb()
     {
         $title = "Pengajuan Sidang Skripsi";
-        Session::put('page', 'daftar_seminar_tmb');
+        Session::put('page', 'indexSkripsi');
         $dosen1 = User::where([
             'level' => 2,
             'program_studi' => 'Teknik Pertambangan'
@@ -115,7 +115,7 @@ class DaftarSidangController extends Controller
     {
         $data = DaftarSidang::find($id);
         $title = "Pengajuan Sidang Skripsi";
-        Session::put('page', 'daftar_sidang_tmb');
+        Session::put('page', 'indexSkripsi');
         $dosen1 = User::where([
             'level' => 2,
             'program_studi' => 'Teknik Pertambangan'
@@ -184,11 +184,8 @@ class DaftarSidangController extends Controller
     public function daftarTi()
     {
         $title = "Pengajuan Sidang Tugas Akhir";
-        Session::put('page', 'daftar_sidang_ti');
-        $dosen1 = User::where([
-            'level' => 2,
-            'program_studi' => 'Teknik Industri'
-        ])->get();
+        Session::put('page', 'sidangTA');
+        $dosen1 = User::where('level', 2)->get();
         $dosen2 = User::where('level', 2)->get();
         $tahun_ajaran = TahunAjaran::get();
         $semester = Semester::get();
@@ -422,11 +419,8 @@ class DaftarSidangController extends Controller
     {
         $data = DaftarSidang::find($id);
         $title = "Pengajuan Sidang Tugas Akhir";
-        Session::put('page', 'daftar_sidang_ti');
-        $dosen1 = User::where([
-            'level' => 2,
-            'program_studi' => 'Teknik Industri'
-        ])->get();
+        Session::put('page', 'sidangTA');
+        $dosen1 = User::where('level', 2)->get();
         $dosen2 = User::where('level', 2)->get();
         $tahun_ajaran = TahunAjaran::get();
         $semester = Semester::get();
@@ -645,11 +639,8 @@ class DaftarSidangController extends Controller
     public function daftarPwk()
     {
         $title = "Pengajuan Sidang Terbuka";
-        Session::put('page', 'daftar_sidang_ti');
-        $dosen1 = User::where([
-            'level' => 2,
-            'program_studi' => 'Perencanaan Wilayah dan Kota'
-        ])->get();
+        Session::put('page', 'ST');
+        $dosen1 = User::where('level', 2)->get();
         $dosen2 = User::where('level', 2)->get();
         $tahun_ajaran = TahunAjaran::get();
         $semester = Semester::get();
@@ -773,11 +764,8 @@ class DaftarSidangController extends Controller
     {
         $data = DaftarSidang::find($id);
         $title = "Pengajuan Sidang Terbuka";
-        Session::put('page', 'daftar_sidang_pwk');
-        $dosen1 = User::where([
-            'level' => 2,
-            'program_studi' => 'Perencanaan Wilayah dan Kota'
-        ])->get();
+        Session::put('page', 'ST');
+        $dosen1 = User::where('level', 2)->get();
         $dosen2 = User::where('level', 2)->get();
         $tahun_ajaran = TahunAjaran::get();
         $semester = Semester::get();
