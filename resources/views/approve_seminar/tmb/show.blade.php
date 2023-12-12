@@ -125,27 +125,17 @@
                             </tr>
                             <tr>
                                 <td>12</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat12', $data->syarat_12) }}" target="_blank">Keterangan menghadiri kolokium skripsi (7 kali)</a></td>
+                                <td><a href="{{ url('/mahasiswa/seminar/syarat12', $data->syarat_12) }}" target="_blank">Draft skripsi (PDF)</a></td>
 
                             </tr>
                             <tr>
                                 <td>13</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat13', $data->syarat_13) }}" target="_blank">Draft skripsi (PDF)</a></td>
+                                <td><a href="{{ url('/mahasiswa/seminar/syarat13', $data->syarat_13) }}" target="_blank">Draft skripsi (DOCX)</a></td>
 
                             </tr>
                             <tr>
                                 <td>14</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat14', $data->syarat_14) }}" target="_blank">Draft skripsi (DOCX)</a></td>
-
-                            </tr>
-                            <tr>
-                                <td>15</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat15', $data->syarat_15) }}" target="_blank">Sertifikat SKKFT</a></td>
-
-                            </tr>
-                            <tr>
-                                <td>16</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat16', $data->syarat_16) }}" target="_blank">Transkrip Nilai</a></td>
+                                <td><a href="{{ url('/mahasiswa/seminar/syarat15', $data->syarat_15) }}" target="_blank">Transkrip Nilai</a></td>
 
                             </tr>
                         </tbody>

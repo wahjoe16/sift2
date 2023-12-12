@@ -121,6 +121,28 @@
                                     @endif
                                 </td>
                             </tr>
+                            <tr>
+                                <td>3</td>
+                                <td><a href="{{ url('/mahasiswa/sidang/syarat03', $data->syarat_3) }}" target="_blank">Sertifikat SKKFT</a></td>
+                                <td>
+                                    @if($data->status_3 == '')
+                                    -
+                                    @elseif($data->status_3 == 1)
+                                    <span class="label bg-green">Diterima</span>
+                                    @elseif($data->status_3 == 2)
+                                    <span class="label bg-red">Ditolak</span>
+                                    @else
+                                    <span class="label bg-yellow text-black">Menunggu</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($data->keterangan_3 != '')
+                                    <p>{{ $data->keterangan_3 }}</p>
+                                    @else
+                                    <p>-</p>
+                                    @endif
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

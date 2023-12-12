@@ -120,11 +120,15 @@
                             <div class="box-body">
                                 <div class="col-md-6 col-sm-12">
                                     <input type="file" name="syarat_1" class="dropify" id="syarat_1">
-                                    <p class="col-form-label text-center" for="syarat_1">Transkrip Nilai Terakhir</p>
+                                    <p class="col-form-label text-center" for="syarat_1">Transkrip Nilai Terakhir <sub>(Dicap dan ditanda tangan Operator SIAA)</sub></p>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
                                     <input type="file" name="syarat_2" class="dropify" id="syarat_2">
                                     <p class="col-form-label text-center" for="syarat_2">Sertifikat Pesantren Calon Sarjana</p>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <input type="file" name="syarat_3" class="dropify" id="syarat_3">
+                                    <p class="col-form-label text-center" for="syarat_3">Sertifikat SKKFT</p>
                                 </div>
                             </div>
                         </div>

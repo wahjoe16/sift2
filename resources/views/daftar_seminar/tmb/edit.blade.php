@@ -259,7 +259,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <label class="col-sm-3 col-form-label">Keterangan menghadiri kolokium skripsi (7 kali)</label>
+                                <label class="col-sm-3 col-form-label">Draft skripsi (PDF)</label>
                                 <p class="col-sm-5 col-form-label ">{{ $data->syarat_12 }}</p>
                                 @if ($data->status_12 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
@@ -274,7 +274,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <label class="col-sm-3 col-form-label">Draft skripsi (PDF)</label>
+                                <label class="col-sm-3 col-form-label">Draft skripsi (DOCX)</label>
                                 <p class="col-sm-5 col-form-label ">{{ $data->syarat_13 }}</p>
                                 @if ($data->status_13 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
@@ -289,7 +289,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <label class="col-sm-3 col-form-label">Draft skripsi (DOCX)</label>
+                                <label class="col-sm-3 col-form-label">Transkrip Nilai <sub>(Dicap dan ditanda tangan Operator SIAA)</label>
                                 <p class="col-sm-5 col-form-label ">{{ $data->syarat_14 }}</p>
                                 @if ($data->status_14 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
@@ -299,36 +299,6 @@
 
                                 @if ($data->status_14 == 2)
                                 <input type="file" name="syarat_14" class="col-sm-3" id="syarat_14">
-                                @endif
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <label class="col-sm-3 col-form-label">Sertifikat SKKFT</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_15 }}</p>
-                                @if ($data->status_15 == 1)
-                                <span class="label bg-green col-sm-1">Diterima</span>
-                                @else
-                                <span class="label bg-red col-sm-1">Ditolak</span>
-                                @endif
-
-                                @if ($data->status_15 == 2)
-                                <input type="file" name="syarat_15" class="col-sm-3" id="syarat_15">
-                                @endif
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <label class="col-sm-3 col-form-label">Transkrip Nilai <sub>(Dicap dan ditanda tangan Operator SIAA)</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_16 }}</p>
-                                @if ($data->status_16 == 1)
-                                <span class="label bg-green col-sm-1">Diterima</span>
-                                @else
-                                <span class="label bg-red col-sm-1">Ditolak</span>
-                                @endif
-
-                                @if ($data->status_16 == 2)
-                                <input type="file" name="syarat_16" class="col-sm-3" id="syarat_16">
                                 @endif
                             </div>
                         </div>

@@ -54,22 +54,23 @@ class ApproveSidangController extends Controller
             'status_1',
             'status_2',
             'status_3',
-            'status_4',
-            'status_5',
-            'status_6',
         ]);
 
         if ($request->isMethod('POST')) {
             $request->validate([
                 'status_1' => 'required',
                 'status_2' => 'required',
+                'status_3' => 'required',
                 'keterangan_1' => 'required_if:status_1,2',
                 'keterangan_2' => 'required_if:status_2,2',
+                'keterangan_3' => 'required_if:status_3,2',
             ], [
                 'status_1.required' => 'Status approval harus diverifikasi',
                 'status_2.required' => 'Status approval harus diverifikasi',
+                'status_3.required' => 'Status approval harus diverifikasi',
                 'keterangan_1.required_if' => 'Keterangan harus diisi',
                 'keterangan_2.required_if' => 'Keterangan harus diisi',
+                'keterangan_3.required_if' => 'Keterangan harus diisi',
             ]);
 
             $data->fill($request->input());

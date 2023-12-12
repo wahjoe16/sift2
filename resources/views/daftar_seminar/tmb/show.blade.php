@@ -317,7 +317,7 @@
                             </tr>
                             <tr>
                                 <td>12</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat12', $data->syarat_12) }}" target="_blank">Keterangan menghadiri kolokium skripsi (7 kali)</a></td>
+                                <td><a href="{{ url('/mahasiswa/seminar/syarat12', $data->syarat_12) }}" target="_blank">Draft skripsi (PDF)</a></td>
                                 <td>
                                     @if($data->status_12 == '')
                                     -
@@ -339,7 +339,7 @@
                             </tr>
                             <tr>
                                 <td>13</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat13', $data->syarat_13) }}" target="_blank">Draft skripsi (PDF)</a></td>
+                                <td><a href="{{ url('/mahasiswa/seminar/syarat13', $data->syarat_13) }}" target="_blank">Draft skripsi (DOCX)</a></td>
                                 <td>
                                     @if($data->status_13 == '')
                                     -
@@ -361,7 +361,7 @@
                             </tr>
                             <tr>
                                 <td>14</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat14', $data->syarat_14) }}" target="_blank">Draft skripsi (DOCX)</a></td>
+                                <td><a href="{{ url('/mahasiswa/seminar/syarat14', $data->syarat_14) }}" target="_blank">Transkrip Nilai</a></td>
                                 <td>
                                     @if($data->status_14 == '')
                                     -
@@ -376,50 +376,6 @@
                                 <td>
                                     @if ($data->keterangan_14 != '')
                                     <p>{{ $data->keterangan_14 }}</p>
-                                    @else
-                                    <p>-</p>
-                                    @endif
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>15</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat15', $data->syarat_15) }}" target="_blank">Sertifikat SKKFT</a></td>
-                                <td>
-                                    @if($data->status_15 == '')
-                                    -
-                                    @elseif($data->status_15 == 1)
-                                    <span class="label bg-green">Diterima</span>
-                                    @elseif($data->status_15 == 2)
-                                    <span class="label bg-red">Ditolak</span>
-                                    @else
-                                    <span class="label bg-yellow text-black">Menunggu</span>
-                                    @endif
-                                </td>
-                                <td>
-                                    @if ($data->keterangan_15 != '')
-                                    <p>{{ $data->keterangan_15 }}</p>
-                                    @else
-                                    <p>-</p>
-                                    @endif
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>16</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat16', $data->syarat_16) }}" target="_blank">Transkrip Nilai</a></td>
-                                <td>
-                                    @if($data->status_16 == '')
-                                    -
-                                    @elseif($data->status_16 == 1)
-                                    <span class="label bg-green">Diterima</span>
-                                    @elseif($data->status_16 == 2)
-                                    <span class="label bg-red">Ditolak</span>
-                                    @else
-                                    <span class="label bg-yellow text-black">Menunggu</span>
-                                    @endif
-                                </td>
-                                <td>
-                                    @if ($data->keterangan_16 != '')
-                                    <p>{{ $data->keterangan_16 }}</p>
                                     @else
                                     <p>-</p>
                                     @endif

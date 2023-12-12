@@ -58,6 +58,7 @@ class DaftarSidangController extends Controller
                 // 'tanggal_pengajuan' => 'required|date_format:m/d/Y',
                 'syarat_1' => 'required|mimes:pdf',
                 'syarat_2' => 'required|mimes:pdf',
+                'syarat_3' => 'required|mimes:pdf',
             ];
 
             $customMessage = [
@@ -69,8 +70,10 @@ class DaftarSidangController extends Controller
                 // 'tanggal_pengajuan.date_format' => 'Format Tanggal Pengajuan Harus Benar',
                 'syarat_1.required' => 'Transkrip Nilai harus diisi',
                 'syarat_2.required' => 'Sertifikat Pesantren Calon Sarjana harus diisi',
+                'syarat_3.required' => 'Sertifikat SKKFT harus diisi',
                 'syarat_1.mimes' => 'Format File Transkrip Nilai harus PDF',
                 'syarat_2.mimes' => 'Format File Sertifikat Pesantren Calon Sarjana harus PDF',
+                'syarat_3.mimes' => 'Format File SKKFT harus PDF',
             ];
 
             $this->validate($request, $rules, $customMessage);
@@ -98,6 +101,13 @@ class DaftarSidangController extends Controller
             $syarat_2_path = 'mahasiswa/sidang/syarat02';
             $syarat_2->move($syarat_2_path, $nama_syarat_2);
             $daftarSidang->syarat_2 = $nama_syarat_2;
+
+            // upload syarat 3
+            $syarat_3 = $request->file('syarat_3');
+            $nama_syarat_3 = $npm . "_" . $syarat_3->getClientOriginalName();
+            $syarat_3_path = 'mahasiswa/sidang/syarat03';
+            $syarat_3->move($syarat_3_path, $nama_syarat_3);
+            $daftarSidang->syarat_3 = $nama_syarat_3;
 
             $daftarSidang->save();
 
@@ -153,7 +163,6 @@ class DaftarSidangController extends Controller
                 $daftarSidang->status_1 = 0;
             }
 
-
             // upload syarat 2
             $syarat_2 = $request->file('syarat_2');
             if (!is_null($syarat_2)) {
@@ -162,6 +171,16 @@ class DaftarSidangController extends Controller
                 $syarat_2->move($syarat_2_path, $nama_syarat_2);
                 $daftarSidang->syarat_2 = $nama_syarat_2;
                 $daftarSidang->status_2 = 0;
+            }
+
+            // upload syarat 3
+            $syarat_3 = $request->file('syarat_3');
+            if (!is_null($syarat_3)) {
+                $nama_syarat_3 = $npm . "_" . $syarat_3->getClientOriginalName();
+                $syarat_3_path = 'mahasiswa/sidang/syarat03';
+                $syarat_3->move($syarat_3_path, $nama_syarat_3);
+                $daftarSidang->syarat_3 = $nama_syarat_3;
+                $daftarSidang->status_3 = 0;
             }
 
             $daftarSidang->save();

@@ -74,6 +74,11 @@
                                 <td><a href="{{ url('/mahasiswa/sidang/syarat02', $data->syarat_2) }}" target="_blank">Sertifikat Pesantren Calon Sarjana</a></td>
 
                             </tr>
+                            <tr>
+                                <td>3</td>
+                                <td><a href="{{ url('/mahasiswa/sidang/syarat03', $data->syarat_3) }}" target="_blank">Sertifikat SKKFT</a></td>
+
+                            </tr>
                         </tbody>
                     </table>
                 </div>

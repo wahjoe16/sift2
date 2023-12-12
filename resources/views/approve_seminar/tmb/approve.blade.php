@@ -302,7 +302,7 @@
                                 </tr>
                                 <tr>
                                     <td>12</td>
-                                    <td><a href="{{ url('/mahasiswa/seminar/syarat12', $data->syarat_12) }}" target="_blank">Keterangan menghadiri kolokium skripsi (7 kali)</a></td>
+                                    <td><a href="{{ url('/mahasiswa/seminar/syarat12', $data->syarat_12) }}" target="_blank">Draft skripsi (PDF)</a></td>
                                     <td>
                                         @if ($data->status_12 == 2)
                                         <input type="radio" name="status_12" value="2" class="minimal-red" checked="checked" readonly>
@@ -323,7 +323,7 @@
                                 </tr>
                                 <tr>
                                     <td>13</td>
-                                    <td><a href="{{ url('/mahasiswa/seminar/syarat13', $data->syarat_13) }}" target="_blank">Draft skripsi (PDF)</a></td>
+                                    <td><a href="{{ url('/mahasiswa/seminar/syarat13', $data->syarat_13) }}" target="_blank">Draft skripsi (DOCX)</a></td>
                                     <td>
                                         @if ($data->status_13 == 2)
                                         <input type="radio" name="status_13" value="2" class="minimal-red" checked="checked" readonly>
@@ -344,7 +344,7 @@
                                 </tr>
                                 <tr>
                                     <td>14</td>
-                                    <td><a href="{{ url('/mahasiswa/seminar/syarat14', $data->syarat_14) }}" target="_blank">Draft skripsi (DOCX)</a></td>
+                                    <td><a href="{{ url('/mahasiswa/seminar/syarat14', $data->syarat_14) }}" target="_blank">Transkrip Nilai</a></td>
                                     <td>
                                         @if ($data->status_14 == 2)
                                         <input type="radio" name="status_14" value="2" class="minimal-red" checked="checked" readonly>
@@ -361,48 +361,6 @@
                                     </td>
                                     <td>
                                         <textarea name="keterangan_14" id="keterangan_14" cols="30" rows="1" class="form-control"></textarea>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>15</td>
-                                    <td><a href="{{ url('/mahasiswa/seminar/syarat15', $data->syarat_15) }}" target="_blank">Sertifikat SKKFT</a></td>
-                                    <td>
-                                        @if ($data->status_15 == 2)
-                                        <input type="radio" name="status_15" value="2" class="minimal-red" checked="checked" readonly>
-                                        @elseif ($data->status_15 == 0)
-                                        <input type="radio" name="status_15" value="2" class="minimal-red">
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if ($data->status_15 == 1)
-                                        <input type="radio" name="status_15" value="1" class="flat-red" checked="checked" readonly>
-                                        @elseif ($data->status_15 == 0)
-                                        <input type="radio" name="status_15" value="1" class="flat-red">
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <textarea name="keterangan_15" id="keterangan_15" cols="30" rows="1" class="form-control"></textarea>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>16</td>
-                                    <td><a href="{{ url('/mahasiswa/seminar/syarat16', $data->syarat_16) }}" target="_blank">Transkrip Nilai</a></td>
-                                    <td>
-                                        @if ($data->status_16 == 2)
-                                        <input type="radio" name="status_16" value="2" class="minimal-red" checked="checked" readonly>
-                                        @elseif ($data->status_16 == 0)
-                                        <input type="radio" name="status_16" value="2" class="minimal-red">
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if ($data->status_16 == 1)
-                                        <input type="radio" name="status_16" value="1" class="flat-red" checked="checked" readonly>
-                                        @elseif ($data->status_16 == 0)
-                                        <input type="radio" name="status_16" value="1" class="flat-red">
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <textarea name="keterangan_16" id="keterangan_16" cols="30" rows="1" class="form-control"></textarea>
                                     </td>
                                 </tr>
                             </tbody>

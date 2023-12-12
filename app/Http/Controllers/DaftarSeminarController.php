@@ -60,10 +60,8 @@ class DaftarSeminarController extends Controller
                 'syarat_10' => 'required|mimes:pdf',
                 'syarat_11' => 'required|mimes:pdf',
                 'syarat_12' => 'required|mimes:pdf',
-                'syarat_13' => 'required|mimes:pdf',
-                'syarat_14' => 'required|mimes:docx,doc',
-                'syarat_15' => 'required|mimes:pdf',
-                'syarat_16' => 'required|mimes:pdf',
+                'syarat_13' => 'required|mimes:docx,doc',
+                'syarat_14' => 'required|mimes:pdf',
             ];
 
             $customMessage = [
@@ -83,11 +81,9 @@ class DaftarSeminarController extends Controller
                 'syarat_9.required' => 'Bukti pembayaran kuliah harus diisi',
                 'syarat_10.required' => 'Bukti perwalian harus diisi',
                 'syarat_11.required' => 'Bukti bebas pinjaman perpustakaan harus diisi',
-                'syarat_12.required' => 'Keterangan menghadiri kolokium skripsi (7 kali) harus diisi',
-                'syarat_13.required' => 'Draft skripsi (PDF) Harus Diisi',
-                'syarat_14.required' => 'Draft skripsi (DOCX) Harus Diisi',
-                'syarat_15.required' => 'Sertifikat SKKFT Harus Diisi',
-                'syarat_16.required' => 'Transkrip Nilai Harus Diisi',
+                'syarat_12.required' => 'Draft skripsi (PDF) Harus Diisi',
+                'syarat_13.required' => 'Draft skripsi (DOCX) Harus Diisi',
+                'syarat_14.required' => 'Transkrip Nilai Harus Diisi',
                 'syarat_1.mimes' => 'Format File Bukti pembayaran Kolokium Skripsi harus PDF',
                 'syarat_2.mimes' => 'Format File Sertifikat TOEFL harus PDF',
                 'syarat_3.mimes' => 'Format File Formulir nilai bimbingan skripsi harus PDF',
@@ -99,11 +95,9 @@ class DaftarSeminarController extends Controller
                 'syarat_9.mimes' => 'Format File Bukti pembayaran kuliah harus PDF',
                 'syarat_10.mimes' => 'Format File Bukti perwalian harus PDF',
                 'syarat_11.mimes' => 'Format File Bukti bebas pinjaman perpustakaan harus PDF',
-                'syarat_12.mimes' => 'Format File Keterangan menghadiri kolokium skripsi (7 kali) harus PDF',
-                'syarat_13.mimes' => 'Format File Draft skripsi Harus PDF',
-                'syarat_14.mimes' => 'Format File Draft skripsi Harus DOCX',
-                'syarat_15.mimes' => 'Format File Sertifikat SKKFT Harus PDF',
-                'syarat_16.mimes' => 'Format File Transkrip Nilai Harus PDF',
+                'syarat_12.mimes' => 'Format File Draft skripsi Harus PDF',
+                'syarat_13.mimes' => 'Format File Draft skripsi Harus DOCX',
+                'syarat_14.mimes' => 'Format File Transkrip Nilai Harus PDF',
             ];
 
             $this->validate($request, $rules, $customMessage);
@@ -215,20 +209,6 @@ class DaftarSeminarController extends Controller
             $syarat_14_path = 'mahasiswa/seminar/syarat14';
             $syarat_14->move($syarat_14_path, $nama_syarat_14);
             $daftarSeminar->syarat_14 = $nama_syarat_14;
-
-            // upload syarat 
-            $syarat_15 = $request->file('syarat_15');
-            $nama_syarat_15 = $npm . "_" . $syarat_15->getClientOriginalName();
-            $syarat_15_path = 'mahasiswa/seminar/syarat15';
-            $syarat_15->move($syarat_15_path, $nama_syarat_15);
-            $daftarSeminar->syarat_15 = $nama_syarat_15;
-
-            // upload syarat 
-            $syarat_16 = $request->file('syarat_16');
-            $nama_syarat_16 = $npm . "_" . $syarat_16->getClientOriginalName();
-            $syarat_16_path = 'mahasiswa/seminar/syarat16';
-            $syarat_16->move($syarat_16_path, $nama_syarat_16);
-            $daftarSeminar->syarat_16 = $nama_syarat_16;
 
             $daftarSeminar->save();
 
@@ -428,27 +408,6 @@ class DaftarSeminarController extends Controller
                 $syarat_14->move($syarat_14_path, $nama_syarat_14);
                 $daftarSeminar->syarat_14 = $nama_syarat_14;
                 $daftarSeminar->status_14 = 0;
-            }
-
-
-            // upload syarat 
-            $syarat_15 = $request->file('syarat_15');
-            if (!is_null($syarat_15)) {
-                $nama_syarat_15 = $npm . "_" . $syarat_15->getClientOriginalName();
-                $syarat_15_path = 'mahasiswa/seminar/syarat15';
-                $syarat_15->move($syarat_15_path, $nama_syarat_15);
-                $daftarSeminar->syarat_15 = $nama_syarat_15;
-                $daftarSeminar->status_15 = 0;
-            }
-
-            // upload syarat 
-            $syarat_16 = $request->file('syarat_16');
-            if (!is_null($syarat_16)) {
-                $nama_syarat_16 = $npm . "_" . $syarat_16->getClientOriginalName();
-                $syarat_16_path = 'mahasiswa/seminar/syarat16';
-                $syarat_16->move($syarat_16_path, $nama_syarat_16);
-                $daftarSeminar->syarat_16 = $nama_syarat_16;
-                $daftarSeminar->status_16 = 0;
             }
 
             $daftarSeminar->save();

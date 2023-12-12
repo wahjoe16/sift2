@@ -111,6 +111,27 @@
                                         <textarea name="keterangan_2" id="keterangan_2" cols="30" rows="1" class="form-control"></textarea>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td><a href="{{ url('/mahasiswa/sidang/syarat03', $data->syarat_3) }}" target="_blank">Sertifikat SKKFT</a></td>
+                                    <td>
+                                        @if ($data->status_3 == 2)
+                                        <input type="radio" name="status_3" value="2" class="minimal-red" checked="checked" readonly>
+                                        @elseif ($data->status_3 == 0)
+                                        <input type="radio" name="status_3" value="2" class="minimal-red">
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($data->status_3 == 1)
+                                        <input type="radio" name="status_3" value="1" class="flat-red" checked="checked" readonly>
+                                        @elseif ($data->status_3 == 0)
+                                        <input type="radio" name="status_3" value="1" class="flat-red">
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <textarea name="keterangan_3" id="keterangan_3" cols="30" rows="1" class="form-control"></textarea>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

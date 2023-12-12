@@ -124,6 +124,21 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <label class="col-sm-3 col-form-label">Sertifikat SKKFT</label>
+                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_3 }}</p>
+                                @if ($data->status_3 == 1)
+                                <span class="label bg-green col-sm-1">Diterima</span>
+                                @else
+                                <span class="label bg-red col-sm-1">Ditolak</span>
+                                @endif
+
+                                @if ($data->status_3 == 2)
+                                <input type="file" name="syarat_3" class="col-sm-3" id="syarat_3">
+                                @endif
+                            </div>
+                        </div>
                     </div>
 
                     <div class="box-footer">
