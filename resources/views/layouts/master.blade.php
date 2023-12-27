@@ -39,7 +39,7 @@
 
     <!-- dropify file input -->
     <link rel="stylesheet" href="{{ url('AdminLTE-2/bower_components/dropify/dist/css/dropify.min.css')  }}">
-
+    @stack('top_script_page')
     @stack('css_page')
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

@@ -3,7 +3,7 @@
 @section('content')
 
 <section class="content-header">
-    <h3>Kolokium Skripsi {{ $data->mahasiswa->nama }}</h3>
+    <h3>Seminar Tugas Akhir {{ $data->mahasiswa->nama }}</h3>
 </section>
 
 <section class="content">
@@ -11,7 +11,7 @@
         <div class="col-md-4">
             <div class="box box-warning">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Informasi Kolokium Skripsi</h3>
+                    <h3 class="box-title">Informasi Seminar Tugas Akhir</h3>
                 </div>
                 <div class="box-body box-profile">
                     <img class="profile-user-img img-responsive img-circle" src="{{ asset('/user/foto/' . $data->mahasiswa->foto) }}" alt="User profile picture">
@@ -48,7 +48,11 @@
                         </li>
                         <li class="list-group-item">
                             <p>Tanggal Approve</p>
+                            @if ($data->status == 0)
+                            <b>-</b>
+                            @else
                             <b>{{ tanggal_indonesia($data->updated_at) }}</b>
+                            @endif
                         </li>
                     </ul>
                 </div>
@@ -70,72 +74,48 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat01', $data->syarat_1) }}" target="_blank">Bukti pembayaran Kolokium Skripsi</a></td>
+                                <td><a href="{{ url('/mahasiswa/seminar/syarat01', $data->syarat_1) }}" target="_blank">Formulir pendaftaran Seminar terisi</a></td>
 
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat02', $data->syarat_2) }}" target="_blank">Sertifikat TOEFL</a></td>
+                                <td><a href="{{ url('/mahasiswa/seminar/syarat02', $data->syarat_2) }}" target="_blank">Copy Berita Acara Pembimbingan / Kartu Bimbingan</a></td>
 
                             </tr>
                             <tr>
                                 <td>3</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat03', $data->syarat_3) }}" target="_blank">Formulir nilai bimbingan skripsi</a></td>
+                                <td><a href="{{ url('/mahasiswa/seminar/syarat03', $data->syarat_3) }}" target="_blank">Persetujuan Seminar dari Dosen Pembimbing</a></td>
 
                             </tr>
                             <tr>
                                 <td>4</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat04', $data->syarat_4) }}" target="_blank">Formulir kemajuan bimbingan skripsi</a></td>
+                                <td><a href="{{ url('/mahasiswa/seminar/syarat04', $data->syarat_4) }}" target="_blank">Fotocopy Kwitansi Pembayaran Seminar dan Bimbingan Tugas Akhir</a></td>
 
                             </tr>
                             <tr>
                                 <td>5</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat05', $data->syarat_5) }}" target="_blank">Formulir persetujuan kolokium skripsi</a></td>
+                                <td><a href="{{ url('/mahasiswa/seminar/syarat05', $data->syarat_5) }}" target="_blank">Transkrip Nilai terakhir yang sudah lulus MK Semester 1-6 dan KP</a></td>
 
                             </tr>
                             <tr>
                                 <td>6</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat06', $data->syarat_6) }}" target="_blank">Formulir kesediaan menghadiri kolokium skripsi</a></td>
+                                <td><a href="{{ url('/mahasiswa/seminar/syarat06', $data->syarat_6) }}" target="_blank">Form Bebas Tunggakan / Pinjaman</a></td>
 
                             </tr>
                             <tr>
                                 <td>7</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat07', $data->syarat_7) }}" target="_blank">Pas foto ukuran 4 x 6 sebanyak 2 lembar</a></td>
+                                <td><a href="{{ url('/mahasiswa/seminar/syarat07', $data->syarat_7) }}" target="_blank">Print out bukti pengecekan Plagiarisme <= 25%</a>
+                                </td>
 
                             </tr>
                             <tr>
                                 <td>8</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat08', $data->syarat_8) }}" target="_blank">Kartu Tanda Mahasiswa</a></td>
+                                <td><a href="{{ url('/mahasiswa/seminar/syarat08', $data->syarat_8) }}" target="_blank">Bukti Monitoring Hafalan</a></td>
 
                             </tr>
                             <tr>
                                 <td>9</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat09', $data->syarat_9) }}" target="_blank">Bukti pembayaran kuliah</a></td>
-
-                            </tr>
-                            <tr>
-                                <td>10</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat10', $data->syarat_10) }}" target="_blank">Bukti perwalian</a></td>
-
-                            </tr>
-                            <tr>
-                                <td>11</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat11', $data->syarat_11) }}" target="_blank">Bukti bebas pinjaman perpustakaan</a></td>
-
-                            </tr>
-                            <tr>
-                                <td>12</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat12', $data->syarat_12) }}" target="_blank">Draft skripsi (PDF)</a></td>
-
-                            </tr>
-                            <tr>
-                                <td>13</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat13', $data->syarat_13) }}" target="_blank">Draft skripsi (DOCX)</a></td>
-
-                            </tr>
-                            <tr>
-                                <td>14</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat14', $data->syarat_14) }}" target="_blank">Transkrip Nilai</a></td>
+                                <td><a href="{{ url('/mahasiswa/seminar/syarat09', $data->syarat_9) }}" target="_blank">Bukti Penyerahan Draft</a></td>
 
                             </tr>
                         </tbody>

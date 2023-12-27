@@ -152,9 +152,14 @@
             </li>
             <li>
                 <a href="{{ route('rekap-seminarPwk.index') }}" @if(Session::get('page')=='rekapPembahasan' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                    <i class="fa  fa-file-text"></i> <span>Rekapitulasi</span>
+                    <i class="fa fa-file-text"></i> <span>Rekapitulasi</span>
                 </a>
             </li>
+            <!-- <li>
+                <a href="{{ route('seminarPwkDownload.index') }}" @if(Session::get('page')=='downloadPembahasan' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                    <i class="fa fa-download"></i> <span>Unduh Dokumen</span>
+                </a>
+            </li> -->
             <li class="header">Sidang Terbuka</li>
             <li>
                 <a href="{{ route('view-sidangPwk.index') }}" @if(Session::get('page')=='appTerbuka' ) style="background: #3c8dbc !important; color:white !important" @endif>
@@ -243,20 +248,40 @@
                     <i class="fa fa-users"></i> <span>Semua User</span>
                 </a>
             </li>
+            <li class="header">Pelaksanaan Sidang</li>
+            <li>
+                <a href="{{ route('adminKolokiumTmb.index') }}" @if(Session::get('page')=='adminKolokiumTambang' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                    <i class="fa fa-check-square"></i> <span>Kolokium Skripsi</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('adminSkripsiTmb.index') }}" @if(Session::get('page')=='adminSidangTambang' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                    <i class="fa fa-check-square"></i> <span>Sidang Skripsi</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('adminSeminarTi.index') }}" @if(Session::get('page')=='adminSeminarTi' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                    <i class="fa fa-check-square"></i> <span>Seminar Tugas Akhir</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('adminSidangTi.index') }}" @if(Session::get('page')=='adminSidangTi' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                    <i class="fa fa-check-square"></i> <span>Sidang Tugas Akhir</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('adminPembahasanPwk.index') }}" @if(Session::get('page')=='adminPembahasanPwk' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                    <i class="fa fa-check-square"></i> <span>Sidang Pembahasan</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('adminTerbukaPwk.index') }}" @if(Session::get('page')=='adminTerbukaPwk' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                    <i class="fa fa-check-square"></i> <span>Sidang Terbuka</span>
+                </a>
+            </li>
             @endif
 
             @if (auth()->user()->level == 1)
-            <li class="header">Data Master</li>
-            <li>
-                <a href="{{ route('tahunajaran.index') }}" @if(Session::get('page')=='indexTa' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                    <i class="fa fa-hourglass"></i> <span>Tahun Akademik</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('semester.index') }}" @if(Session::get('page')=='indexSemester' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                    <i class="fa fa-hourglass-end"></i> <span>Semester</span>
-                </a>
-            </li>
             <li class="header">Data Arsip</li>
             <li>
                 <a href="{{ route('ft-arsip.index') }}" @if(Session::get('page')=='indexArsip' ) style="background: #3c8dbc !important; color:white !important" @endif>
@@ -266,6 +291,95 @@
             <li>
                 <a href="{{ route('ft-arsip.general') }}" @if(Session::get('page')=='generalArsip' ) style="background: #3c8dbc !important; color:white !important" @endif>
                     <i class="fa fa-file"></i> <span>Arsip Umum Fakultas</span>
+                </a>
+            </li>
+
+            @if (auth()->user()->program_studi == '' && auth()->user()->status_superadmin == 0)
+            <li class="header">Pelaksanaan Sidang</li>
+            <li>
+                <a href="{{ route('adminKolokiumTmb.index') }}" @if(Session::get('page')=='adminKolokiumTambang' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                    <i class="fa fa-check-square"></i> <span>Kolokium Skripsi</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('adminSkripsiTmb.index') }}" @if(Session::get('page')=='adminSidangTambang' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                    <i class="fa fa-check-square"></i> <span>Sidang Skripsi</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('adminSeminarTi.index') }}" @if(Session::get('page')=='adminSeminarTi' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                    <i class="fa fa-check-square"></i> <span>Seminar Tugas Akhir</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('adminSidangTi.index') }}" @if(Session::get('page')=='adminSidangTi' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                    <i class="fa fa-check-square"></i> <span>Sidang Tugas Akhir</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('adminPembahasanPwk.index') }}" @if(Session::get('page')=='adminPembahasanPwk' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                    <i class="fa fa-check-square"></i> <span>Sidang Pembahasan</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('adminTerbukaPwk.index') }}" @if(Session::get('page')=='adminTerbukaPwk' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                    <i class="fa fa-check-square"></i> <span>Sidang Terbuka</span>
+                </a>
+            </li>
+            @endif
+
+
+            @if (auth()->user()->level == 1 && auth()->user()->program_studi == 'Teknik Pertambangan')
+            <li class="header">Pelaksanaan Sidang</li>
+            <li>
+                <a href="{{ route('adminKolokiumTmb.index') }}" @if(Session::get('page')=='adminKolokiumTambang' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                    <i class="fa fa-check-square"></i> <span>Kolokium Skripsi</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('adminSkripsiTmb.index') }}" @if(Session::get('page')=='adminSidangTambang' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                    <i class="fa fa-check-square"></i> <span>Sidang Skripsi</span>
+                </a>
+            </li>
+            @endif
+
+            @if (auth()->user()->level == 1 && auth()->user()->program_studi == 'Teknik Industri')
+            <li class="header">Pelaksanaan Sidang</li>
+            <li>
+                <a href="{{ route('adminSeminarTi.index') }}" @if(Session::get('page')=='adminSeminarTi' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                    <i class="fa fa-check-square"></i> <span>Seminar Tugas Akhir</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('adminSidangTi.index') }}" @if(Session::get('page')=='adminSidangTi' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                    <i class="fa fa-check-square"></i> <span>Sidang Tugas Akhir</span>
+                </a>
+            </li>
+            @endif
+
+            @if (auth()->user()->level == 1 && auth()->user()->program_studi == 'Perencanaan Wilayah dan Kota')
+            <li class="header">Pelaksanaan Sidang</li>
+            <li>
+                <a href="{{ route('adminPembahasanPwk.index') }}" @if(Session::get('page')=='adminPembahasanPwk' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                    <i class="fa fa-check-square"></i> <span>Sidang Pembahasan</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('adminTerbukaPwk.index') }}" @if(Session::get('page')=='adminTerbukaPwk' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                    <i class="fa fa-check-square"></i> <span>Sidang Terbuka</span>
+                </a>
+            </li>
+            @endif
+
+            <li class="header">Data Master</li>
+            <li>
+                <a href="{{ route('tahunajaran.index') }}" @if(Session::get('page')=='indexTa' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                    <i class="fa fa-hourglass"></i> <span>Tahun Akademik</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('semester.index') }}" @if(Session::get('page')=='indexSemester' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                    <i class="fa fa-hourglass-end"></i> <span>Semester</span>
                 </a>
             </li>
             <li>

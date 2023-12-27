@@ -20,6 +20,12 @@ class ApproveSidangController extends Controller
         return view('approve_sidang.tmb.index');
     }
 
+    public function viewAdminTmb()
+    {
+        Session::put('page', 'adminSidangTambang');
+        return view('approve_sidang.tmb.index_admin');
+    }
+
     public function dataTmb()
     {
         $data = DaftarSidang::select('daftar_sidang.*', 'users.nik', 'users.nama', 'tahun_ajaran.tahun_ajaran', 'semester.semester')
@@ -43,6 +49,38 @@ class ApproveSidangController extends Controller
                 ';
             })
             ->rawColumns(['tanggal_pengajuan', 'approve'])
+            ->make(true);
+    }
+
+    public function viewDataAdminTmb()
+    {
+        $data = DaftarSidang::select('daftar_sidang.*', 'users.nik', 'users.nama', 'tahun_ajaran.tahun_ajaran', 'semester.semester')
+            ->leftJoin('users', 'users.id', 'daftar_sidang.mahasiswa_id')
+            ->leftJoin('tahun_ajaran', 'tahun_ajaran.id', 'daftar_sidang.tahun_ajaran_id')
+            ->leftJoin('semester', 'semester.id', 'daftar_sidang.semester_id')
+            ->where([
+                'program_studi_id' => 'Teknik Pertambangan',
+            ])->get();
+
+        return datatables()
+            ->of($data)
+            ->addIndexColumn()
+            ->addColumn('tanggal_pengajuan', function ($data) {
+                return tanggal_indonesia($data->created_at, false);
+            })
+            ->addColumn('status', function ($data) {
+                if ($data->status == 0) {
+                    return 'Not Approve';
+                } elseif ($data->status == 1) {
+                    return 'Approved';
+                }
+            })
+            ->addColumn('approve', function ($data) {
+                return '
+                    <a href="' . route('adminSkripsiTmb.show', $data->id) . '" class="btn btn-primary btn-xs btn-flat"><i class="fa fa-search"></i></a>
+                ';
+            })
+            ->rawColumns(['tanggal_pengajuan', 'status', 'approve'])
             ->make(true);
     }
 
@@ -145,6 +183,12 @@ class ApproveSidangController extends Controller
         return view('approve_sidang.tmb.show', compact('data'));
     }
 
+    public function showAdminTmb($id)
+    {
+        $data = DaftarSidang::find($id);
+        return view('approve_sidang.tmb.show_admin', compact('data'));
+    }
+
     public function exportExcelTmb()
     {
         return Excel::download(new RekapSidangTmbExport, 'rekap_sidang_' . date('Y-m-d-his') . '.xlsx');
@@ -155,6 +199,12 @@ class ApproveSidangController extends Controller
     {
         Session::put('page', 'appSidangTA');
         return view('approve_sidang.ti.index');
+    }
+
+    public function viewAdminTi()
+    {
+        Session::put('page', 'adminSidangTi');
+        return view('approve_sidang.ti.index_admin');
     }
 
     public function dataTi()
@@ -180,6 +230,38 @@ class ApproveSidangController extends Controller
                 ';
             })
             ->rawColumns(['tanggal_pengajuan', 'approve'])
+            ->make(true);
+    }
+
+    public function viewDataAdminTi()
+    {
+        $data = DaftarSidang::select('daftar_sidang.*', 'users.nik', 'users.nama', 'tahun_ajaran.tahun_ajaran', 'semester.semester')
+            ->leftJoin('users', 'users.id', 'daftar_sidang.mahasiswa_id')
+            ->leftJoin('tahun_ajaran', 'tahun_ajaran.id', 'daftar_sidang.tahun_ajaran_id')
+            ->leftJoin('semester', 'semester.id', 'daftar_sidang.semester_id')
+            ->where([
+                'program_studi_id' => 'Teknik Industri',
+            ])->get();
+
+        return datatables()
+            ->of($data)
+            ->addIndexColumn()
+            ->addColumn('tanggal_pengajuan', function ($data) {
+                return tanggal_indonesia($data->created_at, false);
+            })
+            ->addColumn('status', function ($data) {
+                if ($data->status == 0) {
+                    return 'Not Approve';
+                } elseif ($data->status == 1) {
+                    return 'Approved';
+                }
+            })
+            ->addColumn('approve', function ($data) {
+                return '
+                    <a href="' . route('adminSidangTi.show', $data->id) . '" class="btn btn-primary btn-xs btn-flat"><i class="fa fa-search"></i></a>
+                ';
+            })
+            ->rawColumns(['tanggal_pengajuan', 'status', 'approve'])
             ->make(true);
     }
 
@@ -352,6 +434,12 @@ class ApproveSidangController extends Controller
         return view('approve_sidang.ti.show', compact('data'));
     }
 
+    public function showAdminTi($id)
+    {
+        $data = DaftarSidang::find($id);
+        return view('approve_sidang.ti.show_admin', compact('data'));
+    }
+
     public function exportExcelTi()
     {
         return Excel::download(new RekapSidangTiExport, 'rekap_sidang_' . date('Y-m-d-his') . '.xlsx');
@@ -361,6 +449,12 @@ class ApproveSidangController extends Controller
     {
         Session::put('page', 'appTerbuka');
         return view('approve_sidang.pwk.index');
+    }
+
+    public function viewAdminPwk()
+    {
+        Session::put('page', 'adminTerbukaPwk');
+        return view('approve_sidang.pwk.index_admin');
     }
 
     public function dataPwk()
@@ -386,6 +480,38 @@ class ApproveSidangController extends Controller
                 ';
             })
             ->rawColumns(['tanggal_pengajuan', 'approve'])
+            ->make(true);
+    }
+
+    public function viewDataAdminPwk()
+    {
+        $data = DaftarSidang::select('daftar_sidang.*', 'users.nik', 'users.nama', 'tahun_ajaran.tahun_ajaran', 'semester.semester')
+            ->leftJoin('users', 'users.id', 'daftar_sidang.mahasiswa_id')
+            ->leftJoin('tahun_ajaran', 'tahun_ajaran.id', 'daftar_sidang.tahun_ajaran_id')
+            ->leftJoin('semester', 'semester.id', 'daftar_sidang.semester_id')
+            ->where([
+                'program_studi_id' => 'Perencanaan Wilayah dan Kota',
+            ])->get();
+
+        return datatables()
+            ->of($data)
+            ->addIndexColumn()
+            ->addColumn('tanggal_pengajuan', function ($data) {
+                return tanggal_indonesia($data->created_at, false);
+            })
+            ->addColumn('status', function ($data) {
+                if ($data->status == 0) {
+                    return 'Not Approve';
+                } elseif ($data->status == 1) {
+                    return 'Approved';
+                }
+            })
+            ->addColumn('approve', function ($data) {
+                return '
+                    <a href="' . route('adminTerbukaPwk.show', $data->id) . '" class="btn btn-primary btn-xs btn-flat"><i class="fa fa-search"></i></a>
+                ';
+            })
+            ->rawColumns(['tanggal_pengajuan', 'status', 'approve'])
             ->make(true);
     }
 
@@ -498,6 +624,12 @@ class ApproveSidangController extends Controller
     {
         $data = DaftarSidang::find($id);
         return view('approve_sidang.pwk.show', compact('data'));
+    }
+
+    public function showAdminPwk($id)
+    {
+        $data = DaftarSidang::find($id);
+        return view('approve_sidang.pwk.show_admin', compact('data'));
     }
 
     public function exportExcelPwk()

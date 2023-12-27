@@ -48,7 +48,11 @@
                         </li>
                         <li class="list-group-item">
                             <p>Tanggal Approve</p>
+                            @if ($data->status == 0)
+                            <b>-</b>
+                            @else
                             <b>{{ tanggal_indonesia($data->updated_at) }}</b>
+                            @endif
                         </li>
                     </ul>
                 </div>

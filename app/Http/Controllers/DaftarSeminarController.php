@@ -60,7 +60,7 @@ class DaftarSeminarController extends Controller
                 'syarat_10' => 'required|mimes:pdf',
                 'syarat_11' => 'required|mimes:pdf',
                 'syarat_12' => 'required|mimes:pdf',
-                'syarat_13' => 'required|mimes:docx,doc',
+                'syarat_13' => 'required',
                 'syarat_14' => 'required|mimes:pdf',
             ];
 
@@ -96,7 +96,6 @@ class DaftarSeminarController extends Controller
                 'syarat_10.mimes' => 'Format File Bukti perwalian harus PDF',
                 'syarat_11.mimes' => 'Format File Bukti bebas pinjaman perpustakaan harus PDF',
                 'syarat_12.mimes' => 'Format File Draft skripsi Harus PDF',
-                'syarat_13.mimes' => 'Format File Draft skripsi Harus DOCX',
                 'syarat_14.mimes' => 'Format File Transkrip Nilai Harus PDF',
             ];
 
