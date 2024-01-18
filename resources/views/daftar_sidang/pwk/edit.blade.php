@@ -94,8 +94,7 @@
                     <div class="box-body">
                         <div class="row">
                             <div class="col-12">
-                                <label class="col-sm-3 col-form-label">Sertifikat pesantren calon sarjana</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_1 }}</p>
+                                <label class="col-sm-8 col-form-label"><a href="{{ url('/mahasiswa/sidang', $data->syarat_1) }}" target="_blank">Sertifikat pesantren calon sarjana</a></label>
                                 @if ($data->status_1 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else
@@ -109,8 +108,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <label class="col-sm-3 col-form-label">Transkrip nilai</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_2 }}</p>
+                                <label class="col-sm-8 col-form-label"><a href="{{ url('/mahasiswa/sidang', $data->syarat_2) }}" target="_blank">Transkrip nilai</a></label>
                                 @if ($data->status_2 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else
@@ -124,8 +122,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <label class="col-sm-3 col-form-label">Sertifikat TOEFL</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_3 }}</p>
+                                <label class="col-sm-8 col-form-label"><a href="{{ url('/mahasiswa/sidang', $data->syarat_3) }}" target="_blank">Sertifikat TOEFL</a></label>
                                 @if ($data->status_3 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else
@@ -139,8 +136,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <label class="col-sm-3 col-form-label">Sertifikat SKKFT</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_4 }}</p>
+                                <label class="col-sm-8 col-form-label"><a href="{{ url('/mahasiswa/sidang', $data->syarat_4) }}" target="_blank">Sertifikat SKKFT</a></label>
                                 @if ($data->status_4 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else
@@ -154,8 +150,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <label class="col-sm-3 col-form-label">Pemeriksaan turnitin</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_5 }}</p>
+                                <label class="col-sm-8 col-form-label"><a href="{{ url('/mahasiswa/sidang', $data->syarat_5) }}" target="_blank">Pemeriksaan turnitin</a></label>
                                 @if ($data->status_5 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else
@@ -169,8 +164,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <label class="col-sm-3 col-form-label">Bukti pembayaran sidang terbuka</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_6 }}</p>
+                                <label class="col-sm-8 col-form-label"><a href="{{ url('/mahasiswa/sidang', $data->syarat_6) }}" target="_blank">Bukti pembayaran sidang terbuka</a></label>
                                 @if ($data->status_6 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else

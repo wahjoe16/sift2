@@ -4,30 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class DaftarSeminar extends Model
+class DaftarSeminar extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia;
+
     protected $table = 'daftar_seminar';
-    protected $fillable = [
-        'status_1', 'keterangan_1',
-        'status_2', 'keterangan_2',
-        'status_3', 'keterangan_3',
-        'status_4', 'keterangan_4',
-        'status_5', 'keterangan_5',
-        'status_6', 'keterangan_6',
-        'status_7', 'keterangan_7',
-        'status_8', 'keterangan_8',
-        'status_9', 'keterangan_9',
-        'status_10', 'keterangan_10',
-        'status_11', 'keterangan_11',
-        'status_12', 'keterangan_12',
-        'status_13', 'keterangan_13',
-        'status_14', 'keterangan_14',
-        'status_15', 'keterangan_15',
-        'status_16', 'keterangan_16',
-        'status', 'keterangan'
-    ];
+    protected $guarded = [];
 
     public function tahun_ajaran()
     {

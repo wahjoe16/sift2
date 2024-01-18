@@ -124,11 +124,19 @@
                                 </div>
                                 <div class="col-md-6 col-sm-12">
                                     <input type="file" name="syarat_2" class="dropify" id="syarat_2">
-                                    <p class="col-form-label text-center" for="syarat_2">Sertifikat Pesantren Calon Sarjana</p>
+                                    <p class="col-form-label text-center" for="syarat_2">Sertifikat Pesantren Calon Sarjana yang masih berlaku</p>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
                                     <input type="file" name="syarat_3" class="dropify" id="syarat_3">
                                     <p class="col-form-label text-center" for="syarat_3">Sertifikat SKKFT</p>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <input type="file" name="syarat_4" class="dropify" id="syarat_4">
+                                    <p class="col-form-label text-center" for="syarat_4">Bukti Pembayaran Sidang Skripsi</p>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <input type="file" name="syarat_5" class="dropify" id="syarat_5">
+                                    <p class="col-form-label text-center" for="syarat_5">Sertifikat TOEFL yang masih berlaku</p>
                                 </div>
                             </div>
                         </div>

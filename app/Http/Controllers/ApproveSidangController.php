@@ -70,9 +70,11 @@ class ApproveSidangController extends Controller
             })
             ->addColumn('status', function ($data) {
                 if ($data->status == 0) {
-                    return 'Not Approve';
+                    return '<span class="label bg-yellow text-black">Waiting for Approval</span>';
                 } elseif ($data->status == 1) {
-                    return 'Approved';
+                    return '<span class="label bg-green">Approved</span>';
+                } elseif ($data->status == 2) {
+                    return '<span class="label bg-red">Rejected</span>';
                 }
             })
             ->addColumn('approve', function ($data) {
@@ -92,6 +94,8 @@ class ApproveSidangController extends Controller
             'status_1',
             'status_2',
             'status_3',
+            'status_4',
+            'status_5',
         ]);
 
         if ($request->isMethod('POST')) {
@@ -99,16 +103,24 @@ class ApproveSidangController extends Controller
                 'status_1' => 'required',
                 'status_2' => 'required',
                 'status_3' => 'required',
+                'status_4' => 'required',
+                'status_5' => 'required',
                 'keterangan_1' => 'required_if:status_1,2',
                 'keterangan_2' => 'required_if:status_2,2',
                 'keterangan_3' => 'required_if:status_3,2',
+                'keterangan_4' => 'required_if:status_4,2',
+                'keterangan_5' => 'required_if:status_5,2',
             ], [
                 'status_1.required' => 'Status approval harus diverifikasi',
                 'status_2.required' => 'Status approval harus diverifikasi',
                 'status_3.required' => 'Status approval harus diverifikasi',
+                'status_4.required' => 'Status approval harus diverifikasi',
+                'status_5.required' => 'Status approval harus diverifikasi',
                 'keterangan_1.required_if' => 'Keterangan harus diisi',
                 'keterangan_2.required_if' => 'Keterangan harus diisi',
                 'keterangan_3.required_if' => 'Keterangan harus diisi',
+                'keterangan_4.required_if' => 'Keterangan harus diisi',
+                'keterangan_5.required_if' => 'Keterangan harus diisi',
             ]);
 
             $data->fill($request->input());
@@ -251,9 +263,11 @@ class ApproveSidangController extends Controller
             })
             ->addColumn('status', function ($data) {
                 if ($data->status == 0) {
-                    return 'Not Approve';
+                    return '<span class="label bg-yellow text-black">Waiting for Approval</span>';
                 } elseif ($data->status == 1) {
-                    return 'Approved';
+                    return '<span class="label bg-green">Approved</span>';
+                } elseif ($data->status == 2) {
+                    return '<span class="label bg-red">Rejected</span>';
                 }
             })
             ->addColumn('approve', function ($data) {
@@ -501,9 +515,11 @@ class ApproveSidangController extends Controller
             })
             ->addColumn('status', function ($data) {
                 if ($data->status == 0) {
-                    return 'Not Approve';
+                    return '<span class="label bg-yellow text-black">Waiting for Approval</span>';
                 } elseif ($data->status == 1) {
-                    return 'Approved';
+                    return '<span class="label bg-green">Approved</span>';
+                } elseif ($data->status == 2) {
+                    return '<span class="label bg-red">Rejected</span>';
                 }
             })
             ->addColumn('approve', function ($data) {

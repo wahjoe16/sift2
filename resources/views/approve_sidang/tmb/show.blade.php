@@ -66,17 +66,27 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td><a href="{{ url('/mahasiswa/sidang/syarat01', $data->syarat_1) }}" target="_blank">Transkrip Nilai</a></td>
+                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_1) }}" target="_blank">Transkrip Nilai</a></td>
 
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td><a href="{{ url('/mahasiswa/sidang/syarat02', $data->syarat_2) }}" target="_blank">Sertifikat Pesantren Calon Sarjana</a></td>
+                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_2) }}" target="_blank">Sertifikat Pesantren Calon Sarjana</a></td>
 
                             </tr>
                             <tr>
                                 <td>3</td>
-                                <td><a href="{{ url('/mahasiswa/sidang/syarat03', $data->syarat_3) }}" target="_blank">Sertifikat SKKFT</a></td>
+                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_3) }}" target="_blank">Sertifikat SKKFT</a></td>
+
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_4) }}" target="_blank">Bukti Pembayaran Sidang Skripsi</a></td>
+
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_5) }}" target="_blank">Sertifikat TOEFL</a></td>
 
                             </tr>
                         </tbody>

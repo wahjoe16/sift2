@@ -79,7 +79,7 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td><a href="{{ url('/mahasiswa/sidang/syarat01', $data->syarat_1) }}" target="_blank">Transkrip Nilai Terakhir</a></td>
+                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_1) }}" target="_blank">Transkrip Nilai Terakhir</a></td>
                                 <td>
                                     @if($data->status_1 == '')
                                     -
@@ -101,7 +101,7 @@
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td><a href="{{ url('/mahasiswa/sidang/syarat02', $data->syarat_2) }}" target="_blank">Sertifikat Pesantren Calon Sarjana</a></td>
+                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_2) }}" target="_blank">Sertifikat Pesantren Calon Sarjana</a></td>
                                 <td>
                                     @if($data->status_2 == '')
                                     -
@@ -123,7 +123,7 @@
                             </tr>
                             <tr>
                                 <td>3</td>
-                                <td><a href="{{ url('/mahasiswa/sidang/syarat03', $data->syarat_3) }}" target="_blank">Sertifikat SKKFT</a></td>
+                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_3) }}" target="_blank">Sertifikat SKKFT</a></td>
                                 <td>
                                     @if($data->status_3 == '')
                                     -
@@ -138,6 +138,50 @@
                                 <td>
                                     @if ($data->keterangan_3 != '')
                                     <p>{{ $data->keterangan_3 }}</p>
+                                    @else
+                                    <p>-</p>
+                                    @endif
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_4) }}" target="_blank">Bukti Pembayaran Sidang Skripsi</a></td>
+                                <td>
+                                    @if($data->status_4 == '')
+                                    -
+                                    @elseif($data->status_4 == 1)
+                                    <span class="label bg-green">Diterima</span>
+                                    @elseif($data->status_4 == 2)
+                                    <span class="label bg-red">Ditolak</span>
+                                    @else
+                                    <span class="label bg-yellow text-black">Menunggu</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($data->keterangan_4 != '')
+                                    <p>{{ $data->keterangan_4 }}</p>
+                                    @else
+                                    <p>-</p>
+                                    @endif
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_5) }}" target="_blank">Sertifikat TOEFL</a></td>
+                                <td>
+                                    @if($data->status_5 == '')
+                                    -
+                                    @elseif($data->status_5 == 1)
+                                    <span class="label bg-green">Diterima</span>
+                                    @elseif($data->status_5 == 2)
+                                    <span class="label bg-red">Ditolak</span>
+                                    @else
+                                    <span class="label bg-yellow text-black">Menunggu</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($data->keterangan_5 != '')
+                                    <p>{{ $data->keterangan_5 }}</p>
                                     @else
                                     <p>-</p>
                                     @endif

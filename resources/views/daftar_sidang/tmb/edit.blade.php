@@ -96,8 +96,7 @@
                     <div class="box-body">
                         <div class="row">
                             <div class="col-12">
-                                <label class="col-sm-3 col-form-label">Transkrip Nilai</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_1 }}</p>
+                                <label class="col-sm-8 col-form-label"><a href="{{ url('/mahasiswa/sidang', $data->syarat_1) }}">Transkrip Nilai</a></label>
                                 @if ($data->status_1 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else
@@ -111,8 +110,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <label class="col-sm-3 col-form-label">Sertifikat Pesantren Calon Sarjana</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_2 }}</p>
+                                <label class="col-sm-8 col-form-label"><a href="{{ url('/mahasiswa/sidang', $data->syarat_2) }}">Sertifikat Pesantren Calon Sarjana</a></label>
                                 @if ($data->status_2 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else
@@ -126,8 +124,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <label class="col-sm-3 col-form-label">Sertifikat SKKFT</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_3 }}</p>
+                                <label class="col-sm-8 col-form-label"><a href="{{ url('/mahasiswa/sidang', $data->syarat_3) }}">Sertifikat SKKFT</a></label>
                                 @if ($data->status_3 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else
@@ -136,6 +133,34 @@
 
                                 @if ($data->status_3 == 2)
                                 <input type="file" name="syarat_3" class="col-sm-3" id="syarat_3">
+                                @endif
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <label class="col-sm-8 col-form-label"><a href="{{ url('/mahasiswa/sidang', $data->syarat_4) }}">Bukti Pembayaran Sidang Skripsi</a></label>
+                                @if ($data->status_4 == 1)
+                                <span class="label bg-green col-sm-1">Diterima</span>
+                                @else
+                                <span class="label bg-red col-sm-1">Ditolak</span>
+                                @endif
+
+                                @if ($data->status_4 == 2)
+                                <input type="file" name="syarat_4" class="col-sm-3" id="syarat_4">
+                                @endif
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <label class="col-sm-8 col-form-label"><a href="{{ url('/mahasiswa/sidang', $data->syarat_5) }}">Sertifikat TOEFL</a></label>
+                                @if ($data->status_5 == 1)
+                                <span class="label bg-green col-sm-1">Diterima</span>
+                                @else
+                                <span class="label bg-red col-sm-1">Ditolak</span>
+                                @endif
+
+                                @if ($data->status_5 == 2)
+                                <input type="file" name="syarat_5" class="col-sm-3" id="syarat_5">
                                 @endif
                             </div>
                         </div>

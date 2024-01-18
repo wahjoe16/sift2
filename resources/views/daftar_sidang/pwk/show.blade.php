@@ -75,7 +75,7 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat01', $data->syarat_1) }}" target="_blank">Sertifikat pesantren calon sarjana</a></td>
+                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_1) }}" target="_blank">Sertifikat pesantren calon sarjana</a></td>
                                 <td>
                                     @if($data->status_1 == '')
                                     -
@@ -97,7 +97,7 @@
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat02', $data->syarat_2) }}" target="_blank">Transkrip nilai</a></td>
+                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_2) }}" target="_blank">Transkrip nilai</a></td>
                                 <td>
                                     @if($data->status_2 == '')
                                     -
@@ -119,7 +119,7 @@
                             </tr>
                             <tr>
                                 <td>3</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat03', $data->syarat_3) }}" target="_blank">Sertifikat TOEFL</a></td>
+                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_3) }}" target="_blank">Sertifikat TOEFL</a></td>
                                 <td>
                                     @if($data->status_3 == '')
                                     -
@@ -141,7 +141,7 @@
                             </tr>
                             <tr>
                                 <td>4</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat04', $data->syarat_4) }}" target="_blank">Sertifikat SKKFT</a></td>
+                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_4) }}" target="_blank">Sertifikat SKKFT</a></td>
                                 <td>
                                     @if($data->status_4 == '')
                                     -
@@ -163,7 +163,7 @@
                             </tr>
                             <tr>
                                 <td>5</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat05', $data->syarat_5) }}" target="_blank">Pemeriksaan turnitin</a></td>
+                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_5) }}" target="_blank">Pemeriksaan turnitin</a></td>
                                 <td>
                                     @if($data->status_5 == '')
                                     -
@@ -185,7 +185,7 @@
                             </tr>
                             <tr>
                                 <td>6</td>
-                                <td><a href="{{ url('/mahasiswa/seminar/syarat06', $data->syarat_6) }}" target="_blank">Bukti pembayaran sidang terbuka</a></td>
+                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_6) }}" target="_blank">Bukti pembayaran sidang terbuka</a></td>
                                 <td>
                                     @if($data->status_6 == '')
                                     -

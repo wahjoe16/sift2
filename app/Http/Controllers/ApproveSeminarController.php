@@ -72,9 +72,11 @@ class ApproveSeminarController extends Controller
             })
             ->addColumn('status', function ($data) {
                 if ($data->status == 0) {
-                    return 'Not Approve';
+                    return '<span class="label bg-yellow text-black">Waiting for Approval</span>';
                 } elseif ($data->status == 1) {
-                    return 'Approved';
+                    return '<span class="label bg-green">Approved</span>';
+                } elseif ($data->status == 2) {
+                    return '<span class="label bg-red">Rejected</span>';
                 }
             })
             ->addColumn('approve', function ($data) {
@@ -349,9 +351,11 @@ class ApproveSeminarController extends Controller
             })
             ->addColumn('status', function ($data) {
                 if ($data->status == 0) {
-                    return 'Not Approve';
+                    return '<span class="label bg-yellow text-black">Waiting for Approval</span>';
                 } elseif ($data->status == 1) {
-                    return 'Approved';
+                    return '<span class="label bg-green">Approved</span>';
+                } elseif ($data->status == 2) {
+                    return '<span class="label bg-red">Rejected</span>';
                 }
             })
             ->addColumn('approve', function ($data) {
@@ -554,9 +558,11 @@ class ApproveSeminarController extends Controller
             })
             ->addColumn('status', function ($data) {
                 if ($data->status == 0) {
-                    return 'Not Approve';
+                    return '<span class="label bg-yellow text-black">Waiting for Approval</span>';
                 } elseif ($data->status == 1) {
-                    return 'Approved';
+                    return '<span class="label bg-green">Approved</span>';
+                } elseif ($data->status == 2) {
+                    return '<span class="label bg-red">Rejected</span>';
                 }
             })
             ->addColumn('approve', function ($data) {

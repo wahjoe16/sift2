@@ -71,7 +71,7 @@
                             <tbody>
                                 <tr>
                                     <td>1</td>
-                                    <td><a href="{{ url('/mahasiswa/seminar/syarat01', $data->syarat_1) }}" target="_blank">Bukti pembayaran Kolokium Skripsi</a></td>
+                                    <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_1) }}" target="_blank">Bukti pembayaran Kolokium Skripsi</a></td>
                                     <td>
                                         @if ($data->status_1 == 2)
                                         <input type="radio" name="status_1" value="2" class="minimal-red" checked="checked" readonly>
@@ -92,7 +92,7 @@
                                 </tr>
                                 <tr>
                                     <td>2</td>
-                                    <td><a href="{{ url('/mahasiswa/seminar/syarat02', $data->syarat_2) }}" target="_blank">Sertifikat TOEFL</a></td>
+                                    <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_2) }}" target="_blank">Sertifikat TOEFL</a></td>
                                     <td>
                                         @if ($data->status_2 == 2)
                                         <input type="radio" name="status_2" value="2" class="minimal-red" checked="checked" readonly>
@@ -113,7 +113,7 @@
                                 </tr>
                                 <tr>
                                     <td>3</td>
-                                    <td><a href="{{ url('/mahasiswa/seminar/syarat03', $data->syarat_3) }}" target="_blank">Formulir nilai bimbingan skripsi</a></td>
+                                    <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_3) }}" target="_blank">Formulir nilai bimbingan skripsi</a></td>
                                     <td>
                                         @if ($data->status_3 == 2)
                                         <input type="radio" name="status_3" value="2" class="minimal-red" checked="checked" readonly>
@@ -134,7 +134,7 @@
                                 </tr>
                                 <tr>
                                     <td>4</td>
-                                    <td><a href="{{ url('/mahasiswa/seminar/syarat04', $data->syarat_4) }}" target="_blank">Formulir kemajuan bimbingan skripsi</a></td>
+                                    <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_4) }}" target="_blank">Formulir kemajuan bimbingan skripsi</a></td>
                                     <td>
                                         @if ($data->status_4 == 2)
                                         <input type="radio" name="status_4" value="2" class="minimal-red" checked="checked" readonly>
@@ -155,7 +155,7 @@
                                 </tr>
                                 <tr>
                                     <td>5</td>
-                                    <td><a href="{{ url('/mahasiswa/seminar/syarat05', $data->syarat_5) }}" target="_blank">Formulir persetujuan kolokium skripsi</a></td>
+                                    <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_5) }}" target="_blank">Formulir persetujuan kolokium skripsi</a></td>
                                     <td>
                                         @if ($data->status_5 == 2)
                                         <input type="radio" name="status_5" value="2" class="minimal-red" checked="checked" readonly>
@@ -176,7 +176,7 @@
                                 </tr>
                                 <tr>
                                     <td>6</td>
-                                    <td><a href="{{ url('/mahasiswa/seminar/syarat06', $data->syarat_6) }}" target="_blank">Formulir kesediaan menghadiri kolokium skripsi</a></td>
+                                    <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_6) }}" target="_blank">Formulir kesediaan menghadiri kolokium skripsi</a></td>
                                     <td>
                                         @if ($data->status_6 == 2)
                                         <input type="radio" name="status_6" value="2" class="minimal-red" checked="checked" readonly>
@@ -197,7 +197,7 @@
                                 </tr>
                                 <tr>
                                     <td>7</td>
-                                    <td><a href="{{ url('/mahasiswa/seminar/syarat07', $data->syarat_7) }}" target="_blank">Pas foto ukuran 4 x 6 sebanyak 2 lembar</a></td>
+                                    <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_7) }}" target="_blank">Pas foto ukuran 4 x 6 sebanyak 2 lembar</a></td>
                                     <td>
                                         @if ($data->status_7 == 2)
                                         <input type="radio" name="status_7" value="2" class="minimal-red" checked="checked" readonly>
@@ -218,7 +218,7 @@
                                 </tr>
                                 <tr>
                                     <td>8</td>
-                                    <td><a href="{{ url('/mahasiswa/seminar/syarat08', $data->syarat_8) }}" target="_blank">Kartu Tanda Mahasiswa</a></td>
+                                    <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_8) }}" target="_blank">Kartu Tanda Mahasiswa</a></td>
                                     <td>
                                         @if ($data->status_8 == 2)
                                         <input type="radio" name="status_8" value="2" class="minimal-red" checked="checked" readonly>
@@ -239,7 +239,7 @@
                                 </tr>
                                 <tr>
                                     <td>9</td>
-                                    <td><a href="{{ url('/mahasiswa/seminar/syarat09', $data->syarat_9) }}" target="_blank">Bukti pembayaran kuliah</a></td>
+                                    <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_9) }}" target="_blank">Bukti pembayaran kuliah</a></td>
                                     <td>
                                         @if ($data->status_9 == 2)
                                         <input type="radio" name="status_9" value="2" class="minimal-red" checked="checked" readonly>
@@ -260,7 +260,7 @@
                                 </tr>
                                 <tr>
                                     <td>10</td>
-                                    <td><a href="{{ url('/mahasiswa/seminar/syarat10', $data->syarat_10) }}" target="_blank">Bukti perwalian</a></td>
+                                    <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_10) }}" target="_blank">Bukti perwalian</a></td>
                                     <td>
                                         @if ($data->status_10 == 2)
                                         <input type="radio" name="status_10" value="2" class="minimal-red" checked="checked" readonly>
@@ -281,7 +281,7 @@
                                 </tr>
                                 <tr>
                                     <td>11</td>
-                                    <td><a href="{{ url('/mahasiswa/seminar/syarat11', $data->syarat_11) }}" target="_blank">Bukti bebas pinjaman perpustakaan</a></td>
+                                    <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_11) }}" target="_blank">Bukti bebas pinjaman perpustakaan</a></td>
                                     <td>
                                         @if ($data->status_11 == 2)
                                         <input type="radio" name="status_11" value="2" class="minimal-red" checked="checked" readonly>
@@ -302,7 +302,7 @@
                                 </tr>
                                 <tr>
                                     <td>12</td>
-                                    <td><a href="{{ url('/mahasiswa/seminar/syarat12', $data->syarat_12) }}" target="_blank">Draft skripsi (PDF)</a></td>
+                                    <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_12) }}" target="_blank">Draft skripsi (PDF)</a></td>
                                     <td>
                                         @if ($data->status_12 == 2)
                                         <input type="radio" name="status_12" value="2" class="minimal-red" checked="checked" readonly>
@@ -323,7 +323,7 @@
                                 </tr>
                                 <tr>
                                     <td>13</td>
-                                    <td><a href="{{ url('/mahasiswa/seminar/syarat13', $data->syarat_13) }}" target="_blank">Draft skripsi (DOCX)</a></td>
+                                    <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_13) }}" target="_blank">Draft skripsi (DOCX)</a></td>
                                     <td>
                                         @if ($data->status_13 == 2)
                                         <input type="radio" name="status_13" value="2" class="minimal-red" checked="checked" readonly>
@@ -344,7 +344,7 @@
                                 </tr>
                                 <tr>
                                     <td>14</td>
-                                    <td><a href="{{ url('/mahasiswa/seminar/syarat14', $data->syarat_14) }}" target="_blank">Transkrip Nilai</a></td>
+                                    <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_14) }}" target="_blank">Transkrip Nilai</a></td>
                                     <td>
                                         @if ($data->status_14 == 2)
                                         <input type="radio" name="status_14" value="2" class="minimal-red" checked="checked" readonly>

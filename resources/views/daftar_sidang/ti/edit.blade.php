@@ -96,8 +96,7 @@
                     <div class="box-body">
                         <div class="row">
                             <div class="col-12">
-                                <label class="col-sm-3 col-form-label">Fotocopy Kwitansi Bimbingan TA (dari awal pengambilan)</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_1 }}</p>
+                                <label class="col-sm-8 col-form-label"><a href="{{ url('/mahasiswa/sidang', $data->syarat_1) }}">Fotocopy Kwitansi Bimbingan TA (dari awal pengambilan)</a></label>
                                 @if ($data->status_1 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else
@@ -111,8 +110,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <label class="col-sm-3 col-form-label">Fotocopy Kwitansi Sidang TA</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_2 }}</p>
+                                <label class="col-sm-8 col-form-label"><a href="{{ url('/mahasiswa/sidang', $data->syarat_2) }}">Fotocopy Kwitansi Sidang TA</a></label>
                                 @if ($data->status_2 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else
@@ -126,8 +124,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <label class="col-sm-3 col-form-label">Fotocopy Kwitansi Seminar TA</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_3 }}</p>
+                                <label class="col-sm-8 col-form-label"><a href="{{ url('/mahasiswa/sidang', $data->syarat_3) }}">Fotocopy Kwitansi Seminar TA</a></label>
                                 @if ($data->status_3 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else
@@ -141,8 +138,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <label class="col-sm-3 col-form-label">Fotocopy Sertifikat Pesantren Calon Sarjana (paling lama 1 Tahun setelah terbit)</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_4 }}</p>
+                                <label class="col-sm-8 col-form-label"><a href="{{ url('/mahasiswa/sidang', $data->syarat_4) }}">Fotocopy Sertifikat Pesantren Calon Sarjana (paling lama 1 Tahun setelah terbit)</a></label>
                                 @if ($data->status_4 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else
@@ -156,8 +152,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <label class="col-sm-3 col-form-label">Formulir Rencana Studi (FRS)</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_5 }}</p>
+                                <label class="col-sm-8 col-form-label"><a href="{{ url('/mahasiswa/sidang', $data->syarat_5) }}">Formulir Rencana Studi (FRS)</a></label>
                                 @if ($data->status_5 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else
@@ -171,8 +166,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <label class="col-sm-3 col-form-label">Bukti Penyerahan Draft TA (4 Eksemplar) Memakai Mika Biru</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_6 }}</p>
+                                <label class="col-sm-8 col-form-label"><a href="{{ url('/mahasiswa/sidang', $data->syarat_6) }}">Bukti Penyerahan Draft TA (4 Eksemplar) Memakai Mika Biru</a></label>
                                 @if ($data->status_6 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else
@@ -186,8 +180,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <label class="col-sm-3 col-form-label">Bukti Bebas Perpustakaan Pusat UNISBA</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_7 }}</p>
+                                <label class="col-sm-8 col-form-label"><a href="{{ url('/mahasiswa/sidang', $data->syarat_7) }}">Bukti Bebas Perpustakaan Pusat UNISBA</a></label>
                                 @if ($data->status_7 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else
@@ -201,8 +194,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <label class="col-sm-3 col-form-label">Bukti Bebas Perpustakaan TI</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_8 }}</p>
+                                <label class="col-sm-8 col-form-label"><a href="{{ url('/mahasiswa/sidang', $data->syarat_8) }}">Bukti Bebas Perpustakaan TI</a></label>
                                 @if ($data->status_8 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else
@@ -216,8 +208,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <label class="col-sm-3 col-form-label">Transkrip Nilai Terakhir</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_9 }}</p>
+                                <label class="col-sm-8 col-form-label"><a href="{{ url('/mahasiswa/sidang', $data->syarat_9) }}">Transkrip Nilai Terakhir</a></label>
                                 @if ($data->status_9 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else
@@ -231,8 +222,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <label class="col-sm-3 col-form-label">Persetujuan Sidang dari Dosen Pembimbing (Kartu Bimbingan Asli)</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_10 }}</p>
+                                <label class="col-sm-8 col-form-label"><a href="{{ url('/mahasiswa/sidang', $data->syarat_10) }}">Persetujuan Sidang dari Dosen Pembimbing (Kartu Bimbingan Asli)</a></label>
                                 @if ($data->status_10 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else
@@ -246,8 +236,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <label class="col-sm-3 col-form-label">Fotocopy Sertifikat TOEFL (paling lama 1 Tahun setelah terbit)</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_11 }}</p>
+                                <label class="col-sm-8 col-form-label"><a href="{{ url('/mahasiswa/sidang', $data->syarat_11) }}">Fotocopy Sertifikat TOEFL (paling lama 1 Tahun setelah terbit)</a></label>
                                 @if ($data->status_11 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else
@@ -261,8 +250,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <label class="col-sm-3 col-form-label">Foto Berwarna / Latar Belakang Biru berukuran 3x4 = 4 buah</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_12 }}</p>
+                                <label class="col-sm-8 col-form-label"><a href="{{ url('/mahasiswa/sidang', $data->syarat_12) }}">Foto Berwarna / Latar Belakang Biru berukuran 3x4 = 4 buah</a></label>
                                 @if ($data->status_12 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else
@@ -276,8 +264,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <label class="col-sm-3 col-form-label">Bukti Bebas Pinjaman / Tunggakan</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_13 }}</p>
+                                <label class="col-sm-8 col-form-label"><a href="{{ url('/mahasiswa/sidang', $data->syarat_13) }}">Bukti Bebas Pinjaman / Tunggakan</a></label>
                                 @if ($data->status_13 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else
@@ -291,8 +278,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <label class="col-sm-3 col-form-label">Menghadiri Seminar / Sidang minimal 3 kali</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_14 }}</p>
+                                <label class="col-sm-8 col-form-label"><a href="{{ url('/mahasiswa/sidang', $data->syarat_14) }}">Menghadiri Seminar / Sidang minimal 3 kali</a></label>
                                 @if ($data->status_14 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else
@@ -306,8 +292,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <label class="col-sm-3 col-form-label">Form Hafalan Surat Al-Quran (minimal 25 surat)</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_15 }}</p>
+                                <label class="col-sm-8 col-form-label"><a href="{{ url('/mahasiswa/sidang', $data->syarat_15) }}">Form Hafalan Surat Al-Quran (minimal 25 surat)</a></label>
                                 @if ($data->status_15 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else
@@ -321,23 +306,21 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <label class="col-sm-3 col-form-label">Print out bukti pengecekan Plagiarisme < 25% (sebelum sidang)</label>
-                                        <p class="col-sm-5 col-form-label ">{{ $data->syarat_16 }}</p>
-                                        @if ($data->status_16 == 1)
-                                        <span class="label bg-green col-sm-1">Diterima</span>
-                                        @else
-                                        <span class="label bg-red col-sm-1">Ditolak</span>
-                                        @endif
+                                <label class="col-sm-8 col-form-label"><a href="{{ url('/mahasiswa/sidang', $data->syarat_16) }}">Print out bukti pengecekan Plagiarisme < 25% (sebelum sidang)</a></label>
+                                @if ($data->status_16 == 1)
+                                <span class="label bg-green col-sm-1">Diterima</span>
+                                @else
+                                <span class="label bg-red col-sm-1">Ditolak</span>
+                                @endif
 
-                                        @if ($data->status_16 == 2)
-                                        <input type="file" name="syarat_16" class="col-sm-3" id="syarat_16">
-                                        @endif
+                                @if ($data->status_16 == 2)
+                                <input type="file" name="syarat_16" class="col-sm-3" id="syarat_16">
+                                @endif
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <label class="col-sm-3 col-form-label">Sertifikat SKKFT yang ditandatangani oleh Wadek III</label>
-                                <p class="col-sm-5 col-form-label ">{{ $data->syarat_17 }}</p>
+                                <label class="col-sm-8 col-form-label"><a href="{{ url('/mahasiswa/sidang', $data->syarat_17) }}">Sertifikat SKKFT yang ditandatangani oleh Wadek III</a></label>
                                 @if ($data->status_17 == 1)
                                 <span class="label bg-green col-sm-1">Diterima</span>
                                 @else
