@@ -17,9 +17,9 @@
 <section class="content">
     <div class="row">
         <div class="col-12">
-            <div class="box box-success">
+            <div class="box box-warning">
                 <div class="box-header with-border">
-                    <h3>Download Dokumen Sidang Pembahasan</h3>
+                    <h3>Download Dokumen Kolokium Skripsi</h3>
                 </div>
                 <div class="box-body">
                     <div class="col-md-12">
@@ -55,25 +55,33 @@
                                     <th>Semester</th>
                                     <th>Status</th>
                                     <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat1"></th> -->
-                                    <th>Lembar bimbingan skripsi</th>
+                                    <th>Bukti pembayaran Kolokium Skripsi</th>
                                     <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat2"></th> -->
-                                    <th>Sertifikat pesantren mahasiswa baru</th>
-                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat3"></th> -->
-                                    <th>Sertifikat pesantren calon sarjana</th>
-                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat4"></th> -->
-                                    <th>Transkrip nilai</th>
-                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat5"></th> -->
                                     <th>Sertifikat TOEFL</th>
+                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat3"></th> -->
+                                    <th>Formulir nilai bimbingan skripsi</th>
+                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat4"></th> -->
+                                    <th>Formulir kemajuan bimbingan skripsi</th>
+                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat5"></th> -->
+                                    <th>Formulir persetujuan kolokium skripsi</th>
                                     <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat6"></th> -->
-                                    <th>Bukti bebas pinjaman perpustakaan</th>
+                                    <th>Formulir kesediaan menghadiri kolokium skripsi</th>
                                     <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat7"></th> -->
-                                    <th>Sertifikat SKKFT</th>
+                                    <th>Pas foto ukuran 4 x 6 sebanyak 2 lembar</th>
                                     <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat8"></th> -->
-                                    <th>Bukti KRS</th>
+                                    <th>Kartu Tanda Mahasiswa</th>
                                     <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat9"></th> -->
-                                    <th>Bukti pembayaran DPP Mk. Skripsi</th>
+                                    <th>Bukti pembayaran kuliah</th>
                                     <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat10"></th> -->
-                                    <th>Bukti pembayaran sidang pembahasan</th>
+                                    <th>Bukti perwalian</th>
+                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat10"></th> -->
+                                    <th>Bukti bebas pinjaman perpustakaan</th>
+                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat10"></th> -->
+                                    <th>Draft skripsi (PDF)</th>
+                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat10"></th> -->
+                                    <th>Draft skripsi (DOCX)</th>
+                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat10"></th> -->
+                                    <th>Transkrip Nilai</th>
                                 </tr>
                             </thead>
                         </table>
@@ -107,7 +115,7 @@
             scrollX: true,
             autoWidth: false,
             ajax: {
-                url: "{{ route('seminarPwkDownload.data') }}",
+                url: "{{ route('seminarTmbDownload.data') }}",
                 data: function(d) {
                     d.tahun_ajaran_id = $('#tahunajaran').val();
                     d.semester_id = $('#semester').val();
@@ -171,6 +179,18 @@
                 },
                 {
                     data: 'syarat_10'
+                },
+                {
+                    data: 'syarat_11'
+                },
+                {
+                    data: 'syarat_12'
+                },
+                {
+                    data: 'syarat_13'
+                },
+                {
+                    data: 'syarat_14'
                 },
             ]
         })

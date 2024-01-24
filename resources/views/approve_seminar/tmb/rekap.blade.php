@@ -6,11 +6,15 @@
 @section('content')
 
 <section class="content">
+    @includeIf('layouts.alert')
+    <h3>Data Kolokium Skripsi</h3>
     <div class="row">
         <div class="col-md-12 col-sm-12">
             <div class="box box-warning">
                 <div class="box-header with-border">
-                    <h3>Data Kolokium Skripsi</h3>
+                    <div class="btn-group">
+                        <a href="{{ route('seminarTmbDownload.index') }}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-download"></i> Unduh Dokumen</a>
+                    </div>
                 </div>
                 <div class="box-body table-responsive">
                     <div class="col-md-12">

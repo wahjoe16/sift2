@@ -17,9 +17,9 @@
 <section class="content">
     <div class="row">
         <div class="col-12">
-            <div class="box box-success">
+            <div class="box box-primari">
                 <div class="box-header with-border">
-                    <h3>Download Dokumen Sidang Pembahasan</h3>
+                    <h3>Download Dokumen Seminar Tugas Akhir</h3>
                 </div>
                 <div class="box-body">
                     <div class="col-md-12">
@@ -55,25 +55,23 @@
                                     <th>Semester</th>
                                     <th>Status</th>
                                     <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat1"></th> -->
-                                    <th>Lembar bimbingan skripsi</th>
+                                    <th>Formulir pendaftaran Seminar terisi</th>
                                     <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat2"></th> -->
-                                    <th>Sertifikat pesantren mahasiswa baru</th>
+                                    <th>Copy Berita Acara Pembimbingan / Kartu Bimbingan</th>
                                     <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat3"></th> -->
-                                    <th>Sertifikat pesantren calon sarjana</th>
+                                    <th>Persetujuan Seminar dari Dosen Pembimbing</th>
                                     <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat4"></th> -->
-                                    <th>Transkrip nilai</th>
+                                    <th>Fotocopy Kwitansi Pembayaran Seminar dan Bimbingan Tugas Akhir</th>
                                     <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat5"></th> -->
-                                    <th>Sertifikat TOEFL</th>
+                                    <th>Transkrip Nilai terakhir yang sudah lulus MK Semester 1-6 dan KP</th>
                                     <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat6"></th> -->
-                                    <th>Bukti bebas pinjaman perpustakaan</th>
+                                    <th>Form Bebas Tunggakan / Pinjaman</th>
                                     <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat7"></th> -->
-                                    <th>Sertifikat SKKFT</th>
-                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat8"></th> -->
-                                    <th>Bukti KRS</th>
+                                    <th>Print out bukti pengecekan Plagiarisme <= 25%</th>
+                                            <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat8"></th> -->
+                                    <th>Bukti Monitoring Hafalan</th>
                                     <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat9"></th> -->
-                                    <th>Bukti pembayaran DPP Mk. Skripsi</th>
-                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat10"></th> -->
-                                    <th>Bukti pembayaran sidang pembahasan</th>
+                                    <th>Bukti Penyerahan Draft</th>
                                 </tr>
                             </thead>
                         </table>
@@ -107,7 +105,7 @@
             scrollX: true,
             autoWidth: false,
             ajax: {
-                url: "{{ route('seminarPwkDownload.data') }}",
+                url: "{{ route('seminarTiDownload.data') }}",
                 data: function(d) {
                     d.tahun_ajaran_id = $('#tahunajaran').val();
                     d.semester_id = $('#semester').val();
@@ -169,9 +167,7 @@
                 {
                     data: 'syarat_9'
                 },
-                {
-                    data: 'syarat_10'
-                },
+
             ]
         })
 

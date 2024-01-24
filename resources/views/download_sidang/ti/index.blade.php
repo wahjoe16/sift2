@@ -17,9 +17,9 @@
 <section class="content">
     <div class="row">
         <div class="col-12">
-            <div class="box box-success">
+            <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3>Download Dokumen Sidang Pembahasan</h3>
+                    <h3>Download Dokumen Sidang Tugas Akhir</h3>
                 </div>
                 <div class="box-body">
                     <div class="col-md-12">
@@ -45,7 +45,7 @@
                                 </div>
                             </div>
                         </form>
-                        <table class="table table-striped table-bordered table-download-seminar display nowrap" style="width: 100%;">
+                        <table class="table table-striped table-bordered table-download-sidang display nowrap" style="width: 100%;">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -55,25 +55,39 @@
                                     <th>Semester</th>
                                     <th>Status</th>
                                     <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat1"></th> -->
-                                    <th>Lembar bimbingan skripsi</th>
+                                    <th>Fotocopy Kwitansi Bimbingan TA</th>
                                     <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat2"></th> -->
-                                    <th>Sertifikat pesantren mahasiswa baru</th>
+                                    <th>Fotocopy Kwitansi Sidang TA</th>
                                     <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat3"></th> -->
-                                    <th>Sertifikat pesantren calon sarjana</th>
+                                    <th>Fotocopy Kwitansi Seminar TA</th>
                                     <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat4"></th> -->
-                                    <th>Transkrip nilai</th>
+                                    <th>Fotocopy Sertifikat Pesantren Calon Sarjana</th>
                                     <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat5"></th> -->
-                                    <th>Sertifikat TOEFL</th>
+                                    <th>Formulir Rencana Studi (FRS)</th>
                                     <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat6"></th> -->
-                                    <th>Bukti bebas pinjaman perpustakaan</th>
+                                    <th>Bukti Penyerahan Draft TA</th>
                                     <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat7"></th> -->
-                                    <th>Sertifikat SKKFT</th>
+                                    <th>Bukti Bebas Perpustakaan Pusat UNISBA</th>
                                     <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat8"></th> -->
-                                    <th>Bukti KRS</th>
+                                    <th>Bukti Bebas Perpustakaan TI</th>
                                     <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat9"></th> -->
-                                    <th>Bukti pembayaran DPP Mk. Skripsi</th>
+                                    <th>Transkrip Nilai Terakhir</th>
                                     <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat10"></th> -->
-                                    <th>Bukti pembayaran sidang pembahasan</th>
+                                    <th>Persetujuan Sidang dari Dosen Pembimbing</th>
+                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat10"></th> -->
+                                    <th>Fotocopy Sertifikat TOEFL</th>
+                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat10"></th> -->
+                                    <th>Foto</th>
+                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat10"></th> -->
+                                    <th>Bukti Bebas Pinjaman / Tunggakan</th>
+                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat10"></th> -->
+                                    <th>Menghadiri Seminar / Sidang</th>
+                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat10"></th> -->
+                                    <th>Form Hafalan Surat Al-Quran</th>
+                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat10"></th> -->
+                                    <th>Print out bukti pengecekan Plagiarisme</th>
+                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat10"></th> -->
+                                    <th>Sertifikat SKKFT</th>
                                 </tr>
                             </thead>
                         </table>
@@ -102,12 +116,12 @@
         //Initialize Select2 Elements
         $('.select2').select2()
 
-        table = $('.table-download-seminar').DataTable({
+        table = $('.table-download-sidang').DataTable({
             processing: true,
             scrollX: true,
             autoWidth: false,
             ajax: {
-                url: "{{ route('seminarPwkDownload.data') }}",
+                url: "{{ route('sidangTiDownload.data') }}",
                 data: function(d) {
                     d.tahun_ajaran_id = $('#tahunajaran').val();
                     d.semester_id = $('#semester').val();
@@ -171,6 +185,27 @@
                 },
                 {
                     data: 'syarat_10'
+                },
+                {
+                    data: 'syarat_11'
+                },
+                {
+                    data: 'syarat_12'
+                },
+                {
+                    data: 'syarat_13'
+                },
+                {
+                    data: 'syarat_14'
+                },
+                {
+                    data: 'syarat_15'
+                },
+                {
+                    data: 'syarat_16'
+                },
+                {
+                    data: 'syarat_17'
                 },
             ]
         })

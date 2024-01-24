@@ -6,11 +6,14 @@
 @section('content')
 
 <section class="content">
+    <h3>Data Sidang Tugas Akhir</h3>
     <div class="row">
         <div class="col-md-12 col-sm-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3>Data Sidang Tugas Akhir</h3>
+                    <div class="btn-group">
+                        <a href="{{ route('sidangTiDownload.index') }}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-download"></i> Unduh Dokumen</a>
+                    </div>
                 </div>
                 <div class="box-body table-responsive">
                     <div class="col-md-12">

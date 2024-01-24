@@ -19,7 +19,7 @@
         <div class="col-12">
             <div class="box box-success">
                 <div class="box-header with-border">
-                    <h3>Download Dokumen Sidang Pembahasan</h3>
+                    <h3>Download Dokumen Sidang Terbuka</h3>
                 </div>
                 <div class="box-body">
                     <div class="col-md-12">
@@ -45,7 +45,7 @@
                                 </div>
                             </div>
                         </form>
-                        <table class="table table-striped table-bordered table-download-seminar display nowrap" style="width: 100%;">
+                        <table class="table table-striped table-bordered table-download-sidang display nowrap" style="width: 100%;">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -55,25 +55,17 @@
                                     <th>Semester</th>
                                     <th>Status</th>
                                     <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat1"></th> -->
-                                    <th>Lembar bimbingan skripsi</th>
-                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat2"></th> -->
-                                    <th>Sertifikat pesantren mahasiswa baru</th>
-                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat3"></th> -->
                                     <th>Sertifikat pesantren calon sarjana</th>
-                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat4"></th> -->
+                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat2"></th> -->
                                     <th>Transkrip nilai</th>
-                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat5"></th> -->
+                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat3"></th> -->
                                     <th>Sertifikat TOEFL</th>
-                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat6"></th> -->
-                                    <th>Bukti bebas pinjaman perpustakaan</th>
-                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat7"></th> -->
+                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat4"></th> -->
                                     <th>Sertifikat SKKFT</th>
-                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat8"></th> -->
-                                    <th>Bukti KRS</th>
-                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat9"></th> -->
-                                    <th>Bukti pembayaran DPP Mk. Skripsi</th>
-                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat10"></th> -->
-                                    <th>Bukti pembayaran sidang pembahasan</th>
+                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat5"></th> -->
+                                    <th>Pemeriksaan turnitin</th>
+                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat5"></th> -->
+                                    <th>Bukti pembayaran sidang terbuka</th>
                                 </tr>
                             </thead>
                         </table>
@@ -102,12 +94,12 @@
         //Initialize Select2 Elements
         $('.select2').select2()
 
-        table = $('.table-download-seminar').DataTable({
+        table = $('.table-download-sidang').DataTable({
             processing: true,
             scrollX: true,
             autoWidth: false,
             ajax: {
-                url: "{{ route('seminarPwkDownload.data') }}",
+                url: "{{ route('sidangPwkDownload.data') }}",
                 data: function(d) {
                     d.tahun_ajaran_id = $('#tahunajaran').val();
                     d.semester_id = $('#semester').val();
@@ -153,24 +145,8 @@
                 {
                     data: 'syarat_5'
                 },
-
                 {
                     data: 'syarat_6'
-                },
-
-                {
-                    data: 'syarat_7'
-                },
-
-                {
-                    data: 'syarat_8'
-                },
-
-                {
-                    data: 'syarat_9'
-                },
-                {
-                    data: 'syarat_10'
                 },
             ]
         })

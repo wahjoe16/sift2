@@ -9,6 +9,7 @@ use App\Http\Controllers\DaftarSeminarController;
 use App\Http\Controllers\DaftarSidangController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DownloadSeminarController;
+use App\Http\Controllers\DownloadSidangController;
 use App\Http\Controllers\MyArchiveController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\SemesterController;
@@ -215,9 +216,6 @@ Route::group(['prefix' => '/dokumentasi_sidang', 'middleware' => 'ceklevel:2'], 
     Route::get('show-seminar/pwk/{id}', [ApproveSeminarController::class, 'showRekapPwk'])->name('rekap-seminarPwk.show');
     Route::get('excel-export-seminar/pwk', [ApproveSeminarController::class, 'exportExcelPwk'])->name('seminarPwkExcel.export');
     Route::get('pdf-export-seminar/pwk', [ApproveSeminarController::class, 'exportPdfPwk'])->name('seminarPwkPdf.export');
-    Route::get('rekap-seminar/pwk/dwnld', [DownloadSeminarController::class, 'indexPwk'])->name('seminarPwkDownload.index');
-    Route::get('rekap-seminar/pwk/dwnld/data', [DownloadSeminarController::class, 'dataPwk'])->name('seminarPwkDownload.data');
-    Route::post('rekap-seminar/pwk/dwnld-selected', [DownloadSeminarController::class, 'downloadSelected'])->name('downloadSelected');
     // Approval dan export data Sidang Skripsi TAMBANG
     Route::get('view-sidang/tmb', [ApproveSidangController::class, 'viewTmb'])->name('view-sidangTmb.index');
     Route::get('view-sidang/tmb/data', [ApproveSidangController::class, 'dataTmb'])->name('view-sidangTmb.data');
@@ -291,11 +289,25 @@ Route::group(['prefix' => '/archives'], function () {
         Route::match(['get', 'post'], 'my-archive/download-selected', [MyArchiveController::class, 'downloadSelected'])->name('myarchive.downloadselected');
     });
 
-    Route::group(['middleware' => 'ceklevel:1,2'], function () {
-    });
-
     Route::get('dropdownlist/category-archive/{id}', [CategoryArsipController::class, 'getDataCategory'])->name('get-category.data');
     Route::get('dropdownlist/sub-category-archive/{id}', [SubcategoryArsipController::class, 'getDataSubcategory'])->name('get-subcategory.data');
+});
+
+Route::group(['prefix' => '/dokumentasi_sidang', 'middleware' => 'ceklevel:1,2'], function () {
+    Route::get('rekap-seminar/tmb/dwnld', [DownloadSeminarController::class, 'indexTmb'])->name('seminarTmbDownload.index');
+    Route::get('rekap-seminar/tmb/dwnld/data', [DownloadSeminarController::class, 'dataTmb'])->name('seminarTmbDownload.data');
+    Route::get('rekap-seminar/ti/dwnld', [DownloadSeminarController::class, 'indexTi'])->name('seminarTiDownload.index');
+    Route::get('rekap-seminar/ti/dwnld/data', [DownloadSeminarController::class, 'dataTi'])->name('seminarTiDownload.data');
+    Route::get('rekap-seminar/pwk/dwnld', [DownloadSeminarController::class, 'indexPwk'])->name('seminarPwkDownload.index');
+    Route::get('rekap-seminar/pwk/dwnld/data', [DownloadSeminarController::class, 'dataPwk'])->name('seminarPwkDownload.data');
+    Route::get('rekap-seminar/pwk/{id}/dwnld', [DownloadSeminarController::class, 'downloadPwk'])->name('downloadPwk');
+
+    Route::get('rekap-sidang/tmb/dwnld', [DownloadSidangController::class, 'indexTmb'])->name('sidangTmbDownload.index');
+    Route::get('rekap-sidang/tmb/dwnld/data', [DownloadSidangController::class, 'dataTmb'])->name('sidangTmbDownload.data');
+    Route::get('rekap-sidang/ti/dwnld', [DownloadSidangController::class, 'indexTi'])->name('sidangTiDownload.index');
+    Route::get('rekap-sidang/ti/dwnld/data', [DownloadSidangController::class, 'dataTi'])->name('sidangTiDownload.data');
+    Route::get('rekap-sidang/pwk/dwnld', [DownloadSidangController::class, 'indexPwk'])->name('sidangPwkDownload.index');
+    Route::get('rekap-sidang/pwk/dwnld/data', [DownloadSidangController::class, 'dataPwk'])->name('sidangPwkDownload.data');
 });
 
 

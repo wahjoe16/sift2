@@ -144,7 +144,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>3</td>
+                                <td>4</td>
                                 <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_4) }}" target="_blank">Bukti Pembayaran Sidang Skripsi</a></td>
                                 <td>
                                     @if($data->status_4 == '')
@@ -166,7 +166,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>3</td>
+                                <td>5</td>
                                 <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_5) }}" target="_blank">Sertifikat TOEFL</a></td>
                                 <td>
                                     @if($data->status_5 == '')

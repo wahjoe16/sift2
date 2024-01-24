@@ -4,11 +4,14 @@
 
 <section class="content">
     @includeIf('layouts.alert')
+    <h3>Seminar Tugas Akhir</h3>
     <div class="row">
         <div class="col-md-12 col-sm-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3>Seminar Tugas Akhir</h3>
+                    <div class="btn-group">
+                        <a href="{{ route('seminarTiDownload.index') }}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-download"></i> Unduh Dokumen</a>
+                    </div>
                 </div>
                 <div class="box-body table-responsive">
                     <table class="table table-striped table-bordered table-approve-seminar">
