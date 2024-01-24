@@ -45,7 +45,7 @@ class ArchiveController extends Controller
             'subcategory_archive',
             'tahun_ajaran',
             'semester'
-        ])->orderBy('section_id', 'asc');
+        ])->orderBy('id', 'desc');
 
         if (request('tahun_ajaran_id')) {
             $data->whereRelation('tahun_ajaran', 'id', request('tahun_ajaran_id'));

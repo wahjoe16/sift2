@@ -62,7 +62,7 @@
                         <thead>
                             <th width="5%">No</th>
                             <th>Nama</th>
-                            <th>Sesi</th>
+                            <th>Bidang</th>
                             <th>Kategori Arsip</th>
                             <th>Sub Kategori Arsip</th>
                             <th>Tahun Akademik</th>
