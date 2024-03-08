@@ -247,12 +247,18 @@ Route::group(['prefix' => '/dokumentasi_sidang', 'middleware' => 'ceklevel:2'], 
     Route::get('data-bimbingan/tmb', [BimbinganController::class, 'indexTmb'])->name('bimbinganTmb.index');
     Route::get('data-bimbingan/tmb-data-1', [BimbinganController::class, 'dataTmb1'])->name('bimbinganTmb.data1');
     Route::get('data-bimbingan/tmb-data-2', [BimbinganController::class, 'dataTmb2'])->name('bimbinganTmb.data2');
+    Route::get('data-bimbingan/{id}/tmb-show-1', [BimbinganController::class, 'showTmb1'])->name('bimbinganTmb.showTmb1');
+    Route::get('data-bimbingan/{id}/tmb-show-2', [BimbinganController::class, 'showTmb2'])->name('bimbinganTmb.showTmb2');
     Route::get('data-bimbingan/ti', [BimbinganController::class, 'indexTi'])->name('bimbinganTi.index');
     Route::get('data-bimbingan/ti-data-1', [BimbinganController::class, 'dataTi1'])->name('bimbinganTi.data1');
     Route::get('data-bimbingan/ti-data-2', [BimbinganController::class, 'dataTi2'])->name('bimbinganTi.data2');
+    Route::get('data-bimbingan/{id}/ti-show-1', [BimbinganController::class, 'showTi1'])->name('bimbinganTi.showTi1');
+    Route::get('data-bimbingan/{id}/ti-show-2', [BimbinganController::class, 'showTi2'])->name('bimbinganTi.showTi2');
     Route::get('data-bimbingan/pwk', [BimbinganController::class, 'indexPwk'])->name('bimbinganPwk.index');
     Route::get('data-bimbingan/pwk-data-1', [BimbinganController::class, 'dataPwk1'])->name('bimbinganPwk.data1');
     Route::get('data-bimbingan/pwk-data-2', [BimbinganController::class, 'dataPwk2'])->name('bimbinganPwk.data2');
+    Route::get('data-bimbingan/{id}/pwk-show-1', [BimbinganController::class, 'showPwk1'])->name('bimbinganPwk.showPwk1');
+    Route::get('data-bimbingan/{id}/pwk-show-2', [BimbinganController::class, 'showPwk2'])->name('bimbinganPwk.showPwk2');
 });
 
 // ARSIP Fakultas Role ADMIN, DOSEN
