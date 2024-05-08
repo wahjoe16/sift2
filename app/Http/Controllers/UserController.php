@@ -360,8 +360,161 @@ class UserController extends Controller
         $dosen->status_kaprodi = $request->status_kaprodi;
         $dosen->status_sekprodi = $request->status_sekprodi;
         $dosen->status_dekanat = $request->status_dekanat;
+        $dosen->class_pendidikan = $request->class_pendidikan;
+        $dosen->class_jabfung = $request->class_jabfung;
+        $dosen->kelompok_keahlian = $request->kelompok_keahlian;
         $dosen->save();
 
+        return redirect()->route('dosen.index')->with('success', 'Data dosen berhasil diubah!');
+    }
+
+    public function editAllDosen()
+    {
+        $dosen = User::where('level', 2)->get();
+        // echo "<pre>"; print_r($dosen); die;
+        return view('dosen.edit_all', compact('dosen'));
+    }
+
+    // public function editDataDosen()
+    // {
+    //     $dosen = User::where('level', 2)->orderBy('program_studi', 'desc')->get();
+
+    //     return datatables()
+    //     ->of($dosen)
+    //     ->addIndexColumn()
+    //     ->addColumn('class_pendidikan', function(){
+    //         $options ='';
+    //         foreach(["S2"=>"S2", "S3"=>"S3"] as $pendidikan => $pendidikanLabel){
+    //             $options .= '<option value="' . $pendidikan . '")>' . $pendidikanLabel . '</option>';
+    //         }
+
+    //         $return = '
+    //             <select name="class_pendidikan[]" id="class_pendidikan" class="form-control">
+    //                 <option value="">Select</option>
+    //                 '.$options.'
+    //             </select>
+    //         ';
+    //         return $return ;
+    //     })
+    //     ->addColumn('class_jabfung', function(){
+    //         $options='';
+    //         foreach([
+    //             "Asisten Ahli"=>"Asisten Ahli", 
+    //             "Lektor"=>"Lektor", 
+    //             "Lektor Kepala"=>"Lektor Kepala", 
+    //             "Guru Besar/Professor"=>"Guru Besar/Professor"
+    //             ] as $jabfung=>$jabfungLabel){
+    //                 $options .= '<option value="' . $jabfung . '">' . $jabfungLabel . '</option>';
+    //         }
+
+    //         $return = '
+    //             <select name="class_jabfung[]" id="class_Jabfung" class="form-control">
+    //                 <option value="">Select</option>
+    //                 '.$options.'
+    //             </select>
+    //         ';
+    //         return $return;
+    //     })
+    //     ->addColumn('kelompok_keahlian', function(){
+    //         $optionsTambang='';
+    //         foreach([
+    //             "Geologi Eksplorasi"=>"Geologi Eksplorasi", 
+    //             "Tambang Umum"=>"Tambang Umum", 
+    //             "Pengolahan Bahan Galian"=>"Pengolahan Bahan Galian"
+    //             ] as $kelompok_keahlian_tmb=>$kelompok_keahlian_tmbLabel){
+    //                 $optionsTambang .= '<option value="' . $kelompok_keahlian_tmb . '">' . $kelompok_keahlian_tmbLabel . '</option>';
+    //         }
+
+    //         $optionsTi='';
+    //         foreach([
+    //             "Keahlian Ergonomi dan Rekayasa Kerja"=>"Keahlian Ergonomi dan Rekayasa Kerja", 
+    //             "Manajemen Industri"=>"Manajemen Industri", 
+    //             "Sistem Industri dan Tekno-Ekonomi"=>"Sistem Industri dan Tekno-Ekonomi",
+    //             "Sistem Manufaktur"=>"Sistem Manufaktur"
+    //             ] as $kelompok_keahlian_ti=>$kelompok_keahlian_tiLabel){
+    //                 $optionsTi .= '<option value="' . $kelompok_keahlian_ti . '">' . $kelompok_keahlian_tiLabel . '</option>';
+    //         }
+
+    //         $optionsPwk='';
+    //         foreach([
+    //             "Kota"=>"Kota", 
+    //             "Transportasi"=>"Transportasi", 
+    //             "Lingkungan"=>"Lingkungan",
+    //             "Pariwisata"=>"Pariwisata",
+    //             "Rekayasa Pedesaan"=>"Rekayasa Pedesaan"
+    //             ] as $kelompok_keahlian_pwk=>$kelompok_keahlian_pwkLabel){
+    //                 $optionsPwk .= '<option value="' . $kelompok_keahlian_pwk . '">' . $kelompok_keahlian_pwkLabel . '</option>';
+    //         }
+
+    //         $return = '
+    //             <select name="kelompok_keahlian[]" id="kelompok_keahlian" class="form-control">
+    //                 <option value="">Select</option>
+    //                 <optgroup label="Teknik Pertambangan">
+    //                 '.$optionsTambang.'
+    //                 </optgroup>
+    //                 <optgroup label="Teknik Industri">
+    //                 '.$optionsTi.'
+    //                 </optgroup>
+    //                 <optgroup label="Perencanaan Wilayah dan Kota">
+    //                 '.$optionsPwk.'
+    //                 </optgroup>
+    //             </select>
+    //         ';
+
+    //         return $return;
+    //     })
+    //     ->rawColumns(['class_pendidikan','class_jabfung','kelompok_keahlian'])
+    //     ->make(true);
+    // }
+
+    public function updateAllDosen(Request $request)
+    {
+        // $dosen = User::where('level', 2)->get();
+        // // dd($dosen);
+        // foreach($dosen as $d){
+        //     $d->class_pendidikan = $request->class_pendidikan;
+        //     $d->class_jabfung = $request->class_jabfung;
+        //     $d->kelompok_keahlian = $request->kelompok_keahlian;
+        //     // dd($d);
+        //     $d->save();
+        // }
+        
+        // $dataDosen = array();
+
+        // foreach($request->dosen_id as $id){
+        //     $dosen = User::find($id);
+        //     $dataDosen[] = $dosen;
+        // }
+       
+        // $data=[];
+        // $error = 1;
+
+        // for ($i=0; $i < count($request->get('dosen_id')) ; $i++) { 
+        //     $dosenId = 0;
+
+        //     if (!empty($request->get('dosen_id')[$i])) {
+        //         $dosenId=$request->get('dosen_id')[$i];
+        //     }
+
+        //     $data[]=[
+        //         'class_pendidikan'=>$request->get('class_pendidikan')[$i],
+        //         'class_jabfung'=>$request->get('class_jabfung')[$i],
+        //         'kelompok_keahlian'=>$request->get('kelompok_keahlian')[$i]
+        //     ];
+        // }
+
+        // dd($data);
+
+        // if (count($data) > 0) {
+        //     $error='';
+        // }
+
+        // User::upsert($data, ['class_pendidikan', 'class_jabfung', 'kelompok_keahlian']);
+        User::whereIn('id', $request->dosen_id)->update([
+            'class_pendidikan' =>$request->class_pendidikan,
+            'class_jabfung' =>$request->class_jabfung,
+            'kelompok_keahlian' =>$request->kelompok_keahlian,
+        ]);
         return redirect()->route('dosen.index')->with('success', 'Data dosen berhasil diubah!');
     }
 

@@ -11,6 +11,7 @@
                     <div class="btn-group">
                         <button onclick="addForm('{{ route('dosen.store') }}')" class="btn btn-success btn-sm btn-flat"><i class="fa fa-plus-circle"></i> Tambah</button>
                         <a href="{{ route('dosen.import-page') }}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-upload"></i> Import</a>
+                        {{-- <a href="{{ route('dosen.editAll') }}" class="btn btn-warning btn-sm btn-flat"><i class="fa fa-edit"></i> Edit</a> --}}
                         <button onclick="deleteSelected('{{ route('dosen.delete-selected') }}')" class="btn btn-danger btn-sm btn-flat"><i class="fa fa-trash"></i> Hapus</button>
                     </div>
                 </div>

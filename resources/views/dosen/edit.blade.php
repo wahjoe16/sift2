@@ -45,6 +45,77 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label for="class_pendidikan" class="col-lg-2 col-lg-offset-1 control-label">Pendidikan</label>
+                            <div class="col-lg-6">
+                                <select name="class_pendidikan" id="class_pendidikan" class="form-control text-black">
+                                    <option value="">Select</option>
+                                    @foreach ([
+                                    "S2"=>"S2",
+                                    "S3"=>"S3"
+                                    ] as $pendidikan => $pendidikanLabel)
+                                    <option value="{{ $pendidikan }}" {{ old('class_pendidikan', $dosen->class_pendidikan)==$pendidikan ? "selected" : "" }}>{{ $pendidikanLabel }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="class_jabfung" class="col-lg-2 col-lg-offset-1 control-label">Jabatan Fungsional</label>
+                            <div class="col-lg-6">
+                                <select name="class_jabfung" id="class_jabfung" class="form-control text-black">
+                                    <option value="">Select</option>
+                                    @foreach ([
+                                    "Tenaga Pengajar"=>"Tenaga Pengajar",
+                                    "Asisten Ahli"=>"Asisten Ahli",
+                                    "Lektor"=>"Lektor",
+                                    "Lektor Kepala"=>"Lektor Kepala",
+                                    "Guru Besar/Professor"=>"Guru Besar/Professor"
+                                    ] as $jabfung => $jabfungLabel)
+                                    <option value="{{ $jabfung }}" {{ old('class_jabfung', $dosen->class_jabfung)==$jabfung ? "selected" : "" }}>{{ $jabfungLabel }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="class_jabfung" class="col-lg-2 col-lg-offset-1 control-label">Keilmuan</label>
+                            <div class="col-lg-6">
+                                <select name="kelompok_keahlian" id="" class="form-control">
+                                    <option value="">Select</option>
+                                    <optgroup label="Teknik Pertambangan">
+                                        @foreach ([
+                                            "Geologi Eksplorasi"=>"Geologi Eksplorasi", 
+                                            "Tambang Umum"=>"Tambang Umum", 
+                                            "Pengolahan Bahan Galian"=>"Pengolahan Bahan Galian"
+                                        ] as $kelompok_keahlian_tmb=>$kelompok_keahlian_tmbLabel)
+                                        <option value="{{ $kelompok_keahlian_tmb }}" {{ old('kelompok_keahlian', $dosen->kelompok_keahlian)==$kelompok_keahlian_tmb ? "selected" : "" }}>{{ $kelompok_keahlian_tmbLabel }}</option>
+                                        @endforeach
+                                    </optgroup>
+
+                                    <optgroup label="Teknik Industri">
+                                        @foreach ([
+                                            "Keahlian Ergonomi dan Rekayasa Kerja"=>"Keahlian Ergonomi dan Rekayasa Kerja", 
+                                            "Manajemen Industri"=>"Manajemen Industri", 
+                                            "Sistem Industri dan Tekno-Ekonomi"=>"Sistem Industri dan Tekno-Ekonomi",
+                                            "Sistem Manufaktur"=>"Sistem Manufaktur"
+                                        ] as $kelompok_keahlian_ti=>$kelompok_keahlian_tiLabel)
+                                        <option value="{{ $kelompok_keahlian_ti }}" {{ old('kelompok_keahlian', $dosen->kelompok_keahlian)==$kelompok_keahlian_ti ? "selected" : "" }}>{{ $kelompok_keahlian_tiLabel }}</option>
+                                        @endforeach
+                                    </optgroup>
+
+                                    <optgroup label="Perencanaan Wilayah dan Kota">
+                                        @foreach ([
+                                            "Kota"=>"Kota", 
+                                            "Transportasi"=>"Transportasi", 
+                                            "Lingkungan"=>"Lingkungan",
+                                            "Pariwisata"=>"Pariwisata",
+                                            "Rekayasa Pedesaan"=>"Rekayasa Pedesaan"
+                                        ] as $kelompok_keahlian_pwk=>$kelompok_keahlian_pwkLabel)
+                                        <option value="{{ $kelompok_keahlian_pwk }}" {{ old('kelompok_keahlian', $dosen->kelompok_keahlian)==$kelompok_keahlian_pwk ? "selected" : "" }}>{{ $kelompok_keahlian_pwkLabel }}</option>
+                                        @endforeach
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="email" class="col-lg-2 col-lg-offset-1 control-label">Email</label>
                             <div class="col-lg-6">
                                 <input type="email" name="email" id="email" class="form-control" value="{{ $dosen->email }}" autofocus>

@@ -87,6 +87,9 @@ Route::group(['prefix' => '/datamaster'], function () {
         Route::get('/dosen/show/{id}', [UserController::class, 'showDosen'])->name('dosen.show');
         Route::get('/dosen/edit/{id}', [UserController::class, 'editDosen'])->name('dosen.edit');
         Route::post('/dosen/update/{id}', [UserController::class, 'updateDosen'])->name('dosen.update');
+        Route::get('/dosen/edit-all', [UserController::class, 'editAllDosen'])->name('dosen.editAll');
+        // Route::get('/dosen/edit-data', [UserController::class, 'editDataDosen'])->name('dosen.editData');
+        Route::post('/dosen/update-all', [UserController::class, 'updateAllDosen'])->name('dosen.updateAll');
         Route::get('/dosen/delete/{id}', [UserController::class, 'deleteDosen'])->name('dosen.destroy');
         Route::post('/dosen/delete/selected', [UserController::class, 'deleteSelectedDosen'])->name('dosen.delete-selected');
         Route::get('/dosen/page/import', [UserController::class, 'importPageDosen'])->name('dosen.import-page');

@@ -29,7 +29,10 @@ class User extends Authenticatable
         'password',
         'program_studi',
         'level',
-        'tipe_dosen'
+        'tipe_dosen',
+        'class_pendidikan',
+        'class_jabfung',
+        'kelompok_keahlian'
     ];
 
     /**
