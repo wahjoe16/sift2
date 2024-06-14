@@ -860,19 +860,19 @@ class DaftarSeminarController extends Controller
             $npm = $mhs->nik;
             $daftarSeminar = new DaftarSeminar();
 
-            $files = [];
-            for ($i = 1; $i <= 10; $i++) {
-                if ($request->file('syarat_' . $i)) {
-                    $files[] = $request->file('syarat_' . $i);
-                }
-            }
+            // $files = [];
+            // for ($i = 1; $i <= 10; $i++) {
+            //     if ($request->file('syarat_' . $i)) {
+            //         $files[] = $request->file('syarat_' . $i);
+            //     }
+            // }
 
-            foreach ($files as $file) {
-                $path = 'mahasiswa/seminar';
-                $nama = $npm . "_" . time() . "_" . $file->getClientOriginalName();
-                $file->move($path, $nama);
-                $dataFile[] = $nama;
-            }
+            // foreach ($files as $file) {
+            //     $path = 'mahasiswa/seminar';
+            //     $nama = $npm . "_" . time() . "_" . $file->getClientOriginalName();
+            //     $file->move($path, $nama);
+            //     $dataFile[] = $nama;
+            // }
 
             $daftarSeminar->mahasiswa_id = auth()->user()->id;
             $daftarSeminar->program_studi_id = auth()->user()->program_studi;
@@ -882,16 +882,137 @@ class DaftarSeminarController extends Controller
             $daftarSeminar->dosen2_id = $request['dosen2_id'];
             $daftarSeminar->judul_skripsi = $request['judul_skripsi'];
             // $daftarSeminar->tanggal_pengajuan = date('Y-m-d', strtotime($request['tanggal_pengajuan']));
-            $daftarSeminar->syarat_1 = $dataFile[0];
-            $daftarSeminar->syarat_2 = $dataFile[1];
-            $daftarSeminar->syarat_3 = $dataFile[2];
-            $daftarSeminar->syarat_4 = $dataFile[3];
-            $daftarSeminar->syarat_5 = $dataFile[4];
-            $daftarSeminar->syarat_6 = $dataFile[5];
-            $daftarSeminar->syarat_7 = $dataFile[6];
-            $daftarSeminar->syarat_8 = $dataFile[7];
-            $daftarSeminar->syarat_9 = $dataFile[8];
-            $daftarSeminar->syarat_10 = $dataFile[9];
+
+
+            // $daftarSeminar->syarat_1 = $dataFile[0];
+            // $daftarSeminar->syarat_2 = $dataFile[1];
+
+            // if ($request->get('syarat_3') != null) {
+            //     $daftarSeminar->syarat_3 = $dataFile[2];
+            // }else {
+            //     $daftarSeminar->syarat_3 = null;
+            // }
+                        
+            // $daftarSeminar->syarat_4 = $dataFile[3];
+           
+            // if ($request->get('syarat_5') != null) {
+            //     $daftarSeminar->syarat_5 = $dataFile[4];
+            // }else {
+            //     $daftarSeminar->syarat_5 = null;
+            // }
+
+            // $daftarSeminar->syarat_6 = $dataFile[5];
+
+            // if ($request->get('syarat_7') != null) {
+            //     $daftarSeminar->syarat_7 = $dataFile[6];
+            // }else {
+            //     $daftarSeminar->syarat_7 = null;
+            // }  
+            
+            // $daftarSeminar->syarat_8 = $dataFile[7];
+            // $daftarSeminar->syarat_9 = $dataFile[8];
+            // $daftarSeminar->syarat_10 = $dataFile[9];
+
+            // upload syarat 
+            $syarat_1 = $request->file('syarat_1');
+            if (!is_null($syarat_1)) {
+                $nama_syarat_1 = $npm . "_" . time() . "_" . $syarat_1->getClientOriginalName();
+                $syarat_1_path = 'mahasiswa/seminar';
+                $syarat_1->move($syarat_1_path, $nama_syarat_1);
+                $daftarSeminar->syarat_1 = $nama_syarat_1;
+                $daftarSeminar->status_1 = 0;
+            }
+
+            // upload syarat 2
+            $syarat_2 = $request->file('syarat_2');
+            if (!is_null($syarat_2)) {
+                $nama_syarat_2 = $npm . "_" . time() . "_" . $syarat_2->getClientOriginalName();
+                $syarat_2_path = 'mahasiswa/seminar';
+                $syarat_2->move($syarat_2_path, $nama_syarat_2);
+                $daftarSeminar->syarat_2 = $nama_syarat_2;
+                $daftarSeminar->status_2 = 0;
+            }
+
+            // upload syarat 3
+            $syarat_3 = $request->file('syarat_3');
+            if (!is_null($syarat_3)) {
+                $nama_syarat_3 = $npm . "_" . time() . "_" . $syarat_3->getClientOriginalName();
+                $syarat_3_path = 'mahasiswa/seminar';
+                $syarat_3->move($syarat_3_path, $nama_syarat_3);
+                $daftarSeminar->syarat_3 = $nama_syarat_3;
+                $daftarSeminar->status_3 = 0;
+            }
+
+            // upload syarat 
+            $syarat_4 = $request->file('syarat_4');
+            if (!is_null($syarat_4)) {
+                $nama_syarat_4 = $npm . "_" . time() . "_" . $syarat_4->getClientOriginalName();
+                $syarat_4_path = 'mahasiswa/seminar';
+                $syarat_4->move($syarat_4_path, $nama_syarat_4);
+                $daftarSeminar->syarat_4 = $nama_syarat_4;
+                $daftarSeminar->status_4 = 0;
+            }
+
+            // upload syarat 
+            $syarat_5 = $request->file('syarat_5');
+            if (!is_null($syarat_5)) {
+                $nama_syarat_5 = $npm . "_" . time() . "_" . $syarat_5->getClientOriginalName();
+                $syarat_5_path = 'mahasiswa/seminar';
+                $syarat_5->move($syarat_5_path, $nama_syarat_5);
+                $daftarSeminar->syarat_5 = $nama_syarat_5;
+                $daftarSeminar->status_5 = 0;
+            }
+
+            // upload syarat 
+            $syarat_6 = $request->file('syarat_6');
+            if (!is_null($syarat_6)) {
+                $nama_syarat_6 = $npm . "_" . time() . "_" . $syarat_6->getClientOriginalName();
+                $syarat_6_path = 'mahasiswa/seminar';
+                $syarat_6->move($syarat_6_path, $nama_syarat_6);
+                $daftarSeminar->syarat_6 = $nama_syarat_6;
+                $daftarSeminar->status_6 = 0;
+            }
+
+            // upload syarat 
+            $syarat_7 = $request->file('syarat_7');
+            if (!is_null($syarat_7)) {
+                $nama_syarat_7 = $npm . "_" . time() . "_" . $syarat_7->getClientOriginalName();
+                $syarat_7_path = 'mahasiswa/seminar';
+                $syarat_7->move($syarat_7_path, $nama_syarat_7);
+                $daftarSeminar->syarat_7 = $nama_syarat_7;
+                $daftarSeminar->status_7 = 0;
+            }
+
+            // upload syarat 
+            $syarat_8 = $request->file('syarat_8');
+            if (!is_null($syarat_8)) {
+                $nama_syarat_8 = $npm . "_" . time() . "_" . $syarat_8->getClientOriginalName();
+                $syarat_8_path = 'mahasiswa/seminar';
+                $syarat_8->move($syarat_8_path, $nama_syarat_8);
+                $daftarSeminar->syarat_8 = $nama_syarat_8;
+                $daftarSeminar->status_8 = 0;
+            }
+
+            // upload syarat 
+            $syarat_9 = $request->file('syarat_9');
+            if (!is_null($syarat_9)) {
+                $nama_syarat_9 = $npm . "_" . time() . "_" . $syarat_9->getClientOriginalName();
+                $syarat_9_path = 'mahasiswa/seminar';
+                $syarat_9->move($syarat_9_path, $nama_syarat_9);
+                $daftarSeminar->syarat_9 = $nama_syarat_9;
+                $daftarSeminar->status_9 = 0;
+            }
+
+            // upload syarat 
+            $syarat_10 = $request->file('syarat_10');
+            if (!is_null($syarat_10)) {
+                $nama_syarat_10 = $npm . "_" . time() . "_" . $syarat_10->getClientOriginalName();
+                $syarat_10_path = 'mahasiswa/seminar';
+                $syarat_10->move($syarat_10_path, $nama_syarat_10);
+                $daftarSeminar->syarat_10 = $nama_syarat_10;
+                $daftarSeminar->status_10 = 0;
+            }
+
             $daftarSeminar->save();
 
             return redirect()->route('seminar_pwk.index')->with('success', 'Sukses mengajukan pendaftaran sidang pembahasan!');
