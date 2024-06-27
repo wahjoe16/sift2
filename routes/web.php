@@ -5,16 +5,23 @@ use App\Http\Controllers\ApproveSidangController;
 use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\BimbinganController;
 use App\Http\Controllers\CategoryArsipController;
+use App\Http\Controllers\CategorySkkftController;
 use App\Http\Controllers\DaftarSeminarController;
 use App\Http\Controllers\DaftarSidangController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DownloadSeminarController;
 use App\Http\Controllers\DownloadSidangController;
+use App\Http\Controllers\JabatanSkkftController;
+use App\Http\Controllers\KegiatanSkkftController;
 use App\Http\Controllers\MyArchiveController;
+use App\Http\Controllers\PointSkkftController;
+use App\Http\Controllers\PrestasiSkkftController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\SubcategoryArsipController;
+use App\Http\Controllers\SubcategorySkkftController;
 use App\Http\Controllers\TahunAjaranController;
+use App\Http\Controllers\TingkatSkkftController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -111,6 +118,14 @@ Route::group(['prefix' => '/datamaster'], function () {
         Route::resource('sub-category-archive', SubcategoryArsipController::class);
         Route::get('data/sub-category-archive', [SubcategoryArsipController::class, 'data'])->name('sub-category-archive.data');
 
+        // CRUD CATEGORY , SUBCATEGORY, TINGKAT, JABATAN, PRESTASI, POIN SKKFT
+        Route::resource('/category-skkft', CategorySkkftController::class);
+        Route::resource('/subcategory-skkft', SubcategorySkkftController::class);
+        Route::resource('/tingkat-skkft', TingkatSkkftController::class);
+        Route::resource('/jabatan-skkft', JabatanSkkftController::class);
+        Route::resource('/prestasi-skkft', PrestasiSkkftController::class);
+        Route::resource('/poin-skkft', PointSkkftController::class);
+        
         // view pelaksanaan seminar
         Route::get('pelaksanaan-sidang/pembahasan-pwk', [ApproveSeminarController::class, 'viewAdminPwk'])->name('adminPembahasanPwk.index');
         Route::get('pelaksanaan-sidang/pembahasan-pwk-data', [ApproveSeminarController::class, 'viewDataAdminPwk'])->name('adminPembahasanPwk.data');
@@ -188,6 +203,14 @@ Route::group(['prefix' => '/dokumentasi_sidang', 'middleware' => 'ceklevel:3'], 
     Route::get('edit/sidang/pwk/{id}', [DaftarSidangController::class, 'editPwk'])->name('sidang_pwk.edit');
     Route::post('update/sidang/pwk/{id}', [DaftarSidangController::class, 'updatePwk'])->name('sidang_pwk.update');
     Route::get('show/sidang/pwk/{id}', [DaftarSidangController::class, 'showPwk'])->name('sidang_pwk.show');
+    
+});
+
+// SKKFT
+Route::group(['prefix' => '/skkft'], function(){
+    Route::group(['middleware' => 'ceklevel:3'], function(){
+        Route::resource('/kegiatan', KegiatanSkkftController::class);
+    });
 });
 
 // Dokumentasi Sidang Role DOSEN
