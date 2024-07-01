@@ -36,6 +36,7 @@
                 </a>
             </li>
 
+            {{-- Menu Untuk Mahasiswa --}}
             @if (auth()->user()->level == 3)
 
                 <li class="header">SKKFT</li>
@@ -46,6 +47,7 @@
                 </li>
 
                 <li class="header">Pelaksanaan Sidang</li>
+                {{-- Menu Pelaksanaan Sidang Untuk Mahasiswa Tambang --}}
                 @if (auth()->user()->level == 3 && auth()->user()->program_studi == 'Teknik Pertambangan')
                     <li>
                         <a href="{{ route('seminar_tmb.index') }}" @if(Session::get('page')=='indexKolokium' ) style="background: #3c8dbc !important; color:white !important" @endif>
@@ -58,7 +60,9 @@
                         </a>
                     </li>
                 @endif
+                {{-- Akhir Menu Pelaksanaan Sidang Untuk Mahasiswa Tambang --}}
 
+                {{-- Menu Pelaksanaan Sidang Untuk Mahasiswa Industri --}}
                 @if (auth()->user()->level == 3 && auth()->user()->program_studi == 'Teknik Industri')
                     <li>
                         <a href="{{ route('seminar_ti.index') }}" @if(Session::get('page')=='seminarTA' ) style="background: #3c8dbc !important; color:white !important" @endif>
@@ -71,7 +75,9 @@
                         </a>
                     </li>
                 @endif
+                {{-- Akhir Menu Pelaksanaan Sidang Untuk Mahasiswa Industri --}}
 
+                {{-- Menu Pelaksanaan Sidang Untuk Mahasiswa Perencanaan Wilayah dan Kota --}}
                 @if (auth()->user()->level == 3 && auth()->user()->program_studi == 'Perencanaan Wilayah dan Kota')
                     <li>
                         <a href="{{ route('seminar_pwk.index') }}" @if(Session::get('page')=='SP' ) style="background: #3c8dbc !important; color:white !important" @endif>
@@ -84,9 +90,12 @@
                         </a>
                     </li>
                 @endif
-            @endif
-            
+                {{-- Akhir Menu Pelaksanaan Sidang Untuk Mahasiswa Perencanaan Wilayah dan Kota --}}
 
+            @endif
+            {{-- Akhir Menu Untuk Mahasiswa --}}
+            
+            {{-- Menu Pelaksanaan Sidang Untuk Koordinator Skripsi Tambang --}}
             @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Teknik Pertambangan' && auth()->user()->status_koordinator_skripsi == 1)
                 <li class="header">Kolokium Skripsi</li>
                 <li>
@@ -111,7 +120,9 @@
                     </a>
                 </li>
             @endif
-
+            {{-- Akhir Menu Pelaksanaan Sidang Untuk Koordinator Skripsi Tambang --}}
+            
+            {{-- Menu Pelaksanaan Sidang Untuk Kaprodi Tambang --}}
             @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Teknik Pertambangan' && auth()->user()->status_kaprodi == 1 || auth()->user()->status_sekprodi == 1)
                 <li class="header">Data Lulusan</li>
                 <li>
@@ -120,7 +131,9 @@
                     </a>
                 </li>
             @endif
-
+            {{-- Akhir Menu Pelaksanaan Sidang Untuk Kaprodi Tambang --}}
+            
+            {{-- Menu Pelaksanaan Sidang Untuk Koordinator Skripsi Industri --}}
             @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Teknik Industri' && auth()->user()->status_koordinator_skripsi == 1)
                 <li class="header">Seminar Tugas Akhir</li>
                 <li>
@@ -145,7 +158,9 @@
                     </a>
                 </li>
             @endif
-
+            {{-- Akhir Menu Pelaksanaan Sidang Untuk Koordinator Skripsi Industri --}}
+            
+            {{-- Menu Pelaksanaan Sidang Untuk Kaprodi Teknik Industri --}}
             @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Teknik Industri' && auth()->user()->status_kaprodi == 1 || auth()->user()->status_sekprodi == 1)
                 <li class="header">Data Lulusan</li>
                 <li>
@@ -154,7 +169,9 @@
                     </a>
                 </li>
             @endif
-
+            {{-- Akhir Menu Pelaksanaan Sidang Untuk Kaprodi Teknik Industri --}}
+            
+            {{-- Menu Pelaksanaan Sidang Untuk Koordinator Skripsi Perencanaan Wilayah dan Kota --}}
             @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Perencanaan Wilayah dan Kota' && auth()->user()->status_koordinator_skripsi == 1)
                 <li class="header">Sidang Pembahasan</li>
                 <li>
@@ -184,7 +201,9 @@
                     </a>
                 </li>
             @endif
+            {{-- Akhir Menu Pelaksanaan Sidang Untuk Koordinator Skripsi Perencanaan Wilayah dan Kota --}}
 
+            {{-- Menu Pelaksanaan Sidang Untuk Kaprodi Perencanaan Wilayah dan Kota --}}
             @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Perencanaan Wilayah dan Kota' && auth()->user()->status_kaprodi == 1 || auth()->user()->status_sekprodi == 1)
                 <li class="header">Data Lulusan</li>
                 <li>
@@ -193,9 +212,12 @@
                     </a>
                 </li>
             @endif
-
+            {{-- Akhir Menu Pelaksanaan Sidang Untuk Kaprodi Perencanaan Wilayah dan Kota --}}
+            
+            {{-- Menu Untuk Dosen --}}
             @if (auth()->user()->level == 2)
                 <li class="header">Bimbingan</li>
+                    {{-- Menu Pembimbingan Dosen Tambang --}}
                     @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Teknik Pertambangan')
                         <li>
                             <a href="{{ route('bimbinganTmb.index') }}" @if(Session::get('page')=='bimbinganTmb' ) style="background: #3c8dbc !important; color:white !important" @endif>
@@ -203,7 +225,9 @@
                             </a>
                         </li>
                     @endif
-
+                    {{-- Akhir Menu Pembimbingan Dosen Tambang --}}
+                    
+                    {{-- Menu Pembimbingan Dosen TI --}}
                     @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Teknik Industri')
                         <li>
                             <a href="{{ route('bimbinganTi.index') }}" @if(Session::get('page')=='bimbinganTi' ) style="background: #3c8dbc !important; color:white !important" @endif>
@@ -211,7 +235,9 @@
                             </a>
                         </li>
                     @endif
+                    {{-- Akhir Menu Pembimbingan Dosen TI --}}
 
+                    {{-- Menu Pembimbingan Dosen PWK --}}
                     @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Perencanaan Wilayah dan Kota')
                         <li>
                             <a href="{{ route('bimbinganPwk.index') }}" @if(Session::get('page')=='bimbinganPwk' ) style="background: #3c8dbc !important; color:white !important" @endif>
@@ -219,6 +245,7 @@
                             </a>
                         </li>
                     @endif
+                    {{-- Akhir Menu Pembimbingan Dosen PWK --}}
 
                 <li class="header">Arsip</li>
                 <li>
@@ -237,7 +264,9 @@
                     </a>
                 </li>
             @endif
-
+            {{-- Akhir Menu untuk Dosen --}}
+            
+            {{-- Menu Untuk Superadmin --}}
             @if (auth()->user()->level == 1 && auth()->user()->status_superadmin == 1)
                 <li class="header">Data User</li>
                 <li>
@@ -291,8 +320,58 @@
                         <i class="fa fa-check-square"></i> <span>Sidang Terbuka</span>
                     </a>
                 </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-graduation-cap"></i>
+                        <span>SKKFT</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li>
+                            <a href="{{ route('dashboardSkkft.index') }}" @if(Session::get('page')=='indexCatSkkft' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                <i class="fa fa-dashboard"></i> <span>Dashboard SKKFT</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('category-skkft.index') }}" @if(Session::get('page')=='indexCatSkkft' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                <i class="fa fa-cube"></i> <span>Kategori SKKFT</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('subcategory-skkft.index') }}" @if(Session::get('page')=='indexSubcatSkkft' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                <i class="fa fa-cubes"></i> <span>Sub Kategori SKKFT</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('tingkat-skkft.index') }}" @if(Session::get('page')=='indexTingkatSkkft' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                <i class="fa fa-line-chart"></i> <span>Tingkat SKKFT</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('jabatan-skkft.index') }}" @if(Session::get('page')=='indexJabatanSkkft' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                <i class="fa fa-shield"></i> <span>Jabatan SKKFT</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('prestasi-skkft.index') }}" @if(Session::get('page')=='indexPrestasiSkkft' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                <i class="fa fa-trophy"></i> <span>Prestasi SKKFT</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('poin-skkft.index') }}" @if(Session::get('page')=='indexPoinSkkft' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                <i class="fa fa-circle-o"></i> <span>Poin SKKFT</span>
+                            </a>
+                        </li>
+                    </ul>
+                    
+                </li>
+                
             @endif
-
+            {{-- Akhir Menu untuk Superadmin --}}
+            
+            {{-- Menu Untuk Admin --}}
             @if (auth()->user()->level == 1)
                 <li class="header">Data Arsip</li>
                 <li>
@@ -306,6 +385,7 @@
                     </a>
                 </li>
 
+                {{-- Menu Untuk Admin Fakultas --}}
                 @if (auth()->user()->program_studi == '' && auth()->user()->status_superadmin == 0)
                     <li class="header">Pelaksanaan Sidang</li>
                     <li>
@@ -339,8 +419,9 @@
                         </a>
                     </li>
                 @endif
+                {{-- Akhir Menu Untuk Admin Fakultas --}}
 
-
+                {{-- Menu Pelaksanaan Sidang Untuk Admin Program Studi Tambang --}}
                 @if (auth()->user()->level == 1 && auth()->user()->program_studi == 'Teknik Pertambangan')
                     <li class="header">Pelaksanaan Sidang</li>
                     <li>
@@ -354,7 +435,9 @@
                         </a>
                     </li>
                 @endif
+                {{-- Akhir Menu Pelaksanaan Sidang Untuk Admin Program Studi Tambang --}}
 
+                {{-- Menu Pelaksanaan Sidang Untuk Admin Program Studi Teknik Industri --}}
                 @if (auth()->user()->level == 1 && auth()->user()->program_studi == 'Teknik Industri')
                     <li class="header">Pelaksanaan Sidang</li>
                     <li>
@@ -368,7 +451,9 @@
                         </a>
                     </li>
                 @endif
+                {{-- Akhir Menu Pelaksanaan Sidang Untuk Admin Program Studi Teknik Industri --}}
 
+                {{-- Menu Pelaksanaan Sidang Untuk Admin Program Studi PWK --}}
                 @if (auth()->user()->level == 1 && auth()->user()->program_studi == 'Perencanaan Wilayah dan Kota')
                     <li class="header">Pelaksanaan Sidang</li>
                     <li>
@@ -382,6 +467,7 @@
                         </a>
                     </li>
                 @endif
+                {{-- Akhir Menu Pelaksanaan Sidang Untuk Admin Program Studi PWK --}}
 
                 <li class="header">Data Master</li>
                 <li>
@@ -409,38 +495,9 @@
                         <i class="fa fa-navicon"></i> <span>Sub Kategori Arsip</span>
                     </a>
                 </li>
-                <li class="header">SKKFT</li>
-                <li>
-                    <a href="{{ route('category-skkft.index') }}" @if(Session::get('page')=='indexCatSkkft' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                        <i class="fa fa-navicon"></i> <span>Kategori SKKFT</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('subcategory-skkft.index') }}" @if(Session::get('page')=='indexSubcatSkkft' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                        <i class="fa fa-navicon"></i> <span>Sub Kategori SKKFT</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('tingkat-skkft.index') }}" @if(Session::get('page')=='indexTingkatSkkft' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                        <i class="fa fa-navicon"></i> <span>Tingkat SKKFT</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('jabatan-skkft.index') }}" @if(Session::get('page')=='indexJabatanSkkft' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                        <i class="fa fa-navicon"></i> <span>Jabatan SKKFT</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('prestasi-skkft.index') }}" @if(Session::get('page')=='indexPrestasiSkkft' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                        <i class="fa fa-navicon"></i> <span>Prestasi SKKFT</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('poin-skkft.index') }}" @if(Session::get('page')=='indexPoinSkkft' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                        <i class="fa fa-navicon"></i> <span>Poin SKKFT</span>
-                    </a>
-                </li>
+                
             @endif
+            {{-- Akhir Menu Untuk Admin --}}
 
             @if (auth()->user()->level == 1 && auth()->user()->status_superadmin == 0)
                 <li class="header">Data User</li>

@@ -11,6 +11,11 @@ class Kegiatan extends Model
     protected $table = 'kegiatan';
     protected $guarded = [];
 
+    public function user_skkft()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+    
     public function categories_skkft()
     {
         return $this->belongsTo(CategorySkkft::class, 'category_id', 'id');

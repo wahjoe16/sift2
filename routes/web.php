@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ApproveSeminarController;
 use App\Http\Controllers\ApproveSidangController;
+use App\Http\Controllers\ApproveSkkftController;
 use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\BimbinganController;
 use App\Http\Controllers\CategoryArsipController;
@@ -157,6 +158,13 @@ Route::group(['prefix' => '/datamaster'], function () {
         Route::get('/data-user/admin', [UserController::class, 'tendikAdmin'])->name('tendikAdmin');
         Route::get('/data-user/admin-data', [UserController::class, 'tendikDataAdmin'])->name('tendikDataAdmin');
     });
+});
+
+Route::group(['prefix'=>'/skkft', 'middleware'=>'ceklevel:1'], function(){
+    Route::get('/dashboard-skkft', [ApproveSkkftController::class, 'index'])->name('dashboardSkkft.index');
+    Route::get('/approve-skkft/{id}', [ApproveSkkftController::class, 'edit'])->name('approveKegiatan.edit');
+    Route::post('/update-skkft/{id}', [ApproveSkkftController::class, 'update'])->name('approveKegiatan.update');
+    Route::delete('/delete-skkft/{id}', [ApproveSkkftController::class, 'delete'])->name('approveKegiatan.destroy');
 });
 
 // Dokumentasi Sidang Role MAHASISWA
@@ -341,13 +349,6 @@ Route::group(['prefix' => '/dokumentasi_sidang', 'middleware' => 'ceklevel:1,2']
     Route::get('rekap-sidang/pwk/dwnld', [DownloadSidangController::class, 'indexPwk'])->name('sidangPwkDownload.index');
     Route::get('rekap-sidang/pwk/dwnld/data', [DownloadSidangController::class, 'dataPwk'])->name('sidangPwkDownload.data');
 });
-
-
-
-
-
-
-
 
 // Route::middleware([
 //     'auth:sanctum',
