@@ -19,11 +19,13 @@ use App\Http\Controllers\PointSkkftController;
 use App\Http\Controllers\PrestasiSkkftController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\SemesterController;
+use App\Http\Controllers\SertifikatSkkftController;
 use App\Http\Controllers\SubcategoryArsipController;
 use App\Http\Controllers\SubcategorySkkftController;
 use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\TingkatSkkftController;
 use App\Http\Controllers\UserController;
+use App\Models\SertifikatSkkft;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -162,11 +164,20 @@ Route::group(['prefix' => '/datamaster'], function () {
     Route::get('dropdownlist/subcategory-skkft/{id}', [SubcategorySkkftController::class, 'getDataSubCategory'])->name('get-subcategoryskkft.data');
 });
 
-Route::group(['prefix'=>'/skkft', 'middleware'=>'ceklevel:1'], function(){
-    Route::get('/dashboard-skkft', [ApproveSkkftController::class, 'index'])->name('dashboardSkkft.index');
-    Route::get('/approve-skkft/{id}', [ApproveSkkftController::class, 'edit'])->name('approveKegiatan.edit');
-    Route::post('/update-skkft/{id}', [ApproveSkkftController::class, 'update'])->name('approveKegiatan.update');
-    Route::delete('/delete-skkft/{id}', [ApproveSkkftController::class, 'delete'])->name('approveKegiatan.destroy');
+Route::group(['prefix'=>'/skkft'], function(){
+    Route::group(['middleware'=>'ceklevel:1'], function(){
+        Route::get('/dashboard-skkft', [ApproveSkkftController::class, 'index'])->name('dashboardSkkft.index');
+        Route::get('/approve-skkft/{id}', [ApproveSkkftController::class, 'edit'])->name('approveKegiatan.edit');
+        Route::post('/update-skkft/{id}', [ApproveSkkftController::class, 'update'])->name('approveKegiatan.update');
+        Route::delete('/delete-skkft/{id}', [ApproveSkkftController::class, 'delete'])->name('approveKegiatan.destroy');
+    });
+    
+    Route::group(['middleware'=>'ceklevel:2'], function(){
+        Route::get('/sertifikat', [SertifikatSkkftController::class, 'index'])->name('sertifikat.index');
+        Route::get('/sertifikat-show/{id}', [SertifikatSkkftController::class, 'show'])->name('sertifikat.show');
+        Route::post('/sertifikat/{id}', [SertifikatSkkftController::class, 'verify'])->name('sertifikat.verify');
+        Route::post('/sertifikat-reject/{id}', [SertifikatSkkftController::class, 'reject'])->name('sertifikat.reject');
+    });
 });
 
 // Dokumentasi Sidang Role MAHASISWA
@@ -222,6 +233,7 @@ Route::group(['prefix' => '/skkft'], function(){
         Route::resource('/kegiatan', KegiatanSkkftController::class);
         Route::get('/kegiatan-summary-data', [KegiatanSkkftController::class, 'dataSkkft'])->name('kegiatan.data');
         Route::get('/kegiatan-summary', [KegiatanSkkftController::class, 'summary'])->name('kegiatan.summary');
+        Route::post('/sertifikat-store', [SertifikatSkkftController::class, 'store'])->name('sertifikat.store');
     });
 });
 

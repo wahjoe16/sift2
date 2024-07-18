@@ -8,7 +8,7 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3>Rangkuman SKKFT {{ auth()->user()->nama }}</h3>
+                    <h3>Rangkuman SKKFT <strong>{{ auth()->user()->nama }}</strong></h3>
                 </div>
                 <div class="box-body table-responsive">
                     <div class="row">
@@ -46,9 +46,55 @@
                                         </tr>
                                     @endforeach
                                         <tr>
-                                            <td></td>
-                                            <td class="text-right"><b>Total Poin</b></td>
-                                            <td><b>{{ $totalPoin }}</b></td>
+                                            <td class="text-right" colspan="2"><b>Total Poin</b></td>
+                                            <td colspan="2"><b>{{ $totalPoin }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            @if (
+                                                is_null($dataSertifikat) &&
+                                                $totalPoin >= 150 &&
+                                                ($poinKategori['1']['poin'] >= 40) &&
+                                                ($poinKategori['3']['poin'] >= 30) &&
+                                                ($poinKategori['4']['poin'] >= 30) &&
+                                                ($poinKategori['5']['poin'] >= 15) &&
+                                                ($poinKategori['6']['poin'] >= 10) &&
+                                                ($poinKategori['7']['poin'] >= 15)
+                                            )
+                                                <td colspan="2" class="text-center">
+                                                    <form action="{{ route('sertifikat.store') }}" method="POST">@csrf
+                                                        <button type="submit" class="btn btn-flat btn-md btn-success">Ajukan Sertifikat</button>
+                                                    </form>
+                                                </td>
+                                                <td colspan="2" class="text-center">
+                                                    <form action="" method="POST">
+                                                        <button type="submit" class="btn btn-flat btn-md btn-info">Ajukan SKPI</button>
+                                                    </form>
+                                                </td>
+                                            @elseif (!is_null($dataSertifikat) &&
+                                                    $totalPoin >= 150 &&
+                                                    ($poinKategori['1']['poin'] >= 40) &&
+                                                    ($poinKategori['3']['poin'] >= 30) &&
+                                                    ($poinKategori['4']['poin'] >= 30) &&
+                                                    ($poinKategori['5']['poin'] >= 15) &&
+                                                    ($poinKategori['6']['poin'] >= 10) &&
+                                                    ($poinKategori['7']['poin'] >= 15)
+                                            )
+                                                <td colspan="2" class="text-center">
+                                                    <button type="submit" class="btn btn-flat btn-md btn-success" disabled>Ajukan Sertifikat</button>
+                                                </td>
+                                                <td colspan="2" class="text-center">
+                                                    <form action="" method="POST">
+                                                        <button type="submit" class="btn btn-flat btn-md btn-info">Ajukan SKPI</button>
+                                                    </form>
+                                                </td>
+                                            @else
+                                                <td colspan="2" class="text-center">
+                                                    <button type="submit" class="btn btn-flat btn-md btn-success" disabled>Ajukan Sertifikat</button>
+                                                </td>
+                                                <td colspan="2" class="text-center">
+                                                    <button type="submit" class="btn btn-flat btn-md btn-info" disabled>Ajukan SKPI</button>
+                                                </td>
+                                            @endif
                                         </tr>
                                 </tbody>
                             </table>

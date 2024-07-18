@@ -6,6 +6,7 @@ use App\Models\CategorySkkft;
 use App\Models\Jabatan;
 use App\Models\Kegiatan;
 use App\Models\PrestasiSkkft;
+use App\Models\SertifikatSkkft;
 use App\Models\SubcategorySkkft;
 use App\Models\Tingkat;
 use Illuminate\Http\Request;
@@ -148,6 +149,7 @@ class KegiatanSkkftController extends Controller
         $data->tingkat_id = $request->tingkat_id;
         $data->prestasi_id = $request->prestasi_id;
         $data->jabatan_id = $request->jabatan_id;
+        $data->status_skkft = 0;
 
         // update bukti fisik
         if($data->bukti_fisik !== ''){
@@ -180,7 +182,11 @@ class KegiatanSkkftController extends Controller
      public function summary()
     {
         Session::put('page', 'summaryKegiatanSkkft');
+        // $title = "Ajukan Sertifikat SKKFT!";
+        // $text = "Apakah anda Yakin?";
+        // confirmDelete($title, $text);
         $data = Kegiatan::where('user_id', auth()->user()->id)->get();
+        $dataSertifikat = SertifikatSkkft::where('user_id', auth()->user()->id)->first();
 
         $poinPerKategori = "
                             select category_skkft.id, category_skkft.category_name, sum(kegiatan.point) as poin from kegiatan
@@ -221,7 +227,7 @@ class KegiatanSkkftController extends Controller
             ];
         }
 
-        return view('kegiatan_skkft.summary', compact('data', 'dataPoin', 'poinKategori', 'totalPoin'));
+        return view('kegiatan_skkft.summary', compact('data', 'dataSertifikat', 'dataPoin', 'poinKategori', 'totalPoin'));
     }
 
     public function dataSkkft()
