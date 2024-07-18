@@ -16,7 +16,7 @@
 
 <section class="content">
     <div class="row">
-        <div class="col-12">
+        <div class="col-md-12">
             <div class="box box-warning">
                 <div class="box-header with-border">
                     <h3>Download Dokumen Kolokium Skripsi</h3>

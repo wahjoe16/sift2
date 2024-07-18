@@ -108,4 +108,10 @@ class SubcategorySkkftController extends Controller
         SubcategorySkkft::find($id)->delete();
         return redirect()->back()->with('danger', 'Sub Kategori SKKFT berhasil dihapus!');
     }
+
+    public function getDataSubCategory($id)
+    {
+        $data = SubcategorySkkft::where('category_id', $id)->pluck('subcategory_name', 'id');
+        return response()->json($data);
+    }
 }

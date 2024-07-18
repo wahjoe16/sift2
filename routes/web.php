@@ -158,6 +158,8 @@ Route::group(['prefix' => '/datamaster'], function () {
         Route::get('/data-user/admin', [UserController::class, 'tendikAdmin'])->name('tendikAdmin');
         Route::get('/data-user/admin-data', [UserController::class, 'tendikDataAdmin'])->name('tendikDataAdmin');
     });
+
+    Route::get('dropdownlist/subcategory-skkft/{id}', [SubcategorySkkftController::class, 'getDataSubCategory'])->name('get-subcategoryskkft.data');
 });
 
 Route::group(['prefix'=>'/skkft', 'middleware'=>'ceklevel:1'], function(){
@@ -218,6 +220,8 @@ Route::group(['prefix' => '/dokumentasi_sidang', 'middleware' => 'ceklevel:3'], 
 Route::group(['prefix' => '/skkft'], function(){
     Route::group(['middleware' => 'ceklevel:3'], function(){
         Route::resource('/kegiatan', KegiatanSkkftController::class);
+        Route::get('/kegiatan-summary-data', [KegiatanSkkftController::class, 'dataSkkft'])->name('kegiatan.data');
+        Route::get('/kegiatan-summary', [KegiatanSkkftController::class, 'summary'])->name('kegiatan.summary');
     });
 });
 

@@ -8,7 +8,7 @@
 <section class="content">
     @includeIf('layouts.alert')
     <div class="row">
-        <div class="col-12">
+        <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">Arsip Umum Fakultas Teknik</h3>

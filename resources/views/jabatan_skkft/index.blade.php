@@ -5,7 +5,7 @@
 <section class="content">
     @includeIf('layouts.alert')
     <div class="row">
-        <div class="col-12">
+        <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
                     <div class="btn-group">

@@ -55,21 +55,21 @@
                         <li class="list-group-item">
                             <b>Status SKKFT</b> 
                             @if ($kegiatan->status_skkft == 0)
-                                <p class="pull-right">Menunggu Verifikasi</p>
+                                <p class="pull-right"><span class="label bg-yellow text-black">Menunggu Verifikasi</span></p>
                             @elseif ($kegiatan->status_skkft == 1)
-                                <p class="pull-right">Diterima</p>
+                                <p class="pull-right"><span class="label bg-green">Diterima</span></p>
                             @else
-                            <p class="pull-right">Ditolak</p>
+                            <p class="pull-right"><span class="label bg-red">Ditolak</span></p>
                             @endif
                         </li>
                         <li class="list-group-item">
                             <b>Status SKPI</b> 
                             @if ($kegiatan->status_skpi == 0)
-                                <p class="pull-right">Menunggu Verifikasi</p>
+                                <p class="pull-right"><span class="label bg-yellow text-black">Menunggu Verifikasi</span></p>
                             @elseif ($kegiatan->status_skpi == 1)
-                                <p class="pull-right">Ya</p>
+                                <p class="pull-right"><span class="label bg-green">Ya</span></p>
                             @else
-                            <p class="pull-right">Tidak</p>
+                            <p class="pull-right"><span class="label bg-red">Tidak</span></p>
                             @endif
                         </li>
                         @if ($kegiatan->keterangan != '')

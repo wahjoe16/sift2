@@ -5,7 +5,7 @@
 <section class="content">
     @includeIf('layouts.alert')
     <div class="row">
-        <div class="col-12">
+        <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
                     <div class="btn-group">
@@ -55,11 +55,11 @@
                                         <td>-</td>
                                     @endif
                                     @if ($k->status_skkft == 0)
-                                        <td>Menunggu</td>
+                                        <td><span class="label bg-yellow text-black">Menunggu</span></td>
                                         @elseif ($k->status_skkft == 1)
-                                        <td>Diterima</td>
+                                        <td><span class="label bg-green">Diterima</span></td>
                                         @elseif ($k->status_skkft == 2)
-                                        <td>Ditolak</td>
+                                        <td><span class="label bg-red">Ditolak</span></td>
                                     @endif
                                     <td>
                                         <a href="{{ route('kegiatan.show', $k->id) }}" class="btn btn-info btn-sm btn-flat"><i class="fa fa-search"></i></a>

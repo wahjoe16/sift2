@@ -105,4 +105,30 @@
     })
 </script>
 
+<script>
+    jQuery(document).ready(function() {
+        
+        jQuery('select[name="category_id"]').on('change', function() {
+            var subcategory = jQuery(this).val();
+            if (subcategory) {
+                jQuery.ajax({
+                    url: '/datamaster/dropdownlist/subcategory-skkft/' + subcategory,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log(data);
+                        jQuery('select[name="subcategory_id"]').empty();
+                        jQuery.each(data, function(key, value) {
+                            $('select[name="subcategory_id"]').append('<option value="' + key + '">' + value + '</option>');
+                        })
+                    }
+                })
+            } else {
+                $('select[name="subcategory_id"]').empty();
+            }
+        })
+
+    })
+</script>
+
 @endpush

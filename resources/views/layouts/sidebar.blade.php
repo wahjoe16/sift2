@@ -39,231 +39,281 @@
             {{-- Menu Untuk Mahasiswa --}}
             @if (auth()->user()->level == 3)
 
-                <li class="header">SKKFT</li>
-                <li>
-                    <a href="{{ route('kegiatan.index') }}" @if(Session::get('page')=='indexKegiatanSkkft') style="background: #3c8dbc !important; color:white !important" @endif>
-                        <i class="fa fa-leanpub"></i> <span>Kegiatan SKKFT</span>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-street-view"></i>
+                        <span>SKKFT</span>
+                        <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                        </span>
                     </a>
+                    <ul class="treeview-menu">
+                        <li>
+                            <a href="{{ route('kegiatan.index') }}" @if(Session::get('page')=='indexKegiatanSkkft') style="background: #3c8dbc !important; color:white !important" @endif>
+                                <i class="fa fa-leanpub"></i> <span>Kegiatan SKKFT</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('kegiatan.summary') }}" @if(Session::get('page')=='summaryKegiatanSkkft') style="background: #3c8dbc !important; color:white !important" @endif>
+                                <i class="fa fa-database"></i> <span>Rangkuman Kegiatan SKKFT</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
+                
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-graduation-cap"></i>
+                        <span>Pelaksanaan Sidang</span>
+                        <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        {{-- Menu Pelaksanaan Sidang Untuk Mahasiswa Tambang --}}
+                        @if (auth()->user()->level == 3 && auth()->user()->program_studi == 'Teknik Pertambangan')
+                            <li>
+                                <a href="{{ route('seminar_tmb.index') }}" @if(Session::get('page')=='indexKolokium' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                    <i class="fa fa-upload"></i> <span>Kolokium Skripsi</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('sidang_tmb.index') }}" @if(Session::get('page')=='indexSkripsi' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                    <i class="fa  fa-file-text"></i> <span>Sidang Skripsi</span>
+                                </a>
+                            </li>
+                        @endif
+                        {{-- Akhir Menu Pelaksanaan Sidang Untuk Mahasiswa Tambang --}}
 
-                <li class="header">Pelaksanaan Sidang</li>
-                {{-- Menu Pelaksanaan Sidang Untuk Mahasiswa Tambang --}}
-                @if (auth()->user()->level == 3 && auth()->user()->program_studi == 'Teknik Pertambangan')
-                    <li>
-                        <a href="{{ route('seminar_tmb.index') }}" @if(Session::get('page')=='indexKolokium' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                            <i class="fa fa-upload"></i> <span>Kolokium Skripsi</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('sidang_tmb.index') }}" @if(Session::get('page')=='indexSkripsi' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                            <i class="fa  fa-file-text"></i> <span>Sidang Skripsi</span>
-                        </a>
-                    </li>
-                @endif
-                {{-- Akhir Menu Pelaksanaan Sidang Untuk Mahasiswa Tambang --}}
+                        {{-- Menu Pelaksanaan Sidang Untuk Mahasiswa Industri --}}
+                        @if (auth()->user()->level == 3 && auth()->user()->program_studi == 'Teknik Industri')
+                            <li>
+                                <a href="{{ route('seminar_ti.index') }}" @if(Session::get('page')=='seminarTA' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                    <i class="fa fa-upload"></i> <span>Seminar Tugas Akhir</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('sidang_ti.index') }}" @if(Session::get('page')=='sidangTA' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                    <i class="fa  fa-file-text"></i> <span>Sidang Tugas Akhir</span>
+                                </a>
+                            </li>
+                        @endif
+                        {{-- Akhir Menu Pelaksanaan Sidang Untuk Mahasiswa Industri --}}
 
-                {{-- Menu Pelaksanaan Sidang Untuk Mahasiswa Industri --}}
-                @if (auth()->user()->level == 3 && auth()->user()->program_studi == 'Teknik Industri')
-                    <li>
-                        <a href="{{ route('seminar_ti.index') }}" @if(Session::get('page')=='seminarTA' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                            <i class="fa fa-upload"></i> <span>Seminar Tugas Akhir</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('sidang_ti.index') }}" @if(Session::get('page')=='sidangTA' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                            <i class="fa  fa-file-text"></i> <span>Sidang Tugas Akhir</span>
-                        </a>
-                    </li>
-                @endif
-                {{-- Akhir Menu Pelaksanaan Sidang Untuk Mahasiswa Industri --}}
-
-                {{-- Menu Pelaksanaan Sidang Untuk Mahasiswa Perencanaan Wilayah dan Kota --}}
-                @if (auth()->user()->level == 3 && auth()->user()->program_studi == 'Perencanaan Wilayah dan Kota')
-                    <li>
-                        <a href="{{ route('seminar_pwk.index') }}" @if(Session::get('page')=='SP' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                            <i class="fa fa-upload"></i> <span>Sidang Pembahasan</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('sidang_pwk.index') }}" @if(Session::get('page')=='ST' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                            <i class="fa  fa-file-text"></i> <span>Sidang Terbuka</span>
-                        </a>
-                    </li>
-                @endif
-                {{-- Akhir Menu Pelaksanaan Sidang Untuk Mahasiswa Perencanaan Wilayah dan Kota --}}
+                        {{-- Menu Pelaksanaan Sidang Untuk Mahasiswa Perencanaan Wilayah dan Kota --}}
+                        @if (auth()->user()->level == 3 && auth()->user()->program_studi == 'Perencanaan Wilayah dan Kota')
+                            <li>
+                                <a href="{{ route('seminar_pwk.index') }}" @if(Session::get('page')=='SP' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                    <i class="fa fa-upload"></i> <span>Sidang Pembahasan</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('sidang_pwk.index') }}" @if(Session::get('page')=='ST' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                    <i class="fa  fa-file-text"></i> <span>Sidang Terbuka</span>
+                                </a>
+                            </li>
+                        @endif
+                        {{-- Akhir Menu Pelaksanaan Sidang Untuk Mahasiswa Perencanaan Wilayah dan Kota --}}
+                    </ul>
+                </li>
 
             @endif
             {{-- Akhir Menu Untuk Mahasiswa --}}
             
-            {{-- Menu Pelaksanaan Sidang Untuk Koordinator Skripsi Tambang --}}
-            @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Teknik Pertambangan' && auth()->user()->status_koordinator_skripsi == 1)
-                <li class="header">Kolokium Skripsi</li>
-                <li>
-                    <a href="{{ route('view-seminarTmb.index') }}" @if(Session::get('page')=='appKolokium' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                        <i class="fa fa-upload"></i> <span>Pengajuan</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('rekap-seminarTmb.index') }}" @if(Session::get('page')=='rekapKolokium' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                        <i class="fa  fa-file-text"></i> <span>Rekapitulasi</span>
-                    </a>
-                </li>
-                <li class="header">Sidang Skripsi</li>
-                <li>
-                    <a href="{{ route('view-sidangTmb.index') }}" @if(Session::get('page')=='appSkripsi' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                        <i class="fa fa-upload"></i> <span>Pengajuan</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('rekap-sidangTmb.index') }}" @if(Session::get('page')=='rekapSkripsi' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                        <i class="fa  fa-file-text"></i> <span>Rekapitulasi</span>
-                    </a>
-                </li>
-            @endif
-            {{-- Akhir Menu Pelaksanaan Sidang Untuk Koordinator Skripsi Tambang --}}
-            
-            {{-- Menu Pelaksanaan Sidang Untuk Kaprodi Tambang --}}
-            @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Teknik Pertambangan' && auth()->user()->status_kaprodi == 1 || auth()->user()->status_sekprodi == 1)
-                <li class="header">Data Lulusan</li>
-                <li>
-                    <a href="{{ route('rekap-sidangTmb.index') }}" @if(Session::get('page')=='rekapSkripsi' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                        <i class="fa  fa-file-text"></i> <span>Rekap Lulusan</span>
-                    </a>
-                </li>
-            @endif
-            {{-- Akhir Menu Pelaksanaan Sidang Untuk Kaprodi Tambang --}}
-            
-            {{-- Menu Pelaksanaan Sidang Untuk Koordinator Skripsi Industri --}}
-            @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Teknik Industri' && auth()->user()->status_koordinator_skripsi == 1)
-                <li class="header">Seminar Tugas Akhir</li>
-                <li>
-                    <a href="{{ route('view-seminarTi.index') }}" @if(Session::get('page')=='appSeminarTA' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                        <i class="fa fa-upload"></i> <span>Pengajuan</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('rekap-seminarTi.index') }}" @if(Session::get('page')=='rekapSeminarTA' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                        <i class="fa  fa-file-text"></i> <span>Rekapitulasi</span>
-                    </a>
-                </li>
-                <li class="header">Sidang Tugas Akhir</li>
-                <li>
-                    <a href="{{ route('view-sidangTi.index') }}" @if(Session::get('page')=='appSidangTA' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                        <i class="fa fa-upload"></i> <span>Pengajuan</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('rekap-sidangTi.index') }}" @if(Session::get('page')=='rekapSidangTA' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                        <i class="fa  fa-file-text"></i> <span>Rekapitulasi</span>
-                    </a>
-                </li>
-            @endif
-            {{-- Akhir Menu Pelaksanaan Sidang Untuk Koordinator Skripsi Industri --}}
-            
-            {{-- Menu Pelaksanaan Sidang Untuk Kaprodi Teknik Industri --}}
-            @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Teknik Industri' && auth()->user()->status_kaprodi == 1 || auth()->user()->status_sekprodi == 1)
-                <li class="header">Data Lulusan</li>
-                <li>
-                    <a href="{{ route('rekap-sidangTi.index') }}" @if(Session::get('page')=='rekapSidangTA' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                        <i class="fa  fa-file-text"></i> <span>Rekap Lulusan</span>
-                    </a>
-                </li>
-            @endif
-            {{-- Akhir Menu Pelaksanaan Sidang Untuk Kaprodi Teknik Industri --}}
-            
-            {{-- Menu Pelaksanaan Sidang Untuk Koordinator Skripsi Perencanaan Wilayah dan Kota --}}
-            @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Perencanaan Wilayah dan Kota' && auth()->user()->status_koordinator_skripsi == 1)
-                <li class="header">Sidang Pembahasan</li>
-                <li>
-                    <a href="{{ route('view-seminarPwk.index') }}" @if(Session::get('page')=='appPembahasan' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                        <i class="fa fa-upload"></i> <span>Pengajuan</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('rekap-seminarPwk.index') }}" @if(Session::get('page')=='rekapPembahasan' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                        <i class="fa fa-file-text"></i> <span>Rekapitulasi</span>
-                    </a>
-                </li>
-                <!-- <li>
-                    <a href="{{ route('seminarPwkDownload.index') }}" @if(Session::get('page')=='downloadPembahasan' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                        <i class="fa fa-download"></i> <span>Unduh Dokumen</span>
-                    </a>
-                </li> -->
-                <li class="header">Sidang Terbuka</li>
-                <li>
-                    <a href="{{ route('view-sidangPwk.index') }}" @if(Session::get('page')=='appTerbuka' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                        <i class="fa fa-upload"></i> <span>Pengajuan</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('rekap-sidangPwk.index') }}" @if(Session::get('page')=='rekapTerbuka' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                        <i class="fa  fa-file-text"></i> <span>Rekapitulasi</span>
-                    </a>
-                </li>
-            @endif
-            {{-- Akhir Menu Pelaksanaan Sidang Untuk Koordinator Skripsi Perencanaan Wilayah dan Kota --}}
-
-            {{-- Menu Pelaksanaan Sidang Untuk Kaprodi Perencanaan Wilayah dan Kota --}}
-            @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Perencanaan Wilayah dan Kota' && auth()->user()->status_kaprodi == 1 || auth()->user()->status_sekprodi == 1)
-                <li class="header">Data Lulusan</li>
-                <li>
-                    <a href="{{ route('rekap-sidangPwk.index') }}" @if(Session::get('page')=='rekapTerbuka' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                        <i class="fa  fa-file-text"></i> <span>Rekap Lulusan</span>
-                    </a>
-                </li>
-            @endif
-            {{-- Akhir Menu Pelaksanaan Sidang Untuk Kaprodi Perencanaan Wilayah dan Kota --}}
-            
-            {{-- Menu Untuk Dosen --}}
             @if (auth()->user()->level == 2)
-                <li class="header">Bimbingan</li>
-                    {{-- Menu Pembimbingan Dosen Tambang --}}
-                    @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Teknik Pertambangan')
-                        <li>
-                            <a href="{{ route('bimbinganTmb.index') }}" @if(Session::get('page')=='bimbinganTmb' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                                <i class="fa fa-users"></i> <span>Data Mahasiswa Bimbingan</span>
-                            </a>
-                        </li>
-                    @endif
-                    {{-- Akhir Menu Pembimbingan Dosen Tambang --}}
-                    
-                    {{-- Menu Pembimbingan Dosen TI --}}
-                    @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Teknik Industri')
-                        <li>
-                            <a href="{{ route('bimbinganTi.index') }}" @if(Session::get('page')=='bimbinganTi' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                                <i class="fa fa-users"></i> <span>Data Mahasiswa Bimbingan</span>
-                            </a>
-                        </li>
-                    @endif
-                    {{-- Akhir Menu Pembimbingan Dosen TI --}}
 
-                    {{-- Menu Pembimbingan Dosen PWK --}}
-                    @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Perencanaan Wilayah dan Kota')
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-graduation-cap"></i>
+                        <span>Pelaksanaan Sidang</span>
+                        <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        {{-- Menu Pelaksanaan Sidang Untuk Koordinator Skripsi Tambang --}}
+                        @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Teknik Pertambangan' && auth()->user()->status_koordinator_skripsi == 1)
+                            <li class="header">Kolokium Skripsi</li>
+                            <li>
+                                <a href="{{ route('view-seminarTmb.index') }}" @if(Session::get('page')=='appKolokium' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                    <i class="fa fa-upload"></i> <span>Pengajuan</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('rekap-seminarTmb.index') }}" @if(Session::get('page')=='rekapKolokium' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                    <i class="fa  fa-file-text"></i> <span>Rekapitulasi</span>
+                                </a>
+                            </li>
+                            <li class="header">Sidang Skripsi</li>
+                            <li>
+                                <a href="{{ route('view-sidangTmb.index') }}" @if(Session::get('page')=='appSkripsi' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                    <i class="fa fa-upload"></i> <span>Pengajuan</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('rekap-sidangTmb.index') }}" @if(Session::get('page')=='rekapSkripsi' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                    <i class="fa  fa-file-text"></i> <span>Rekapitulasi</span>
+                                </a>
+                            </li>
+                        @endif
+                        {{-- Akhir Menu Pelaksanaan Sidang Untuk Koordinator Skripsi Tambang --}}
+                        
+                        {{-- Menu Pelaksanaan Sidang Untuk Kaprodi Tambang --}}
+                        @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Teknik Pertambangan' && auth()->user()->status_kaprodi == 1 || auth()->user()->status_sekprodi == 1)
+                            <li class="header">Data Lulusan</li>
+                            <li>
+                                <a href="{{ route('rekap-sidangTmb.index') }}" @if(Session::get('page')=='rekapSkripsi' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                    <i class="fa  fa-file-text"></i> <span>Rekap Lulusan</span>
+                                </a>
+                            </li>
+                        @endif
+                        {{-- Akhir Menu Pelaksanaan Sidang Untuk Kaprodi Tambang --}}
+                        
+                        {{-- Menu Pelaksanaan Sidang Untuk Koordinator Skripsi Industri --}}
+                        @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Teknik Industri' && auth()->user()->status_koordinator_skripsi == 1)
+                            <li class="header">Seminar Tugas Akhir</li>
+                            <li>
+                                <a href="{{ route('view-seminarTi.index') }}" @if(Session::get('page')=='appSeminarTA' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                    <i class="fa fa-upload"></i> <span>Pengajuan</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('rekap-seminarTi.index') }}" @if(Session::get('page')=='rekapSeminarTA' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                    <i class="fa  fa-file-text"></i> <span>Rekapitulasi</span>
+                                </a>
+                            </li>
+                            <li class="header">Sidang Tugas Akhir</li>
+                            <li>
+                                <a href="{{ route('view-sidangTi.index') }}" @if(Session::get('page')=='appSidangTA' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                    <i class="fa fa-upload"></i> <span>Pengajuan</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('rekap-sidangTi.index') }}" @if(Session::get('page')=='rekapSidangTA' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                    <i class="fa  fa-file-text"></i> <span>Rekapitulasi</span>
+                                </a>
+                            </li>
+                        @endif
+                        {{-- Akhir Menu Pelaksanaan Sidang Untuk Koordinator Skripsi Industri --}}
+                        
+                        {{-- Menu Pelaksanaan Sidang Untuk Kaprodi Teknik Industri --}}
+                        @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Teknik Industri' && auth()->user()->status_kaprodi == 1 || auth()->user()->status_sekprodi == 1)
+                            <li class="header">Data Lulusan</li>
+                            <li>
+                                <a href="{{ route('rekap-sidangTi.index') }}" @if(Session::get('page')=='rekapSidangTA' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                    <i class="fa  fa-file-text"></i> <span>Rekap Lulusan</span>
+                                </a>
+                            </li>
+                        @endif
+                        {{-- Akhir Menu Pelaksanaan Sidang Untuk Kaprodi Teknik Industri --}}
+                        
+                        {{-- Menu Pelaksanaan Sidang Untuk Koordinator Skripsi Perencanaan Wilayah dan Kota --}}
+                        @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Perencanaan Wilayah dan Kota' && auth()->user()->status_koordinator_skripsi == 1)
+                            <li class="header">Sidang Pembahasan</li>
+                            <li>
+                                <a href="{{ route('view-seminarPwk.index') }}" @if(Session::get('page')=='appPembahasan' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                    <i class="fa fa-upload"></i> <span>Pengajuan</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('rekap-seminarPwk.index') }}" @if(Session::get('page')=='rekapPembahasan' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                    <i class="fa fa-file-text"></i> <span>Rekapitulasi</span>
+                                </a>
+                            </li>
+                            <!-- <li>
+                                <a href="{{ route('seminarPwkDownload.index') }}" @if(Session::get('page')=='downloadPembahasan' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                    <i class="fa fa-download"></i> <span>Unduh Dokumen</span>
+                                </a>
+                            </li> -->
+                            <li class="header">Sidang Terbuka</li>
+                            <li>
+                                <a href="{{ route('view-sidangPwk.index') }}" @if(Session::get('page')=='appTerbuka' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                    <i class="fa fa-upload"></i> <span>Pengajuan</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('rekap-sidangPwk.index') }}" @if(Session::get('page')=='rekapTerbuka' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                    <i class="fa  fa-file-text"></i> <span>Rekapitulasi</span>
+                                </a>
+                            </li>
+                        @endif
+                        {{-- Akhir Menu Pelaksanaan Sidang Untuk Koordinator Skripsi Perencanaan Wilayah dan Kota --}}
+
+                        {{-- Menu Pelaksanaan Sidang Untuk Kaprodi Perencanaan Wilayah dan Kota --}}
+                        @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Perencanaan Wilayah dan Kota' && auth()->user()->status_kaprodi == 1 || auth()->user()->status_sekprodi == 1)
+                            <li class="header">Data Lulusan</li>
+                            <li>
+                                <a href="{{ route('rekap-sidangPwk.index') }}" @if(Session::get('page')=='rekapTerbuka' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                    <i class="fa  fa-file-text"></i> <span>Rekap Lulusan</span>
+                                </a>
+                            </li>
+                        @endif
+                        {{-- Akhir Menu Pelaksanaan Sidang Untuk Kaprodi Perencanaan Wilayah dan Kota --}}
+                        
+                        {{-- Menu Untuk Dosen --}}
+                        @if (auth()->user()->level == 2)
+                            <li class="header">Bimbingan</li>
+                            {{-- Menu Pembimbingan Dosen Tambang --}}
+                            @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Teknik Pertambangan')
+                                <li>
+                                    <a href="{{ route('bimbinganTmb.index') }}" @if(Session::get('page')=='bimbinganTmb' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                        <i class="fa fa-users"></i> <span>Data Mahasiswa Bimbingan</span>
+                                    </a>
+                                </li>
+                            @endif
+                            {{-- Akhir Menu Pembimbingan Dosen Tambang --}}
+                            
+                            {{-- Menu Pembimbingan Dosen TI --}}
+                            @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Teknik Industri')
+                                <li>
+                                    <a href="{{ route('bimbinganTi.index') }}" @if(Session::get('page')=='bimbinganTi' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                        <i class="fa fa-users"></i> <span>Data Mahasiswa Bimbingan</span>
+                                    </a>
+                                </li>
+                            @endif
+                            {{-- Akhir Menu Pembimbingan Dosen TI --}}
+
+                            {{-- Menu Pembimbingan Dosen PWK --}}
+                            @if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Perencanaan Wilayah dan Kota')
+                                <li>
+                                    <a href="{{ route('bimbinganPwk.index') }}" @if(Session::get('page')=='bimbinganPwk' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                        <i class="fa fa-users"></i> <span>Data Mahasiswa Bimbingan</span>
+                                    </a>
+                                </li>
+                            @endif
+                            {{-- Akhir Menu Pembimbingan Dosen PWK --}}
+                        @endif
+                                
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-book"></i>
+                        <span>Arsip Fakultas</span>
+                        <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
                         <li>
-                            <a href="{{ route('bimbinganPwk.index') }}" @if(Session::get('page')=='bimbinganPwk' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                                <i class="fa fa-users"></i> <span>Data Mahasiswa Bimbingan</span>
+                            <a href="{{ route('all-archive.index') }}" @if(Session::get('page')=='allArchive' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                <i class="fa fa-book"></i> <span> Semua Arsip</span>
                             </a>
                         </li>
-                    @endif
-                    {{-- Akhir Menu Pembimbingan Dosen PWK --}}
-
-                <li class="header">Arsip</li>
-                <li>
-                    <a href="{{ route('all-archive.index') }}" @if(Session::get('page')=='allArchive' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                        <i class="fa fa-book"></i> <span> Semua Arsip</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('my-archive.general') }}" @if(Session::get('page')=='generalArsip' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                        <i class="fa fa-file"></i> <span>Arsip Umum Fakultas</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('my-archive.index') }}" @if(Session::get('page')=='myArchive' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                        <i class="fa fa-folder"></i> <span>Arsip Saya</span>
-                    </a>
+                        <li>
+                            <a href="{{ route('my-archive.general') }}" @if(Session::get('page')=='generalArsip' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                <i class="fa fa-file"></i> <span>Arsip Umum Fakultas</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('my-archive.index') }}" @if(Session::get('page')=='myArchive' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                <i class="fa fa-folder"></i> <span>Arsip Saya</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
             @endif
+               
             {{-- Akhir Menu untuk Dosen --}}
             
             {{-- Menu Untuk Superadmin --}}

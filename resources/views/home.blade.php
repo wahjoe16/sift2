@@ -65,9 +65,12 @@
                         <div class="icon">
                             <i class="fa fa-users"></i>
                         </div>
-                        <a href="https://skkft.unisba.ac.id/" class="small-box-footer">
-                            Klik Disini <i class="fa fa-arrow-circle-right"></i>
-                        </a>
+                        @if (auth()->user()->level == 3)
+                            <a href="{{ route('kegiatan.index') }}" class="small-box-footer">
+                                Klik Disini <i class="fa fa-arrow-circle-right"></i>
+                            </a>
+                        @endif
+                        
                     </div>
                 </div>
             </div>

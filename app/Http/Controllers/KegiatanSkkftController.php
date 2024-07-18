@@ -9,6 +9,7 @@ use App\Models\PrestasiSkkft;
 use App\Models\SubcategorySkkft;
 use App\Models\Tingkat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use Symfony\Component\HttpFoundation\File\UploadedFile as FileUploadedFile;
@@ -174,5 +175,68 @@ class KegiatanSkkftController extends Controller
         if ($data->bukti_fisik !== '') $this->deleteFile($data->bukti_fisik);
         $data->delete();
         return redirect()->back()->with('success', 'Kegiatan SKKFT Berhasil Dihapus');
+    }
+
+     public function summary()
+    {
+        Session::put('page', 'summaryKegiatanSkkft');
+        $data = Kegiatan::where('user_id', auth()->user()->id)->get();
+
+        $poinPerKategori = "
+                            select category_skkft.id, category_skkft.category_name, sum(kegiatan.point) as poin from kegiatan
+                            left join category_skkft on category_skkft.id = kegiatan.category_id
+                            where kegiatan.user_id =? and kegiatan.status_skkft = 1
+                            group by category_skkft.category_name, category_skkft.id
+                            order by category_skkft.id
+                        ";
+
+        $category = CategorySkkft::get();
+        $dataPoin = DB::select($poinPerKategori, [auth()->user()->id]);
+        // dd($dataPoin);
+        $poinMhs = [];
+        $totalPoin = 0;
+
+        foreach ($dataPoin as $dp) {
+            $poinMhs[$dp->category_name] = $dp->poin;
+            $totalPoin += $dp->poin;
+        }
+
+        $poinKategori = [];
+        foreach ($category as $c) {
+            if (array_key_exists($c->category_name, $poinMhs)) {
+                $poinnya = $poinMhs[$c->category_name];
+                $persennya = ($poinnya/150)*100;
+            }else {
+                $poinnya = 0;
+                $persennya = 0;
+            }
+
+            $poinKategori[$c->id] = [
+                'id' => $c->id,
+                'category' => $c->category_name,
+                'poin'=> $poinnya,
+                'persennya' => $persennya,
+                'lolos' => $persennya >= $c->bobot,
+                'bobotnya' => $c->bobot
+            ];
+        }
+
+        return view('kegiatan_skkft.summary', compact('data', 'dataPoin', 'poinKategori', 'totalPoin'));
+    }
+
+    public function dataSkkft()
+    {
+        $dataKegiatan = Kegiatan::where('user_id', auth()->user()->id)->get();
+
+        return datatables()
+            ->of($dataKegiatan)
+            ->addIndexColumn()
+            ->addColumn('aksi', function ($dataKegiatan) {
+                return '
+                    <a href="' . route('kegiatan.show', $dataKegiatan->id) . '"><i class="fa fa-search"></i></a>
+                ';
+            })
+            ->rawColumns(['aksi'])
+            ->make(true);
     }
 }
