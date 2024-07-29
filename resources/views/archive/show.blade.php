@@ -40,6 +40,9 @@
                     <strong><i class="fa fa-hourglass-end margin-r-5"></i> Tanggal Upload</strong>
                     <p class="text-muted">{{ tanggal_indonesia($data->created_at) }}</p>
                     <hr>
+                    {{-- <strong><i class="fa fa-user margin-r-5"></i> Diupload Oleh</strong>
+                    <p class="text-muted">{{ $data['user_upload']['nama'] }}</p>
+                    <hr> --}}
                     <strong><i class="fa fa-user margin-r-5"></i> Dokumen atas Dosen</strong>
                     @foreach ($data->users as $item)
                     <p class="text-muted">{{ $item->nama }}</p><br>

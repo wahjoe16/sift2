@@ -39,7 +39,8 @@ class MyArchiveController extends Controller
             'category_archive',
             'subcategory_archive',
             'tahun_ajaran',
-            'semester'
+            'semester',
+            'user_upload'
         ])->orderBy('section_id', 'asc');
 
         if (request('tahun_ajaran_id')) {
@@ -109,13 +110,14 @@ class MyArchiveController extends Controller
     public function myDataArchive()
     {
         $user = auth()->user();
-        $myarchive = Archive::select('archives.id', 'archives.name as a_name', 'sections.name as s_name', 'category_archives.name as c_name', 'subcategory_archives.name as sa_name', 'tahun_ajaran.tahun_ajaran as ta', 'semester.semester as smt')
+        $myarchive = Archive::select('archives.id', 'archives.name as a_name', 'users.nama as uu', 'sections.name as s_name', 'category_archives.name as c_name', 'subcategory_archives.name as sa_name', 'tahun_ajaran.tahun_ajaran as ta', 'semester.semester as smt', )
             ->leftJoin('my_archives', 'my_archives.archive_id', 'archives.id')
             ->leftJoin('sections', 'sections.id', 'archives.section_id')
             ->leftJoin('category_archives', 'category_archives.id', 'archives.category_archive_id')
             ->leftJoin('subcategory_archives', 'subcategory_archives.id', 'archives.subcategory_archive_id')
             ->leftJoin('tahun_ajaran', 'tahun_ajaran.id', 'archives.tahun_ajaran_id')
             ->leftJoin('semester', 'semester.id', 'archives.semester_id')
+            ->leftJoin('users', 'users.id', 'archives.user_upload')
             ->where('my_archives.user_id', $user->id);
 
         if (request('tahun_ajaran_id')) {
@@ -308,7 +310,8 @@ class MyArchiveController extends Controller
             'category_archive',
             'subcategory_archive',
             'tahun_ajaran',
-            'semester'
+            'semester',
+            'user_upload'
         ])->doesntHave('users');
 
         if (request('tahun_ajaran_id')) {

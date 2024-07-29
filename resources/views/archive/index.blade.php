@@ -67,6 +67,7 @@
                             <th>Sub Kategori Arsip</th>
                             <th>Tahun Akademik</th>
                             <th>Semester</th>
+                            <th>Diupload Oleh</th>
                             <th width="16%"><i class="fa fa-cogs"></i> Aksi</th>
                         </thead>
                     </table>
@@ -124,6 +125,10 @@
                 },
                 {
                     data: 'semester.semester'
+                },
+                {
+                    defaultContent: "N/A",
+                    data: 'user_upload.nama'
                 },
                 {
                     data: 'action',

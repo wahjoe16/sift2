@@ -9,7 +9,7 @@ class Archive extends Model
 {
     use HasFactory;
     protected $table = 'archives';
-    protected $fillable = ['name', 'file', 'section_id', 'category_archive_id', 'subcategory_archive_id', 'tahun_ajaran_id', 'semester_id'];
+    protected $fillable = ['name', 'user_upload' ,'file', 'section_id', 'category_archive_id', 'subcategory_archive_id', 'tahun_ajaran_id', 'semester_id'];
 
     public function tahun_ajaran()
     {
@@ -39,6 +39,16 @@ class Archive extends Model
     public function users()
     {
         return $this->belongsToMany(User::class, 'my_archives');
+    }
+
+    public function archives()
+    {
+        return $this->belongsToMany(Archive::class, 'my_archives');
+    }
+
+    public function user_upload()
+    {
+        return $this->belongsTo(User::class, 'user_upload');
     }
 
     public static function boot()

@@ -44,7 +44,8 @@ class ArchiveController extends Controller
             'category_archive',
             'subcategory_archive',
             'tahun_ajaran',
-            'semester'
+            'semester',
+            'user_upload'
         ])->orderBy('id', 'desc');
 
         if (request('tahun_ajaran_id')) {
@@ -114,7 +115,8 @@ class ArchiveController extends Controller
             'category_archive',
             'subcategory_archive',
             'tahun_ajaran',
-            'semester'
+            'semester',
+            'user_upload'
         ])->doesntHave('users');
 
         if (request('tahun_ajaran_id')) {
@@ -236,15 +238,25 @@ class ArchiveController extends Controller
         //     $data->save();
         // }
 
-        $data = $request->only('name', 'section_id', 'category_archive_id', 'subcategory_archive_id', 'tahun_ajaran_id', 'semester_id');
+        // $data = $request->only('name', 'section_id', 'category_archive_id', 'subcategory_archive_id', 'tahun_ajaran_id', 'semester_id');
 
         if ($request->hasFile('file')) {
             $data['file'] = $this->saveFile($request->file('file'));
         }
 
-        $archive = Archive::create($data);
+        $archive = Archive::create([
+            'name' => $request['name'],
+            'user_upload' => auth()->user()->id,
+            'section_id' => $request['section_id'],
+            'category_archive_id' => $request['category_archive_id'],
+            'subcategory_archive_id' => $request['subcategory_archive_id'],
+            'tahun_ajaran_id' => $request['tahun_ajaran_id'],
+            'semester_id' => $request['semester_id'],
+            'file' => $data['file'],
+        ]);
+        
         $archive->users()->sync($request['dosen_id']);
-
+        
         return redirect()->route('ft-arsip.index')->with('success', 'Archive has been successfull created!');
     }
 
@@ -305,14 +317,24 @@ class ArchiveController extends Controller
             'name' => 'required'
         ]);
 
-        $data = $request->only('name', 'section_id', 'category_archive_id', 'subcategory_archive_id', 'tahun_ajaran_id', 'semester_id');
+        // $data = $request->only('name', 'section_id', 'category_archive_id', 'subcategory_archive_id', 'tahun_ajaran_id', 'semester_id');
 
         if ($request->hasFile('file')) {
             $data['file'] = $this->saveFile($request->file('file'));
             if ($archive->file !== '') $this->deleteFile($archive->file);
         }
 
-        $archive->update($data);
+        $archive->update([
+            'name' => $request['name'],
+            'user_upload' => auth()->user()->id,
+            'section_id' => $request['section_id'],
+            'category_archive_id' => $request['category_archive_id'],
+            'subcategory_archive_id' => $request['subcategory_archive_id'],
+            'tahun_ajaran_id' => $request['tahun_ajaran_id'],
+            'semester_id' => $request['semester_id'],
+            'file' => $data['file'],
+        ]);
+        
         $archive->users()->sync($request['dosen_id']);
         return redirect()->route('ft-arsip.index')->with('success', 'File archive has been successfull updated!');
     }

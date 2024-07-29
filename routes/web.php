@@ -20,6 +20,7 @@ use App\Http\Controllers\PrestasiSkkftController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\SertifikatSkkftController;
+use App\Http\Controllers\SkpiController;
 use App\Http\Controllers\SubcategoryArsipController;
 use App\Http\Controllers\SubcategorySkkftController;
 use App\Http\Controllers\TahunAjaranController;
@@ -170,6 +171,10 @@ Route::group(['prefix'=>'/skkft'], function(){
         Route::get('/approve-skkft/{id}', [ApproveSkkftController::class, 'edit'])->name('approveKegiatan.edit');
         Route::post('/update-skkft/{id}', [ApproveSkkftController::class, 'update'])->name('approveKegiatan.update');
         Route::delete('/delete-skkft/{id}', [ApproveSkkftController::class, 'delete'])->name('approveKegiatan.destroy');
+        Route::get('/skpi', [SkpiController::class, 'index'])->name('skpi.index');
+        Route::post('/skpi/{id}', [SkpiController::class, 'verify'])->name('skpi.verify');
+        Route::get('/skpi-list', [SkpiController::class, 'list'])->name('skpi.list');
+        Route::get('/skpi-print', [SkpiController::class, 'print'])->name('skpi.print');
     });
     
     Route::group(['middleware'=>'ceklevel:2'], function(){
@@ -234,6 +239,7 @@ Route::group(['prefix' => '/skkft'], function(){
         Route::get('/kegiatan-summary-data', [KegiatanSkkftController::class, 'dataSkkft'])->name('kegiatan.data');
         Route::get('/kegiatan-summary', [KegiatanSkkftController::class, 'summary'])->name('kegiatan.summary');
         Route::post('/sertifikat-store', [SertifikatSkkftController::class, 'store'])->name('sertifikat.store');
+        Route::post('/skpi-store', [SkpiController::class, 'store'])->name('skpi.store');
     });
 });
 
