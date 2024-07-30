@@ -315,7 +315,7 @@
                 @if (auth()->user()->level == 2 && auth()->user()->status_dekanat == 1)
                     <li class="treeview">
                         <a href="#">
-                            <i class="fa fa-graduation-cap"></i>
+                            <i class="fa fa-street-view"></i>
                             <span>SKKFT</span>
                             <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
@@ -334,6 +334,28 @@
                             </li>
                         </ul>
                     </li>
+
+                    <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-newspaper-o"></i>
+                        <span>SKPI</span>
+                        <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li>
+                            <a href="{{ route('skpi.index') }}" @if(Session::get('page')=='') style="background: #3c8dbc !important; color:white !important" @endif>
+                                <i class="fa fa-leanpub"></i> <span>Pengajuan SKPI</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('skpi.list') }}" @if(Session::get('page')=='') style="background: #3c8dbc !important; color:white !important" @endif>
+                                <i class="fa fa-database"></i> <span>Data SKPI</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 @endif
             @endif
                
@@ -395,7 +417,7 @@
                 </li>
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-graduation-cap"></i>
+                        <i class="fa fa-street-view"></i>
                         <span>SKKFT</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
@@ -439,6 +461,27 @@
                         </li>
                     </ul>
                     
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-graduation-cap"></i>
+                        <span>SKPI</span>
+                        <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li>
+                            <a href="{{ route('skpi.index') }}" @if(Session::get('page')=='') style="background: #3c8dbc !important; color:white !important" @endif>
+                                <i class="fa fa-leanpub"></i> <span>Pengajuan SKPI</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('skpi.list') }}" @if(Session::get('page')=='') style="background: #3c8dbc !important; color:white !important" @endif>
+                                <i class="fa fa-database"></i> <span>Data SKPI</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 
             @endif

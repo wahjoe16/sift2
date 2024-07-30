@@ -20,6 +20,22 @@
                                     <th>Poin</th>
                                     <th width="12%"><i class="fa fa-cogs"></i></th>
                                 </thead>
+                                <tbody>
+                                    @foreach ($dataKegiatan as $dk)
+                                        <tr>
+                                            <td>{{$loop->index + 1 }}</td>
+                                            <td>{{ $dk->nama_kegiatan }}</td>
+                                            <td>{{ $dk->point }}</td>
+                                            <td>
+                                                @if ($dk->status_skkft == 1)
+                                                    <span class="label label-success">Diterima</span>
+                                                @else
+                                                    <span class="label label-danger">Ditolak</span>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
                             </table>
                         </div>
                         <div class="col-md-6 col-sm-12">
@@ -75,20 +91,20 @@
 
 @push('scripts_page')
 <script>
-    let table;
+    // let table;
 
-    $(function() {
-        table = $('.table-skkft').DataTable({
-            processing: true,
-            autoWidth: false,
-            url: '{{ route("kegiatan.data") }}',
-            columns: [
-                { data: 'id' },
-                { data: 'nama_kegiatan' },
-                { data: 'poin', searchable: false, sortable: false },
-                { data: 'aksi', searchable: false, sortable: false },
-            ]
-        })
-    })
+    // $(function() {
+    //     table = $('.table-skkft').DataTable({
+    //         processing: true,
+    //         autoWidth: false,
+    //         url: '{{ route("kegiatan.data") }}',
+    //         columns: [
+    //             { data: 'id' },
+    //             { data: 'nama_kegiatan' },
+    //             { data: 'poin', searchable: false, sortable: false },
+    //             { data: 'aksi', searchable: false, sortable: false },
+    //         ]
+    //     })
+    // })
 </script>
 @endpush

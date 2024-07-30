@@ -13,9 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('skpis', function (Blueprint $table) {
+        Schema::create('skpi', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('user_id')->unsigned();
+            $table->date('tanggal');
+            $table->tinyInteger('status')->default(0);
+            $table->text('keterangan')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -26,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('skpis');
+        Schema::dropIfExists('skpi');
     }
 };

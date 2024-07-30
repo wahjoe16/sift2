@@ -70,7 +70,38 @@
                                 Klik Disini <i class="fa fa-arrow-circle-right"></i>
                             </a>
                         @endif
-                        
+                        @if (auth()->user()->level == 1)
+                            <a href="{{ route('dashboardSkkft.index') }}" class="small-box-footer">
+                                Klik Disini <i class="fa fa-arrow-circle-right"></i>
+                            </a>
+                        @endif
+                        @if (auth()->user()->level == 2)
+                            <a href="{{ route('sertifikat.index') }}" class="small-box-footer">
+                                Klik Disini <i class="fa fa-arrow-circle-right"></i>
+                            </a>
+                        @endif
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="small-box bg-yellow">
+                        <div class="inner">
+                            <h3>SKPI</h3>
+
+                            <p>Surat Keterangan Pendamping Ijazah</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-users"></i>
+                        </div>
+                        @if (auth()->user()->level == 1)
+                            <a href="{{ route('skpi.list') }}" class="small-box-footer">
+                                Klik Disini <i class="fa fa-arrow-circle-right"></i>
+                            </a>
+                        @endif
+                        @if (auth()->user()->level == 2)
+                            <a href="{{ route('skpi.index') }}" class="small-box-footer">
+                                Klik Disini <i class="fa fa-arrow-circle-right"></i>
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>

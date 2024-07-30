@@ -29,6 +29,7 @@ use App\Http\Controllers\UserController;
 use App\Models\SertifikatSkkft;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Maatwebsite\Excel\Row;
 
 /*
 |--------------------------------------------------------------------------
@@ -170,11 +171,13 @@ Route::group(['prefix'=>'/skkft'], function(){
         Route::get('/dashboard-skkft', [ApproveSkkftController::class, 'index'])->name('dashboardSkkft.index');
         Route::get('/approve-skkft/{id}', [ApproveSkkftController::class, 'edit'])->name('approveKegiatan.edit');
         Route::post('/update-skkft/{id}', [ApproveSkkftController::class, 'update'])->name('approveKegiatan.update');
-        Route::delete('/delete-skkft/{id}', [ApproveSkkftController::class, 'delete'])->name('approveKegiatan.destroy');
-        Route::get('/skpi', [SkpiController::class, 'index'])->name('skpi.index');
-        Route::post('/skpi/{id}', [SkpiController::class, 'verify'])->name('skpi.verify');
-        Route::get('/skpi-list', [SkpiController::class, 'list'])->name('skpi.list');
+        Route::delete('/delete-skkft/{id}', [ApproveSkkftController::class, 'delete'])->name('approveKegiatan.destroy');        
+        
         Route::get('/skpi-print', [SkpiController::class, 'print'])->name('skpi.print');
+    });
+    
+    Route::group(['middleware' => 'ceklevel:1, 2'], function(){
+        Route::get('/skpi-list', [SkpiController::class, 'list'])->name('skpi.list');
     });
     
     Route::group(['middleware'=>'ceklevel:2'], function(){
@@ -182,6 +185,9 @@ Route::group(['prefix'=>'/skkft'], function(){
         Route::get('/sertifikat-show/{id}', [SertifikatSkkftController::class, 'show'])->name('sertifikat.show');
         Route::post('/sertifikat/{id}', [SertifikatSkkftController::class, 'verify'])->name('sertifikat.verify');
         Route::post('/sertifikat-reject/{id}', [SertifikatSkkftController::class, 'reject'])->name('sertifikat.reject');
+        Route::get('/skpi', [SkpiController::class, 'index'])->name('skpi.index');
+        Route::post('/skpi/{id}', [SkpiController::class, 'verify'])->name('skpi.verify');
+        Route::get('/skpi-show/{id}', [SkpiController::class, 'show'])->name('skpi.show');
     });
 });
 

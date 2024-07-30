@@ -7,6 +7,7 @@ use App\Models\Jabatan;
 use App\Models\Kegiatan;
 use App\Models\PrestasiSkkft;
 use App\Models\SertifikatSkkft;
+use App\Models\Skpi;
 use App\Models\SubcategorySkkft;
 use App\Models\Tingkat;
 use Illuminate\Http\Request;
@@ -22,7 +23,8 @@ class KegiatanSkkftController extends Controller
         $title = 'Hapus Kegiatan!';
         $text = "Apakah anda yakin?";
         Session::put('page', 'indexKegiatanSkkft');
-        $kegiatan = Kegiatan::get();
+        $user = auth()->user()->id;
+        $kegiatan = Kegiatan::where('user_id', $user)->get();
         return view('kegiatan_skkft.index', compact('title', 'text', 'kegiatan'));
     }
 
@@ -187,6 +189,7 @@ class KegiatanSkkftController extends Controller
         // confirmDelete($title, $text);
         $data = Kegiatan::where('user_id', auth()->user()->id)->get();
         $dataSertifikat = SertifikatSkkft::where('user_id', auth()->user()->id)->first();
+        $dataSkpi = Skpi::where('user_id', auth()->user()->id)->first();
 
         $poinPerKategori = "
                             select category_skkft.id, category_skkft.category_name, sum(kegiatan.point) as poin from kegiatan
@@ -227,7 +230,7 @@ class KegiatanSkkftController extends Controller
             ];
         }
 
-        return view('kegiatan_skkft.summary', compact('data', 'dataSertifikat', 'dataPoin', 'poinKategori', 'totalPoin'));
+        return view('kegiatan_skkft.summary', compact('data', 'dataSertifikat', 'dataSkpi' ,'dataPoin', 'poinKategori', 'totalPoin'));
     }
 
     public function dataSkkft()
