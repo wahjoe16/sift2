@@ -11,7 +11,7 @@
                     <h3>Data SKPI</h3>
                 </div>
                 <div class="box-body table-responsive">
-                        <table class="table table-striped table-bordered table-sertifikat_skkft">
+                        <table class="table table-striped table-bordered table-print_skpi">
                             <thead>
                                 <th width="5%">No</th>
                                 <th>Nama Mahasiswa</th>
@@ -20,7 +20,7 @@
                                 <th>Tanggal Pengajuan</th>
                                 <th width="12%"><i class="fa fa-cogs"></i> Aksi</th>
                             </thead>
-                            <tbody>
+                            {{-- <tbody>
                                 @foreach($data as $d)
                                 <tr>
                                     <td>{{ $loop->index + 1 }}</td>
@@ -29,11 +29,11 @@
                                     <td>{{ $d->user_skpi->program_studi }}</td>
                                     <td>{{ tanggal_indonesia($d->tanggal) }}</td>
                                     <td>
-                                        <a href="{{ route('skpi.print') }}" class="btn btn-success btn-sm btn-flat"><i class="fa fa-download"></i></a>
+                                        <a href="{{ route('skpi.print', $d->id) }}" class="btn btn-success btn-sm btn-flat"><i class="fa fa-download"></i> Cetak</a>
                                     </td>
                                 </tr>
                                 @endforeach
-                            </tbody>
+                            </tbody> --}}
                         </table>
                     </form>
                 </div>
@@ -46,6 +46,24 @@
 
 @push('scripts_page')
 <script>
-    
+    let table;
+
+    $(function(){
+        table = $('.table-print_skpi').DataTable({
+            processing: true,
+            autoWidth: false,
+            ajax: {
+                url: '{{ route("skpi.data") }}',
+            },
+            columns: [
+                { data: 'DT_RowIndex', searchable: false },
+                { data: 'user_skpi.nama' },
+                { data: 'user_skpi.nik' },
+                { data: 'user_skpi.program_studi' },
+                { data: 'tanggal'},
+                { data: 'aksi', sortable: false},
+            ]
+        });
+    })
 </script>
 @endpush

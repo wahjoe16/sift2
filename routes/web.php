@@ -173,11 +173,12 @@ Route::group(['prefix'=>'/skkft'], function(){
         Route::post('/update-skkft/{id}', [ApproveSkkftController::class, 'update'])->name('approveKegiatan.update');
         Route::delete('/delete-skkft/{id}', [ApproveSkkftController::class, 'delete'])->name('approveKegiatan.destroy');        
         
-        Route::get('/skpi-print', [SkpiController::class, 'print'])->name('skpi.print');
+        Route::get('/skpi-print/{id}', [SkpiController::class, 'print'])->name('skpi.print');
     });
     
     Route::group(['middleware' => 'ceklevel:1, 2'], function(){
         Route::get('/skpi-list', [SkpiController::class, 'list'])->name('skpi.list');
+        Route::get('/skpi-list/data', [SkpiController::class, 'datalist'])->name('skpi.data');
     });
     
     Route::group(['middleware'=>'ceklevel:2'], function(){
