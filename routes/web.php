@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlumniController;
 use App\Http\Controllers\ApproveSeminarController;
 use App\Http\Controllers\ApproveSidangController;
 use App\Http\Controllers\ApproveSkkftController;
@@ -60,6 +61,7 @@ Route::group(['middleware' => 'ceklevel:1,2,3'], function () {
     Route::get('/dashboard/rekap-lulusan', [DashboardController::class, 'rekapLulusan'])->name('dashboard.rekapLulusan');
     Route::get('/dashboard/rekap-lulusan/{id}', [DashboardController::class, 'showRekapLulusan'])->name('rekapLulusan.show');
     Route::get('/dashboard/excel-export-sidang', [DashboardController::class, 'exportExcelLulusan'])->name('lulusanExcel.export');
+    Route::match(['get', 'post'], '/alumni/show-edit', [AlumniController::class, 'showEdit'])->name('alumni.show-edit');
 });
 
 // DATA MASTER Role ADMIN
@@ -106,6 +108,11 @@ Route::group(['prefix' => '/datamaster'], function () {
         Route::post('/dosen/delete/selected', [UserController::class, 'deleteSelectedDosen'])->name('dosen.delete-selected');
         Route::get('/dosen/page/import', [UserController::class, 'importPageDosen'])->name('dosen.import-page');
         Route::post('/dosen/import', [UserController::class, 'importDosen'])->name('dosen.import');
+        // CRUD Alumni
+        Route::resource('/alumni', AlumniController::class)->except(['index', 'show']);
+        Route::get('/alumni/page/import', [AlumniController::class, 'importPageAlumni'])->name('alumni.import-page');
+        Route::post('/alumni/import', [AlumniController::class, 'importAlumni'])->name('alumni.import');
+        Route::post('/alumni/reset-pwd/{id}', [AlumniController::class, 'resetPwd'])->name('alumni.reset-password');
         // CRUD SEMESTER
         Route::resource('/semester', SemesterController::class);
         Route::get('/semester-data', [SemesterController::class, 'data'])->name('semester.data');
@@ -161,26 +168,31 @@ Route::group(['prefix' => '/datamaster'], function () {
         Route::get('/data-user/dosen-data', [UserController::class, 'tendikDataDosen'])->name('tendikDataDosen');
         Route::get('/data-user/admin', [UserController::class, 'tendikAdmin'])->name('tendikAdmin');
         Route::get('/data-user/admin-data', [UserController::class, 'tendikDataAdmin'])->name('tendikDataAdmin');
+        Route::get('/alumni', [AlumniController::class, 'index'])->name('alumni.index');
+        Route::get('/alumni-data', [AlumniController::class, 'data'])->name('alumni.data');
+        Route::get('/alumni/{id}', [AlumniController::class, 'show'])->name('alumni.show');
     });
 
     Route::get('dropdownlist/subcategory-skkft/{id}', [SubcategorySkkftController::class, 'getDataSubCategory'])->name('get-subcategoryskkft.data');
 });
 
 Route::group(['prefix'=>'/skkft'], function(){
+    // SKKFT ADMIN
     Route::group(['middleware'=>'ceklevel:1'], function(){
         Route::get('/dashboard-skkft', [ApproveSkkftController::class, 'index'])->name('dashboardSkkft.index');
         Route::get('/approve-skkft/{id}', [ApproveSkkftController::class, 'edit'])->name('approveKegiatan.edit');
         Route::post('/update-skkft/{id}', [ApproveSkkftController::class, 'update'])->name('approveKegiatan.update');
-        Route::delete('/delete-skkft/{id}', [ApproveSkkftController::class, 'delete'])->name('approveKegiatan.destroy');        
-        
+        Route::delete('/delete-skkft/{id}', [ApproveSkkftController::class, 'delete'])->name('approveKegiatan.destroy'); 
         Route::get('/skpi-print/{id}', [SkpiController::class, 'print'])->name('skpi.print');
     });
     
-    Route::group(['middleware' => 'ceklevel:1, 2'], function(){
+    // SKKFT ADMIN dan DOSEN
+    Route::group(['middleware' => 'ceklevel:1,2'], function(){
         Route::get('/skpi-list', [SkpiController::class, 'list'])->name('skpi.list');
         Route::get('/skpi-list/data', [SkpiController::class, 'datalist'])->name('skpi.data');
     });
     
+    // SKKFT DOSEN
     Route::group(['middleware'=>'ceklevel:2'], function(){
         Route::get('/sertifikat', [SertifikatSkkftController::class, 'index'])->name('sertifikat.index');
         Route::get('/sertifikat-show/{id}', [SertifikatSkkftController::class, 'show'])->name('sertifikat.show');
@@ -190,57 +202,8 @@ Route::group(['prefix'=>'/skkft'], function(){
         Route::post('/skpi/{id}', [SkpiController::class, 'verify'])->name('skpi.verify');
         Route::get('/skpi-show/{id}', [SkpiController::class, 'show'])->name('skpi.show');
     });
-});
 
-// Dokumentasi Sidang Role MAHASISWA
-Route::group(['prefix' => '/dokumentasi_sidang', 'middleware' => 'ceklevel:3'], function () {
-    // Daftar Seminar Tugas Akhir Mahasiswa TI
-    Route::get('seminar/ti', [DaftarSeminarController::class, 'indexTi'])->name('seminar_ti.index');
-    Route::get('daftar/seminar/ti', [DaftarSeminarController::class, 'daftarTi'])->name('seminar_ti.daftar');
-    Route::post('store/seminar/ti', [DaftarSeminarController::class, 'storeTi'])->name('seminar_ti.store');
-    Route::get('edit/seminar/ti/{id}', [DaftarSeminarController::class, 'editTi'])->name('seminar_ti.edit');
-    Route::post('update/seminar/ti/{id}', [DaftarSeminarController::class, 'updateTi'])->name('seminar_ti.update');
-    Route::get('show/seminar/ti/{id}', [DaftarSeminarController::class, 'showTi'])->name('seminar_ti.show');
-    // Daftar Kolokium Skripsi Mahasiswa TAMBANG
-    Route::get('seminar/tmb', [DaftarSeminarController::class, 'indexTmb'])->name('seminar_tmb.index');
-    Route::get('daftar/seminar/tmb', [DaftarSeminarController::class, 'daftarTmb'])->name('seminar_tmb.daftar');
-    Route::post('store/seminar/tmb', [DaftarSeminarController::class, 'storeTmb'])->name('seminar_tmb.store');
-    Route::get('edit/seminar/tmb/{id}', [DaftarSeminarController::class, 'editTmb'])->name('seminar_tmb.edit');
-    Route::post('update/seminar/tmb/{id}', [DaftarSeminarController::class, 'updateTmb'])->name('seminar_tmb.update');
-    Route::get('show/seminar/tmb/{id}', [DaftarSeminarController::class, 'showTmb'])->name('seminar_tmb.show');
-    // Daftar Sidang Pembahasan Mahasiswa PWK
-    Route::get('seminar/pwk', [DaftarSeminarController::class, 'indexPwk'])->name('seminar_pwk.index');
-    Route::get('daftar/seminar/pwk', [DaftarSeminarController::class, 'daftarPwk'])->name('seminar_pwk.daftar');
-    Route::post('store/seminar/pwk', [DaftarSeminarController::class, 'storePwk'])->name('seminar_pwk.store');
-    Route::get('edit/seminar/pwk/{id}', [DaftarSeminarController::class, 'editPwk'])->name('seminar_pwk.edit');
-    Route::post('update/seminar/pwk/{id}', [DaftarSeminarController::class, 'updatePwk'])->name('seminar_pwk.update');
-    Route::get('show/seminar/pwk/{id}', [DaftarSeminarController::class, 'showPwk'])->name('seminar_pwk.show');
-    // Daftar Sidang Skripsi Mahasiswa TAMBANG
-    Route::get('sidang/tmb', [DaftarSidangController::class, 'indexTmb'])->name('sidang_tmb.index');
-    Route::get('daftar/sidang/tmb', [DaftarSidangController::class, 'daftarTmb'])->name('sidang_tmb.daftar');
-    Route::post('store/sidang/tmb', [DaftarSidangController::class, 'storeTmb'])->name('sidang_tmb.store');
-    Route::get('edit/sidang/tmb/{id}', [DaftarSidangController::class, 'editTmb'])->name('sidang_tmb.edit');
-    Route::post('update/sidang/tmb/{id}', [DaftarSidangController::class, 'updateTmb'])->name('sidang_tmb.update');
-    Route::get('show/sidang/tmb/{id}', [DaftarSidangController::class, 'showTmb'])->name('sidang_tmb.show');
-    // Daftar Sidang Tugas Akhir Mahasiswa TI
-    Route::get('sidang/ti', [DaftarSidangController::class, 'indexTi'])->name('sidang_ti.index');
-    Route::get('daftar/sidang/ti', [DaftarSidangController::class, 'daftarTi'])->name('sidang_ti.daftar');
-    Route::post('store/sidang/ti', [DaftarSidangController::class, 'storeTi'])->name('sidang_ti.store');
-    Route::get('edit/sidang/ti/{id}', [DaftarSidangController::class, 'editTi'])->name('sidang_ti.edit');
-    Route::post('update/sidang/ti/{id}', [DaftarSidangController::class, 'updateTi'])->name('sidang_ti.update');
-    Route::get('show/sidang/ti/{id}', [DaftarSidangController::class, 'showTi'])->name('sidang_ti.show');
-    // Daftar Sidang Terbuka Mahasiswa PWK
-    Route::get('sidang/pwk', [DaftarSidangController::class, 'indexPwk'])->name('sidang_pwk.index');
-    Route::get('daftar/sidang/pwk', [DaftarSidangController::class, 'daftarPwk'])->name('sidang_pwk.daftar');
-    Route::post('store/sidang/pwk', [DaftarSidangController::class, 'storePwk'])->name('sidang_pwk.store');
-    Route::get('edit/sidang/pwk/{id}', [DaftarSidangController::class, 'editPwk'])->name('sidang_pwk.edit');
-    Route::post('update/sidang/pwk/{id}', [DaftarSidangController::class, 'updatePwk'])->name('sidang_pwk.update');
-    Route::get('show/sidang/pwk/{id}', [DaftarSidangController::class, 'showPwk'])->name('sidang_pwk.show');
-    
-});
-
-// SKKFT
-Route::group(['prefix' => '/skkft'], function(){
+    // SKKFT MAHASISWA
     Route::group(['middleware' => 'ceklevel:3'], function(){
         Route::resource('/kegiatan', KegiatanSkkftController::class);
         Route::get('/kegiatan-summary-data', [KegiatanSkkftController::class, 'dataSkkft'])->name('kegiatan.data');
@@ -248,80 +211,154 @@ Route::group(['prefix' => '/skkft'], function(){
         Route::post('/sertifikat-store', [SertifikatSkkftController::class, 'store'])->name('sertifikat.store');
         Route::post('/skpi-store', [SkpiController::class, 'store'])->name('skpi.store');
     });
+
 });
 
-// Dokumentasi Sidang Role DOSEN
-Route::group(['prefix' => '/dokumentasi_sidang', 'middleware' => 'ceklevel:2'], function () {
-    // Approval dan export data Kolokium Skripsi TAMBANG
-    Route::get('view-seminar/tmb', [ApproveSeminarController::class, 'viewTmb'])->name('view-seminarTmb.index');
-    Route::get('view-seminar/tmb/data', [ApproveSeminarController::class, 'dataTmb'])->name('view-seminarTmb.data');
-    Route::match(['get', 'post'], '/approval-seminar/tmb/{id}', [ApproveSeminarController::class, 'approveTmb'])->name('approve-seminarTmb.store');
-    Route::get('rekap-seminar/tmb', [ApproveSeminarController::class, 'rekapTmb'])->name('rekap-seminarTmb.index');
-    Route::get('rekap-seminar/tmb/data', [ApproveSeminarController::class, 'dataRekapTmb'])->name('rekap-seminarTmb.data');
-    Route::get('show-seminar/tmb/{id}', [ApproveSeminarController::class, 'showRekapTmb'])->name('rekap-seminarTmb.show');
-    Route::get('excel-export-seminar/tmb', [ApproveSeminarController::class, 'exportExcelTmb'])->name('seminarTmbExcel.export');
-    Route::get('pdf-export-seminar/tmb', [ApproveSeminarController::class, 'exportPdfTmb'])->name('seminarTmbPdf.export');
-    // Approval dan export data Seminar Tugas Akhir TI
-    Route::get('view-seminar/ti', [ApproveSeminarController::class, 'viewTi'])->name('view-seminarTi.index');
-    Route::get('view-seminar/ti/data', [ApproveSeminarController::class, 'dataTi'])->name('view-seminarTi.data');
-    Route::match(['get', 'post'], '/approval-seminar/ti/{id}', [ApproveSeminarController::class, 'approveTi'])->name('approve-seminarTi.store');
-    Route::get('rekap-seminar/ti', [ApproveSeminarController::class, 'rekapTi'])->name('rekap-seminarTi.index');
-    Route::get('rekap-seminar/ti/data', [ApproveSeminarController::class, 'dataRekapTi'])->name('rekap-seminarTi.data');
-    Route::get('show-seminar/ti/{id}', [ApproveSeminarController::class, 'showRekapTi'])->name('rekap-seminarTi.show');
-    Route::get('excel-export-seminar/ti', [ApproveSeminarController::class, 'exportExcelTi'])->name('seminarTiExcel.export');
-    Route::get('pdf-export-seminar/ti', [ApproveSeminarController::class, 'exportPdfTi'])->name('seminarTiPdf.export');
-    // Approval dan export data Sidang Pembahasan PWK
-    Route::get('view-seminar/pwk', [ApproveSeminarController::class, 'viewPwk'])->name('view-seminarPwk.index');
-    Route::get('view-seminar/pwk/data', [ApproveSeminarController::class, 'dataPwk'])->name('view-seminarPwk.data');
-    Route::match(['get', 'post'], '/approval-seminar/pwk/{id}', [ApproveSeminarController::class, 'approvePwk'])->name('approve-seminarPwk.store');
-    Route::get('rekap-seminar/pwk', [ApproveSeminarController::class, 'rekapPwk'])->name('rekap-seminarPwk.index');
-    Route::get('rekap-seminar/pwk/data', [ApproveSeminarController::class, 'dataRekapPwk'])->name('rekap-seminarPwk.data');
-    Route::get('show-seminar/pwk/{id}', [ApproveSeminarController::class, 'showRekapPwk'])->name('rekap-seminarPwk.show');
-    Route::get('excel-export-seminar/pwk', [ApproveSeminarController::class, 'exportExcelPwk'])->name('seminarPwkExcel.export');
-    Route::get('pdf-export-seminar/pwk', [ApproveSeminarController::class, 'exportPdfPwk'])->name('seminarPwkPdf.export');
-    // Approval dan export data Sidang Skripsi TAMBANG
-    Route::get('view-sidang/tmb', [ApproveSidangController::class, 'viewTmb'])->name('view-sidangTmb.index');
-    Route::get('view-sidang/tmb/data', [ApproveSidangController::class, 'dataTmb'])->name('view-sidangTmb.data');
-    Route::match(['get', 'post'], '/approval-sidang/tmb/{id}', [ApproveSidangController::class, 'approveTmb'])->name('approve-sidangTmb.store');
-    Route::get('rekap-sidang/tmb', [ApproveSidangController::class, 'rekapTmb'])->name('rekap-sidangTmb.index');
-    Route::get('rekap-sidang/tmb/data', [ApproveSidangController::class, 'dataRekapTmb'])->name('rekap-sidangTmb.data');
-    Route::get('show-sidang/tmb/{id}', [ApproveSidangController::class, 'showRekapTmb'])->name('rekap-sidangTmb.show');
-    Route::get('excel-export-sidang/tmb', [ApproveSidangController::class, 'exportExcelTmb'])->name('sidangTmbExcel.export');
-    Route::get('pdf-export-sidang/tmb', [ApproveSidangController::class, 'exportPdfTmb'])->name('sidangTmbPdf.export');
-    // Approval dan export data Sidang Tugas Akhir TI
-    Route::get('view-sidang/ti', [ApproveSidangController::class, 'viewTi'])->name('view-sidangTi.index');
-    Route::get('view-sidang/ti/data', [ApproveSidangController::class, 'dataTi'])->name('view-sidangTi.data');
-    Route::match(['get', 'post'], '/approval-sidang/ti/{id}', [ApproveSidangController::class, 'approveTi'])->name('approve-sidangTi.store');
-    Route::get('rekap-sidang/ti', [ApproveSidangController::class, 'rekapTi'])->name('rekap-sidangTi.index');
-    Route::get('rekap-sidang/ti/data', [ApproveSidangController::class, 'dataRekapTi'])->name('rekap-sidangTi.data');
-    Route::get('show-sidang/ti/{id}', [ApproveSidangController::class, 'showRekapTi'])->name('rekap-sidangTi.show');
-    Route::get('excel-export-sidang/ti', [ApproveSidangController::class, 'exportExcelTi'])->name('sidangTiExcel.export');
-    Route::get('pdf-export-sidang/ti', [ApproveSidangController::class, 'exportPdfTi'])->name('sidangTiPdf.export');
-    // Approval dan export data Sidang Terbuka PWK
-    Route::get('view-sidang/pwk', [ApproveSidangController::class, 'viewPwk'])->name('view-sidangPwk.index');
-    Route::get('view-sidang/pwk/data', [ApproveSidangController::class, 'dataPwk'])->name('view-sidangPwk.data');
-    Route::match(['get', 'post'], '/approval-sidang/pwk/{id}', [ApproveSidangController::class, 'approvePwk'])->name('approve-sidangPwk.store');
-    Route::get('rekap-sidang/pwk', [ApproveSidangController::class, 'rekapPwk'])->name('rekap-sidangPwk.index');
-    Route::get('rekap-sidang/pwk/data', [ApproveSidangController::class, 'dataRekapPwk'])->name('rekap-sidangPwk.data');
-    Route::get('show-sidang/pwk/{id}', [ApproveSidangController::class, 'showRekapPwk'])->name('rekap-sidangPwk.show');
-    Route::get('excel-export-sidang/pwk', [ApproveSidangController::class, 'exportExcelPwk'])->name('sidangPwkExcel.export');
-    Route::get('pdf-export-sidang/pwk', [ApproveSidangController::class, 'exportPdfPwk'])->name('sidangPwkPdf.export');
-    // View data Mahasiswa Bimbingan TMB, TI, PWK
-    Route::get('data-bimbingan/tmb', [BimbinganController::class, 'indexTmb'])->name('bimbinganTmb.index');
-    Route::get('data-bimbingan/tmb-data-1', [BimbinganController::class, 'dataTmb1'])->name('bimbinganTmb.data1');
-    Route::get('data-bimbingan/tmb-data-2', [BimbinganController::class, 'dataTmb2'])->name('bimbinganTmb.data2');
-    Route::get('data-bimbingan/{id}/tmb-show-1', [BimbinganController::class, 'showTmb1'])->name('bimbinganTmb.showTmb1');
-    Route::get('data-bimbingan/{id}/tmb-show-2', [BimbinganController::class, 'showTmb2'])->name('bimbinganTmb.showTmb2');
-    Route::get('data-bimbingan/ti', [BimbinganController::class, 'indexTi'])->name('bimbinganTi.index');
-    Route::get('data-bimbingan/ti-data-1', [BimbinganController::class, 'dataTi1'])->name('bimbinganTi.data1');
-    Route::get('data-bimbingan/ti-data-2', [BimbinganController::class, 'dataTi2'])->name('bimbinganTi.data2');
-    Route::get('data-bimbingan/{id}/ti-show-1', [BimbinganController::class, 'showTi1'])->name('bimbinganTi.showTi1');
-    Route::get('data-bimbingan/{id}/ti-show-2', [BimbinganController::class, 'showTi2'])->name('bimbinganTi.showTi2');
-    Route::get('data-bimbingan/pwk', [BimbinganController::class, 'indexPwk'])->name('bimbinganPwk.index');
-    Route::get('data-bimbingan/pwk-data-1', [BimbinganController::class, 'dataPwk1'])->name('bimbinganPwk.data1');
-    Route::get('data-bimbingan/pwk-data-2', [BimbinganController::class, 'dataPwk2'])->name('bimbinganPwk.data2');
-    Route::get('data-bimbingan/{id}/pwk-show-1', [BimbinganController::class, 'showPwk1'])->name('bimbinganPwk.showPwk1');
-    Route::get('data-bimbingan/{id}/pwk-show-2', [BimbinganController::class, 'showPwk2'])->name('bimbinganPwk.showPwk2');
+
+Route::group(['prefix' => '/dokumentasi_sidang'], function () {
+    // Dokumentasi Sidang Role MAHASISWA
+    Route::group(['middleware' => 'ceklevel:3'], function () {
+        // Daftar Seminar Tugas Akhir Mahasiswa TI
+        Route::get('seminar/ti', [DaftarSeminarController::class, 'indexTi'])->name('seminar_ti.index');
+        Route::get('daftar/seminar/ti', [DaftarSeminarController::class, 'daftarTi'])->name('seminar_ti.daftar');
+        Route::post('store/seminar/ti', [DaftarSeminarController::class, 'storeTi'])->name('seminar_ti.store');
+        Route::get('edit/seminar/ti/{id}', [DaftarSeminarController::class, 'editTi'])->name('seminar_ti.edit');
+        Route::post('update/seminar/ti/{id}', [DaftarSeminarController::class, 'updateTi'])->name('seminar_ti.update');
+        Route::get('show/seminar/ti/{id}', [DaftarSeminarController::class, 'showTi'])->name('seminar_ti.show');
+        // Daftar Kolokium Skripsi Mahasiswa TAMBANG
+        Route::get('seminar/tmb', [DaftarSeminarController::class, 'indexTmb'])->name('seminar_tmb.index');
+        Route::get('daftar/seminar/tmb', [DaftarSeminarController::class, 'daftarTmb'])->name('seminar_tmb.daftar');
+        Route::post('store/seminar/tmb', [DaftarSeminarController::class, 'storeTmb'])->name('seminar_tmb.store');
+        Route::get('edit/seminar/tmb/{id}', [DaftarSeminarController::class, 'editTmb'])->name('seminar_tmb.edit');
+        Route::post('update/seminar/tmb/{id}', [DaftarSeminarController::class, 'updateTmb'])->name('seminar_tmb.update');
+        Route::get('show/seminar/tmb/{id}', [DaftarSeminarController::class, 'showTmb'])->name('seminar_tmb.show');
+        // Daftar Sidang Pembahasan Mahasiswa PWK
+        Route::get('seminar/pwk', [DaftarSeminarController::class, 'indexPwk'])->name('seminar_pwk.index');
+        Route::get('daftar/seminar/pwk', [DaftarSeminarController::class, 'daftarPwk'])->name('seminar_pwk.daftar');
+        Route::post('store/seminar/pwk', [DaftarSeminarController::class, 'storePwk'])->name('seminar_pwk.store');
+        Route::get('edit/seminar/pwk/{id}', [DaftarSeminarController::class, 'editPwk'])->name('seminar_pwk.edit');
+        Route::post('update/seminar/pwk/{id}', [DaftarSeminarController::class, 'updatePwk'])->name('seminar_pwk.update');
+        Route::get('show/seminar/pwk/{id}', [DaftarSeminarController::class, 'showPwk'])->name('seminar_pwk.show');
+        // Daftar Sidang Skripsi Mahasiswa TAMBANG
+        Route::get('sidang/tmb', [DaftarSidangController::class, 'indexTmb'])->name('sidang_tmb.index');
+        Route::get('daftar/sidang/tmb', [DaftarSidangController::class, 'daftarTmb'])->name('sidang_tmb.daftar');
+        Route::post('store/sidang/tmb', [DaftarSidangController::class, 'storeTmb'])->name('sidang_tmb.store');
+        Route::get('edit/sidang/tmb/{id}', [DaftarSidangController::class, 'editTmb'])->name('sidang_tmb.edit');
+        Route::post('update/sidang/tmb/{id}', [DaftarSidangController::class, 'updateTmb'])->name('sidang_tmb.update');
+        Route::get('show/sidang/tmb/{id}', [DaftarSidangController::class, 'showTmb'])->name('sidang_tmb.show');
+        // Daftar Sidang Tugas Akhir Mahasiswa TI
+        Route::get('sidang/ti', [DaftarSidangController::class, 'indexTi'])->name('sidang_ti.index');
+        Route::get('daftar/sidang/ti', [DaftarSidangController::class, 'daftarTi'])->name('sidang_ti.daftar');
+        Route::post('store/sidang/ti', [DaftarSidangController::class, 'storeTi'])->name('sidang_ti.store');
+        Route::get('edit/sidang/ti/{id}', [DaftarSidangController::class, 'editTi'])->name('sidang_ti.edit');
+        Route::post('update/sidang/ti/{id}', [DaftarSidangController::class, 'updateTi'])->name('sidang_ti.update');
+        Route::get('show/sidang/ti/{id}', [DaftarSidangController::class, 'showTi'])->name('sidang_ti.show');
+        // Daftar Sidang Terbuka Mahasiswa PWK
+        Route::get('sidang/pwk', [DaftarSidangController::class, 'indexPwk'])->name('sidang_pwk.index');
+        Route::get('daftar/sidang/pwk', [DaftarSidangController::class, 'daftarPwk'])->name('sidang_pwk.daftar');
+        Route::post('store/sidang/pwk', [DaftarSidangController::class, 'storePwk'])->name('sidang_pwk.store');
+        Route::get('edit/sidang/pwk/{id}', [DaftarSidangController::class, 'editPwk'])->name('sidang_pwk.edit');
+        Route::post('update/sidang/pwk/{id}', [DaftarSidangController::class, 'updatePwk'])->name('sidang_pwk.update');
+        Route::get('show/sidang/pwk/{id}', [DaftarSidangController::class, 'showPwk'])->name('sidang_pwk.show');
+    });
+    
+    // Dokumentasi Sidang Role DOSEN
+    Route::group(['middleware' => 'ceklevel:2'], function () {
+        // Approval dan export data Kolokium Skripsi TAMBANG
+        Route::get('view-seminar/tmb', [ApproveSeminarController::class, 'viewTmb'])->name('view-seminarTmb.index');
+        Route::get('view-seminar/tmb/data', [ApproveSeminarController::class, 'dataTmb'])->name('view-seminarTmb.data');
+        Route::match(['get', 'post'], '/approval-seminar/tmb/{id}', [ApproveSeminarController::class, 'approveTmb'])->name('approve-seminarTmb.store');
+        Route::get('rekap-seminar/tmb', [ApproveSeminarController::class, 'rekapTmb'])->name('rekap-seminarTmb.index');
+        Route::get('rekap-seminar/tmb/data', [ApproveSeminarController::class, 'dataRekapTmb'])->name('rekap-seminarTmb.data');
+        Route::get('show-seminar/tmb/{id}', [ApproveSeminarController::class, 'showRekapTmb'])->name('rekap-seminarTmb.show');
+        Route::get('excel-export-seminar/tmb', [ApproveSeminarController::class, 'exportExcelTmb'])->name('seminarTmbExcel.export');
+        Route::get('pdf-export-seminar/tmb', [ApproveSeminarController::class, 'exportPdfTmb'])->name('seminarTmbPdf.export');
+        // Approval dan export data Seminar Tugas Akhir TI
+        Route::get('view-seminar/ti', [ApproveSeminarController::class, 'viewTi'])->name('view-seminarTi.index');
+        Route::get('view-seminar/ti/data', [ApproveSeminarController::class, 'dataTi'])->name('view-seminarTi.data');
+        Route::match(['get', 'post'], '/approval-seminar/ti/{id}', [ApproveSeminarController::class, 'approveTi'])->name('approve-seminarTi.store');
+        Route::get('rekap-seminar/ti', [ApproveSeminarController::class, 'rekapTi'])->name('rekap-seminarTi.index');
+        Route::get('rekap-seminar/ti/data', [ApproveSeminarController::class, 'dataRekapTi'])->name('rekap-seminarTi.data');
+        Route::get('show-seminar/ti/{id}', [ApproveSeminarController::class, 'showRekapTi'])->name('rekap-seminarTi.show');
+        Route::get('excel-export-seminar/ti', [ApproveSeminarController::class, 'exportExcelTi'])->name('seminarTiExcel.export');
+        Route::get('pdf-export-seminar/ti', [ApproveSeminarController::class, 'exportPdfTi'])->name('seminarTiPdf.export');
+        // Approval dan export data Sidang Pembahasan PWK
+        Route::get('view-seminar/pwk', [ApproveSeminarController::class, 'viewPwk'])->name('view-seminarPwk.index');
+        Route::get('view-seminar/pwk/data', [ApproveSeminarController::class, 'dataPwk'])->name('view-seminarPwk.data');
+        Route::match(['get', 'post'], '/approval-seminar/pwk/{id}', [ApproveSeminarController::class, 'approvePwk'])->name('approve-seminarPwk.store');
+        Route::get('rekap-seminar/pwk', [ApproveSeminarController::class, 'rekapPwk'])->name('rekap-seminarPwk.index');
+        Route::get('rekap-seminar/pwk/data', [ApproveSeminarController::class, 'dataRekapPwk'])->name('rekap-seminarPwk.data');
+        Route::get('show-seminar/pwk/{id}', [ApproveSeminarController::class, 'showRekapPwk'])->name('rekap-seminarPwk.show');
+        Route::get('excel-export-seminar/pwk', [ApproveSeminarController::class, 'exportExcelPwk'])->name('seminarPwkExcel.export');
+        Route::get('pdf-export-seminar/pwk', [ApproveSeminarController::class, 'exportPdfPwk'])->name('seminarPwkPdf.export');
+        // Approval dan export data Sidang Skripsi TAMBANG
+        Route::get('view-sidang/tmb', [ApproveSidangController::class, 'viewTmb'])->name('view-sidangTmb.index');
+        Route::get('view-sidang/tmb/data', [ApproveSidangController::class, 'dataTmb'])->name('view-sidangTmb.data');
+        Route::match(['get', 'post'], '/approval-sidang/tmb/{id}', [ApproveSidangController::class, 'approveTmb'])->name('approve-sidangTmb.store');
+        Route::get('rekap-sidang/tmb', [ApproveSidangController::class, 'rekapTmb'])->name('rekap-sidangTmb.index');
+        Route::get('rekap-sidang/tmb/data', [ApproveSidangController::class, 'dataRekapTmb'])->name('rekap-sidangTmb.data');
+        Route::get('show-sidang/tmb/{id}', [ApproveSidangController::class, 'showRekapTmb'])->name('rekap-sidangTmb.show');
+        Route::get('excel-export-sidang/tmb', [ApproveSidangController::class, 'exportExcelTmb'])->name('sidangTmbExcel.export');
+        Route::get('pdf-export-sidang/tmb', [ApproveSidangController::class, 'exportPdfTmb'])->name('sidangTmbPdf.export');
+        // Approval dan export data Sidang Tugas Akhir TI
+        Route::get('view-sidang/ti', [ApproveSidangController::class, 'viewTi'])->name('view-sidangTi.index');
+        Route::get('view-sidang/ti/data', [ApproveSidangController::class, 'dataTi'])->name('view-sidangTi.data');
+        Route::match(['get', 'post'], '/approval-sidang/ti/{id}', [ApproveSidangController::class, 'approveTi'])->name('approve-sidangTi.store');
+        Route::get('rekap-sidang/ti', [ApproveSidangController::class, 'rekapTi'])->name('rekap-sidangTi.index');
+        Route::get('rekap-sidang/ti/data', [ApproveSidangController::class, 'dataRekapTi'])->name('rekap-sidangTi.data');
+        Route::get('show-sidang/ti/{id}', [ApproveSidangController::class, 'showRekapTi'])->name('rekap-sidangTi.show');
+        Route::get('excel-export-sidang/ti', [ApproveSidangController::class, 'exportExcelTi'])->name('sidangTiExcel.export');
+        Route::get('pdf-export-sidang/ti', [ApproveSidangController::class, 'exportPdfTi'])->name('sidangTiPdf.export');
+        // Approval dan export data Sidang Terbuka PWK
+        Route::get('view-sidang/pwk', [ApproveSidangController::class, 'viewPwk'])->name('view-sidangPwk.index');
+        Route::get('view-sidang/pwk/data', [ApproveSidangController::class, 'dataPwk'])->name('view-sidangPwk.data');
+        Route::match(['get', 'post'], '/approval-sidang/pwk/{id}', [ApproveSidangController::class, 'approvePwk'])->name('approve-sidangPwk.store');
+        Route::get('rekap-sidang/pwk', [ApproveSidangController::class, 'rekapPwk'])->name('rekap-sidangPwk.index');
+        Route::get('rekap-sidang/pwk/data', [ApproveSidangController::class, 'dataRekapPwk'])->name('rekap-sidangPwk.data');
+        Route::get('show-sidang/pwk/{id}', [ApproveSidangController::class, 'showRekapPwk'])->name('rekap-sidangPwk.show');
+        Route::get('excel-export-sidang/pwk', [ApproveSidangController::class, 'exportExcelPwk'])->name('sidangPwkExcel.export');
+        Route::get('pdf-export-sidang/pwk', [ApproveSidangController::class, 'exportPdfPwk'])->name('sidangPwkPdf.export');
+        // View data Mahasiswa Bimbingan TMB, TI, PWK
+        Route::get('data-bimbingan/tmb', [BimbinganController::class, 'indexTmb'])->name('bimbinganTmb.index');
+        Route::get('data-bimbingan/tmb-data-1', [BimbinganController::class, 'dataTmb1'])->name('bimbinganTmb.data1');
+        Route::get('data-bimbingan/tmb-data-2', [BimbinganController::class, 'dataTmb2'])->name('bimbinganTmb.data2');
+        Route::get('data-bimbingan/{id}/tmb-show-1', [BimbinganController::class, 'showTmb1'])->name('bimbinganTmb.showTmb1');
+        Route::get('data-bimbingan/{id}/tmb-show-2', [BimbinganController::class, 'showTmb2'])->name('bimbinganTmb.showTmb2');
+        Route::get('data-bimbingan/ti', [BimbinganController::class, 'indexTi'])->name('bimbinganTi.index');
+        Route::get('data-bimbingan/ti-data-1', [BimbinganController::class, 'dataTi1'])->name('bimbinganTi.data1');
+        Route::get('data-bimbingan/ti-data-2', [BimbinganController::class, 'dataTi2'])->name('bimbinganTi.data2');
+        Route::get('data-bimbingan/{id}/ti-show-1', [BimbinganController::class, 'showTi1'])->name('bimbinganTi.showTi1');
+        Route::get('data-bimbingan/{id}/ti-show-2', [BimbinganController::class, 'showTi2'])->name('bimbinganTi.showTi2');
+        Route::get('data-bimbingan/pwk', [BimbinganController::class, 'indexPwk'])->name('bimbinganPwk.index');
+        Route::get('data-bimbingan/pwk-data-1', [BimbinganController::class, 'dataPwk1'])->name('bimbinganPwk.data1');
+        Route::get('data-bimbingan/pwk-data-2', [BimbinganController::class, 'dataPwk2'])->name('bimbinganPwk.data2');
+        Route::get('data-bimbingan/{id}/pwk-show-1', [BimbinganController::class, 'showPwk1'])->name('bimbinganPwk.showPwk1');
+        Route::get('data-bimbingan/{id}/pwk-show-2', [BimbinganController::class, 'showPwk2'])->name('bimbinganPwk.showPwk2');
+    });
+
+    // Dokumentasi Sidang Role ADMIN dan DOSEN
+    Route::group(['middleware' => 'ceklevel:1,2'], function(){
+        Route::get('rekap-seminar/tmb/dwnld', [DownloadSeminarController::class, 'indexTmb'])->name('seminarTmbDownload.index');
+        Route::get('rekap-seminar/tmb/dwnld/data', [DownloadSeminarController::class, 'dataTmb'])->name('seminarTmbDownload.data');
+        Route::get('rekap-seminar/ti/dwnld', [DownloadSeminarController::class, 'indexTi'])->name('seminarTiDownload.index');
+        Route::get('rekap-seminar/ti/dwnld/data', [DownloadSeminarController::class, 'dataTi'])->name('seminarTiDownload.data');
+        Route::get('rekap-seminar/pwk/dwnld', [DownloadSeminarController::class, 'indexPwk'])->name('seminarPwkDownload.index');
+        Route::get('rekap-seminar/pwk/dwnld/data', [DownloadSeminarController::class, 'dataPwk'])->name('seminarPwkDownload.data');
+        Route::get('rekap-seminar/pwk/{id}/dwnld', [DownloadSeminarController::class, 'downloadPwk'])->name('downloadPwk');
+
+        Route::get('rekap-sidang/tmb/dwnld', [DownloadSidangController::class, 'indexTmb'])->name('sidangTmbDownload.index');
+        Route::get('rekap-sidang/tmb/dwnld/data', [DownloadSidangController::class, 'dataTmb'])->name('sidangTmbDownload.data');
+        Route::get('rekap-sidang/ti/dwnld', [DownloadSidangController::class, 'indexTi'])->name('sidangTiDownload.index');
+        Route::get('rekap-sidang/ti/dwnld/data', [DownloadSidangController::class, 'dataTi'])->name('sidangTiDownload.data');
+        Route::get('rekap-sidang/pwk/dwnld', [DownloadSidangController::class, 'indexPwk'])->name('sidangPwkDownload.index');
+        Route::get('rekap-sidang/pwk/dwnld/data', [DownloadSidangController::class, 'dataPwk'])->name('sidangPwkDownload.data');
+    });
+
+});
+
+// SKKFT
+Route::group(['prefix' => '/skkft'], function(){
+    
 });
 
 // ARSIP Fakultas Role ADMIN, DOSEN
@@ -362,22 +399,6 @@ Route::group(['prefix' => '/archives'], function () {
     Route::get('dropdownlist/sub-category-archive/{id}', [SubcategoryArsipController::class, 'getDataSubcategory'])->name('get-subcategory.data');
 });
 
-Route::group(['prefix' => '/dokumentasi_sidang', 'middleware' => 'ceklevel:1,2'], function () {
-    Route::get('rekap-seminar/tmb/dwnld', [DownloadSeminarController::class, 'indexTmb'])->name('seminarTmbDownload.index');
-    Route::get('rekap-seminar/tmb/dwnld/data', [DownloadSeminarController::class, 'dataTmb'])->name('seminarTmbDownload.data');
-    Route::get('rekap-seminar/ti/dwnld', [DownloadSeminarController::class, 'indexTi'])->name('seminarTiDownload.index');
-    Route::get('rekap-seminar/ti/dwnld/data', [DownloadSeminarController::class, 'dataTi'])->name('seminarTiDownload.data');
-    Route::get('rekap-seminar/pwk/dwnld', [DownloadSeminarController::class, 'indexPwk'])->name('seminarPwkDownload.index');
-    Route::get('rekap-seminar/pwk/dwnld/data', [DownloadSeminarController::class, 'dataPwk'])->name('seminarPwkDownload.data');
-    Route::get('rekap-seminar/pwk/{id}/dwnld', [DownloadSeminarController::class, 'downloadPwk'])->name('downloadPwk');
-
-    Route::get('rekap-sidang/tmb/dwnld', [DownloadSidangController::class, 'indexTmb'])->name('sidangTmbDownload.index');
-    Route::get('rekap-sidang/tmb/dwnld/data', [DownloadSidangController::class, 'dataTmb'])->name('sidangTmbDownload.data');
-    Route::get('rekap-sidang/ti/dwnld', [DownloadSidangController::class, 'indexTi'])->name('sidangTiDownload.index');
-    Route::get('rekap-sidang/ti/dwnld/data', [DownloadSidangController::class, 'dataTi'])->name('sidangTiDownload.data');
-    Route::get('rekap-sidang/pwk/dwnld', [DownloadSidangController::class, 'indexPwk'])->name('sidangPwkDownload.index');
-    Route::get('rekap-sidang/pwk/dwnld/data', [DownloadSidangController::class, 'dataPwk'])->name('sidangPwkDownload.data');
-});
 
 // Route::middleware([
 //     'auth:sanctum',

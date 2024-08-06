@@ -7,22 +7,24 @@
     <div class="row">
         <div class="col-md-8 col-sm-12 col-xs-12">
             <div class="row">
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div class="small-box bg-aqua">
-                        <div class="inner">
-                            <h3>Sidang</h3>
+                @if (auth()->user()->status_aktif == 1)
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="small-box bg-aqua">
+                            <div class="inner">
+                                <h3>Sidang</h3>
 
-                            <p>Dokumentasi Persyaratan</p>
+                                <p>Dokumentasi Persyaratan</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fa fa-graduation-cap"></i>
+                            </div>
+                            <a href="{{ route('dashboard.sidang') }}" class="small-box-footer">
+                                Klik Disini <i class="fa fa-arrow-circle-right"></i>
+                            </a>
                         </div>
-                        <div class="icon">
-                            <i class="fa fa-graduation-cap"></i>
-                        </div>
-                        <a href="{{ route('dashboard.sidang') }}" class="small-box-footer">
-                            Klik Disini <i class="fa fa-arrow-circle-right"></i>
-                        </a>
                     </div>
-                </div>
-                @if (auth()->user()->level == 2)
+                @endif
+                @if (auth()->user()->level == 2 && auth()->user()->status_aktif == 1)
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="small-box bg-green">
                         <div class="inner">
@@ -38,7 +40,7 @@
                         </a>
                     </div>
                 </div>
-                @elseif (auth()->user()->level == 1)
+                @elseif (auth()->user()->level == 1 && auth()->user()->status_aktif == 1)
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="small-box bg-green">
                         <div class="inner">
@@ -55,50 +57,79 @@
                     </div>
                 </div>
                 @endif
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div class="small-box bg-red">
-                        <div class="inner">
-                            <h3>SKKFT</h3>
+                @if (auth()->user()->status_aktif == 1)
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="small-box bg-red">
+                            <div class="inner">
+                                <h3>SKKFT</h3>
 
-                            <p>Satuan Kegiatan Kemahasiswaan Fakultas Teknik</p>
+                                <p>Satuan Kegiatan Kemahasiswaan Fakultas Teknik</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fa fa-users"></i>
+                            </div>
+                            @if (auth()->user()->level == 3)
+                                <a href="{{ route('kegiatan.index') }}" class="small-box-footer">
+                                    Klik Disini <i class="fa fa-arrow-circle-right"></i>
+                                </a>
+                            @endif
+                            @if (auth()->user()->level == 1)
+                                <a href="{{ route('dashboardSkkft.index') }}" class="small-box-footer">
+                                    Klik Disini <i class="fa fa-arrow-circle-right"></i>
+                                </a>
+                            @endif
+                            @if (auth()->user()->level == 2)
+                                <a href="{{ route('sertifikat.index') }}" class="small-box-footer">
+                                    Klik Disini <i class="fa fa-arrow-circle-right"></i>
+                                </a>
+                            @endif
                         </div>
-                        <div class="icon">
-                            <i class="fa fa-users"></i>
-                        </div>
-                        @if (auth()->user()->level == 3)
-                            <a href="{{ route('kegiatan.index') }}" class="small-box-footer">
-                                Klik Disini <i class="fa fa-arrow-circle-right"></i>
-                            </a>
-                        @endif
-                        @if (auth()->user()->level == 1)
-                            <a href="{{ route('dashboardSkkft.index') }}" class="small-box-footer">
-                                Klik Disini <i class="fa fa-arrow-circle-right"></i>
-                            </a>
-                        @endif
-                        @if (auth()->user()->level == 2)
-                            <a href="{{ route('sertifikat.index') }}" class="small-box-footer">
-                                Klik Disini <i class="fa fa-arrow-circle-right"></i>
-                            </a>
-                        @endif
                     </div>
-                </div>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div class="small-box bg-yellow">
-                        <div class="inner">
-                            <h3>SKPI</h3>
+                @endif
+                @if (auth()->user()->status_aktif == 1)
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="small-box bg-yellow">
+                            <div class="inner">
+                                <h3>SKPI</h3>
 
-                            <p>Surat Keterangan Pendamping Ijazah</p>
+                                <p>Surat Keterangan Pendamping Ijazah</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fa fa-users"></i>
+                            </div>
+                            @if (auth()->user()->level == 1)
+                                <a href="{{ route('skpi.list') }}" class="small-box-footer">
+                                    Klik Disini <i class="fa fa-arrow-circle-right"></i>
+                                </a>
+                            @endif
+                            @if (auth()->user()->level == 2)
+                                <a href="{{ route('skpi.index') }}" class="small-box-footer">
+                                    Klik Disini <i class="fa fa-arrow-circle-right"></i>
+                                </a>
+                            @endif
+                        </div>
+                    </div>
+                @endif
+                
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="small-box bg-maroon">
+                        <div class="inner">
+                            <h3>Alumni</h3>
+
+                            <p>Database Alumni Fakultas Teknik</p>
                         </div>
                         <div class="icon">
-                            <i class="fa fa-users"></i>
+                            <i class="fa fa-male"></i>
                         </div>
-                        @if (auth()->user()->level == 1)
-                            <a href="{{ route('skpi.list') }}" class="small-box-footer">
+                        <?php
+                            $data = auth()->user();
+                        ?>
+                        @if (auth()->user()->status_aktif == 0)
+                            <a href="{{ route('alumni.show-edit') }}" class="small-box-footer">
                                 Klik Disini <i class="fa fa-arrow-circle-right"></i>
                             </a>
-                        @endif
-                        @if (auth()->user()->level == 2)
-                            <a href="{{ route('skpi.index') }}" class="small-box-footer">
+                        @else
+                            <a href="{{ route('alumni.index') }}" class="small-box-footer">
                                 Klik Disini <i class="fa fa-arrow-circle-right"></i>
                             </a>
                         @endif
