@@ -24,24 +24,24 @@
                     <form class="form-horizontal" action="{{ route('update.profil') }}" method="post" enctype="multipart/form-data">@csrf
                         <div class="box-body">
                             <div class="form-group">
-                                <label for="nik" class="col-sm-2 control-label">NIK / NPM</label>
+                                <label for="nik" class="col-sm-4 control-label">NIK / NPM</label>
 
-                                <div class="col-sm-10">
+                                <div class="col-sm-8">
                                     <input type="text" class="form-control" name="nik" id="nik" placeholder="Email" value="{{ auth()->user()->nik }}" readonly>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="nama" class="col-sm-2 control-label">Nama</label>
+                                <label for="nama" class="col-sm-4 control-label">Nama</label>
 
-                                <div class="col-sm-10">
+                                <div class="col-sm-8">
                                     <input type="text" class="form-control" name="nama" id="nama" placeholder="Nama" value="{{ auth()->user()->nama }}" required>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="program_studi" class="col-sm-2 control-label">Program Studi</label>
+                                <label for="program_studi" class="col-sm-4 control-label">Program Studi</label>
 
-                                <div class="col-sm-10">
+                                <div class="col-sm-8">
                                     <select name="program_studi" id="program_studi" class="form-control text-dark">
                                         <option value="">Select</option>
                                         @foreach ([
@@ -59,9 +59,9 @@
 
                             @if (auth()->user()->level == 2)
                             <div class="form-group">
-                                <label for="tipe_dosen" class="col-sm-2 control-label">Tipe Dosen</label>
+                                <label for="tipe_dosen" class="col-sm-4 control-label">Tipe Dosen</label>
 
-                                <div class="col-sm-10">
+                                <div class="col-sm-8">
                                     <select name="tipe_dosen" id="tipe_dosen" class="form-control text-dark" required>
                                         <option value="">Select</option>
                                         @foreach ([
@@ -74,9 +74,9 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="status_dekanat" class="col-sm-2 control-label">Status Dekanat</label>
+                                <label for="status_dekanat" class="col-sm-4 control-label">Status Dekanat</label>
 
-                                <div class="col-sm-10">
+                                <div class="col-sm-8">
                                     <select name="status_dekanat" id="status_dekanat" class="form-control" disabled>
                                         <option value="">Select</option>
                                         @foreach ([
@@ -89,9 +89,9 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="status_koordinator_skripsi" class="col-sm-2 control-label">Status Koordinator Skripsi</label>
+                                <label for="status_koordinator_skripsi" class="col-sm-4 control-label">Status Koordinator Skripsi</label>
 
-                                <div class="col-sm-10">
+                                <div class="col-sm-8">
                                     <select name="status_koordinator_skripsi" id="status_koordinator_skripsi" class="form-control" disabled>
                                         <option value="">Select</option>
                                         @foreach ([
@@ -104,9 +104,9 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="status_kaprodi" class="col-sm-2 control-label">Status Ketua Program Studi</label>
+                                <label for="status_kaprodi" class="col-sm-4 control-label">Status Ketua Program Studi</label>
 
-                                <div class="col-sm-10">
+                                <div class="col-sm-8">
                                     <select name="status_kaprodi" id="status_kaprodi" class="form-control" disabled>
                                         <option value="">Select</option>
                                         @foreach ([
@@ -119,9 +119,9 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="status_sekprodi" class="col-sm-2 control-label">Status Sekertaris Program Studi</label>
+                                <label for="status_sekprodi" class="col-sm-4 control-label">Status Sekertaris Program Studi</label>
 
-                                <div class="col-sm-10">
+                                <div class="col-sm-8">
                                     <select name="status_sekprodi" id="status_sekprodi" class="form-control" disabled>
                                         <option value="">Select</option>
                                         @foreach ([
@@ -136,24 +136,24 @@
                             @endif
 
                             <div class="form-group">
-                                <label for="email" class="col-sm-2 control-label">Email</label>
+                                <label for="email" class="col-sm-4 control-label">Email</label>
 
-                                <div class="col-sm-10">
+                                <div class="col-sm-8">
                                     <input type="email" class="form-control" name="email" id="email" placeholder="Email" value="{{ auth()->user()->email }}" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="telepon" class="col-sm-2 control-label">No Handphone</label>
+                                <label for="telepon" class="col-sm-4 control-label">No Handphone</label>
 
-                                <div class="col-sm-10">
+                                <div class="col-sm-8">
                                     <input type="telepon" class="form-control" name="telepon" id="telepon" placeholder="telepon" value="{{ auth()->user()->telepon }}" required>
                                 </div>
                             </div>
                             @if (auth()->user()->level == 1)
                             <div class="form-group">
-                                <label for="superadmin" class="col-sm-2 control-label">Status Super Admin</label>
+                                <label for="superadmin" class="col-sm-4 control-label">Status Super Admin</label>
 
-                                <div class="col-sm-10">
+                                <div class="col-sm-8">
                                     <select name="superadmin" id="superadmin" class="form-control" disabled>
                                         <option value="">Superadmin</option>
                                         @foreach ([
@@ -167,9 +167,9 @@
                             </div>
                             @endif
                             <div class="form-group">
-                                <label for="foto" class="col-sm-2 control-label">Foto</label>
+                                <label for="foto" class="col-sm-4 control-label">Foto</label>
 
-                                <div class="col-sm-10">
+                                <div class="col-sm-8">
                                     <input type="file" name="foto" class="dropify" id="foto">
                                     @if(!empty(auth()->user()->foto))
                                     <a target="_blank" href="{{ asset('/user/foto/' . auth()->user()->foto ?? '') }}">Lihat Foto</a>

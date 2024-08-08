@@ -32,7 +32,11 @@ class User extends Authenticatable
         'tipe_dosen',
         'class_pendidikan',
         'class_jabfung',
-        'kelompok_keahlian'
+        'kelompok_keahlian',
+        'email',
+        'telepon',
+        'status_aktif',
+        'tahun_lulus'
     ];
 
     /**

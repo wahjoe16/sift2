@@ -50,7 +50,7 @@
                         <div class="form-group row">
                             <label for="tahun_lulus" class="col-lg-2 col-lg-offset-1 control-label">Tahun Lulus</label>
                             <div class="col-lg-6">
-                                <input type="text" name="tahun_lulus" id="tahun_lulus" class="form-control" required autofocus value="{{ $alumni->tahun_lulus }}">
+                                <input type="text" name="tahun_lulus" id="tahun_lulus" class="form-control" required autofocus value="{{ $data->tahun_lulus }}">
                                 <span class="help-block with-errors"></span>
                             </div>
                         </div>
@@ -71,21 +71,21 @@
                         <div class="form-group row">
                             <label for="pekerjaan_sekarang" class="col-lg-2 col-lg-offset-1 control-label">Pekerjaan Sekarang</label>
                             <div class="col-lg-6">
-                                <input type="text" name="pekerjaan_sekarang" id="pekerjaan_sekarang" class="form-control" autofocus value="{{ $alumni->pekerjaan_sekarang }}">
+                                <input type="text" name="pekerjaan_sekarang" id="pekerjaan_sekarang" class="form-control" autofocus value="{{ $data->pekerjaan_sekarang }}">
                                 <span class="help-block with-errors"></span>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="perusahaan_sekarang" class="col-lg-2 col-lg-offset-1 control-label">Perusahaan Sekarang</label>
                             <div class="col-lg-6">
-                                <input type="text" name="perusahaan_sekarang" id="perusahaan_sekarang" class="form-control" autofocus value="{{ $alumni->perusahaan_sekarang }}">
+                                <input type="text" name="perusahaan_sekarang" id="perusahaan_sekarang" class="form-control" autofocus value="{{ $data->perusahaan_sekarang }}">
                                 <span class="help-block with-errors"></span>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="alamat" class="col-lg-2 col-lg-offset-1 control-label">Alamat Perusahaan</label>
+                            <label for="alamat_kerja" class="col-lg-2 col-lg-offset-1 control-label">Alamat Perusahaan</label>
                             <div class="col-lg-6">
-                                <input type="text" name="alamat" id="alamat" class="form-control" autofocus value="{{ $alumni->alamat }}">
+                                <input type="text" name="alamat_kerja" id="alamat_kerja" class="form-control" autofocus value="{{ $data->alamat_kerja }}">
                                 <span class="help-block with-errors"></span>
                             </div>
                         </div>

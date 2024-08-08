@@ -61,28 +61,28 @@
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
                             <p>Tahun Lulus</p>
-                            <p><b>{{ $alumni->tahun_lulus }}</b></p>
+                            <p><b>{{ $data->tahun_lulus }}</b></p>
                         </li>
                         <li class="list-group-item">
                             <p>Pekerjaan Sekarang</p>
-                            @if ($alumni->pekerjaan_sekarang != '')
-                                <p><b>{{ $alumni->pekerjaan_sekarang }}</b></p>
+                            @if ($data->pekerjaan_sekarang != '')
+                                <p><b>{{ $data->pekerjaan_sekarang }}</b></p>
                             @else
                                 <p>-</p>
                             @endif
                         </li>
                         <li class="list-group-item">
                             <p>Perusahaan Sekarang</p>
-                            @if ($alumni->perusahaan_sekarang != '')
-                                <p><b>{{ $alumni->perusahaan_sekarang }}</b></p>
+                            @if ($data->perusahaan_sekarang != '')
+                                <p><b>{{ $data->perusahaan_sekarang }}</b></p>
                             @else
                                 <p>-</p>
                             @endif
                         </li>
                         <li class="list-group-item">
                             <p>Alamat Perusahaan</p>
-                            @if ($alumni->alamat != '')
-                                <p><b>{{ $alumni->alamat }}</b></p>
+                            @if ($data->alamat_kerja != '')
+                                <p><b>{{ $data->alamat_kerja }}</b></p>
                             @else
                                 <p>-</p>
                             @endif

@@ -24,24 +24,24 @@
                     <form class="form-horizontal" action="{{ route('alumni.show-edit') }}" method="post" enctype="multipart/form-data">@csrf
                         <div class="box-body">
                             <div class="form-group">
-                                <label for="nik" class="col-sm-2 control-label">NIK / NPM</label>
+                                <label for="nik" class="col-sm-3 control-label">NIK / NPM</label>
 
-                                <div class="col-sm-10">
+                                <div class="col-sm-9">
                                     <input type="text" class="form-control" name="nik" id="nik" placeholder="Email" value="{{ auth()->user()->nik }}" readonly>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="nama" class="col-sm-2 control-label">Nama</label>
+                                <label for="nama" class="col-sm-3 control-label">Nama</label>
 
-                                <div class="col-sm-10">
+                                <div class="col-sm-9">
                                     <input type="text" class="form-control" name="nama" id="nama" placeholder="Nama" value="{{ auth()->user()->nama }}" required>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="program_studi" class="col-sm-2 control-label">Program Studi</label>
+                                <label for="program_studi" class="col-sm-3 control-label">Program Studi</label>
 
-                                <div class="col-sm-10">
+                                <div class="col-sm-9">
                                     <select name="program_studi" id="program_studi" class="form-control text-dark">
                                         <option value="">Select</option>
                                         @foreach ([
@@ -57,51 +57,51 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="email" class="col-sm-2 control-label">Tahun Lulus</label>
+                                <label for="tahun_lulus" class="col-sm-3 control-label">Tahun Lulus</label>
 
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="tahun_lulus" id="tahun_lulus" placeholder="Tahun Lulus" value="{{ $alumni->tahun_lulus }}" required>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="tahun_lulus" id="tahun_lulus" placeholder="Tahun Lulus" value="{{ $data->tahun_lulus }}" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="email" class="col-sm-2 control-label">Email</label>
+                                <label for="email" class="col-sm-3 control-label">Email</label>
 
-                                <div class="col-sm-10">
+                                <div class="col-sm-9">
                                     <input type="email" class="form-control" name="email" id="email" placeholder="Email" value="{{ auth()->user()->email }}" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="telepon" class="col-sm-2 control-label">No Handphone</label>
+                                <label for="telepon" class="col-sm-3 control-label">No Handphone</label>
 
-                                <div class="col-sm-10">
+                                <div class="col-sm-9">
                                     <input type="telepon" class="form-control" name="telepon" id="telepon" placeholder="telepon" value="{{ auth()->user()->telepon }}" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="email" class="col-sm-2 control-label">Pekerjaan Sekarang</label>
+                                <label for="pekerjaan_sekarang" class="col-sm-3 control-label">Pekerjaan Sekarang</label>
 
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="pekerjaan_sekarang" id="pekerjaan_sekarang" placeholder="Tahun Lulus" value="{{ $alumni->pekerjaan_sekarang }}" required>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="pekerjaan_sekarang" id="pekerjaan_sekarang" placeholder="Pekerjaan Sekarang" value="{{ $data->pekerjaan_sekarang }}" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="email" class="col-sm-2 control-label">Perusahaan Sekarang</label>
+                                <label for="perusahaan_sekarang" class="col-sm-3 control-label">Perusahaan Sekarang</label>
 
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="perusahaan_sekarang" id="perusahaan_sekarang" placeholder="Tahun Lulus" value="{{ $alumni->perusahaan_sekarang }}" required>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="perusahaan_sekarang" id="perusahaan_sekarang" placeholder="Perusahaan Sekarang" value="{{ $data->perusahaan_sekarang }}" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="email" class="col-sm-2 control-label">Alamat Perusahaan</label>
+                                <label for="alamat_kerja" class="col-sm-3 control-label">Alamat Perusahaan</label>
 
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="alamat" id="alamat" placeholder="Alamat Perusahaan" value="{{ $alumni->alamat }}" required>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="alamat_kerja" id="alamat_kerja" placeholder="Alamat Perusahaan" value="{{ $data->alamat_kerja }}" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="foto" class="col-sm-2 control-label">Foto</label>
+                                <label for="foto" class="col-sm-3 control-label">Foto</label>
 
-                                <div class="col-sm-10">
+                                <div class="col-sm-9">
                                     <input type="file" name="foto" class="dropify" id="foto">
                                     @if(!empty(auth()->user()->foto))
                                     <a target="_blank" href="{{ asset('/user/foto/' . auth()->user()->foto ?? '') }}">Lihat Foto</a>

@@ -81,9 +81,9 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="alamat" class="col-lg-2 col-lg-offset-1 control-label">Alamat Perusahaan</label>
+                            <label for="alamat_kerja" class="col-lg-2 col-lg-offset-1 control-label">Alamat Perusahaan</label>
                             <div class="col-lg-6">
-                                <input type="text" name="alamat" id="alamat" class="form-control" autofocus>
+                                <input type="text" name="alamat_kerja" id="alamat_kerja" class="form-control" autofocus>
                                 <span class="help-block with-errors"></span>
                             </div>
                         </div>

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\AlumniImport;
 use App\Models\Alumni;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AlumniController extends Controller
 {
@@ -53,19 +55,17 @@ class AlumniController extends Controller
         $data = new User();
         $data->nama = $request->nama;
         $data->nik = $request->nik;
+        $data->program_studi = $request->program_studi;
         $data->email = $request->email;
+        $data->telepon = $request->telepon;
         $data->password =  bcrypt($data->nik);
         $data->level = 3;
         $data->status_aktif = 0;
+        $data->tahun_lulus = $request->tahun_lulus;
+        $data->alamat_kerja = $request->alamat_kerja;
+        $data->pekerjaan_sekarang = $request->pekerjaan_sekarang;
+        $data->perusahaan_sekarang = $request->perusahaan_sekarang;
         $data->save();
-
-        $alumni = new Alumni();
-        $alumni->user_id = $data->id;
-        $alumni->tahun_lulus = $request->tahun_lulus;
-        $alumni->alamat = $request->alamat;
-        $alumni->pekerjaan_sekarang = $request->pekerjaan_sekarang;
-        $alumni->perusahaan_sekarang = $request->perusahaan_sekarang;
-        $alumni->save();
 
         return redirect()->route('alumni.index')->with('success', 'Data alumni berhasil disimpan!');
     }
@@ -80,8 +80,7 @@ class AlumniController extends Controller
     public function edit($id)
     {
         $data = User::find($id);
-        $alumni = Alumni::where('user_id', $id)->first();
-        return view('alumni.edit', compact('data', 'alumni'));
+        return view('alumni.edit', compact('data'));
     }
 
     public function update(Request $request, $id)
@@ -99,16 +98,30 @@ class AlumniController extends Controller
         $data->program_studi = $request->program_studi;
         $data->email = $request->email;
         $data->telepon = $request->telepon;
+        $data->tahun_lulus = $request->tahun_lulus;
+        $data->alamat_kerja = $request->alamat_kerja;
+        $data->pekerjaan_sekarang = $request->pekerjaan_sekarang;
+        $data->perusahaan_sekarang = $request->perusahaan_sekarang;
         $data->save();
 
-        $alumni = Alumni::where('user_id', $id)->first();
-        $alumni->tahun_lulus = $request->tahun_lulus;
-        $alumni->alamat = $request->alamat;
-        $alumni->pekerjaan_sekarang = $request->pekerjaan_sekarang;
-        $alumni->perusahaan_sekarang = $request->perusahaan_sekarang;
-        $alumni->save();
-
         return redirect()->route('alumni.index')->with('success', 'Data Alumni Berhasil Diubah');
+    }
+
+    public function importPageAlumni()
+    {
+        return view('alumni.import');
+    }
+
+    public function importAlumni()
+    {
+        $alumni = new AlumniImport();
+        Excel::import($alumni, request()->file('file'));
+
+        if ($alumni->failures()->isNotEmpty()) {
+            return redirect()->route('alumni.index')->withFailures($alumni->failures());
+        }
+
+        return redirect()->route('alumni.index')->with('success', 'Data alumni berhasil diimport!');
     }
 
     public function resetPwd($id)
@@ -123,7 +136,6 @@ class AlumniController extends Controller
     public function showEdit(Request $request)
     {
         $data = auth()->user();
-        $alumni = Alumni::where('user_id', $data->id)->first();
 
         if($request->isMethod('POST')){
 
@@ -133,7 +145,7 @@ class AlumniController extends Controller
                 'email' => 'required',
                 'telepon' => 'required',
                 'foto' => 'required|mimes:png,jpg',
-                'alamat' => 'required',
+                'alamat_kerja' => 'required',
                 'tahun_lulus' => 'required',
                 'pekerjaan_sekarang' => 'required',
                 'perusahaan_sekarang' => 'required'
@@ -144,7 +156,7 @@ class AlumniController extends Controller
                 'telepon.required' => 'Telepon tidak boleh kosong',
                 'foto.required' => 'Foto tidak boleh kosong',
                 'foto.mimes' => 'Foto harus mempunyai format jpg atau png',
-                'alamat.required' => 'Alamat tidak boleh kosong',
+                'alamat_kerja.required' => 'Alamat Kerja tidak boleh kosong',
                 'tahun_lulus.required' => 'Program Studi tidak boleh kosong',
                 'pekerjaan_sekarang.required' => 'Pekerjaan Sekarang tidak boleh kosong',
                 'perusahaan_sekarang.required' => 'Perusahaan Sekarang tidak boleh kosong',
@@ -170,17 +182,15 @@ class AlumniController extends Controller
             $data->telepon = $request->telepon;
             $data->nik = $request->nik;
             $data->program_studi = $request->program_studi;
+            $data->alamat_kerja = $request->alamat_kerja;
+            $data->tahun_lulus = $request->tahun_lulus;
+            $data->pekerjaan_sekarang = $request->pekerjaan_sekarang;
+            $data->perusahaan_sekarang = $request->perusahaan_sekarang;
             $data->save();
-
-            $alumni->alamat = $request->alamat;
-            $alumni->tahun_lulus = $request->tahun_lulus;
-            $alumni->pekerjaan_sekarang = $request->pekerjaan_sekarang;
-            $alumni->perusahaan_sekarang = $request->perusahaan_sekarang;
-            $alumni->save();
 
             return redirect()->route('alumni.show-edit')->with('success', 'Data alumni berhasil diubah!');
         }
 
-        return view('alumni.show-edit', compact('data', 'alumni'));
+        return view('alumni.show-edit', compact('data'));
     }
 }
