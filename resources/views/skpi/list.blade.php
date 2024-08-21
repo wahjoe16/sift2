@@ -20,20 +20,6 @@
                                 <th>Tanggal Pengajuan</th>
                                 <th width="12%"><i class="fa fa-cogs"></i> Aksi</th>
                             </thead>
-                            {{-- <tbody>
-                                @foreach($data as $d)
-                                <tr>
-                                    <td>{{ $loop->index + 1 }}</td>
-                                    <td>{{ $d->user_skpi->nama }}</td>
-                                    <td>{{ $d->user_skpi->nik }}</td>
-                                    <td>{{ $d->user_skpi->program_studi }}</td>
-                                    <td>{{ tanggal_indonesia($d->tanggal) }}</td>
-                                    <td>
-                                        <a href="{{ route('skpi.print', $d->id) }}" class="btn btn-success btn-sm btn-flat"><i class="fa fa-download"></i> Cetak</a>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody> --}}
                         </table>
                     </form>
                 </div>

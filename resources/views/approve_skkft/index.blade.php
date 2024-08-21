@@ -2,6 +2,10 @@
 
 @section('content')
 
+<section class="content-header">
+    <h3>Pengajuan Kegiatan SKKFT</h3>
+</section>
+
 <section class="content">
     @includeIf('layouts.alert')
     <div class="row">

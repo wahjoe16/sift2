@@ -16,6 +16,31 @@ class ApproveSkkftController extends Controller
         return view('approve_skkft.index', compact('dataPengajuan'));
     }
 
+    public function indexData()
+    {
+        return view('approve_skkft.data');
+    }
+
+    public function ajaxIndexData()
+    {
+        $data = Kegiatan::with([
+            'user_skkft', 'categories_skkft', 'subcategories_skkft'
+        ])->where('status_skkft', 1)->orderBy('id', 'DESC')->get();
+
+        return datatables()
+            ->of($data)
+            ->addIndexColumn()
+            ->addColumn('aksi', function($data){
+                return '
+                    <div class="btn-group">
+                        <a href="'.route('skkft.show', $data->id).'" class="btn btn-primary btn-flat btn-sm"><i class="fa fa-search"></i></a>
+                    </div>
+                ';
+            })
+            ->rawColumns(['aksi'])
+            ->make(true);
+    }
+
     public function edit($id)
     {
         Session::put('page', 'dashboardSkkft');

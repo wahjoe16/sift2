@@ -23,6 +23,7 @@
                                     <th>Prestasi</th>
                                     <th>Jabatan</th>
                                     <th>Poin</th>
+                                    <th>Status</th>
                                     <th width="12%"><i class="fa fa-cogs"></i></th>
                                 </thead>
                                 <tbody>
@@ -60,6 +61,13 @@
                                                 @else
                                                     <span class="label label-warning">Ditolak</span>
                                                 @endif
+                                            </td>
+                                            <td>
+                                                <form action="{{ route('skpi.deleteKegiatan', $d->id) }}" method="post" class="d-inline">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <button type="submit" class="btn btn-danger btn-sm btn-flat"><i class="fa fa-trash"></i></button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach

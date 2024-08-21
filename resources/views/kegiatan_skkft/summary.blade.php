@@ -8,7 +8,7 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3>Rangkuman SKKFT <strong>{{ auth()->user()->nama }}</strong></h3>
+                    <h3><i>Summary</i> SKKFT <strong>{{ auth()->user()->nama }}</strong></h3>
                 </div>
                 <div class="box-body table-responsive">
                     <div class="row">
@@ -18,7 +18,7 @@
                                     <th width="5%">No</th>
                                     <th>Nama Kegiatan</th>
                                     <th>Poin</th>
-                                    <th width="12%"><i class="fa fa-cogs"></i></th>
+                                    <th width="12%" class="text-center">Status</th>
                                 </thead>
                                 <tbody>
                                     @foreach ($data as $d)
@@ -42,9 +42,9 @@
                             <table class="table table-striped table-bordered">
                                 <thead>
                                     <th width="5%">#</th>
-                                    <th>Kategori</th>
-                                    <th width="20%">Poin</th>
-                                    <th width="12%">Keterangan</th>
+                                    <th class="text-center">Kategori</th>
+                                    <th width="12%">Poin</th>
+                                    <th width="40%" class="text-center">Keterangan</th>
                                 </thead>
                                 <tbody>
                                     @foreach ($poinKategori as $pk)
@@ -54,9 +54,13 @@
                                             <td>{{ $pk['poin'] }}</td>
                                             <td>
                                                 @if ($pk['lolos'])
-                                                    Poin Sudah Mencapai Bobot Minimal ({{$pk['bobotnya']}}% Dari 150 Poin)
+                                                    <div class="alert alert-success alert-dismissible">
+                                                        Poin Sudah Mencapai Bobot Minimal ({{$pk['bobotnya']}}% Dari 150 Poin)
+                                                    </div>
                                                     @else
-                                                    Poin Belum Mencapai Bobot Minimal ({{$pk['bobotnya']}}% Dari 150 Poin)
+                                                    <div class="alert alert-warning alert-dismissible">
+                                                        Poin Belum Mencapai Bobot Minimal ({{$pk['bobotnya']}}% Dari 150 Poin)
+                                                    </div>
                                                 @endif
                                             </td>
                                         </tr>
@@ -72,8 +76,8 @@
                                                 ($poinKategori['1']['poin'] >= 40) &&
                                                 ($poinKategori['3']['poin'] >= 30) &&
                                                 ($poinKategori['4']['poin'] >= 30) &&
-                                                ($poinKategori['5']['poin'] >= 15) &&
-                                                ($poinKategori['6']['poin'] >= 10) &&
+                                                ($poinKategori['5']['poin'] >= 20) &&
+                                                ($poinKategori['6']['poin'] >= 15) &&
                                                 ($poinKategori['7']['poin'] >= 15)
                                             )
                                                 <td colspan="4" class="text-center">

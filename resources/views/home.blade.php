@@ -95,7 +95,7 @@
                                 <p>Surat Keterangan Pendamping Ijazah</p>
                             </div>
                             <div class="icon">
-                                <i class="fa fa-users"></i>
+                                <i class="fa fa-newspaper-o"></i>
                             </div>
                             @if (auth()->user()->level == 1)
                                 <a href="{{ route('skpi.list') }}" class="small-box-footer">

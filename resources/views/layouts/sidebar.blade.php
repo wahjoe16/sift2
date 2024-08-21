@@ -452,8 +452,8 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('dashboardSkkft.index') }}" @if(Session::get('page')=='indexCatSkkft' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                                <i class="fa fa-database"></i> <span>Data Kegiatan SKKFT</span>
+                            <a href="{{ route('dataSkkft.index') }}" @if(Session::get('page')=='indexCatSkkft' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                                <i class="fa fa-database"></i> <span>Database Kegiatan SKKFT</span>
                             </a>
                         </li>
                         <li>

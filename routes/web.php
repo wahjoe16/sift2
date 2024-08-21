@@ -180,10 +180,15 @@ Route::group(['prefix'=>'/skkft'], function(){
     // SKKFT ADMIN
     Route::group(['middleware'=>'ceklevel:1'], function(){
         Route::get('/dashboard-skkft', [ApproveSkkftController::class, 'index'])->name('dashboardSkkft.index');
+        Route::get('/data-skkft-index', [ApproveSkkftController::class, 'indexData'])->name('dataSkkft.index');
+        Route::get('/data-skkft', [ApproveSkkftController::class, 'ajaxIndexData'])->name('dataSkkft.data');
+        Route::get('/data-skkft-show/{id}', [ApproveSkkftController::class, 'showKegiatan'])->name('skkft.show');
         Route::get('/approve-skkft/{id}', [ApproveSkkftController::class, 'edit'])->name('approveKegiatan.edit');
         Route::post('/update-skkft/{id}', [ApproveSkkftController::class, 'update'])->name('approveKegiatan.update');
         Route::delete('/delete-skkft/{id}', [ApproveSkkftController::class, 'delete'])->name('approveKegiatan.destroy'); 
         Route::get('/skpi-print/{id}', [SkpiController::class, 'print'])->name('skpi.print');
+        Route::get('/skpi-edit/{id}', [SkpiController::class, 'edit'])->name('skpi.edit');
+        Route::put('/skpi-update/{id}', [SkpiController::class, 'update'])->name('skpi.update');
     });
     
     // SKKFT ADMIN dan DOSEN
@@ -201,6 +206,7 @@ Route::group(['prefix'=>'/skkft'], function(){
         Route::get('/skpi', [SkpiController::class, 'index'])->name('skpi.index');
         Route::post('/skpi/{id}', [SkpiController::class, 'verify'])->name('skpi.verify');
         Route::get('/skpi-show/{id}', [SkpiController::class, 'show'])->name('skpi.show');
+        Route::put('/kegiatan-skpi-delete/{id}', [SkpiController::class, 'deleteKegiatan'])->name('skpi.deleteKegiatan');
     });
 
     // SKKFT MAHASISWA
