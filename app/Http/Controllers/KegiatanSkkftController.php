@@ -10,10 +10,13 @@ use App\Models\SertifikatSkkft;
 use App\Models\Skpi;
 use App\Models\SubcategorySkkft;
 use App\Models\Tingkat;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
+use Mpdf\Mpdf;
+use Spatie\Browsershot\Browsershot;
 use Symfony\Component\HttpFoundation\File\UploadedFile as FileUploadedFile;
 
 class KegiatanSkkftController extends Controller
@@ -25,7 +28,8 @@ class KegiatanSkkftController extends Controller
         Session::put('page', 'indexKegiatanSkkft');
         $user = auth()->user()->id;
         $kegiatan = Kegiatan::where('user_id', $user)->get();
-        return view('kegiatan_skkft.index', compact('title', 'text', 'kegiatan'));
+        $sertifikat = SertifikatSkkft::where('user_id', auth()->user()->id)->first();
+        return view('kegiatan_skkft.index', compact('title', 'text', 'kegiatan', 'sertifikat'));
     }
 
     public function create()
@@ -190,6 +194,7 @@ class KegiatanSkkftController extends Controller
         $data = Kegiatan::where('user_id', auth()->user()->id)->get();
         $dataSertifikat = SertifikatSkkft::where('user_id', auth()->user()->id)->first();
         $dataSkpi = Skpi::where('user_id', auth()->user()->id)->first();
+        $statusSertifikatSkkft = SertifikatSkkft::where('user_id', auth()->user()->id)->first();
 
         $poinPerKategori = "
                             select category_skkft.id, category_skkft.category_name, sum(kegiatan.point) as poin from kegiatan
@@ -230,7 +235,7 @@ class KegiatanSkkftController extends Controller
             ];
         }
 
-        return view('kegiatan_skkft.summary', compact('data', 'dataSertifikat', 'dataSkpi' ,'dataPoin', 'poinKategori', 'totalPoin'));
+        return view('kegiatan_skkft.summary', compact('data', 'dataSertifikat', 'dataSkpi' , 'statusSertifikatSkkft', 'dataPoin', 'poinKategori', 'totalPoin'));
     }
 
     public function dataSkkft()
@@ -247,5 +252,31 @@ class KegiatanSkkftController extends Controller
             })
             ->rawColumns(['aksi'])
             ->make(true);
+    }
+
+    public function generateSkkft()
+    {
+        $sertifikat = SertifikatSkkft::where('user_id', auth()->user()->id)->first();
+        // $user = $sertifikat->user_skkft();
+        // dd($sertifikat);
+        $sql = "
+            select category_skkft.category_name, sum(kegiatan.point) as poin from kegiatan
+            left join category_skkft on category_skkft.id = kegiatan.category_id
+            where kegiatan.user_id =? and kegiatan.status_skkft = 1
+            group by category_skkft.category_name
+        ";
+        $dataPoin = DB::select($sql, [$sertifikat]);
+        $data = [
+            'nama' => $sertifikat->user_skkft->nama,
+            'npm' => $sertifikat->user_skkft->nik,
+            'tanggal' => tanggal_indonesia($sertifikat->tanggal, false),
+            'wadek' => 'Ir. Yuliadi, S.T., M.T., IPM.',
+            'poin' => $dataPoin
+        ];
+
+        // $template = view('sertifikat.generate', $data)->render();
+
+        $pdf = Pdf::loadView('sertifikat.generate', $data)->setPaper('A4', 'landscape');
+        return $pdf->download('sertifikat_skkft.pdf');
     }
 }

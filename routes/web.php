@@ -216,6 +216,7 @@ Route::group(['prefix'=>'/skkft'], function(){
         Route::get('/kegiatan-summary', [KegiatanSkkftController::class, 'summary'])->name('kegiatan.summary');
         Route::post('/sertifikat-store', [SertifikatSkkftController::class, 'store'])->name('sertifikat.store');
         Route::post('/skpi-store', [SkpiController::class, 'store'])->name('skpi.store');
+        Route::get('/sertifikat-skkft-generate', [KegiatanSkkftController::class, 'generateSkkft'])->name('sertifikatSkkft.generate');
     });
 
 });

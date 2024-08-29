@@ -99,6 +99,22 @@
             </div>
         </div>
     </div>
+    @if (!is_null($statusSertifikatSkkft) && $statusSertifikatSkkft->status == 1)
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h4>Sertifikat SKKFT</h4>
+                    </div>
+                    <div class="box-body">
+                        <strong>
+                            <a href="{{ route('sertifikatSkkft.generate') }}">Download Sertifikat SKKFT</a>
+                        </strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 </section>
 
 @endsection
