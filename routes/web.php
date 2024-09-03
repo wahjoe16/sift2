@@ -8,9 +8,11 @@ use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\BimbinganController;
 use App\Http\Controllers\CategoryArsipController;
 use App\Http\Controllers\CategorySkkftController;
+use App\Http\Controllers\ClaimSkkftController;
 use App\Http\Controllers\DaftarSeminarController;
 use App\Http\Controllers\DaftarSidangController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DependenDropdownController;
 use App\Http\Controllers\DownloadSeminarController;
 use App\Http\Controllers\DownloadSidangController;
 use App\Http\Controllers\JabatanSkkftController;
@@ -172,11 +174,16 @@ Route::group(['prefix' => '/datamaster'], function () {
         Route::get('/alumni-data', [AlumniController::class, 'data'])->name('alumni.data');
         Route::get('/alumni/{id}', [AlumniController::class, 'show'])->name('alumni.show');
     });
-
-    Route::get('dropdownlist/subcategory-skkft/{id}', [SubcategorySkkftController::class, 'getDataSubCategory'])->name('get-subcategoryskkft.data');
+   
 });
 
 Route::group(['prefix'=>'/skkft'], function(){
+
+    Route::get('dropdownlist/subcategory-skkft/{id}', [DependenDropdownController::class, 'getDataSubCategory'])->name('get-subcategoryskkft.data');
+    Route::get('dropdownlist/tingkat-skkft/{id}', [DependenDropdownController::class, 'getDataTingkat'])->name('get-tingkatskkft.data');
+    Route::get('dropdownlist/prestasi-skkft/{id}', [DependenDropdownController::class, 'getDataPrestasi'])->name('get-prestasiskkft.data');
+    Route::get('dropdownlist/jabatan-skkft/{id}', [DependenDropdownController::class, 'getDataJabatan'])->name('get-jabatanskkft.data');
+
     // SKKFT ADMIN
     Route::group(['middleware'=>'ceklevel:1'], function(){
         Route::get('/dashboard-skkft', [ApproveSkkftController::class, 'index'])->name('dashboardSkkft.index');
@@ -212,6 +219,7 @@ Route::group(['prefix'=>'/skkft'], function(){
     // SKKFT MAHASISWA
     Route::group(['middleware' => 'ceklevel:3'], function(){
         Route::resource('/kegiatan', KegiatanSkkftController::class);
+        Route::get('/kegiatan-claim', [ClaimSkkftController::class, 'claimKegiatan'])->name('kegiatan.claim');
         Route::get('/kegiatan-summary-data', [KegiatanSkkftController::class, 'dataSkkft'])->name('kegiatan.data');
         Route::get('/kegiatan-summary', [KegiatanSkkftController::class, 'summary'])->name('kegiatan.summary');
         Route::post('/sertifikat-store', [SertifikatSkkftController::class, 'store'])->name('sertifikat.store');

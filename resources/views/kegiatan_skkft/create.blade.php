@@ -49,9 +49,6 @@
                             <div class="col-sm-6">
                                 <select name="subcategory_id" id="subcategory_id" class="form-control select2">
                                     <option value="">Pilih</option>
-                                    @foreach($subcategory as $sc)
-                                    <option value="{{ $sc['id'] }}">{{ $sc['subcategory_name'] }}</option>
-                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -60,9 +57,6 @@
                             <div class="col-sm-6">
                                 <select name="tingkat_id" id="tingkat_id" class="form-control select2">
                                     <option value="">Pilih</option>
-                                    @foreach($tingkat as $t)
-                                    <option value="{{ $t['id'] }}">{{ $t['tingkat'] }}</option>
-                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -71,9 +65,6 @@
                             <div class="col-sm-6">
                                 <select name="prestasi_id" id="prestasi_id" class="form-control select2">
                                     <option value="">Pilih</option>
-                                    @foreach($prestasi as $p)
-                                    <option value="{{ $p['id'] }}">{{ $p['prestasi'] }}</option>
-                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -82,9 +73,6 @@
                             <div class="col-sm-6">
                                 <select name="jabatan_id" id="jabatan_id" class="form-control select2">
                                     <option value="">Pilih</option>
-                                    @foreach($jabatan as $j)
-                                    <option value="{{ $j['id'] }}">{{ $j['jabatan'] }}</option>
-                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -137,7 +125,7 @@
             var subcategory = jQuery(this).val();
             if (subcategory) {
                 jQuery.ajax({
-                    url: '/datamaster/dropdownlist/subcategory-skkft/' + subcategory,
+                    url: '/skkft/dropdownlist/subcategory-skkft/' + subcategory,
                     type: 'GET',
                     dataType: 'json',
                     success: function(data) {
@@ -150,6 +138,66 @@
                 })
             } else {
                 $('select[name="subcategory_id"]').empty();
+            }
+        })
+
+        jQuery('select[name="subcategory_id"]').on('change', function() {
+            var tingkat = jQuery(this).val();
+            if (tingkat) {
+                jQuery.ajax({
+                    url: '/skkft/dropdownlist/tingkat-skkft/' + tingkat,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log(data);
+                        jQuery('select[name="tingkat_id"]').empty();
+                        jQuery.each(data, function(key, value) {
+                            $('select[name="tingkat_id"]').append('<option value="' + value.tingkat_skkft.id + '">' + value.tingkat_skkft.tingkat + '</option>');
+                        })
+                    }
+                })
+            } else {
+                $('select[name="tingkat_id"]').empty();
+            }
+        })
+
+        jQuery('select[name="subcategory_id"]').on('change', function() {
+            var prestasi = jQuery(this).val();
+            if (prestasi) {
+                jQuery.ajax({
+                    url: '/skkft/dropdownlist/prestasi-skkft/' + prestasi,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log(data);
+                        jQuery('select[name="prestasi_id"]').empty();
+                        jQuery.each(data, function(key, value) {
+                            $('select[name="prestasi_id"]').append('<option value="' + value.prestasi_skkft.id + '">' + value.prestasi_skkft.prestasi + '</option>');
+                        })
+                    }
+                })
+            } else {
+                $('select[name="prestasi_id"]').empty();
+            }
+        })
+
+        jQuery('select[name="subcategory_id"]').on('change', function() {
+            var jabatan = jQuery(this).val();
+            if (jabatan) {
+                jQuery.ajax({
+                    url: '/skkft/dropdownlist/jabatan-skkft/' + jabatan,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log(data);
+                        jQuery('select[name="jabatan_id"]').empty();
+                        jQuery.each(data, function(key, value) {
+                            $('select[name="jabatan_id"]').append('<option value="' + value.jabatan_skkft.id + '">' + value.jabatan_skkft.jabatan + '</option>');
+                        })
+                    }
+                })
+            } else {
+                $('select[name="jabatan_id"]').empty();
             }
         })
 

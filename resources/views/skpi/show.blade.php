@@ -22,8 +22,7 @@
                                     <th>Tingkat</th>
                                     <th>Prestasi</th>
                                     <th>Jabatan</th>
-                                    <th>Poin</th>
-                                    <th>Status</th>
+                                    <th>Link Bukti Fisik</th>
                                     <th width="12%"><i class="fa fa-cogs"></i></th>
                                 </thead>
                                 <tbody>
@@ -54,14 +53,7 @@
                                                     -
                                                 @endif
                                             </td>
-                                            <td><strong>{{ $d->point }}</strong></td>
-                                            <td>
-                                                @if ($d->status_skkft == 1)
-                                                    <span class="label label-success">Disetujui</span>
-                                                @else
-                                                    <span class="label label-warning">Ditolak</span>
-                                                @endif
-                                            </td>
+                                            <td class="text-center"><a href="{{ url('/mahasiswa/skkft', $d->bukti_fisik) }}" target="_blank"><i class="fa fa-link"></i></a></td>
                                             <td>
                                                 <form action="{{ route('skpi.deleteKegiatan', $d->id) }}" method="post" class="d-inline">
                                                     @csrf
@@ -90,20 +82,6 @@
 
 @push('scripts_page')
 <script>
-    // let table;
-
-    // $(function() {
-    //     table = $('.table-skkft').DataTable({
-    //         processing: true,
-    //         autoWidth: false,
-    //         url: '{{ route("kegiatan.data") }}',
-    //         columns: [
-    //             { data: 'id' },
-    //             { data: 'nama_kegiatan' },
-    //             { data: 'poin', searchable: false, sortable: false },
-    //             { data: 'aksi', searchable: false, sortable: false },
-    //         ]
-    //     })
-    // })
+    
 </script>
 @endpush

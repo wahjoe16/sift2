@@ -16,6 +16,7 @@
                                 <th width="5%">No</th>
                                 <th>Nama Mahasiswa</th>
                                 <th>NPM</th>
+                                <th>Program Studi</th>
                                 <th>Tanggal Pengajuan</th>
                                 <th width="12%"><i class="fa fa-cogs"></i> Aksi</th>
                             </thead>
@@ -25,6 +26,7 @@
                                     <td>{{ $loop->index + 1 }}</td>
                                     <td>{{ $d->user_skkft->nama }}</td>
                                     <td>{{ $d->user_skkft->nik }}</td>
+                                    <td>{{ $d->user_skkft->program_studi }}</td>
                                     <td>{{ tanggal_indonesia($d->tanggal) }}</td>
                                     <td>
                                         <a href="{{ route('skpi.show', $d->id) }}" class="btn btn-info btn-flat btn-sm"><i class="fa fa-search"></i></a>

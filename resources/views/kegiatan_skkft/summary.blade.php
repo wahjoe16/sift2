@@ -74,11 +74,11 @@
                                                 is_null($dataSertifikat) &&
                                                 $totalPoin >= 150 &&
                                                 ($poinKategori['1']['poin'] >= 40) &&
+                                                ($poinKategori['2']['poin'] >= 30) &&
                                                 ($poinKategori['3']['poin'] >= 30) &&
-                                                ($poinKategori['4']['poin'] >= 30) &&
-                                                ($poinKategori['5']['poin'] >= 20) &&
-                                                ($poinKategori['6']['poin'] >= 15) &&
-                                                ($poinKategori['7']['poin'] >= 15)
+                                                ($poinKategori['4']['poin'] >= 20) &&
+                                                ($poinKategori['5']['poin'] >= 15) &&
+                                                ($poinKategori['6']['poin'] >= 15)
                                             )
                                                 <td colspan="4" class="text-center">
                                                     <form action="{{ route('sertifikat.store') }}" method="POST">@csrf

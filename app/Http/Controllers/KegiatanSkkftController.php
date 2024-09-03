@@ -28,6 +28,7 @@ class KegiatanSkkftController extends Controller
         Session::put('page', 'indexKegiatanSkkft');
         $user = auth()->user()->id;
         $kegiatan = Kegiatan::where('user_id', $user)->get();
+        // dd($kegiatan);
         $sertifikat = SertifikatSkkft::where('user_id', auth()->user()->id)->first();
         return view('kegiatan_skkft.index', compact('title', 'text', 'kegiatan', 'sertifikat'));
     }

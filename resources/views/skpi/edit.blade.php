@@ -10,6 +10,67 @@
 
 <section class="content">
     <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3>Rekap SKKFT <strong>{{ $data->user_skpi->nama }}</strong></h3>
+                </div>
+                <div class="box-body table-responsive">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-striped table-bordered table-skkft">
+                                <thead>
+                                    <th width="5%">No</th>
+                                    <th>Nama Kegiatan</th>
+                                    <th>Kategori</th>
+                                    <th>Sub Kategori</th>
+                                    <th>Tingkat</th>
+                                    <th>Prestasi</th>
+                                    <th>Jabatan</th>
+                                    <th>Bukti Fisik</th>
+                                </thead>
+                                <tbody>
+                                    @foreach ($dataKegiatan as $d)
+                                        <tr>
+                                            <td>{{ $loop->index + 1 }}</td>
+                                            <td>{{ $d->nama_kegiatan }}</td>
+                                            <td>{{ $d->categories_skkft->category_name }}</td>
+                                            <td>{{ $d->subcategories_skkft->subcategory_name }}</td>
+                                            <td>
+                                                @if ($d->tingkat_id != '')
+                                                    {{ $d->tingkat_skkft->tingkat }}
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($d->prestasi_id != '')
+                                                    {{ $d->prestasi_skkft->prestasi }}
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($d->jabatan_id != '')
+                                                    {{ $d->jabatan_skkft->jabatan }}
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
+                                            <td class="text-center"><a href="{{ url('/mahasiswa/skkft', $d->bukti_fisik) }}" target="_blank"><i class="fa fa-link"></i></a></td>
+                                            
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <form action="{{ route('skpi.update', $data->id) }}" method="post">
                 <div class="box">
@@ -43,20 +104,6 @@
                                 <div class="form-group">
                                     <label for="tanggal_masuk">Tanggal Masuk Perkuliahan</label>
                                     <input type="text" name="tanggal_masuk" class="form-control" id="tanggal" placeholder="Tanggal Masuk Perkuliahan" value="{{ $data->tanggal_masuk }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="akre_fakultas">Akreditasi Fakultas</label>
-                                    <select name="akre_fakultas" id="akre_fakultas" class="form-control select2 text-black">
-                                        <option value="">Select</option>
-                                            @foreach ([
-                                                "Unggul"=>"Unggul",
-                                                "Baik Sekali"=>"Baik Sekali",
-                                                "Baik"=>"Baik",
-                                                "Tak Terakreditasi"=>"Tak Terakreditasi"
-                                                ] as $akre_fakultas => $akre_fakultasLabel)
-                                                <option value="{{ $akre_fakultas }}" {{ old('akre_fakultas', $data->akreditasi_fakultas)==$akre_fakultas ? "selected" : "" }}>{{ $akre_fakultasLabel }}</option>
-                                            @endforeach
-                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="akre_prodi">Akreditasi Program Studi</label>
@@ -93,10 +140,6 @@
                                 <div class="form-group">
                                     <label for="tanggal_lulus">Tanggal Lulus Perkuliahan</label>
                                     <input type="text" name="tanggal_lulus" class="form-control" id="tanggal3" placeholder="Tanggal Lulus Perkuliahan" value="{{ $data->tanggal_lulus }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="lama_studi">Lama Studi</label>
-                                    <input type="text" name="lama_studi" class="form-control" id="lama_studi" placeholder="Lama Studi" value="{{ $data->lama_studi }}">
                                 </div>
                             </div>
                         </div> 

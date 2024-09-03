@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\CategorySkkft;
+use App\Models\PoinSkkft;
 use App\Models\SubcategorySkkft;
+use App\Models\Tingkat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Intervention\Image\Point;
 
 class SubcategorySkkftController extends Controller
 {
@@ -109,9 +112,5 @@ class SubcategorySkkftController extends Controller
         return redirect()->back()->with('danger', 'Sub Kategori SKKFT berhasil dihapus!');
     }
 
-    public function getDataSubCategory($id)
-    {
-        $data = SubcategorySkkft::where('category_id', $id)->pluck('subcategory_name', 'id');
-        return response()->json($data);
-    }
+    
 }

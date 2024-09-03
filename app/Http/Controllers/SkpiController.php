@@ -90,7 +90,18 @@ class SkpiController extends Controller
     {
         $data = Skpi::with('user_skpi')->find($id);
         // dd($data);
-        return view('skpi.edit', compact('data'));
+
+        $dataKegiatan = Kegiatan::select('kegiatan.*', 'users.nik', 'users.nama', 'category_skkft.category_name', 'subcategory_skkft.subcategory_name', 'tingkat.tingkat', 'jabatan.jabatan', 'prestasi_skkft.prestasi')
+                        ->where(['user_id' => $data->user_id, 'status_skpi' => 1])
+                        ->leftJoin('users', 'users.id', '=', 'kegiatan.user_id')
+                        ->leftJoin('category_skkft', 'category_skkft.id', '=', 'kegiatan.category_id')
+                        ->leftJoin('subcategory_skkft', 'subcategory_skkft.id', '=', 'kegiatan.subcategory_id')
+                        ->leftJoin('tingkat', 'tingkat.id', '=', 'kegiatan.tingkat_id')
+                        ->leftJoin('prestasi_skkft', 'prestasi_skkft.id', '=', 'kegiatan.prestasi_id')
+                        ->leftJoin('jabatan', 'jabatan.id', '=', 'kegiatan.jabatan_id')
+                        ->get();
+
+        return view('skpi.edit', compact('data', 'dataKegiatan'));
     }
 
     public function update(Request $request, $id)
@@ -120,6 +131,21 @@ class SkpiController extends Controller
         $data = Skpi::find($id);       
 
         $templateProcessor = new TemplateProcessor('skpi-template/skpi.docx');
+
+        $kodeTmb = "70.1";
+        $kodeTi = "70.2";
+        $kodePwk = "70.3";
+        if($data->user_skpi->program_studi == 'Teknik Pertambangan') {
+            $templateProcessor->setValue('kodeProdi', $kodeTmb);
+        }elseif ($data->user_skpi->program_studi == 'Teknik Industri') {
+            $templateProcessor->setValue('kodeProdi', $kodeTi);
+        }elseif ($data->user_skpi->program_studi == 'Perencanaan Wilayah dan Kota') {
+            $templateProcessor->setValue('kodeProdi', $kodePwk);
+        }
+
+        $tahun = date('Y');
+        $templateProcessor->setValue('tahun', $tahun);
+
         $templateProcessor->setValue('no_skpi', $data->no_skpi);
         $templateProcessor->setValue('nama', $data->user_skpi->nama);
         $templateProcessor->setValue('npm', $data->user_skpi->nik);
@@ -129,7 +155,12 @@ class SkpiController extends Controller
         $templateProcessor->setValue('no_ijazah', $data->no_ijazah);
         $templateProcessor->setValue('tanggal_masuk', tanggal_indonesia($data->tanggal_masuk, false));
         $templateProcessor->setValue('tanggal_lulus', tanggal_indonesia($data->tanggal_lulus, false));
-        $templateProcessor->setValue('lama_studi', $data->lama_studi);
+
+        $dateIn = date_create($data->tanggal_masuk);
+        $dateOut = date_create($data->tanggal_lulus);
+        $interval = date_diff($dateIn, $dateOut);
+        $templateProcessor->setValue('lama_studi', $interval->y.' Tahun '. $interval->m.' Bulan ');
+
         $templateProcessor->setValue('akre_fakultas', $data->akreditasi_fakultas);
         $templateProcessor->setValue('akre_prodi', $data->akreditasi_prodi);
         $templateProcessor->setValue('tanggal_pengajuan', tanggal_indonesia($data->tanggal, false));
@@ -160,17 +191,7 @@ class SkpiController extends Controller
             "Mampu bekerja sama dengan tim secara efektif, berjiwa kepemimpinan, menciptakan suasana yang kolaboratif dan inklusif, serta mampu menetapkan target, rencana dan tujuan secara objectif",
             "Mampu mengembangkan dan melakukan eksperimen secara tepat, menganalisis dan menginterpretasikan data serta menarik kesimpulan dan mengambil keputusan secara teknis",
             "Mampu memahani kebutuhan akan pembelajaran sepanjang hayat, termasuk menerapkan pengetahuan kekinian yang relevan sesuai kebutuhan dengan strategi yang tepat"
-        ];
-        
-        /*$cplTambang = "
-            1. Mampu mengidentifikasi, memformulasi, dan menyelesaikan permasalahan rekayasa (engineering) dalam bidang pertambangan dengan menerapkan prinsip-prinsip rekayasa, sains dan matematika;
-            2. Mampu menerapkan perancangan rekayasa untuk menyelesaikan permasalahan dalam bidang pertambangan dengan mempertimbangkan K3, faktor global, budaya, sosial, ekonomi, lingkungan, dan ekonomi;
-            3. Mampu berkomunikasi lisan dan tulisan secara efektif dengan berbagai pihak terkait;
-            4. Mampu bertanggung jawab dan mematuhi etika profesi dalam bidang rekayasa pertambangan serta membuat keputusan dengan mempertimbangkan dampak terhadap sosial, ekonomi dan lingkungan secara global;
-            5. Mampu bekerja sama dengan tim secara efektif, berjiwa kepemimpinan, menciptakan suasana yang kolaboratif dan inklusif, serta mampu menetapkan target, rencana dan tujuan secara objectif;
-            6. Mampu mengembangkan dan melakukan eksperimen secara tepat, menganalisis dan menginterpretasikan data serta menarik kesimpulan dan mengambil keputusan secara teknis;
-            7. Mampu memahani kebutuhan akan pembelajaran sepanjang hayat, termasuk menerapkan pengetahuan kekinian yang relevan sesuai kebutuhan dengan strategi yang tepat.
-        ";*/
+        ];       
 
         $cplPwk = [
             "Menguasai dan menerapkan konsep teoritis, prinsip, dan proses dalam bidang perencanaan wilayah, desa, dan kota.",
@@ -265,10 +286,12 @@ class SkpiController extends Controller
         $templateProcessor->setValue('islam', $kegiatanIslam);
         */
         
-        $dataKegiatan = Kegiatan::select('kegiatan.*', 'category_skkft.category_name')
+        $dataKegiatan = Kegiatan::select('kegiatan.nama_kegiatan', 'category_skkft.category_name')
                         ->where(['user_id' => $data->user_id, 'status_skpi' => 1])
                         ->leftJoin('category_skkft', 'category_skkft.id', '=', 'kegiatan.category_id')
-                        ->pluck('nama_kegiatan');
+                        //->pluck('nama_kegiatan');
+
+                        ->get()->toArray();
         // dd($dataKegiatan);
         
         // $namaKegiatan = [];
@@ -277,10 +300,12 @@ class SkpiController extends Controller
         // }
         // dd($namaKegiatan);
         // dd($dataKegiatan);
-        
-        $templateProcessor->setValue('nama_kegiatan',  $dataKegiatan);
-       
-        
+        // foreach($dataKegiatan as $kegiatan){
+        //     $templateProcessor->setValue('nama_kegiatan',  $kegiatan);
+        // }
+
+        $templateProcessor->cloneBlock('block_kegiatan', 0, true, false, $dataKegiatan);
+                      
         $categorySkkft = CategorySkkft::pluck('id');
 
         $fileName = $data->user_skpi->nik . '_' . $data->user_skpi->nama;
