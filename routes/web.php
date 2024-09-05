@@ -371,17 +371,13 @@ Route::group(['prefix' => '/dokumentasi_sidang'], function () {
 
 });
 
-// SKKFT
-Route::group(['prefix' => '/skkft'], function(){
-    
-});
-
 // ARSIP Fakultas Role ADMIN, DOSEN
 Route::group(['prefix' => '/archives'], function () {
 
     Route::group(['middleware' => 'ceklevel:1'], function () {
         // CRUD ARCHIVE
-        Route::resource('ft-arsip', ArchiveController::class);
+        Route::resource('ft-arsip', ArchiveController::class)->except('destroy');
+        Route::get('ft-arsip/{id}/destroy', [ArchiveController::class, 'destroy'])->name('ft-arsip.destroy');
         Route::get('data/ft-arsip', [ArchiveController::class, 'data'])->name('ft-arsip.data');
 
         // download Archive

@@ -260,21 +260,23 @@ class KegiatanSkkftController extends Controller
         $sertifikat = SertifikatSkkft::where('user_id', auth()->user()->id)->first();
         // $user = $sertifikat->user_skkft();
         // dd($sertifikat);
+               
         $sql = "
             select category_skkft.category_name, sum(kegiatan.point) as poin from kegiatan
             left join category_skkft on category_skkft.id = kegiatan.category_id
             where kegiatan.user_id =? and kegiatan.status_skkft = 1
             group by category_skkft.category_name
         ";
+
         $dataPoin = DB::select($sql, [$sertifikat]);
         $data = [
             'nama' => $sertifikat->user_skkft->nama,
             'npm' => $sertifikat->user_skkft->nik,
             'tanggal' => tanggal_indonesia($sertifikat->tanggal, false),
-            'wadek' => 'Ir. Yuliadi, S.T., M.T., IPM.',
+            'wadek' => 'Dr. Eng. Ir. M. Rahman Ardhiansyah, S.T., M.T., IPM.',
             'poin' => $dataPoin
         ];
-
+       
         // $template = view('sertifikat.generate', $data)->render();
 
         $pdf = Pdf::loadView('sertifikat.generate', $data)->setPaper('A4', 'landscape');

@@ -30,7 +30,7 @@
                                                 @if ($d->status_skkft == 1)
                                                     <span class="label label-success">Disetujui</span>
                                                 @else
-                                                    <span class="label label-warning">Ditolak</span>
+                                                    <span class="label label-danger">Ditolak</span>
                                                 @endif
                                             </td>
                                         </tr>
@@ -102,15 +102,9 @@
     @if (!is_null($statusSertifikatSkkft) && $statusSertifikatSkkft->status == 1)
         <div class="row">
             <div class="col-sm-12">
-                <div class="box">
-                    <div class="box-header with-border">
-                        <h4>Sertifikat SKKFT</h4>
-                    </div>
-                    <div class="box-body">
-                        <strong>
-                            <a href="{{ route('sertifikatSkkft.generate') }}">Download Sertifikat SKKFT</a>
-                        </strong>
-                    </div>
+                <div class="alert alert-success alert-dismissible">
+                    <h4><i class="icon fa fa-check"></i> Selamat!</h4>
+                    Pengajuan sertifikat SKKFT telah disetujui, silahkan klik <a href="{{ route('sertifikatSkkft.generate') }}">Disini </a>untuk unduh sertifikat.
                 </div>
             </div>
         </div>
