@@ -9,6 +9,7 @@ use App\Exports\RekapLulusanExport;
 use App\Models\Archive;
 use App\Models\DaftarSeminar;
 use App\Models\DaftarSidang;
+use App\Models\Kegiatan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -74,7 +75,8 @@ class DashboardController extends Controller
     {
         $data = User::find($id);
         $sidang = DaftarSidang::where('mahasiswa_id', $id)->first();
-        return view('dashboard.show_mahasiswa', compact('data', 'sidang'));
+        $kegiatan = Kegiatan::where('user_id', $id)->get();
+        return view('dashboard.show_mahasiswa', compact('data', 'sidang', 'kegiatan'));
     }
 
     public function dataDosen()

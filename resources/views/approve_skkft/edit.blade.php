@@ -43,7 +43,7 @@
                     <div class="box-body">
                         <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
-                            <b>Nama Kegiatan</b> <p class="pull-right">{{ $dataPengajuan->nama_kegiatan }}</p>
+                            <b>Nama Kegiatan</b> <p>{{ $dataPengajuan->nama_kegiatan }}</p>
                         </li>
                         <li class="list-group-item">
                             <b>Tanggal Kegiatan</b> <p class="pull-right">{{ tanggal_indonesia($dataPengajuan->tanggal) }}</p>
@@ -82,7 +82,7 @@
                             @endif
                         </li>
                         <li class="list-group-item">
-                            <b>Bukti Fisik</b><a href="{{ url('/mahasiswa/skkft', $dataPengajuan->bukti_fisik) }}" class="pull-right">{{ $dataPengajuan->bukti_fisik }}</a>
+                            <b>Bukti Fisik</b><a href="{{ url('/mahasiswa/skkft', $dataPengajuan->bukti_fisik) }}" target="_blank" class="pull-right">{{ $dataPengajuan->bukti_fisik }}</a>
                         </li>
                     </ul>
                     </div>
@@ -111,7 +111,7 @@
                 <div class="form-group row">
                     <label for="status_skpi" class="col-lg-2">Status SKPI</label>
                     <div class="col-sm-6">
-                        <input type="checkbox" name="status_skpi" value="1">
+                        <input type="checkbox" name="status_skpi" value="1" @if($dataPengajuan->status_skpi == 1) checked @endif>
                     </div>
                 </div>
             </div>

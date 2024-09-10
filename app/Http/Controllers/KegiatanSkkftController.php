@@ -134,13 +134,12 @@ class KegiatanSkkftController extends Controller
             'subcategory_id' =>'required',
             'nama_kegiatan' =>'required',
             'tanggal' =>'required',
-            'bukti_fisik' =>'required|mimes:pdf|max:1000'
+            'bukti_fisik' =>'mimes:pdf|max:1000'
         ],[
             'category_id.required' => 'Kategori Harus Diisi',
             'subcategory_id.required' => 'Subkategori Harus Diisi',
             'nama_kegiatan.required' => 'Nama Kegiatan Harus Diisi',
             'tanggal.required' => 'Tanggal Kegiatan Harus Diisi',
-            'bukti_fisik.required' => 'Bukti Fisik Harus Diisi',
             'bukti_fisik.mimes' => 'File Bukti Fisik Harus Format PDF',
             'bukti_fisik.max' => 'File Bukti Fisik Tidak Boleh Lebih dari 1MB',
         ]);
@@ -160,12 +159,18 @@ class KegiatanSkkftController extends Controller
 
         // update bukti fisik
         if($data->bukti_fisik !== ''){
-            $this->deleteFile($data->bukti_fisik);
             $bukti_fisik = $request->file('bukti_fisik');
-            $fileName = $npm. '_'. time(). '_'. $bukti_fisik->getClientOriginalName();
-            $filePath ='mahasiswa/skkft';
-            $bukti_fisik->move($filePath, $fileName);
-            $data->bukti_fisik = $fileName;
+            if (!is_null($bukti_fisik)) {
+                $this->deleteFile($data->bukti_fisik);
+                $fileName = $npm. '_'. time(). '_'. $bukti_fisik->getClientOriginalName();
+                $filePath ='mahasiswa/skkft';
+                $bukti_fisik->move($filePath, $fileName);
+                $data->bukti_fisik = $fileName;
+            } elseif (!empty($request->current_bukti_fisik)) {
+                $data->bukti_fisik = $request->current_bukti_fisik;
+            }else {
+                $data->bukti_fisik = '';
+            }
         }
 
         $data->save();

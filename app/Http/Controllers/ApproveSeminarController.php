@@ -19,7 +19,9 @@ class ApproveSeminarController extends Controller
     public function viewTmb()
     {
         Session::put('page', 'appKolokium');
-        return view('approve_seminar.tmb.index');
+        $ta = TahunAjaran::get();
+        $smt = Semester::get();
+        return view('approve_seminar.tmb.index', compact('ta', 'smt'));
     }
 
     public function viewAdminTmb()
@@ -185,13 +187,13 @@ class ApproveSeminarController extends Controller
         return view('approve_seminar.tmb.approve', compact('data'));
     }
 
-    public function rekapTmb()
-    {
-        $ta = TahunAjaran::get();
-        $smt = Semester::get();
-        Session::put('page', 'rekapKolokium');
-        return view('approve_seminar.tmb.rekap', compact('ta', 'smt'));
-    }
+    // public function rekapTmb()
+    // {
+    //     $ta = TahunAjaran::get();
+    //     $smt = Semester::get();
+    //     Session::put('page', 'rekapKolokium');
+    //     return view('approve_seminar.tmb.rekap', compact('ta', 'smt'));
+    // }
 
     public function getDataRekapTmb()
     {
@@ -298,7 +300,9 @@ class ApproveSeminarController extends Controller
     public function viewTi()
     {
         Session::put('page', 'appSeminarTA');
-        return view('approve_seminar.ti.index');
+        $ta = TahunAjaran::get();
+        $smt = Semester::get();
+        return view('approve_seminar.ti.index', compact('ta', 'smt'));
     }
 
     public function viewAdminTi()
@@ -439,13 +443,13 @@ class ApproveSeminarController extends Controller
         return view('approve_seminar.ti.approve', compact('data'));
     }
 
-    public function rekapTi()
-    {
-        $ta = TahunAjaran::get();
-        $smt = Semester::get();
-        Session::put('page', 'rekapSeminarTA');
-        return view('approve_seminar.ti.rekap', compact('ta', 'smt'));
-    }
+    // public function rekapTi()
+    // {
+    //     $ta = TahunAjaran::get();
+    //     $smt = Semester::get();
+    //     Session::put('page', 'rekapSeminarTA');
+    //     return view('approve_seminar.ti.rekap', compact('ta', 'smt'));
+    // }
 
     public function dataRekapTi()
     {
@@ -505,7 +509,9 @@ class ApproveSeminarController extends Controller
     public function viewPwk()
     {
         Session::put('page', 'appPembahasan');
-        return view('approve_seminar.pwk.index');
+        $ta = TahunAjaran::get();
+        $smt = Semester::get();
+        return view('approve_seminar.pwk.index', compact('smt', 'ta'));
     }
 
     public function viewAdminPwk()
@@ -645,13 +651,13 @@ class ApproveSeminarController extends Controller
         return view('approve_seminar.pwk.approve', compact('data'));
     }
 
-    public function rekapPwk()
-    {
-        $ta = TahunAjaran::get();
-        $smt = Semester::get();
-        Session::put('page', 'rekapPembahasan');
-        return view('approve_seminar.pwk.rekap', compact('ta', 'smt'));
-    }
+    // public function rekapPwk()
+    // {
+    //     $ta = TahunAjaran::get();
+    //     $smt = Semester::get();
+    //     Session::put('page', 'rekapPembahasan');
+    //     return view('approve_seminar.pwk.rekap', compact('ta', 'smt'));
+    // }
 
     public function dataRekapPwk()
     {

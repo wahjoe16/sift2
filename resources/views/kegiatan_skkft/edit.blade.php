@@ -90,23 +90,16 @@
                                 </select>
                             </div>
                         </div>
-                        @if (!empty($kegiatan->bukti_fisik))
-                        <div class="form-group row">
-                            <div class="col-lg-2 col-lg-offset-1"></div>
-                            <div class="col-md-6">
-                                @php
-                                $path = asset("/mahasiswa/skkft/$kegiatan->bukti_fisik");
-                                @endphp
-                                <a href="{{ asset('/mahasiswa/skkft/')."/".$kegiatan->bukti_fisik }}">
-                                    <p>{{ $kegiatan->bukti_fisik }}</p>
-                                </a>
-                            </div>
-                        </div>
-                        @endif
                         <div class="form-group row">
                             <label class="col-lg-2 col-lg-offset-1 control-label" for="bukti_fisik">Upload Bukti Fisik</label>
                             <div class="col-sm-6">
-                                <input type="file" name="bukti_fisik" class="dropify" id="bukti_fisik" value="{{ $kegiatan->bukti_fisik }}">
+                                <input type="file" name="bukti_fisik" class="dropify" id="bukti_fisik">
+                                @if (!empty($kegiatan->bukti_fisik))
+                                    <a href="{{ asset('/mahasiswa/skkft/')."/".$kegiatan->bukti_fisik }}" target="_blank">
+                                        <p>{{ $kegiatan->bukti_fisik }}</p>
+                                    </a>
+                                    <input type="hidden" name="current_bukti_fisik" id="current_bukti_fisik" value="{{ $kegiatan->bukti_fisik }}">
+                                @endif
                             </div>
                         </div>
                         <div class="form-group row">

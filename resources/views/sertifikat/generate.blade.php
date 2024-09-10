@@ -67,7 +67,7 @@
 
                     <span>NPM : {{ $npm }}</span><br>
                     <p>
-                        Telah memenuhi nilai kegiatan kemahasiswaan sebagaimana <br>
+                        Telah memenuhi skor kegiatan kemahasiswaan sebagaimana <br>
                         ditetapkan dalam panduan SKKFT
                     </p>
                 </div>
@@ -80,8 +80,8 @@
                     <td width="5%"></td>
                     <td>
                         Bandung, {{ $tanggal }}
-                        <br><br>
-                        <img src="{{ public_path('skkft-template/ttd.png') }}" width="170px">
+                        <br>
+                        <img src="{{ public_path('skkft-template/ttd rahman.jpg') }}" width="240px">
                         <br>
                         <b>{{ $wadek }}</b><br>
                         Wakil Dekan III Fakultas Teknik
@@ -90,8 +90,8 @@
             </table>
         </div>
     </div>
-    <div class="page-break"></div>
-    <div class="page2">
+    {{-- <div class="page-break"></div> --}}
+    {{-- <div class="page2">
         <div style="margin-top:0px;">
             <table width="70%" border="1" cellpading="0" cellspacing="0" style="margin-top:150px;"  align="center">
                 <tr bgcolor="#000" style="color:#fff">
@@ -122,6 +122,6 @@
                 </tr>
             </table>
         </div>
-    </div>
+    </div> --}}
 </body>
 </html>

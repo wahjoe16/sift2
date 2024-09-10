@@ -192,7 +192,8 @@ Route::group(['prefix'=>'/skkft'], function(){
         Route::get('/data-skkft-show/{id}', [ApproveSkkftController::class, 'showKegiatan'])->name('skkft.show');
         Route::get('/approve-skkft/{id}', [ApproveSkkftController::class, 'edit'])->name('approveKegiatan.edit');
         Route::post('/update-skkft/{id}', [ApproveSkkftController::class, 'update'])->name('approveKegiatan.update');
-        Route::delete('/delete-skkft/{id}', [ApproveSkkftController::class, 'delete'])->name('approveKegiatan.destroy'); 
+        Route::delete('/delete-skkft/{id}', [ApproveSkkftController::class, 'delete'])->name('approveKegiatan.destroy');
+        Route::get('/kegiatan-recovery/{id}', [ClaimSkkftController::class, 'recoveryKegiatan'])->name('kegiatan.recovery'); 
         Route::get('/skpi-print/{id}', [SkpiController::class, 'print'])->name('skpi.print');
         Route::get('/skpi-edit/{id}', [SkpiController::class, 'edit'])->name('skpi.edit');
         Route::put('/skpi-update/{id}', [SkpiController::class, 'update'])->name('skpi.update');
@@ -219,7 +220,6 @@ Route::group(['prefix'=>'/skkft'], function(){
     // SKKFT MAHASISWA
     Route::group(['middleware' => 'ceklevel:3'], function(){
         Route::resource('/kegiatan', KegiatanSkkftController::class);
-        Route::get('/kegiatan-claim', [ClaimSkkftController::class, 'claimKegiatan'])->name('kegiatan.claim');
         Route::get('/kegiatan-summary-data', [KegiatanSkkftController::class, 'dataSkkft'])->name('kegiatan.data');
         Route::get('/kegiatan-summary', [KegiatanSkkftController::class, 'summary'])->name('kegiatan.summary');
         Route::post('/sertifikat-store', [SertifikatSkkftController::class, 'store'])->name('sertifikat.store');

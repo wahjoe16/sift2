@@ -79,6 +79,7 @@
                 </div>
                 <div class="box-footer with-border">
                     <a href="{{ route('kegiatan.index') }}" class="btn btn-danger btn-sm btn-flat"><i class="fa fa-backward"></i> Kembali</a>
+                    <a href="{{ route('kegiatan.edit', $kegiatan->id) }}" class="btn btn-warning btn-sm btn-flat"><i class="fa fa-edit"></i> Edit</a>
                 </div>
             </div>
         </div>

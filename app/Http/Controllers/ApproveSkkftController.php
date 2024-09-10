@@ -41,6 +41,15 @@ class ApproveSkkftController extends Controller
             ->make(true);
     }
 
+    public function showKegiatan($id)
+    {
+        $data = Kegiatan::with([
+            'user_skkft', 'categories_skkft', 'subcategories_skkft', 'tingkat_skkft', 'prestasi_skkft', 'jabatan_skkft'
+        ])->find($id);
+        // dd($data);
+        return view('approve_skkft.show', compact('data'));
+    }
+
     public function edit($id)
     {
         Session::put('page', 'dashboardSkkft');
@@ -83,7 +92,7 @@ class ApproveSkkftController extends Controller
         }
 
         $data->save();
-        return redirect()->route('dashboardSkkft.index')->with('success', 'Data Kegiatan SKKFT Diterima');
+        return redirect()->route('dashboardSkkft.index')->with('success', 'Data Kegiatan SKKFT sudah diverifikasi');
     }
 
     public function deleteFile($buktiFisik)

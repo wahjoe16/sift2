@@ -17,7 +17,9 @@ class ApproveSidangController extends Controller
     public function viewTmb()
     {
         Session::put('page', 'appSkripsi');
-        return view('approve_sidang.tmb.index');
+        $ta = TahunAjaran::get();
+        $smt = Semester::get();
+        return view('approve_sidang.tmb.index', compact('ta', 'smt'));
     }
 
     public function viewAdminTmb()
@@ -210,7 +212,9 @@ class ApproveSidangController extends Controller
     public function viewTi()
     {
         Session::put('page', 'appSidangTA');
-        return view('approve_sidang.ti.index');
+        $ta = TahunAjaran::get();
+        $smt = Semester::get();
+        return view('approve_sidang.ti.index', compact('ta', 'smt'));
     }
 
     public function viewAdminTi()
@@ -462,7 +466,9 @@ class ApproveSidangController extends Controller
     public function viewPwk()
     {
         Session::put('page', 'appTerbuka');
-        return view('approve_sidang.pwk.index');
+        $ta = TahunAjaran::get();
+        $smt = Semester::get();
+        return view('approve_sidang.pwk.index', compact('ta', 'smt'));
     }
 
     public function viewAdminPwk()
