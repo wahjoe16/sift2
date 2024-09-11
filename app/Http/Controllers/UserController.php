@@ -44,18 +44,21 @@ class UserController extends Controller
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
 
-            if ($file->isValid()) {
+            if (!is_null($file)) {
+                File::delete(public_path('/user/foto/'. $user->foto));
                 $nama = 'user-' . date('Y-m-dHis') . '.' . $file->getClientOriginalExtension();
                 $file->move(public_path('/user/foto'), $nama);
                 $user->foto = $nama;
-            } else if (!empty($request['current_user_foto'])) {
-                $nama = $request['current_user_foto'];
+            } else if (!empty($request->current_user_foto)) {
+                $user->foto = $request->current_user_foto;
             } else {
-                $nama = '';
+                $user->foto = '';
             }
         }
 
         $user->nama = $request->nama;
+        $user->tanggal_lahir = date('Y-m-d', strtotime($request->tanggal_lahir));
+        $user->tempat_lahir = $request->tempat_lahir;
         $user->email = $request->email;
         $user->telepon = $request->telepon;
         $user->program_studi = $request->program_studi;

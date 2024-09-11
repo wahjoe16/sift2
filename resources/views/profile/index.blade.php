@@ -1,5 +1,8 @@
 @extends('layouts.dashboard')
 
+<!-- bootstrap datepicker -->
+<link rel="stylesheet" href="{{ asset('AdminLTE-2/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
+
 @section('content')
 
 <section class="content">
@@ -38,6 +41,22 @@
                                 </div>
                             </div>
 
+                            @if (auth()->user()->level == 3)
+                                <div class="form-group">
+                                    <label for="tempat_lahir" class="col-sm-4 control-label">Tempat Lahir</label>
+
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" name="tempat_lahir" id="tempat_lahir" placeholder="Tempat Lahir" value="{{ auth()->user()->tempat_lahir }}" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tanggal_lahir" class="col-sm-4 control-label">Tanggal Lahir</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="tanggal_lahir" class="form-control" id="tanggal2" placeholder="Tanggal Lahir" @if($data->tanggal_lahir != '') value="{{ $data->tanggal_lahir }}" @endif required>
+                                    </div>
+                                </div>
+                            @endif
+                            
                             <div class="form-group">
                                 <label for="program_studi" class="col-sm-4 control-label">Program Studi</label>
 
@@ -194,7 +213,18 @@
 @endsection
 
 @push('scripts_page')
+
+<!-- bootstrap datepicker -->
+<script src="{{ asset('AdminLTE-2/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+
 <script>
-    $('.dropify').dropify();
+    $(function(){
+        $('.dropify').dropify();
+
+        //Date picker
+        $('#tanggal2').datepicker({
+            autoclose: true
+        })
+    })
 </script>
 @endpush
