@@ -1,0 +1,57 @@
+html,
+body {
+    height: 100%;
+    font-family: "SUSE", system-ui;
+}
+
+img {
+    max-width: 100%;
+}
+
+/* COVER */
+
+#cover {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url("/media/city-blur.jpg") center center no-repeat;
+    background-size: cover;
+    color: white;
+}
+
+#cover::before {
+    content: "";
+    background: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+#cover-caption {
+    width: 100%;
+    z-index: 1;
+}
+
+.header-canvas h5 {
+    color: dodgerblue;
+    padding-left: 35px;
+}
+
+.body-canvas {
+    color: lightslategrey;
+}
+
+.body-canvas form {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.body-canvas input {
+    margin-bottom: 10px;
+}
+
+.body-canvas input::placeholder {
+    font-size: 15px;
+    font-family: "SUSE", system-ui;
+}

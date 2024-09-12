@@ -15,6 +15,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DependenDropdownController;
 use App\Http\Controllers\DownloadSeminarController;
 use App\Http\Controllers\DownloadSidangController;
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\JabatanSkkftController;
 use App\Http\Controllers\KegiatanSkkftController;
 use App\Http\Controllers\MyArchiveController;
@@ -409,6 +410,12 @@ Route::group(['prefix' => '/archives'], function () {
     Route::get('dropdownlist/category-archive/{id}', [CategoryArsipController::class, 'getDataCategory'])->name('get-category.data');
     Route::get('dropdownlist/sub-category-archive/{id}', [SubcategoryArsipController::class, 'getDataSubcategory'])->name('get-subcategory.data');
 });
+
+// FRONT-END PROTAL ALUMNI
+Route::group(['prefix' => '/a-portal'], function(){
+    Route::get('/', [FrontendController::class, 'portal'])->name('frontend.portal');
+});
+
 
 
 // Route::middleware([
