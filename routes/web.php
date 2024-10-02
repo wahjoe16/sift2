@@ -215,12 +215,16 @@ Route::group(['prefix'=>'/skkft'], function(){
         Route::get('/skpi', [SkpiController::class, 'index'])->name('skpi.index');
         Route::post('/skpi/{id}', [SkpiController::class, 'verify'])->name('skpi.verify');
         Route::get('/skpi-show/{id}', [SkpiController::class, 'show'])->name('skpi.show');
-        Route::put('/kegiatan-skpi-delete/{id}', [SkpiController::class, 'deleteKegiatan'])->name('skpi.deleteKegiatan');
+        Route::get('/data-skkft-skpi/{id}', [SkpiController::class, 'showData'])->name('kegiatanSkpi.data');
+        Route::post('/kegiatan-skpi-delete/{id}', [SkpiController::class, 'deleteKegiatan'])->name('skpi.deleteKegiatan');
+        Route::post('/skpi-show/delete_selected', [SkpiController::class, 'deleteSelectedKegiatan'])->name('skpi.delete-selected');
     });
 
     // SKKFT MAHASISWA
     Route::group(['middleware' => 'ceklevel:3'], function(){
         Route::resource('/kegiatan', KegiatanSkkftController::class);
+        Route::get('/kegiatan-upload-bukfis/{id}', [KegiatanSkkftController::class, 'editBukfis'])->name('kegiatan-bukfis.edit');
+        Route::put('/kegiatan-update-bukfis/{id}', [KegiatanSkkftController::class, 'uploadBukfis'])->name('kegiatan-bukfis.upload');
         Route::get('/kegiatan-summary-data', [KegiatanSkkftController::class, 'dataSkkft'])->name('kegiatan.data');
         Route::get('/kegiatan-summary', [KegiatanSkkftController::class, 'summary'])->name('kegiatan.summary');
         Route::post('/sertifikat-store', [SertifikatSkkftController::class, 'store'])->name('sertifikat.store');
@@ -413,7 +417,16 @@ Route::group(['prefix' => '/archives'], function () {
 
 // FRONT-END PROTAL ALUMNI
 Route::group(['prefix' => '/a-portal'], function(){
+
     Route::get('/', [FrontendController::class, 'portal'])->name('frontend.portal');
+    Route::post('/regist', [FrontendController::class, 'register'])->name('frontend.register');
+    Route::post('/login', [FrontendController::class, 'login'])->name('frontend.login');
+    
+    
+    Route::group(['middleware' => ['alumni']], function(){
+        Route::get('/dashboard', [FrontendController::class, 'dashboard'])->name('dashboardFrontend.index');
+        Route::get('a-portal-logout', [FrontendController::class, 'logout'])->name('frontend.logout');
+    });
 });
 
 

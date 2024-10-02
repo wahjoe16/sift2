@@ -7,9 +7,8 @@ body {
 img {
     max-width: 100%;
 }
-
+/* -- LOGIN PAGE -- */
 /* COVER */
-
 #cover {
     height: 100%;
     display: flex;
@@ -54,4 +53,97 @@ img {
 .body-canvas input::placeholder {
     font-size: 15px;
     font-family: "SUSE", system-ui;
+}
+
+/* --DASHBOARD PAGE-- */
+#content {
+    padding-top: 85px;
+}
+
+.body-profile > img {
+    max-width: 60px;
+    height: auto;
+    border: 2px solid white;
+    position: relative;
+    bottom: 50px;
+}
+
+.body-profile > h5,
+p,
+hr {
+    position: relative;
+    bottom: 10px;
+}
+
+.body-profile > hr {
+    border-right: 0;
+    border-left: 0;
+}
+
+li.borderless {
+    border: 0 none;
+}
+
+.body-activity li {
+    font-size: 14px;
+    color: grey;
+    font-style: normal;
+}
+
+.post-area img {
+    max-width: 40%;
+    height: auto;
+    position: relative;
+    margin-top: 13px;
+    margin-left: 19px;
+}
+
+.feeds-card {
+    margin-bottom: 20px;
+}
+
+.feed-header > img {
+    max-width: 60px;
+    height: auto;
+    /* border: 2px solid white; */
+    margin-right: 10px;
+    /* padding-top: 8px; */
+}
+
+.feed-header p {
+    position: absolute;
+    top: 10px;
+    left: 90px;
+}
+
+.feed-header small {
+    position: absolute;
+    width: 200px;
+    top: 25px;
+}
+
+.feed-body > p {
+    font-weight: 300;
+}
+
+.img-card {
+    margin-top: -25px;
+}
+
+.member-card {
+    margin-bottom: -50px;
+}
+
+.member-card img {
+    max-width: 90px;
+    height: auto;
+    /* border: 2px solid white; */
+    /* position: relative;
+    bottom: 50px; */
+}
+
+.member-caption {
+    position: relative;
+    left: 80px;
+    top: -50px;
 }

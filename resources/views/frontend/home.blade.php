@@ -23,16 +23,22 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
                             <div class="offcanvas-body body-canvas">
-                                <form action="" method="post">@csrf
-                                    <input type="text" name="nama" class="form-control form-control-lg rounded-pill" placeholder="Nama Lengkap">
-                                    <input type="email" name="email" class="form-control form-control-lg rounded-pill" placeholder="Email">
-                                    <input type="text" name="npm" class="form-control form-control-lg rounded-pill" placeholder="NPM (Jika Masih Ingat)">
-                                    <input type="password" name="password" class="form-control form-control-lg rounded-pill" placeholder="Sandi">
-                                    <input type="password" name="confirm_password" class="form-control form-control-lg rounded-pill" placeholder="Konfirmasi Sandi">
+                                <form action="{{ route('frontend.register') }}" method="post">@csrf
+                                    <input type="text" name="nama" class="form-control form-control-lg rounded-pill" placeholder="Nama Lengkap" required>
+                                    <input type="email" name="email" class="form-control form-control-lg rounded-pill" placeholder="Email" required>
+                                    <input type="text" name="nik" class="form-control form-control-lg rounded-pill" placeholder="NPM (Tidak Wajib)">
+                                    <input type="password" id="password" name="password" class="form-control form-control-lg rounded-pill" placeholder="Sandi" required>
+                                    @if ($errors->has('password'))
+                                        <span class="text-danger">{{ $errors->first('password') }}</span>
+                                    @endif
+                                    <input type="password" id="password" name="password_confirmation" class="form-control form-control-lg rounded-pill" placeholder="Konfirmasi Sandi" required>
+                                    @if ($errors->has('password'))
+                                        <span class="text-danger">{{ $errors->first('password') }}</span>
+                                    @endif
                                     <button class="btn btn-link" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight2" aria-controls="offcanvasRight">Sudah punya akun?</button>
                                     <br><br>
                                     <div class="d-grid gap-2">
-                                        <button class="btn btn-info text-white rounded-pill" type="button">Daftar</button>
+                                        <button class="btn btn-info text-white rounded-pill" type="submit">Daftar</button>
                                     </div>
                                 </form>
                             </div>
@@ -44,17 +50,23 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
                             <div class="offcanvas-body body-canvas">
-                                <form action="" method="post">
+                                <form action="{{ route('frontend.login') }}" method="post">@csrf
                                     <input type="email" name="email" class="form-control form-control-lg rounded-pill" placeholder="Email">
-                                    <input type="password" name="password" class="form-control form-control-lg rounded-pill" placeholder="Sandi">
+                                    <input type="password" name="password" class="form-control form-control-lg rounded-pill" placeholder="Kata Sandi">
                                     <br>
                                     <div class="d-grid gap-2">
-                                        <button class="btn btn-info text-white rounded-pill" type="button">Masuk</button>
+                                        <button class="btn btn-info text-white rounded-pill" type="submit">Masuk</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="row text-center mt-5">
+                    <div class="col-md-12">
+                        @includeIf('layouts.alert')
+                    </div>
+        
                 </div>
             </div>
         </div>

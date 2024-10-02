@@ -23,8 +23,7 @@ class SkpiController extends Controller
     public function show($id)
     {
         $data = SertifikatSkkft::find($id);
-        // dd($data);
-        $dataKegiatan = Kegiatan::select('kegiatan.*', 'users.nik', 'users.nama', 'category_skkft.category_name', 'subcategory_skkft.subcategory_name', 'tingkat.tingkat', 'jabatan.jabatan', 'prestasi_skkft.prestasi')
+        /* $dataKegiatan = Kegiatan::select('kegiatan.*', 'users.nik', 'users.nama', 'category_skkft.category_name', 'subcategory_skkft.subcategory_name', 'tingkat.tingkat', 'jabatan.jabatan', 'prestasi_skkft.prestasi')
                         ->where(['user_id' => $data->user_id, 'status_skpi' => 1])
                         ->leftJoin('users', 'users.id', '=', 'kegiatan.user_id')
                         ->leftJoin('category_skkft', 'category_skkft.id', '=', 'kegiatan.category_id')
@@ -32,9 +31,36 @@ class SkpiController extends Controller
                         ->leftJoin('tingkat', 'tingkat.id', '=', 'kegiatan.tingkat_id')
                         ->leftJoin('prestasi_skkft', 'prestasi_skkft.id', '=', 'kegiatan.prestasi_id')
                         ->leftJoin('jabatan', 'jabatan.id', '=', 'kegiatan.jabatan_id')
-                        ->get();
-        // dd($dataKegiatan);
-        return view('skpi.show', compact('data', 'dataKegiatan'));
+                        ->get(); */
+        return view('skpi.show', compact('data'));
+    }
+
+    public function showData($id)
+    {
+        $data = SertifikatSkkft::find($id);
+        $dataKegiatan = Kegiatan::with([
+            'user_skkft', 'categories_skkft', 'subcategories_skkft', 'tingkat_skkft', 'prestasi_skkft', 'jabatan_skkft'
+            ])->where([
+                'user_id' => $data->user_id, 'status_skpi' => 1])->get();
+        
+        return datatables()
+            ->of($dataKegiatan)
+            ->addIndexColumn()
+            ->addColumn('bukti_fisik', function($dataKegiatan){
+                return '
+                    <a href="' . url('/mahasiswa/skkft', $dataKegiatan->bukti_fisik) . '" target="_blank"><i class="fa fa-link"></i></a>
+                ';
+            })
+            ->addColumn('select_all', function($dataKegiatan){
+                return '
+                    <input type="checkbox" name="kegiatan_id[]" id="select_item" class="select_item" value="'.$dataKegiatan->id.'">
+                ';
+            })
+            ->addColumn('aksi', function($dataKegiatan){
+                return view('skpi.delete-item.form-delete', ['dataKegiatan' => $dataKegiatan]);
+            })
+            ->rawColumns(['bukti_fisik', 'select_all', 'aksi'])
+            ->make(true);
     }
 
     public function verify($id)
@@ -58,6 +84,18 @@ class SkpiController extends Controller
         $data = Kegiatan::find($id);
         $data->status_skpi = 0;
         $data->save();
+
+        return redirect()->back()->with('success', 'Kegiatan SKKFT berhasil dihapus!');
+    }
+
+    public function deleteSelectedKegiatan(Request $request)
+    {
+        // dd($request->all());
+        foreach ($request->kegiatan_id as $id) {
+            $data = Kegiatan::find($id);
+            $data->status_skpi = 0;
+            $data->save();
+        }
 
         return redirect()->back()->with('success', 'Kegiatan SKKFT berhasil dihapus!');
     }

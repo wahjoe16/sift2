@@ -39,6 +39,8 @@ class User extends Authenticatable
         'tahun_lulus'
     ];
 
+    protected $guard = 'alumni';
+
     /**
      * The attributes that should be hidden for serialization.
      *

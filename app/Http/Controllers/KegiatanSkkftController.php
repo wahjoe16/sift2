@@ -127,6 +127,18 @@ class KegiatanSkkftController extends Controller
         return view('kegiatan_skkft.edit', compact('title','kegiatan','prestasi', 'jabatan', 'category', 'subcategory', 'tingkat'));
     }
 
+    public function editBukfis($id)
+    {
+        $title="Upload Bukti Fisik Kegiatan SKKFT";
+        $kegiatan = Kegiatan::find($id);
+        $category=CategorySkkft::get();
+        $subcategory=SubcategorySkkft::get();
+        $tingkat=Tingkat::get();
+        $prestasi=PrestasiSkkft::get();
+        $jabatan=Jabatan::get();
+        return view('kegiatan_skkft.edit-bukfis', compact('title','kegiatan','prestasi', 'jabatan', 'category', 'subcategory', 'tingkat'));
+    }
+
     public function update(Request $request, $id)
     {
         $this->validate($request, [
@@ -175,6 +187,39 @@ class KegiatanSkkftController extends Controller
 
         $data->save();
         return redirect()->route('kegiatan.index')->with('success', 'Kegiatan SKKFT Berhasil Diubah');
+    }
+
+    public function uploadBukfis(Request $request, $id)
+    {
+        $this->validate($request, [
+            'bukti_fisik' =>'mimes:pdf|max:1000'
+        ],[
+            'bukti_fisik.mimes' => 'File Bukti Fisik Harus Format PDF',
+            'bukti_fisik.max' => 'File Bukti Fisik Tidak Boleh Lebih dari 1MB',
+        ]);
+
+        $npm = auth()->user()->nik;
+        $data = Kegiatan::find($id);
+        $data->user_id = auth()->user()->id;
+
+        // update bukti fisik
+        if($data->bukti_fisik !== ''){
+            $bukti_fisik = $request->file('bukti_fisik');
+            if (!is_null($bukti_fisik)) {
+                $this->deleteFile($data->bukti_fisik);
+                $fileName = $npm. '_'. time(). '_'. $bukti_fisik->getClientOriginalName();
+                $filePath ='mahasiswa/skkft';
+                $bukti_fisik->move($filePath, $fileName);
+                $data->bukti_fisik = $fileName;
+            } elseif (!empty($request->current_bukti_fisik)) {
+                $data->bukti_fisik = $request->current_bukti_fisik;
+            }else {
+                $data->bukti_fisik = '';
+            }
+        }
+
+        $data->save();
+        return redirect()->route('kegiatan.index')->with('success', 'Bukti Fisik Kegiatan SKKFT Berhasil Diupload');
     }
 
     public function deleteFile($buktiFisik)

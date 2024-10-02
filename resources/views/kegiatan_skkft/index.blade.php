@@ -25,7 +25,7 @@
                                 <th>Jabatan</th>
                                 <th>Poin</th>
                                 <th>Status SKKFT</th>
-                                <th width="12%"><i class="fa fa-cogs"></i> Aksi</th>
+                                <th width="13%"><i class="fa fa-cogs"></i> Aksi</th>
                             </thead>
                             <tbody>
                                 @foreach($kegiatan as $k)
@@ -64,6 +64,7 @@
                                     <td>
                                         <a href="{{ route('kegiatan.show', $k->id) }}" class="btn btn-info btn-sm btn-flat"><i class="fa fa-search"></i></a>
                                         <a href="{{ route('kegiatan.edit', $k->id) }}" class="btn btn-warning btn-sm btn-flat"><i class="fa fa-edit"></i></a>
+                                        <a href="{{ route('kegiatan-bukfis.edit', $k->id) }}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-file-pdf-o"></i></a>
                                         <form action="{{ route('kegiatan.destroy', $k->id) }}" method="post" class="d-inline">
                                             @csrf
                                             @method('DELETE')
@@ -75,7 +76,6 @@
                             </tbody>
                         </table>
                     </div>
-                    
                 @else
                     <!-- Main content -->
                     <section class="content">
@@ -98,7 +98,15 @@
                     </section>
                     <!-- /.content -->
                 @endif
-                
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-warning alert-dismissible">
+                        <h4><i class="icon fa fa-warning"></i> Perhatian!</h4>
+                        Jika anda sebelumnya sudah mempunyai riwayat poin SKKFT silahkan isi form <a href="https://forms.gle/DJ9tArc6CsX68C3GA" target="_blank">ini</a> untuk memulihkan data riwayat poin anda, selanjutnya anda diwajibkan untuk upload ulang bukti fisiknya.
+                    </div>
+                </div>
             </div>
         </div>
     </div> 
