@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg fixed-top bg-body-tertiary shadow-sm">
     <div class="container">
-        <a class="navbar-brand" href="#">FT</a>
+        <a class="navbar-brand" href="{{ route('dashboardFrontend.index') }}">FT</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -47,7 +47,10 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li>
-                            <a href="{{ route('frontend.logout') }}" class="btn btn-default btn-flat"><i class="fa fa-user-circle"></i> Logout</a>
+                            <a href="{{ route('frontend.profile-update', 'personal') }}" class="btn btn-default btn-flat"><i class="bi bi-person-lines-fill"></i> Edit Profil</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('frontend.logout') }}" class="btn btn-default btn-flat"><i class="bi bi-box-arrow-left"></i></i> Keluar</a>
                         </li>
                         
                     </ul>

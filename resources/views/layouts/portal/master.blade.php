@@ -24,7 +24,8 @@
 
         @include('layouts.portal.footer')
 
-    
+        <!-- jQuery 3 -->
+        <script src="{{ asset('AdminLTE-2/bower_components/jquery/dist/jquery.min.js') }}"></script>
 
         {{-- <script src="{{ asset('bootstrap5/js/bootstrap.min.js') }}"></script> --}}
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
@@ -115,7 +116,14 @@
             })()
 
         </script>
+        
+        
 
         <script src="{{ asset('bootstrap5/js/custom.js') }}"></script>
+        <!-- sweet alert 2 -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        @include('sweetalert::alert')
+
+        @stack('bottom_scripts')
     </body>
 </html>

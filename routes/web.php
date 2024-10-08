@@ -426,6 +426,7 @@ Route::group(['prefix' => '/a-portal'], function(){
     Route::group(['middleware' => ['alumni']], function(){
         Route::get('/dashboard', [FrontendController::class, 'dashboard'])->name('dashboardFrontend.index');
         Route::get('a-portal-logout', [FrontendController::class, 'logout'])->name('frontend.logout');
+        Route::match(['get', 'post'], '/profile-update/{slug}', [FrontendController::class, 'profileUpdate'])->name('frontend.profile-update');
     });
 });
 

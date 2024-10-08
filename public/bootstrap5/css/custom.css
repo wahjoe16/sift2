@@ -110,7 +110,7 @@ li.borderless {
     /* padding-top: 8px; */
 }
 
-.feed-header p {
+.feed-header > p {
     position: absolute;
     top: 10px;
     left: 90px;
@@ -146,4 +146,27 @@ li.borderless {
     position: relative;
     left: 80px;
     top: -50px;
+}
+
+/*== PROFILE PAGE ==*/
+
+.profile-banner img {
+    max-width: 130px;
+    height: auto;
+    border: 3px solid white;
+    position: relative;
+    bottom: 100px;
+}
+
+.profile-banner > h5 {
+    position: relative;
+    bottom: 80px;
+}
+
+.profile-banner > p {
+    margin-top: -70px;
+}
+
+.icon-menu-profile {
+    margin-right: 15px;
 }

@@ -56,6 +56,7 @@
         table = $('.table-skkft').DataTable({
             processing: true,
             autoWidth: false,
+            paging: false,
             ajax: {
                 url: '{{ route("kegiatanSkpi.data", $data->id) }}',
             },

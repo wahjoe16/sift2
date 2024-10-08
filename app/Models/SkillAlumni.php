@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class JobsAlumni extends Model
+class SkillAlumni extends Model
 {
     use HasFactory;
-    protected $table = 'jobs_alumni';
+    protected $table ='skill_alumni';
     protected $guarded = [];
 
-    public function user_jobs_alumni()
+    public function user_skill_alumni()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
