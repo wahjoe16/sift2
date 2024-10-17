@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Alumni;
 use App\Models\JobsAlumni;
 use App\Models\KeahlianAlumni;
+use App\Models\Posisi;
 use App\Models\SkillAlumni;
+use App\Models\SubPosisi;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 
 class FrontendController extends Controller
@@ -40,22 +44,36 @@ class FrontendController extends Controller
 
         $this->validate($request, $rules, $customMessage);
 
-        $data = User::create([
-            'nama' => $request->nama,
-            'email' => $request->email,
-            'nik' => $request->nik,
-            'password' => bcrypt($request->password),
-            'level' => 3,
-            'status_aktif' => 0,
-        ]);
+        if ($request->ajax()) {
+            // $data = $request->all();
+            // echo "<pre>"; print_r($data); die;
 
-        Alumni::create(['user_id' => $data->id]);
+            $data = User::create([
+                'nama' => $request->nama,
+                'email' => $request->email,
+                'nik' => $request->nik,
+                'password' => bcrypt($request->password),
+                'level' => 3,
+                'status_aktif' => 0,
+            ]);
 
-        if (!$data) {
-            return redirect()->back()->with('error', 'Registrasi gagal, silahkan coba lagi');
+            Alumni::create(['user_id' => $data->id]);
+
+            if (Auth::attempt([
+                'email' => $request->email,
+                'password' => $request->password
+            ])) {
+                $redirectTo = url('/alumni-page/dashboard');
+                return response()->json(['url' => $redirectTo]);
+            }
         }
+        
 
-        return redirect()->route('dashboardFrontend.index')->with('success', 'Registrasi berhasil!');
+        // if (!$data) {
+        //     return redirect()->back()->with('error', 'Registrasi gagal, silahkan coba lagi');
+        // }
+
+        // return redirect()->route('dashboardFrontend.index')->with('success', 'Registrasi berhasil!');
     }
 
     public function login(Request $request)
@@ -78,7 +96,10 @@ class FrontendController extends Controller
 
     public function dashboard()
     {
-        return view('frontend.dashboard');
+        $dataUser = Auth::guard('alumni')->user();
+        // dd($dataUser);
+        $dataAlumni = Alumni::where('user_id', $dataUser->id)->first();
+        return view('frontend.dashboard', compact('dataUser', 'dataAlumni'));
     }
 
     public function profileUpdate($slug, Request $request)
@@ -119,6 +140,8 @@ class FrontendController extends Controller
                     'no_hp' => $request->no_hp,
                     'allow_view_alamat' => $request->allow_alamat,
                     'allow_view_no_hp' => $request->allow_telepon,
+                    'pekerjaan_sekarang' => $request->pekerjaan_sekarang,
+                    'perusahaan_sekarang' => $request->perusahaan_sekarang,
                 ]);
 
                 return redirect()->back()->with('success', 'Data profil alumni berhasil diperbaharui');
@@ -130,11 +153,13 @@ class FrontendController extends Controller
                     $rules = [
                     'program_studi' =>'required',
                     'tahun_lulus' =>'required',
+                    'angkatan' =>'required',
                 ];
 
                 $customMessage = [
                     'program_studi.required' => 'Program studi harus diisi',
                     'tahun_lulus.required' => 'Tahun lulus harus diisi',
+                    'angkatan.required' => 'Angkatan harus diisi',
                 ];
 
                 $this->validate($request, $rules, $customMessage);
@@ -145,7 +170,8 @@ class FrontendController extends Controller
                 ]);
 
                 Alumni::where('user_id', Auth::guard('alumni')->user()->id)->update([
-                    'tahun_lulus' => $request->tahun_lulus
+                    'tahun_lulus' => $request->tahun_lulus,
+                    'angkatan' => $request->angkatan
                 ]);
 
                 return redirect()->back()->with('success', 'Data profil lulusan alumni berhasil diperbaharui');
@@ -162,7 +188,9 @@ class FrontendController extends Controller
                         $jobs->tahun_masuk_bekerja = $value;
                         $jobs->tahun_berhenti_bekerja = $request['tahun_berhenti_bekerja'][$key];
                         $jobs->jenis_pekerjaan = $request['jenis_pekerjaan'][$key];
-                        $jobs->posisi = $request['posisi'][$key];
+                        $jobs->bidang_pekerjaan = $request['bidang_pekerjaan'][$key];
+                        $jobs->posisi_id = $request['posisi'][$key];
+                        $jobs->subposisi_id = $request['subposisi'][$key];
                         $jobs->nama_perusahaan = $request['nama_perusahaan'][$key];
                         $jobs->lokasi_perusahaan = $request['alamat'][$key];
                         $jobs->save();
@@ -259,12 +287,95 @@ class FrontendController extends Controller
         }
 
         $dataAlumni = Alumni::where('user_id', Auth::guard('alumni')->user()->id)->first();
-        $jobsAlumni = JobsAlumni::with('user_jobs_alumni')->where('user_id', Auth::guard('alumni')->user()->id)->get();
+        $jobsAlumni = JobsAlumni::with('user_jobs_alumni', 'posisi')->where('user_id', Auth::guard('alumni')->user()->id)->get()->toArray();
         $skillAlumni = SkillAlumni::with('user_skill_alumni')->where('user_id', Auth::guard('alumni')->user()->id)->get();
         $keahlianAlumni = KeahlianAlumni::with('user_keahlian_alumni')->where('user_id', Auth::guard('alumni')->user()->id)->get();
-        // dd($keahlianAlumni);
+        $posisi = Posisi::get();
+        $subposisi = SubPosisi::get();
+        // dd($jobsAlumni);
 
-        return view('frontend.profile', compact('slug', 'dataAlumni', 'jobsAlumni', 'skillAlumni', 'keahlianAlumni'));
+        return view('frontend.profile', compact('slug', 'dataAlumni', 'jobsAlumni', 'skillAlumni', 'keahlianAlumni', 'posisi', 'subposisi'));
+    }
+
+    public function getSubposisi($id)
+    {
+        $data = SubPosisi::where('posisi_id', $id)->pluck('nama_posisi', 'id');
+        return response()->json($data);
+    }
+
+    public function changeProfilePhoto(Request $request)
+    {
+        $user = Auth::guard('alumni')->user();
+
+        if ($request->isMethod('post')) {
+
+            $rules = [
+                'foto' => 'required|mimes:png,jpg',
+            ];
+            
+            $customMessage = [
+                'foto.required' => 'Foto harus diisi',
+                'foto.mimes' => 'Format file yang diperbolehkan hanya PNG dan JPG'
+            ];
+
+            $this->validate($request, $rules, $customMessage);
+
+            // upload profile photo
+            if($request->hasFile('foto')){
+                $file = $request->file('foto');
+
+                if (!is_null($file)) {
+                    File::delete(public_path('/user/foto/' . $user->foto));
+                    $fileName = $user->nama . '_' . time() . '_' . $file->getClientOriginalName();
+                    $filePath = public_path('/user/foto');
+                    $file->move($filePath, $fileName);
+                }
+            }
+
+            User::where('id', Auth::guard('alumni')->user()->id)->update([
+                'foto' => $fileName
+            ]);            
+
+            return redirect()->back()->with('success', 'Foto profil berhasil diperbarui');
+
+        }
+    }
+
+    public function changeImageBannner(Request $request)
+    {
+        $user = Auth::guard('alumni')->user();
+
+        if ($request->isMethod('post')) {
+
+            $rules = [
+                'banner' => 'required|mimes:png,jpg',
+            ];
+            
+            $customMessage = [
+                'banner.required' => 'Banner harus diisi',
+                'banner.mimes' => 'Format file yang diperbolehkan hanya PNG dan JPG'
+            ];
+
+            $this->validate($request, $rules, $customMessage);
+
+            // upload banner
+            if($request->hasFile('banner')){
+                $file = $request->file('banner');
+
+                if (!is_null($file)) {
+                    File::delete(public_path('/user/banner/' . $user->banner));
+                    $fileName = $user->nama . '_' . time() . '_' . $file->getClientOriginalName();
+                    $filePath = public_path('/user/banner');
+                    $file->move($filePath, $fileName);
+                }
+            }
+
+            Alumni::where('user_id', $user->id)->update([
+                'banner_img' => $fileName
+            ]);
+
+            return redirect()->back()->with('success', 'Gambar banner berhasil diperbarui');
+        }
     }
 
     public function logout()

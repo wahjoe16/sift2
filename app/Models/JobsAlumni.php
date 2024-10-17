@@ -15,4 +15,9 @@ class JobsAlumni extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+    public function posisi()
+    {
+        return $this->belongsTo(Posisi::class);
+    }
 }

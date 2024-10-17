@@ -21,6 +21,10 @@
                             <p class="text-muted text-center">{{ $data->nik }}</p>
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item">
+                                    <p class="text-center">ID</p>
+                                    <p class="text-center"><b>{{ $data->id }}</b></p>
+                                </li>
+                                <li class="list-group-item">
                                     <p class="text-center">Program Studi</p>
                                     <p class="text-center"><b>{{ $data->program_studi }}</b></p>
                                 </li>

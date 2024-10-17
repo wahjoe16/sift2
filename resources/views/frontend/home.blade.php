@@ -7,9 +7,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-5 col-sm-12 offset-md-1">
-                        <h1 class="display-6" style="font-weight: 600;">Portal Alumni <br>   Fakultas Teknik <br> UNISBA</h1>
-                        <p>
-                            Just like the old Bootstrap, but better. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio quibusdam quis, repudiandae reprehenderit doloremque fugiat molestias, corporis voluptas.
+                        <h1 class="display-6" style="font-weight: 600;">Alumni <br>   Fakultas Teknik <br> UNISBA</h1>
+                        <p class="mt-5">
+                            Halaman media sosial alumni fakultas teknik UNISBA yang dirancang untuk silaturahmi antar alumni, <i>tracing</i> alumni,
+                            dan segala hal positif yang bisa dibagikan antar alumni.
                         </p>
                         <button type="submit" class="btn btn-info btn-md text-white rounded-pill">Selengkapnya</button>
                     </div>
@@ -23,7 +24,8 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
                             <div class="offcanvas-body body-canvas">
-                                <form action="{{ route('frontend.register') }}" method="post">@csrf
+                                {{-- <form id="registerForm" action="{{ route('frontend.register') }}" method="post">@csrf --}}
+                                <form id="registerForm" action="javascript:;" method="post">@csrf 
                                     <input type="text" name="nama" class="form-control form-control-lg rounded-pill" placeholder="Nama Lengkap" required>
                                     <input type="email" name="email" class="form-control form-control-lg rounded-pill" placeholder="Email" required>
                                     <input type="text" name="nik" class="form-control form-control-lg rounded-pill" placeholder="NPM (Tidak Wajib)">
@@ -73,3 +75,25 @@
     </section>
 
 @endsection
+
+@push('login-register_scripts')
+    <script>
+        $(document).ready(function(){
+            // register alumni with ajax
+            $("#registerForm").submit(function(){
+                var formdata = $(this).serialize();
+                $.ajax({
+                    url: "{{ route('frontend.register') }}",
+                    type: "POST",
+                    data: formdata,
+                    success: function(resp){
+                        alert(resp.url);
+                        window.location.href = resp.url;
+                    }, error: function(){
+                        alert("Gagal mendaftar");
+                    }
+                })
+            })
+        })
+    </script>
+@endpush

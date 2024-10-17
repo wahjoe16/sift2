@@ -7,6 +7,7 @@ use App\Charts\MahasiswaPieChart;
 use App\Charts\TrenLulusanChart;
 use App\Exports\RekapLulusanExport;
 use App\Models\Archive;
+use App\Models\CategorySkkft;
 use App\Models\DaftarSeminar;
 use App\Models\DaftarSidang;
 use App\Models\Kegiatan;
@@ -76,7 +77,47 @@ class DashboardController extends Controller
         $data = User::find($id);
         $sidang = DaftarSidang::where('mahasiswa_id', $id)->first();
         $kegiatan = Kegiatan::where('user_id', $id)->get();
-        return view('dashboard.show_mahasiswa', compact('data', 'sidang', 'kegiatan'));
+
+        $poinPerKategori = "
+                            select category_skkft.id, category_skkft.category_name, sum(kegiatan.point) as poin from kegiatan
+                            left join category_skkft on category_skkft.id = kegiatan.category_id
+                            where kegiatan.user_id =? and kegiatan.status_skkft = 1
+                            group by category_skkft.category_name, category_skkft.id
+                            order by category_skkft.id
+                        ";
+
+        $category = CategorySkkft::get();
+        $dataPoin = DB::select($poinPerKategori, [$id]);
+        // dd($dataPoin);
+        $poinMhs = [];
+        $totalPoin = 0;
+
+        foreach ($dataPoin as $dp) {
+            $poinMhs[$dp->category_name] = $dp->poin;
+            $totalPoin += $dp->poin;
+        }
+
+        $poinKategori = [];
+        foreach ($category as $c) {
+            if (array_key_exists($c->category_name, $poinMhs)) {
+                $poinnya = $poinMhs[$c->category_name];
+                $persennya = ($poinnya/150)*100;
+            }else {
+                $poinnya = 0;
+                $persennya = 0;
+            }
+
+            $poinKategori[$c->id] = [
+                'id' => $c->id,
+                'category' => $c->category_name,
+                'poin'=> $poinnya,
+                'persennya' => $persennya,
+                'lolos' => $persennya >= $c->bobot,
+                'bobotnya' => $c->bobot
+            ];
+        }
+
+        return view('dashboard.show_mahasiswa', compact('data', 'sidang', 'kegiatan', 'dataPoin', 'poinKategori', 'totalPoin'));
     }
 
     public function dataDosen()

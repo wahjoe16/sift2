@@ -21,6 +21,10 @@
                             <p class="text-muted text-center">{{ $data->nik }}</p>
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item">
+                                    <p class="text-center">ID</p>
+                                    <p class="text-center"><b>{{ $data->id }}</b></p>
+                                </li>
+                                <li class="list-group-item">
                                     <p class="text-center">Program Studi</p>
                                     <p class="text-center"><b>{{ $data->program_studi }}</b></p>
                                 </li>
@@ -28,6 +32,13 @@
                                     <p class="text-center">Email</p>
                                     <p class="text-center"><b>{{ $data->email }}</b></p>
                                 </li>
+                                @if (!is_null($data->tanggal_lahir))
+                                    <li class="list-group-item">
+                                        <p class="text-center">Tempat dan Tanggal Lahir</p>
+                                        <p class="text-center"><b>{{ $data->tempat_lahir }}, {{ tanggal_indonesia($data->tanggal_lahir, false) }}</b></p>
+                                    </li>
+                                @endif
+                                
                             </ul>
                         </div>
                         <div class="col-md-9 col-sm-12 col-xs-12">
@@ -35,6 +46,7 @@
                                 <ul class="nav nav-tabs">
                                     <li class="active"><a href="#tab_1" data-toggle="tab">Data Sidang</a></li>
                                     <li><a href="#tab_2" data-toggle="tab">Data Kemahasiswaan (SKKFT)</a></li>
+                                    <li><a href="#tab_3" data-toggle="tab">Rekap Data SKKFT</a></li>
                                 </ul>
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="tab_1">
@@ -123,7 +135,14 @@
                                                         @elseif ($k->status_skkft == 2)
                                                         <td><span class="label bg-red">Ditolak</span></td>
                                                     @endif
-                                                    <td><a href="{{ route('skkft.show', $k->id) }}" class="btn btn-info btn-sm btn-flat"><i class="fa fa-search"></i></a></td>
+                                                    <td>
+                                                        <a href="{{ route('skkft.show', $k->id) }}" class="btn btn-info btn-sm btn-flat"><i class="fa fa-search"></i></a>
+                                                        <form action="{{ route('approveKegiatan.destroy', $k->id) }}" method="post" class="d-inline">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger btn-sm btn-flat"><i class="fa fa-trash"></i></button>
+                                                        </form>
+                                                    </td>
                                                 </tr>
                                                 @endforeach
                                             </tbody>
@@ -138,6 +157,55 @@
                                         </div>
                                     </div>
                                     <!-- /.tab-pane -->
+                                    <div class="tab-pane" id="tab_3">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="box">
+                                                    <div class="box-header with-border">
+                                                        <h4><i>Summary</i> SKKFT <strong>{{ $data->nama }}</strong></h4>
+                                                    </div>
+                                                    <div class="box-body table-responsive">
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <table class="table table-striped table-bordered">
+                                                                    <thead>
+                                                                        <th width="5%">#</th>
+                                                                        <th class="text-center">Kategori</th>
+                                                                        <th width="12%">Poin</th>
+                                                                        <th width="40%" class="text-center">Keterangan</th>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        @foreach ($poinKategori as $pk)
+                                                                            <tr>
+                                                                                <td>{{ $pk['id'] }}</td>
+                                                                                <td>{{ $pk['category'] }}</td>
+                                                                                <td>{{ $pk['poin'] }}</td>
+                                                                                <td>
+                                                                                    @if ($pk['lolos'])
+                                                                                        <div class="alert alert-success alert-dismissible">
+                                                                                            Poin Sudah Mencapai Bobot Minimal ({{$pk['bobotnya']}}% Dari 150 Poin)
+                                                                                        </div>
+                                                                                        @else
+                                                                                        <div class="alert alert-warning alert-dismissible">
+                                                                                            Poin Belum Mencapai Bobot Minimal ({{$pk['bobotnya']}}% Dari 150 Poin)
+                                                                                        </div>
+                                                                                    @endif
+                                                                                </td>
+                                                                            </tr>
+                                                                        @endforeach
+                                                                            <tr>
+                                                                                <td class="text-right" colspan="2"><b>Total Poin</b></td>
+                                                                                <td colspan="2"><b>{{ $totalPoin }}</b></td>
+                                                                            </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!-- /.tab-content -->
                             </div>

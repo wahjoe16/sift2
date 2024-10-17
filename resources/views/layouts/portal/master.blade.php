@@ -11,6 +11,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap" rel="stylesheet">
+        @stack('top_css')
     </head>
     <body>
 
@@ -25,7 +26,7 @@
         @include('layouts.portal.footer')
 
         <!-- jQuery 3 -->
-        <script src="{{ asset('AdminLTE-2/bower_components/jquery/dist/jquery.min.js') }}"></script>
+        <script src="{{ asset('/bootstrap5/js/jQery-3.7.1.min.js') }}"></script>
 
         {{-- <script src="{{ asset('bootstrap5/js/bootstrap.min.js') }}"></script> --}}
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

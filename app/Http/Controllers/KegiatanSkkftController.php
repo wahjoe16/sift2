@@ -192,8 +192,9 @@ class KegiatanSkkftController extends Controller
     public function uploadBukfis(Request $request, $id)
     {
         $this->validate($request, [
-            'bukti_fisik' =>'mimes:pdf|max:1000'
+            'bukti_fisik' =>'required|mimes:pdf|max:1000'
         ],[
+            'bukti_fisik.required' => 'Bukti Fisik Harus Diisi',
             'bukti_fisik.mimes' => 'File Bukti Fisik Harus Format PDF',
             'bukti_fisik.max' => 'File Bukti Fisik Tidak Boleh Lebih dari 1MB',
         ]);

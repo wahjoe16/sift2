@@ -232,19 +232,37 @@ class SkpiController extends Controller
         ];       
 
         $cplPwk = [
-            "Menguasai dan menerapkan konsep teoritis, prinsip, dan proses dalam bidang perencanaan wilayah, desa, dan kota.",
-            "Menguasai dan menerapkan teknik analisis berbasis ipteks yang relevan dalam bidang perencanaan wilayah, desa, dan kota.",
-            "Menguasai metode perencanaan dalam alternatif pengambilan keputusan di bidang perencanaan wilayah, desa, dan kota.",
-            "Menganalisis potensi dan permasalahan konteks keruangan maupun non keruangan dalam permasalahan perencanaan wilayah, desa, dan kota.",
-            "Melakukan penelitian di bidang perencanaan wilayah, desa, dan kota.",
-            "Menjelaskan pemanfaatan, pengendalian, dan evaluasi hasil perencanaan.",
-            "Memformulasikan alternatif solusi dalam perencanaan wilayah, desa, dan kota.",
-            "Mendokumentasikan dan mengkomunikasikan hasil perencanaan wilayah, desa, dan kota.",
-            "Menerapkan norma dan nilai di Indonesia dalam praktek perencanaan wilayah, desa, dan kota.",
-            "Bekerjasama dengan tim multi displin ilmu.",
+            "Menunjukkan sikap ketakwaan kepada Allah SWT dalam kehidupan bermasyarakat yang menjunjung tinggi nasionalisme dan nilai kemanusiaan.",
+            "Menunjukkan sikap tanggung jawab terhadap pekerjaan baik mandiri maupun bekerja sama dengan menginternalisasikan nilai, norma, etika akademik, semangat kejuangan, dan kewirausahaan.",
+            "Mempraktikkan teknologi informasi dan ipteks dalam penyelesaian masalah dan penyusunan deskripsi saintifik yang ditunjang dengan kemampuan mendokumentasikan data berdasarkan pemikiran logis, kritis, sistematis dan inovatif, serta menegakkan integritas akademik.",
+            "Membangun jejaring kerja untuk menghasilkan kinerja yang bermutu dan terukur yang didukung kemampuan komunikasi lisan dan tertulis serta kemampuan mengevaluasinya.",
+            "Menguasai konsep teoritik, serta norma dan nilai-nilai yang relevan digunakan dalam bidang perencanaan wilayah dan kota.",
+            "Menguasai prinsip dan proses, serta teknik analisis berbasis ipteks yang relevan digunakan dalam bidang perencanaan wilayah dan kota.",
+            "Menguasai metode perencanaan dalam alternatif pengambilan keputusan di bidang perencanaan wilayah dan kota.",
+            "Menerapkan konsep umum maupun teoretis, serta norma dan nilai yang relevan untuk menyelesaikan masalah di dalam praktek perencanaan wilayah dan kota.",
+            "Menerapkan prinsip dan proses serta teknik-teknik formulasi rencana berdasarkan analisis potensi dan permasalahan dalam konteks keruangan dan non keruangan di bidang perencanaan wilayah dan kota.",
+            "Memformulasikan alternatif solusi dalam perencanaan wilayah dan kota dengan mempertimbangkan pemanfaatan, pengendalian, dan evaluasi hasil perencanaan, serta mampu mendokumentasikan dan mengkomunikasikan hasilnya.",
         ];
 
-        $cplTi = "";
+        $cplTi = [
+            "Menunjukkan keimanan dan ketakwaan kepada Allah SWT dan internalisasi nilai mujahid, mujtahid, dan mujaddid serta norma dan etika akademik",
+            "Menunjukkan kontribusi dalam peningkatan mutu kehidupan masyarakat untuk kepentingan bangsa dan social kemasyarakatan yang dijiwai sikap nasionalisme, toleransi, kepekaan sosial, dan kepedulian berdasarkan Pancasila.",
+            "Mampu menegakkan baqiyatush-shalihat (produk amal shalih yang berkekalan dunia sampai akhirat) dan berakhlaq karimah.",
+            "Mampu menerapkan pemikiran logis, kritis, sistematis, dan inovatif dalam pengembangan ilmu pengetahuan dan teknologi, serta iman dan taqwa.",
+            "Mampu menunjukkan kinerja mandiri, pengembangan jaringan kerja, dan berinovasi dalam menerapkan ilmu pengetahuan, serta iman dan taqwa.",
+            "Mampu menggunakan teknologi informasi dalam konteks pencegahan plagiasi.",
+            "Kemampuan untuk berkomunikasi lisan dan tulisan secara efektif.",
+            "Kemampuan untuk merencanakan, menyelesaikan, dan mengevaluasi tugas dengan memperhatikan batasan yang diberikan.",
+            "Kemampuan untuk bekerja dalam tim.",
+            "Kemampuan untuk terlibat dalam pembelajaran sepanjang hayat, termasuk akses terhadap pengetahuan yang relevan dari isu-isu terkini.",
+            "Kemampuan untuk menerapkan pengetahuan matematika, ilmu alam dan/atau material, teknologi informasi dan keteknikan untuk memperoleh pemahaman menyeluruh dari prinsip-prinsip keteknikindustrian.",
+            "Kemampuan untuk merancang sistem terintegrasi dengan memenuhi standar yang diperlukan dan berbagai batasan multi aspek yang realistis (misal: teknis, aspek hukum, ekonomi, lingkungan, sosial, politik, kesehatan dan keselamatan, keberlanjutan), serta melibatkan berbagai pemangku kepentingan, dan mengidentifikasi dan/atau memanfaatkan potensi sumber daya lokal dan nasional dengan pandangan global di bidang teknik industri.",
+            "Kemampuan untuk merancang dan melakukan eksperimen laboratorium dan/atau lapangan dan menganalisis dan menerjemahkan data untuk mendukung proses pengambilan keputusan keteknikindustrian.",
+            "Kemampuan untuk mengidentifikasi, merumuskan, menganalisis dan menyelesaikan permasalahan kompleks di bidang teknik industri.",
+            "Kemampuan untuk menerapkan metode, keterampilan, dan peralatan teknik modern yang diperlukan dalam praktik keteknikindustrian.",
+            "Kemampuan untuk bertanggungjawab kepada masyarakat, akuntabel, dan menjalankan etika profesi dalam menyelesaikan permasalahan keteknikindustrian.",
+            "Mampu merancang dan memperbaiki model bisnis dalam penciptaan nilai tambah pada industri yang sudah mapan atau pada perintisan usaha baru.",
+        ];
 
         if ($data->user_skpi->program_studi == 'Teknik Pertambangan') {
             $templateProcessor->setValue('cpl1', $cplTambang[0]);
@@ -266,18 +284,36 @@ class SkpiController extends Controller
             $templateProcessor->setValue('cpl9', $cplPwk[8]);
             $templateProcessor->setValue('cpl10', $cplPwk[9]);
         }elseif ($data->user_skpi->program_studi == 'Teknik Industri') {
-            $templateProcessor->setValue('cpl', $cplTi);
+            $templateProcessor->setValue('cpl1', $cplTi[0]);
+            $templateProcessor->setValue('cpl2', $cplTi[1]);
+            $templateProcessor->setValue('cpl3', $cplTi[2]);
+            $templateProcessor->setValue('cpl4', $cplTi[3]);
+            $templateProcessor->setValue('cpl5', $cplTi[4]);
+            $templateProcessor->setValue('cpl6', $cplTi[5]);
+            $templateProcessor->setValue('cpl7', $cplTi[6]);
+            $templateProcessor->setValue('cpl8', $cplTi[7]);
+            $templateProcessor->setValue('cpl9', $cplTi[8]);
+            $templateProcessor->setValue('cpl10', $cplTi[9]);
+            $templateProcessor->setValue('cpl11', $cplTi[10]);
+            $templateProcessor->setValue('cpl12', $cplTi[11]);
+            $templateProcessor->setValue('cpl13', $cplTi[12]);
+            $templateProcessor->setValue('cpl14', $cplTi[13]);
+            $templateProcessor->setValue('cpl15', $cplTi[14]);
+            $templateProcessor->setValue('cpl16', $cplTi[15]);
+            $templateProcessor->setValue('cpl17', $cplTi[16]);
         }
 
         $skemaTambang = "
-            Pendidikan Program Sarjana mempunyai beban 146 SKS. Satu SKS beban akademik Program Sarjana setara dengan upaya mahasiswa sebanyak tiga jam seminggu dalam satu semester reguler, yang meliputi satu jam kegiatan interaksi akademik terjadwal dengan staf pengajar, berupa kegiatan tatap muka di kelas satu jam kegiatan terstruktur yang dilakukan dalam rangka kegiatan kuliah, seperti menyelesaikan tugas, menyelesaikan soal, membuat makalah, menelusuri pustaka, serta satu jam kegiatan mandiri untuk mendalami dan mempersiapkan tugas-tugas akademik, misalnya membaca buku referensi. Bagian dari 146 SKS tersebut terdiri dari 91 SKS mata kuliah keahlian berkarya (MKKB), 10 SKS mata kuliah berkehidupan bermasyarakat (MBB), 10 SKS mata kuliah kepribadian (MK), 10 SKS mata kuliah keilmuan dan ketrampilan (MKK) dan 7 SKS mata kuliah wajib institusi unisba (MIU). Terdapat tiga kelompok keahlian pada Program Studi Pertambangan yaitu Kelompok Keahlian Geologi Eksplorasi, Kelompok Keahlian Tambang Umum, dan Kelompok Keahlian Pengolahan.
+            Pendidikan Program Sarjana mempunyai beban 146 SKS. Satu SKS beban akademik Program Sarjana setara dengan upaya mahasiswa sebanyak tiga jam seminggu dalam satu semester reguler, yang meliputi satu jam kegiatan interaksi akademik terjadwal dengan staf pengajar, berupa kegiatan tatap muka di kelas satu jam kegiatan terstruktur yang dilakukan dalam rangka kegiatan kuliah, seperti menyelesaikan tugas, menyelesaikan soal, membuat makalah, menelusuri pustaka, serta satu jam kegiatan mandiri untuk mendalami dan mempersiapkan tugas-tugas akademik, misalnya membaca buku referensi. Bagian dari 146 SKS tersebut terdiri dari 91 SKS mata kuliah keahlian berkarya (MKKB), 10 SKS mata kuliah berkehidupan bermasyarakat (MBB), 10 SKS mata kuliah kepribadian (MK), 10 SKS mata kuliah keilmuan dan ketrampilan (MKK) dan 7 SKS mata kuliah wajib institusi unisba (MIU). Terdapat tiga kelompok keahlian pada Program Studi Tekni Pertambangan yaitu Kelompok Keahlian Geologi Eksplorasi, Kelompok Keahlian Tambang Umum, dan Kelompok Keahlian Pengolahan.
         ";
 
         $skemaPwk = "
-            Pendidikan Program Sarjana mempunyai beban 144 SKS. Satu SKS beban akademik Program Sarjana setara dengan upaya mahasiswa sebanyak tiga jam seminggu dalam satu semester reguler, yang meliputi satu jam kegiatan interaksi akademik terjadwal dengan staf pengajar, berupa kegiatan tatap muka di kelas satu jam kegiatan terstruktur yangd dilakukan dalam rangka kegiatan kuliah, seperti menyelesaikan tugas, menyelesaikan soal, membuat makalah, menelusuri pustaka, serta satu jam kegiatan mandiri untuk mendalami dan mempersiapkan tugas-tugas akademik, misalnya membaca buku referensi. Bagian dari 144 SKS tersebut merupakan 6 SKS Mata Kuliah Keagamaan dan Pesantren yang dilakukan selama 7 semester. Kuliah Keagamaan dan Pesantren diselenggarakan dengan tujuan untuk memperkokoh pengetahuan tentang materi ilmu agama islam dan menghasilkan lulusan yang berakhlak baik. Pendidikan Program Sarjana Program Studi Perencanaan Wilayah dan Kota terbagi atas 135 SKS mata kuliah pokok dan 9 SKS mata kuliah pilihan. Penentuan 9 SKS mata kuliah   pilihan dilakukan berdasarkan pemilihan kelompok keahlian oleh mahasiswa. Terdapat lima kelompok keahlian pada Program Studi Perencanaan Wilayah dan Kota, yaitu Kelompok Keahlian Kota, Kelompok Keahlian Transportasi, Kelompok Keahlian Lingkungan, Kelompok Keahlian Pariwisata, dan Kelompok Keahlian Rekayasa Perdesaan.
+            Pendidikan Program Sarjana mempunyai beban 144 SKS. Satu SKS beban akademik Program Sarjana setara dengan upaya mahasiswa sebanyak tiga jam seminggu dalam satu semester reguler, yang meliputi satu jam kegiatan interaksi akademik terjadwal dengan staf pengajar, berupa kegiatan tatap muka di kelas satu jam kegiatan terstruktur yang dilakukan dalam rangka kegiatan kuliah, seperti menyelesaikan tugas, menyelesaikan soal, membuat makalah, menelusuri pustaka, serta satu jam kegiatan mandiri untuk mendalami dan mempersiapkan tugas-tugas akademik, misalnya membaca buku referensi. Bagian dari 144 SKS tersebut merupakan 6 SKS Mata Kuliah Keagamaan dan Pesantren yang dilakukan selama 7 semester. Kuliah Keagamaan dan Pesantren diselenggarakan dengan tujuan untuk memperkokoh pengetahuan tentang materi ilmu agama islam dan menghasilkan lulusan yang berakhlak baik. Pendidikan Program Sarjana Program Studi Perencanaan Wilayah dan Kota terbagi atas 135 SKS mata kuliah pokok dan 9 SKS mata kuliah pilihan. Penentuan 9 SKS mata kuliah   pilihan dilakukan berdasarkan pemilihan kelompok keahlian oleh mahasiswa. Terdapat lima kelompok keahlian pada Program Studi Perencanaan Wilayah dan Kota, yaitu Kelompok Keahlian Kota, Kelompok Keahlian Transportasi, Kelompok Keahlian Lingkungan, Kelompok Keahlian Pariwisata, dan Kelompok Keahlian Rekayasa Perdesaan.
         ";
 
-        $skemaTi = "";
+        $skemaTi = "
+            Pendidikan Program Sarjana mempunyai beban 144 SKS. Satu SKS beban akademik Program Sarjana setara dengan upaya mahasiswa sebanyak tiga jam seminggu dalam satu semester reguler, yang meliputi satu jam kegiatan interaksi akademik terjadwal dengan staf pengajar, berupa kegiatan tatap muka di kelas satu jam kegiatan terstruktur yang dilakukan dalam rangka kegiatan kuliah, seperti menyelesaikan tugas, menyelesaikan soal, membuat makalah, menelusuri pustaka, serta satu jam kegiatan mandiri untuk mendalami dan mempersiapkan tugas-tugas akademik, misalnya membaca buku referensi. Bagian dari 144 SKS tersebut merupakan 6 SKS Mata Kuliah Keagamaan dan Pesantren yang dilakukan selama 7 semester. Kuliah Keagamaan dan Pesantren diselenggarakan dengan tujuan untuk memperkokoh pengetahuan tentang materi ilmu agama islam dan menghasilkan lulusan yang berakhlak baik. Pendidikan Program Studi Teknik Industri terbagi atas 135 SKS mata kuliah pokok dan 9 SKS mata kuliah pilihan. Penentuan 9 SKS mata kuliah   pilihan dilakukan berdasarkan pemilihan kelompok keahlian oleh mahasiswa. Terdapat lima kelompok keahlian pada Program Studi Teknik Industri, yaitu Sistem Manufaktur, Ergonomi dan Rekayasa Kerja, Manajemen Industri, Sistem Informasi dan Keputusan, serta Sistem Industri dan Tekno-ekonomi.
+        ";
 
         if ($data->user_skpi->program_studi == 'Teknik Pertambangan') {
             $templateProcessor->setValue('skema', $skemaTambang);

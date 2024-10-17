@@ -14,7 +14,10 @@
 
     @yield('content')
 
+    <!-- jQuery 3 -->
+    <script src="{{ asset('/bootstrap5/js/jQery-3.7.1.min.js') }}"></script>
     <script src="{{ asset('bootstrap5/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('bootstrap5/js/custom.js') }}"></script>
+    @stack('login-register_scripts')
   </body>
 </html>

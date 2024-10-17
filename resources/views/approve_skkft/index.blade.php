@@ -27,17 +27,12 @@
                                 <tr>
                                     <td>{{$loop->index + 1}}</td>
                                     <td>{{ $dp->user_skkft->nik }}</td>
-                                    <td>{{ $dp->user_skkft->nama }}</td>
+                                    <td><a href="{{ route('dashboardMahasiswa.show', $dp->user_id) }}">{{ $dp->user_skkft->nama }}</a></td>
                                     <td>{{ $dp->nama_kegiatan }}</td>
                                     <td>{{ $dp->categories_skkft->category_name }}</td>
                                     <td>{{ $dp->subcategories_skkft->subcategory_name }}</td>
                                     <td>
                                         <a href="{{ route('approveKegiatan.edit', $dp->id) }}" class="btn btn-warning btn-sm btn-flat"><i class="fa fa-edit"></i></a>
-                                        <form action="{{ route('approveKegiatan.destroy', $dp->id) }}" method="post" class="d-inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm btn-flat"><i class="fa fa-trash"></i></button>
-                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach

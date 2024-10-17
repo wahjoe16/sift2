@@ -106,6 +106,6 @@ class ApproveSkkftController extends Controller
         $data = Kegiatan::find($id);
         if ($data->bukti_fisik!== '') $this->deleteFile($data->bukti_fisik);
         $data->delete();
-        return redirect()->route('dashboardSkkft.index')->with('success', 'Data Kegiatan SKKFT Berhasil Dihapus');
+        return redirect()->back()->with('success', 'Data Kegiatan SKKFT Berhasil Dihapus');
     }
 }

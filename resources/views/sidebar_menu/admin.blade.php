@@ -197,5 +197,15 @@
                 <i class="fa fa-navicon"></i> <span>Sub Kategori Arsip</span>
             </a>
         </li>
+        <li>
+            <a href="{{ route('posisi-pekerjaan.index') }}" @if(Session::get('page')=='indexPosisi' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                <i class="fa fa-navicon"></i> <span>Posisi Pekerjaan Alumni</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('subposisi-pekerjaan.index') }}" @if(Session::get('page')=='indexSubPosisi' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                <i class="fa fa-navicon"></i> <span>Sub Posisi Pekerjaan Alumni</span>
+            </a>
+        </li>
     </ul>
 </li>

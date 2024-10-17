@@ -66,7 +66,7 @@ class UserController extends Controller
         $user->jabatan = $request->jabatan;
 
         $user->save();
-        return redirect()->back()->with('success', 'Profil berhasil diubah!');
+        return redirect()->back()->with('success', 'Profil berhasil diubah!','success');
     }
 
     public function password()
@@ -621,7 +621,7 @@ class UserController extends Controller
             ->addColumn('aksi', function ($mahasiswa) {
                 return '
                     <a href="' . route('dashboardMahasiswa.show', $mahasiswa->id) . '"><i class="fa fa-search"></i></a>
-                    ';
+                ';
             })
             ->rawColumns(['aksi', 'foto'])
             ->make(true);

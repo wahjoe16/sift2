@@ -5,14 +5,23 @@
     <div class="row">
         <div class="col-lg-3">
             <div class="card text-center">
-                <img src="{{ url('/media/scotland.jpg') }}" class="card-img-top" alt="..." style="max-width: 100%; height: 80px;">
+                @if (!empty($dataAlumni->banner_img))
+                    <img src="{{ url('/user/banner/' . $dataAlumni->banner_img) }}" class="card-img-top" alt="..." style="max-width: 100%; height: 80px; object-fit: cover;">
+                @else
+                    <img src="{{ url('/media/scotland.jpg') }}" class="card-img-top" alt="..." style="max-width: 100%; height: 80px;">
+                @endif
+                
                 <div class="card-body body-profile">
-                    <img src="{{ url('/media/wahyu.jpeg') }}" class="rounded-circle" alt="">
-                    <h5 class="card-title">Wahyu Hidayat</h5>
-                    <p class="card-text" style="color: grey; font-size: 14px; font-weight: 300;">Laboran di Universitas Islam Bandung.</p>
+                    @if(!empty($dataUser->foto))
+                        <img src="{{ asset('/user/foto/' . $dataUser->foto ?? '') }}" class="rounded-circle" alt="">
+                    @else
+                        <img class="rounded-circle" src="{{ asset('user/foto/user.png') }}" alt="">
+                    @endif
+                    <h5 class="card-title">{{ $dataUser->nama }}</h5>
+                    <p class="card-text" style="color: grey; font-size: 14px; font-weight: 300;">{{ $dataAlumni->pekerjaan_sekarang }} di {{ $dataAlumni->perusahaan_sekarang }}</p>
                     <hr>
-                    <h6 class="card-title text-start">Teknik Pertambangan</h6>
-                    <p class="card-text text-start" style="color: grey; font-size: 14px; font-weight: 300;">2011</p>
+                    <h6 class="card-title text-start">{{ $dataUser->program_studi }}</h6>
+                    <p class="card-text text-start mt-3" style="color: grey; font-size: 14px; font-weight: 300;">{{ $dataAlumni->angkatan }}</p>
                     
                 </div>
             </div>
@@ -29,20 +38,16 @@
             </div>
         </div>
         <div class="col-lg-6">
-            <div class="card mb-3">
-                <div class="row g-0 post-area">
-                    <div class="col-md-3">
-                        <img src="{{ url('/media/wahyu.jpeg') }}" class="rounded-circle" alt="">
-                    </div>
-                    <div class="col-md-7">
-                        <div class="card-body">
-                            <div class="d-grid gap-3">
-                                <button type="button" class="btn btn-lg btn-outline-secondary rounded-pill">Klik disini untuk posting</button>
-                            </div>
+            <div class="row g-0 post-area">
+                <div class="col-lg-12">
+                    <div class="card-body">
+                        <div class="d-grid gap-3">
+                            <button type="button" class="btn btn-lg btn-outline-secondary rounded-pill">Klik disini untuk posting</button>
                         </div>
                     </div>
                 </div>
             </div>
+            <br>
             <div class="card feeds-card">
                 <div class="card-header feed-header">
                     <img src="{{ url('/media/wahyu.jpeg') }}" class="float-start" alt="">

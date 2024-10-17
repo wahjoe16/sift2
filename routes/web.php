@@ -20,6 +20,7 @@ use App\Http\Controllers\JabatanSkkftController;
 use App\Http\Controllers\KegiatanSkkftController;
 use App\Http\Controllers\MyArchiveController;
 use App\Http\Controllers\PointSkkftController;
+use App\Http\Controllers\PosisiPekerjaanController;
 use App\Http\Controllers\PrestasiSkkftController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\SemesterController;
@@ -27,11 +28,13 @@ use App\Http\Controllers\SertifikatSkkftController;
 use App\Http\Controllers\SkpiController;
 use App\Http\Controllers\SubcategoryArsipController;
 use App\Http\Controllers\SubcategorySkkftController;
+use App\Http\Controllers\SubPosisiPekerjaanController;
 use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\TingkatSkkftController;
 use App\Http\Controllers\UserController;
 use App\Models\SertifikatSkkft;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Maatwebsite\Excel\Row;
 
@@ -140,6 +143,11 @@ Route::group(['prefix' => '/datamaster'], function () {
         Route::resource('/jabatan-skkft', JabatanSkkftController::class);
         Route::resource('/prestasi-skkft', PrestasiSkkftController::class);
         Route::resource('/poin-skkft', PointSkkftController::class);
+
+        // CRUD POSISI DAN SUBPOSISI PEKERJAAN ALUMNI
+        Route::resource('/posisi-pekerjaan', PosisiPekerjaanController::class);
+        Route::resource('/subposisi-pekerjaan', SubPosisiPekerjaanController::class);
+        
         
         // view pelaksanaan seminar
         Route::get('pelaksanaan-sidang/pembahasan-pwk', [ApproveSeminarController::class, 'viewAdminPwk'])->name('adminPembahasanPwk.index');
@@ -416,17 +424,21 @@ Route::group(['prefix' => '/archives'], function () {
 });
 
 // FRONT-END PROTAL ALUMNI
-Route::group(['prefix' => '/a-portal'], function(){
+Route::group(['prefix' => '/alumni-page'], function(){
 
     Route::get('/', [FrontendController::class, 'portal'])->name('frontend.portal');
     Route::post('/regist', [FrontendController::class, 'register'])->name('frontend.register');
     Route::post('/login', [FrontendController::class, 'login'])->name('frontend.login');
+    Route::get('/subposisi/{id}', [FrontendController::class, 'getSubposisi'])->name('subposisi.get');
     
     
     Route::group(['middleware' => ['alumni']], function(){
+        // Auth::routes();
         Route::get('/dashboard', [FrontendController::class, 'dashboard'])->name('dashboardFrontend.index');
         Route::get('a-portal-logout', [FrontendController::class, 'logout'])->name('frontend.logout');
         Route::match(['get', 'post'], '/profile-update/{slug}', [FrontendController::class, 'profileUpdate'])->name('frontend.profile-update');
+        Route::post('/change-img-banner', [FrontendController::class, 'changeImageBannner'])->name('frontend.change-banner');
+        Route::post('/change-profile-photo', [FrontendController::class, 'changeProfilePhoto'])->name('frontend.change-photo');
     });
 });
 
