@@ -128,24 +128,65 @@
             @elseif ($slug == 'lulusan')
                 <h5><i class="bi bi-mortarboard  icon-menu-profile" style="color: #0317fc"></i> Edit Profil Lulusan Alumni</h5>
                 <hr>
-                <p style="color: grey;">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate</p>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Jenjang</th>
+                            <th scope="col">Angkatan</th>
+                            <th scope="col">Tahun Lulus</th>
+                            <th scope="col">NPM</th>
+                            <th scope="col">Program Studi</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        @foreach ($profilLulusan as $pl => $value)
+                            <tr>
+                                <th scope="row">{{ $pl+1 }}</th>
+                                <td>{{ $value['jenjang'] }}</td>
+                                <td>{{ $value['angkatan'] }}</td>
+                                <td>{{ $value['tahun_lulus'] }}</td>
+                                <td>{{ $value['npm'] }}</td>
+                                <td>{{ $value['program_studi'] }}</td>
+                            </tr>
+                        @endforeach   
+                    </tbody>
+                </table>
+                
+                <h5 class="mt-5">Tambah Riwayat lulusan</h5>
                 <hr>
                 <form action="{{ route('frontend.profile-update', 'lulusan') }}" method="post">
                     @csrf
                     <div class="row mb-3">
                         <div class="col-lg-6">
+                            <label for="jenjang" class="form-label">Jenjang</label>
+                            <select name="jenjang" id="jenjang" class="form-control">
+                                <option value="">Pilih</option>
+                                @foreach ([
+                                "S1"=>"Sarjana",
+                                "S2"=>"Magister",
+                                "S3"=>"Doktor",
+                                "Profesi" => "Profesi"
+                                ] as $jenjang => $jenjangLabel)
+                                <option value="{{ $jenjang }}">{{ $jenjangLabel }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-lg-6">
                             <label for="angkatan" class="form-label">Angkatan</label>
-                            <input type="number" name="angkatan" class="form-control" id="exampleFormControlInput1" placeholder="Angkatan" @if($dataAlumni->angkatan != '') value="{{ $dataAlumni->angkatan }}" @endif>
+                            <input type="number" name="angkatan" class="form-control" id="exampleFormControlInput1" placeholder="Angkatan">
                         </div>
                         <div class="col-lg-6">
                             <label for="tahun_lulus" class="form-label">Tahun Lulus</label>
-                            <input type="number" name="tahun_lulus" class="form-control" id="exampleFormControlInput1" placeholder="Tahun Lulus" @if($dataAlumni->tahun_lulus != '') value="{{ $dataAlumni->tahun_lulus }}" @endif>
+                            <input type="number" name="tahun_lulus" class="form-control" id="exampleFormControlInput1" placeholder="Tahun Lulus">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-lg-6">
                             <label for="nik" class="form-label">NPM (Tidak Wajib)</label>
-                            <input type="text" name="nik" class="form-control" id="exampleFormControlInput1" placeholder="NPM" value="{{ Auth::guard('alumni')->user()->nik }}">
+                            <input type="text" name="nik" class="form-control" id="exampleFormControlInput1" placeholder="NPM">
                         </div>
                         <div class="col-lg-6">
                             <label for="program_studi" class="form-label">Program Studi</label>
@@ -158,7 +199,7 @@
                                 "Program Profesi Insinyur" => "Program Profesi Insinyur",
                                 "Magister Perencanaan Wilayah dan Kota" => "Magister Perencanaan Wilayah dan Kota"
                                 ] as $programStudi => $prodiLabel)
-                                <option value="{{ $programStudi }}" @if(!empty($programStudi == Auth::guard('alumni')->user()->program_studi)) selected @endif>{{ $prodiLabel }}</option>
+                                <option value="{{ $programStudi }}">{{ $prodiLabel }}</option>
                                 @endforeach
                             </select>
                         </div>

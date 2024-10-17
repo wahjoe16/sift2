@@ -6,6 +6,7 @@ use App\Models\Alumni;
 use App\Models\JobsAlumni;
 use App\Models\KeahlianAlumni;
 use App\Models\Posisi;
+use App\Models\ProfilLulusanAlumni;
 use App\Models\SkillAlumni;
 use App\Models\SubPosisi;
 use App\Models\User;
@@ -98,8 +99,10 @@ class FrontendController extends Controller
     {
         $dataUser = Auth::guard('alumni')->user();
         // dd($dataUser);
-        $dataAlumni = Alumni::where('user_id', $dataUser->id)->first();
-        return view('frontend.dashboard', compact('dataUser', 'dataAlumni'));
+        $dataAlumni = ProfilLulusanAlumni::where('user_id', $dataUser->id)->get()->toArray();
+        $alumni = Alumni::where('user_id', $dataUser->id)->first();
+        $listAlumni = User::where(['level' => 3, 'status_aktif' => 0])->orderBy('id', 'desc')->paginate(5);
+        return view('frontend.dashboard', compact('dataUser', 'dataAlumni', 'alumni', 'listAlumni'));
     }
 
     public function profileUpdate($slug, Request $request)
@@ -164,15 +167,14 @@ class FrontendController extends Controller
 
                 $this->validate($request, $rules, $customMessage);
 
-                User::where('id', Auth::guard('alumni')->user()->id)->update([
-                    'nik' => $request->nik,
-                    'program_studi' => $request->program_studi
-                ]);
-
-                Alumni::where('user_id', Auth::guard('alumni')->user()->id)->update([
-                    'tahun_lulus' => $request->tahun_lulus,
-                    'angkatan' => $request->angkatan
-                ]);
+                $lulusan = new ProfilLulusanAlumni();
+                $lulusan->user_id = Auth::guard('alumni')->user()->id;
+                $lulusan->angkatan = $request->angkatan;
+                $lulusan->tahun_lulus = $request->tahun_lulus;
+                $lulusan->jenjang = $request->jenjang;
+                $lulusan->npm = $request->nik;
+                $lulusan->program_studi = $request->program_studi;
+                $lulusan->save();
 
                 return redirect()->back()->with('success', 'Data profil lulusan alumni berhasil diperbaharui');
             }
@@ -290,11 +292,12 @@ class FrontendController extends Controller
         $jobsAlumni = JobsAlumni::with('user_jobs_alumni', 'posisi')->where('user_id', Auth::guard('alumni')->user()->id)->get()->toArray();
         $skillAlumni = SkillAlumni::with('user_skill_alumni')->where('user_id', Auth::guard('alumni')->user()->id)->get();
         $keahlianAlumni = KeahlianAlumni::with('user_keahlian_alumni')->where('user_id', Auth::guard('alumni')->user()->id)->get();
+        $profilLulusan = ProfilLulusanAlumni::with('users')->where('user_id', Auth::guard('alumni')->user()->id)->get()->toArray();
         $posisi = Posisi::get();
         $subposisi = SubPosisi::get();
         // dd($jobsAlumni);
 
-        return view('frontend.profile', compact('slug', 'dataAlumni', 'jobsAlumni', 'skillAlumni', 'keahlianAlumni', 'posisi', 'subposisi'));
+        return view('frontend.profile', compact('slug', 'dataAlumni', 'jobsAlumni', 'skillAlumni', 'keahlianAlumni','profilLulusan', 'posisi', 'subposisi'));
     }
 
     public function getSubposisi($id)

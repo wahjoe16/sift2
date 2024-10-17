@@ -18,10 +18,13 @@
                         <img class="rounded-circle" src="{{ asset('user/foto/user.png') }}" alt="">
                     @endif
                     <h5 class="card-title">{{ $dataUser->nama }}</h5>
-                    <p class="card-text" style="color: grey; font-size: 14px; font-weight: 300;">{{ $dataAlumni->pekerjaan_sekarang }} di {{ $dataAlumni->perusahaan_sekarang }}</p>
+                    <p class="card-text" style="color: grey; font-size: 14px; font-weight: 300;">{{ $alumni->pekerjaan_sekarang }} di {{ $alumni->perusahaan_sekarang }}</p>
                     <hr>
-                    <h6 class="card-title text-start">{{ $dataUser->program_studi }}</h6>
-                    <p class="card-text text-start mt-3" style="color: grey; font-size: 14px; font-weight: 300;">{{ $dataAlumni->angkatan }}</p>
+                    @foreach ($dataAlumni as $da)
+                        <h6 class="card-title text-start">{{ $da['program_studi'] }}</h6>
+                        <p class="card-text text-start mt-3" style="color: grey; font-size: 14px; font-weight: 300;">{{ $da['angkatan'] }}</p>
+                    @endforeach
+                    
                     
                 </div>
             </div>
@@ -77,41 +80,21 @@
                     Para alumni FT
                 </div>
                 <div class="card-body">
-                    <div class="row member-card">
-                        <img src="{{ url('/media/wahyu.jpeg') }}" class="rounded-circle  float-start" alt="">
-                        <div class="member-caption">
-                            <h6>Wahyu Hidayat</h6>
-                            <p><small class="text-body-secondary">Ikuti</small></p>
+                    @foreach ($listAlumni as $la)
+                        <div class="row member-card">
+                            @if(!empty($la->foto))
+                                <img src="{{ asset('/user/foto/' . $la->foto ?? '') }}" class="rounded-circle" alt="">
+                            @else
+                                <img class="rounded-circle" src="{{ asset('user/foto/user.png') }}" alt="">
+                            @endif
+                            <div class="member-caption">
+                                <h6>{{ $la->nama }}</h6>
+                                <p><small class="text-body-secondary">Ikuti</small></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row member-card">
-                        <img src="{{ url('/media/wahyu.jpeg') }}" class="rounded-circle  float-start" alt="">
-                        <div class="member-caption">
-                            <h6>Wahyu Hidayat</h6>
-                            <p><small class="text-body-secondary">Ikuti</small></p>
-                        </div>
-                    </div>
-                    <div class="row member-card">
-                        <img src="{{ url('/media/wahyu.jpeg') }}" class="rounded-circle  float-start" alt="">
-                        <div class="member-caption">
-                            <h6>Wahyu Hidayat</h6>
-                            <p><small class="text-body-secondary">Ikuti</small></p>
-                        </div>
-                    </div>
-                    <div class="row member-card">
-                        <img src="{{ url('/media/wahyu.jpeg') }}" class="rounded-circle  float-start" alt="">
-                        <div class="member-caption">
-                            <h6>Wahyu Hidayat</h6>
-                            <p><small class="text-body-secondary">Ikuti</small></p>
-                        </div>
-                    </div>
-                    <div class="row member-card">
-                        <img src="{{ url('/media/wahyu.jpeg') }}" class="rounded-circle  float-start" alt="">
-                        <div class="member-caption">
-                            <h6>Wahyu Hidayat</h6>
-                            <p><small class="text-body-secondary">Ikuti</small></p>
-                        </div>
-                    </div>
+                    @endforeach
+                    
+                    
                 </div>
             </div>
         </div>
