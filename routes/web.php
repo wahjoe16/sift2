@@ -439,6 +439,7 @@ Route::group(['prefix' => '/alumni-page'], function(){
         Route::match(['get', 'post'], '/profile-update/{slug}', [FrontendController::class, 'profileUpdate'])->name('frontend.profile-update');
         Route::post('/change-img-banner', [FrontendController::class, 'changeImageBannner'])->name('frontend.change-banner');
         Route::post('/change-profile-photo', [FrontendController::class, 'changeProfilePhoto'])->name('frontend.change-photo');
+        Route::post('/post-create', [FrontendController::class, 'createPost'])->name('frontend.create-post');
     });
 });
 

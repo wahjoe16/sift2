@@ -6,6 +6,7 @@ use App\Models\Alumni;
 use App\Models\JobsAlumni;
 use App\Models\KeahlianAlumni;
 use App\Models\Posisi;
+use App\Models\PostAlumni;
 use App\Models\ProfilLulusanAlumni;
 use App\Models\SkillAlumni;
 use App\Models\SubPosisi;
@@ -102,7 +103,8 @@ class FrontendController extends Controller
         $dataAlumni = ProfilLulusanAlumni::where('user_id', $dataUser->id)->get()->toArray();
         $alumni = Alumni::where('user_id', $dataUser->id)->first();
         $listAlumni = User::where(['level' => 3, 'status_aktif' => 0])->orderBy('id', 'desc')->paginate(5);
-        return view('frontend.dashboard', compact('dataUser', 'dataAlumni', 'alumni', 'listAlumni'));
+        $postingan = PostAlumni::with('users')->orderBy('id', 'desc')->get()->toArray();
+        return view('frontend.dashboard', compact('dataUser', 'dataAlumni', 'alumni', 'listAlumni', 'postingan'));
     }
 
     public function profileUpdate($slug, Request $request)
@@ -378,6 +380,39 @@ class FrontendController extends Controller
             ]);
 
             return redirect()->back()->with('success', 'Gambar banner berhasil diperbarui');
+        }
+    }
+
+    public function createPost(Request $request)
+    {
+        if ($request->isMethod('POST')) {
+            $rules = [
+                'post_content' =>'required',
+                'post_image' =>'mimes:png,jpg,jpeg',
+            ];
+            
+            $customMessage = [
+                'post_content.required' => 'Isi postingan harus diisi',
+                'image.mimes' => 'Format file yang diperbolehkan hanya PNG, JPG, dan JPEG'
+            ];
+
+            $this->validate($request, $rules, $customMessage);
+            
+            $post = new PostAlumni();
+            $post->user_id = Auth::guard('alumni')->user()->id;
+            $post->deskripsi = $request->post_content;
+
+            if ($request->hasFile('post_image')) {
+                $file = $request->post_image;
+                $fileName = time() . '_postingan.' . $file->getClientOriginalExtension();
+                $filePath = public_path('/alumni/postingan');
+                $file->move($filePath, $fileName);
+                $post->media = $fileName;
+            }
+
+            $post->save();
+
+            return redirect()->back()->with('success', 'Postingan sukses ditambahkan!');
         }
     }
 

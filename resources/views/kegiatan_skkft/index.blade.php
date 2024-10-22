@@ -104,7 +104,7 @@
                 <div class="col-md-12">
                     <div class="alert alert-warning alert-dismissible">
                         <h4><i class="icon fa fa-warning"></i> Perhatian!</h4>
-                        Jika anda sebelumnya sudah mempunyai riwayat poin SKKFT silahkan isi form <a href="https://forms.gle/DJ9tArc6CsX68C3GA" target="_blank">ini</a> untuk memulihkan data riwayat poin anda, selanjutnya anda diwajibkan untuk upload ulang bukti fisiknya.
+                        Jika anda sebelumnya sudah mempunyai riwayat poin SKKFT silahkan isi form <a href="https://forms.gle/eYGd1edms3i7ixeD9" target="_blank">ini</a> untuk memulihkan data riwayat poin anda, selanjutnya anda diwajibkan untuk upload ulang bukti fisiknya.
                     </div>
                 </div>
             </div>

@@ -5,8 +5,8 @@
     <div class="row">
         <div class="col-lg-3">
             <div class="card text-center">
-                @if (!empty($dataAlumni->banner_img))
-                    <img src="{{ url('/user/banner/' . $dataAlumni->banner_img) }}" class="card-img-top" alt="..." style="max-width: 100%; height: 80px; object-fit: cover;">
+                @if (!empty($alumni->banner_img))
+                    <img src="{{ url('/user/banner/' . $alumni->banner_img) }}" class="card-img-top" alt="..." style="max-width: 100%; height: 80px; object-fit: cover;">
                 @else
                     <img src="{{ url('/media/scotland.jpg') }}" class="card-img-top" alt="..." style="max-width: 100%; height: 80px;">
                 @endif
@@ -45,34 +45,33 @@
                 <div class="col-lg-12">
                     <div class="card-body">
                         <div class="d-grid gap-3">
-                            <button type="button" class="btn btn-lg btn-outline-secondary rounded-pill">Klik disini untuk posting</button>
+                            <button onclick="createPost('{{ route('frontend.create-post') }}')" type="button" class="btn btn-lg btn-outline-secondary rounded-pill">Klik disini untuk posting</button>
                         </div>
                     </div>
                 </div>
             </div>
             <br>
-            <div class="card feeds-card">
-                <div class="card-header feed-header">
-                    <img src="{{ url('/media/wahyu.jpeg') }}" class="float-start" alt="">
-                    <p>Wahyu Hidayat</p>
-                    <p><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+            @foreach ($postingan as $p)
+                <div class="card feeds-card">
+                    <div class="card-header feed-header">
+                        <img src="{{ url('/user/foto', $p['users']['foto']) }}" class="float-start" alt="">
+                        <p>{{ $p['users']['nama'] }}</p>
+                        <p><small class="text-body-secondary">{{ tanggal_indonesia($p['created_at'], false) }}</small></p>
+                    </div>
+                    <div class="card-body feed-body">
+                        <?php $paragraphs = explode(PHP_EOL, $p['deskripsi']); ?>
+
+                        @foreach ($paragraphs as $paragraph)
+                            <p>{{{ $paragraph }}}</p>
+                        @endforeach
+                        
+                    </div>
+                    @if (!is_null($p['media']))
+                        <img src="{{ url('/alumni/postingan', $p['media']) }}" class="card-img-bottom img-card" alt="...">
+                    @endif
+                    
                 </div>
-                <div class="card-body feed-body">
-                    <p>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                </div>
-                <img src="{{ url('/media/scotland.jpg') }}" class="card-img-bottom img-card" alt="...">
-            </div>
-            <div class="card feeds-card">
-                <div class="card-header feed-header">
-                    <img src="{{ url('/media/wahyu.jpeg') }}" class="float-start" alt="">
-                    <p>Wahyu Hidayat</p>
-                    <p><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                </div>
-                <div class="card-body feed-body">
-                    <p>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                </div>
-                <img src="{{ url('/media/scotland.jpg') }}" class="card-img-bottom img-card" alt="...">
-            </div>
+            @endforeach
         </div>
         <div class="col-lg-3">
             <div class="card">
@@ -100,4 +99,45 @@
         </div>
     </div>
 
+    @includeIf('frontend.modal-form.post')
+
 @endsection
+
+@push('bottom_scripts')
+    <script>
+
+        $('#post-form').validator().on('submit', function(d){
+            if (!d.preventDefault()) {
+                $.post($('#post-form form').attr('action'), $('#post-form form').serialize())
+                    .done((response) => {
+                        $('#post-form').modal('hide');
+                    })
+                    .fail((errors) => {
+                        alert('Tidak dapat menyimpan data');
+                        return;
+                    });
+            }
+        });
+
+        function createPost(url) {
+            $('#post-form').modal('show');
+            $('#post-form .post-profile-title').text('Posting Informasi Terbaru');
+
+            $('#post-form form')[0].reset();
+            $('#post-form form').attr('action', url);
+            $('#post-form [name=_method]').val('post');
+        }
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#imageResult').attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+@endpush

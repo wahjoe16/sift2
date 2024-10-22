@@ -49,6 +49,9 @@
                             <div class="col-sm-6">
                                 <select name="subcategory_id" id="subcategory_id" class="form-control select2">
                                     <option value="">Pilih</option>
+                                    @foreach ($subcategory as $s)
+                                        <option value="{{ $s->id }}">{{ $s->subcategory_name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -65,6 +68,9 @@
                             <div class="col-sm-6">
                                 <select name="prestasi_id" id="prestasi_id" class="form-control select2">
                                     <option value="">Pilih</option>
+                                    @foreach ($prestasi as $p)
+                                        <option value="{{ $p->id }}">{{ $p->prestasi }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
