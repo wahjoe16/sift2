@@ -212,6 +212,7 @@ Route::group(['prefix'=>'/skkft'], function(){
     Route::group(['middleware' => 'ceklevel:1,2'], function(){
         Route::get('/skpi-list', [SkpiController::class, 'list'])->name('skpi.list');
         Route::get('/skpi-list/data', [SkpiController::class, 'datalist'])->name('skpi.data');
+        Route::get('/skpi-list/data-accept', [SkpiController::class, 'datalistAccept'])->name('skpi.data-accept');
     });
     
     // SKKFT DOSEN

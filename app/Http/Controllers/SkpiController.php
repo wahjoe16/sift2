@@ -102,13 +102,30 @@ class SkpiController extends Controller
 
     public function list()
     {
-        $data = Skpi::where('status', 1)->orderBy('id', 'desc')->get();
-        return view('skpi.list', compact('data'));
+        return view('skpi.list');
     }
 
     public function datalist()
     {
-        $data = Skpi::with('user_skpi')->where('status', 1)->orderBy('id', 'desc')->get();
+        $data = Skpi::with('user_skpi')->where(['status' => 1, 'status_cetak' => 0])->orderBy('id', 'desc')->get();
+        return datatables()
+            ->of($data)
+            ->addIndexColumn()
+            ->addColumn('tanggal', function($data){
+                return tanggal_indonesia($data->tanggal, false);
+            })
+            ->addColumn('aksi', function ($data) {
+                return '
+                    <a href="'.route('skpi.edit', $data->id).'" class="btn btn-warning text-black btn-flat btn-sm"><i class="fa fa-edit"></i></a>
+                ';
+            })
+            ->rawColumns(['tanggal','aksi'])
+            ->make(true);
+    }
+
+    public function datalistAccept()
+    {
+        $data = Skpi::with('user_skpi')->where(['status' => 1, 'status_cetak' => 1])->orderBy('id', 'desc')->get();
         return datatables()
             ->of($data)
             ->addIndexColumn()
@@ -145,6 +162,28 @@ class SkpiController extends Controller
     public function update(Request $request, $id)
     {
         $data = Skpi::find($id);
+
+        $rules = [
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+            'tanggal_masuk' => 'required',
+            'tanggal_lulus' => 'required',
+            'no_ijazah' =>'required',
+            'no_skpi' =>'required',
+            'akre_prodi' =>'required'
+        ];
+
+        $customMessage = [
+            'tempat_lahir.required' => 'Tempat Lahir Harus Diisi',
+            'tanggal_lahir.required' => 'Tanggal Lahir Harus Diisi',
+            'tanggal_masuk.required' => 'Tanggal Masuk Perkuliahan Harus Diisi',
+            'tanggal_lulus.required' => 'Tanggal Lulus Perkuliahan Harus Diisi',
+            'no_ijazah.required' => 'No Ijazah Harus Diisi',
+            'no_skpi.required' => 'No SKPI Harus Diisi',
+            'akre_prodi.required' => 'Akreditasi Program Studi Harus Diisi'
+        ];
+
+        $this->validate($request, $rules, $customMessage);
         
         $date1 = $request->tanggal_lahir;
         $date2 = $request->tanggal_masuk;
