@@ -207,5 +207,15 @@
                 <i class="fa fa-navicon"></i> <span>Sub Posisi Pekerjaan Alumni</span>
             </a>
         </li>
+        <li>
+            <a href="{{ route('profesi-alumni.index') }}" @if(Session::get('page')=='indexProfesi' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                <i class="fa fa-navicon"></i> <span>Profesi Alumni</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('jabatan-profesi.index') }}" @if(Session::get('page')=='indexJabatanProfesi' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                <i class="fa fa-navicon"></i> <span>Jabatan Profesi Alumni</span>
+            </a>
+        </li>
     </ul>
 </li>

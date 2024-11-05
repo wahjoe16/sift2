@@ -95,7 +95,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="tempat_lahir">Tempat Lahir</label>
-                                    <input type="text" name="tempat_lahir" class="form-control" id="tempat_lahir" placeholder="Tempat Lahir" value="{{ $data->tempat_lahir }}">
+                                    <input type="text" name="tempat_lahir" class="form-control" id="tempat_lahir" placeholder="Tempat Lahir" @if($data->tempat_lahir != '') value="{{ $data->tempat_lahir }}" @endif>
                                 </div>
                                 <div class="form-group">
                                     <label for="no_skpi">Nomor SKPI</label>

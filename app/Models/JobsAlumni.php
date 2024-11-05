@@ -20,4 +20,14 @@ class JobsAlumni extends Model
     {
         return $this->belongsTo(Posisi::class);
     }
+
+    public function profesi_alumni()
+    {
+        return $this->belongsTo(ProfesiAlumni::class, 'profesi_id', 'id');
+    }
+
+    public function jabatan_profesi_alumni()
+    {
+        return $this->belongsTo(JabatanProfesi::class, 'jabatan_id', 'id');
+    }
 }

@@ -17,7 +17,7 @@
                         </div>
                     </div>
 
-                    <p class="font-italic text-white text-center">The image uploaded will be rendered inside the box below.</p>
+                    {{-- <p class="font-italic text-white text-center">The image uploaded will be rendered inside the box below.</p> --}}
                     <div class="image-area mt-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
                 </div>
                 <div class="modal-footer">

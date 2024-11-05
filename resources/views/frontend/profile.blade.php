@@ -71,18 +71,18 @@
             @if ($slug == 'personal')
                 <h5><i class="bi bi-info-circle icon-menu-profile" style="color: #3a9e66;"></i> Edit Infomasi Alumni</h5>
                 <hr>
-                <p style="color: grey;">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate</p>
+                <p style="color: grey;"></p>
                 <hr>
                 <form action="{{ route('frontend.profile-update', 'personal') }}" method="post">
                     @csrf
                     <div class="row mt-3">
                         <div class="col-lg-6">
                             <label for="nama" class="form-label">Nama Lengkap</label>
-                            <input type="text" name="nama" class="form-control" placeholder="Nama Lengkap" value="{{ Auth::guard('alumni')->user()->nama }}">
+                            <input type="text" name="nama" class="form-control" placeholder="Misal: Muhammad Farhan" value="{{ Auth::guard('alumni')->user()->nama }}">
                         </div>
                         <div class="col-lg-6">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" name="email" class="form-control" placeholder="Email" value="{{ Auth::guard('alumni')->user()->email }}">
+                            <input type="email" name="email" class="form-control" placeholder="Misal: farhan.123@gmail.com" value="{{ Auth::guard('alumni')->user()->email }}">
                         </div>
                     </div>
                     
@@ -99,7 +99,7 @@
                         </div>
                         <div class="col-lg-6">
                             <label for="no_hp" class="form-label">Telepon / HP</label>
-                            <input type="text" name="no_hp" class="form-control" id="no_hp" placeholder="Telepon / HP" value="{{ $dataAlumni->no_hp }}">
+                            <input type="text" name="no_hp" class="form-control" id="no_hp" placeholder="Misal: 085733456345" value="{{ $dataAlumni->no_hp }}">
 
                             <input class="form-check-input" name="allow_telepon" type="checkbox" value="1" @if($dataAlumni->allow_view_no_hp != '') checked @endif id="allow_telepon">
                             <label class="form-check-label" for="allow_telepon" style="color: #1a75d6; font-size: 13px;">
@@ -111,11 +111,11 @@
                     <div class="row mt-3">
                         <div class="col-lg-6">
                             <label for="pekerjaan_sekarang" class="form-label">Pekerjaan Sekarang</label>
-                            <input type="text" name="pekerjaan_sekarang" class="form-control" placeholder="Pekerjaan Sekarang" value="{{ $dataAlumni->pekerjaan_sekarang }}">
+                            <input type="text" name="pekerjaan_sekarang" class="form-control" placeholder="Misal: Manajer Keuangan" value="{{ $dataAlumni->pekerjaan_sekarang }}">
                         </div>
                         <div class="col-lg-6">
                             <label for="perusahaan_sekarang" class="form-label">Nama Perusahaan / Instansi</label>
-                            <input type="text" name="perusahaan_sekarang" class="form-control" placeholder="Nama Perusahaan / Instansi" value="{{ $dataAlumni->perusahaan_sekarang }}">
+                            <input type="text" name="perusahaan_sekarang" class="form-control" placeholder="Misal: PT. Telekomunikasi Indonesia" value="{{ $dataAlumni->perusahaan_sekarang }}">
                         </div>
                     </div>
                     
@@ -135,7 +135,7 @@
                             <th scope="col">Jenjang</th>
                             <th scope="col">Angkatan</th>
                             <th scope="col">Tahun Lulus</th>
-                            <th scope="col">NPM</th>
+                            <th scope="col">Perguruan Tinggi</th>
                             <th scope="col">Program Studi</th>
                         </tr>
                     </thead>
@@ -146,14 +146,14 @@
                                 <td>{{ $value['jenjang'] }}</td>
                                 <td>{{ $value['angkatan'] }}</td>
                                 <td>{{ $value['tahun_lulus'] }}</td>
-                                <td>{{ $value['npm'] }}</td>
+                                <td>{{ $value['perguruan_tinggi'] }}</td>
                                 <td>{{ $value['program_studi'] }}</td>
                             </tr>
                         @endforeach   
                     </tbody>
                 </table>
                 
-                <h5 class="mt-5">Tambah Riwayat lulusan</h5>
+                <h5 class="mt-5">Tambah Riwayat Pendidikan</h5>
                 <hr>
                 <form action="{{ route('frontend.profile-update', 'lulusan') }}" method="post">
                     @csrf
@@ -163,6 +163,7 @@
                             <select name="jenjang" id="jenjang" class="form-control">
                                 <option value="">Pilih</option>
                                 @foreach ([
+                                "D3"=>"Diploma",
                                 "S1"=>"Sarjana",
                                 "S2"=>"Magister",
                                 "S3"=>"Doktor",
@@ -172,36 +173,30 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="col-lg-6">
+                            <label for="nik" class="form-label">NPM (Tidak Wajib)</label>
+                            <input type="text" name="nik" class="form-control" id="exampleFormControlInput1" placeholder="Nomor Pokok / Induk Mahasiswa">
+                        </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-lg-6">
                             <label for="angkatan" class="form-label">Angkatan</label>
-                            <input type="number" name="angkatan" class="form-control" id="exampleFormControlInput1" placeholder="Angkatan">
+                            <input type="number" name="angkatan" class="form-control" id="exampleFormControlInput1" placeholder="1234*">
                         </div>
                         <div class="col-lg-6">
                             <label for="tahun_lulus" class="form-label">Tahun Lulus</label>
-                            <input type="number" name="tahun_lulus" class="form-control" id="exampleFormControlInput1" placeholder="Tahun Lulus">
+                            <input type="number" name="tahun_lulus" class="form-control" id="exampleFormControlInput1" placeholder="1234*">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-lg-6">
-                            <label for="nik" class="form-label">NPM (Tidak Wajib)</label>
-                            <input type="text" name="nik" class="form-control" id="exampleFormControlInput1" placeholder="NPM">
+                            <label for="perguruan_tinggi" class="form-label">Perguruan Tinggi</label>
+                            <input type="text" name="perguruan_tinggi" class="form-control" id="exampleFormControlInput1" placeholder="Misal: Universitas Islam Bandung">
                         </div>
                         <div class="col-lg-6">
                             <label for="program_studi" class="form-label">Program Studi</label>
-                            <select name="program_studi" id="program_studi" class="form-control">
-                                <option value="">Pilih</option>
-                                @foreach ([
-                                "Teknik Pertambangan"=>"Teknik Pertambangan",
-                                "Perencanaan Wilayah dan Kota"=>"Perencanaan Wilayah dan Kota",
-                                "Teknik Industri"=>"Teknik Industri",
-                                "Program Profesi Insinyur" => "Program Profesi Insinyur",
-                                "Magister Perencanaan Wilayah dan Kota" => "Magister Perencanaan Wilayah dan Kota"
-                                ] as $programStudi => $prodiLabel)
-                                <option value="{{ $programStudi }}">{{ $prodiLabel }}</option>
-                                @endforeach
-                            </select>
+                            <input type="text" name="program_studi" class="form-control" id="exampleFormControlInput1" placeholder="Misal: Teknik Pertambangan">
+                            
                         </div>
                     </div>
                     <div class="mt-3">
@@ -219,8 +214,8 @@
                             <th scope="col">#</th>
                             <th scope="col">Tahun Masuk Bekerja</th>
                             <th scope="col">Tahun Berhenti Bekerja</th>
-                            <th scope="col">Jenis Pekerjaan</th>
                             <th scope="col">Posisi Pekerjaan</th>
+                            <th scope="col">Jabatan</th>
                             <th scope="col">Nama Perusahaan</th>
                             <th scope="col">Alamat Perusahaan</th>
                         </tr>
@@ -231,10 +226,31 @@
                                 <th scope="row">{{ $ja+1 }}</th>
                                 <td>{{ $value['tahun_masuk_bekerja'] }}</td>
                                 <td>{{ $value['tahun_berhenti_bekerja'] }}</td>
-                                <td>{{ $value['jenis_pekerjaan'] }}</td>
-                                <td>{{ $value['posisi']['nama_posisi'] }}</td>
-                                <td>{{ $value['nama_perusahaan'] }}</td>
-                                <td>{{ $value['lokasi_perusahaan'] }}</td>
+                                
+                                @if ($value['profesi_id'] == '')
+                                    <td>-</td>
+                                @else
+                                    <td>{{ $value['posisi'] }}</td>
+                                @endif
+
+                                @if ($value['jabatan_id'] == '')
+                                    <td>-</td>
+                                @else
+                                    <td>{{ $value['jabatan_profesi_alumni']['nama_jabatan'] }}</td>
+                                @endif
+
+                                @if ($value['nama_perusahaan'] == '')
+                                    <td>-</td>
+                                @else
+                                    <td>{{ $value['nama_perusahaan'] }}</td>
+                                @endif
+
+                                @if ($value['lokasi_perusahaan'] == '')
+                                    <td>-</td>
+                                @else
+                                    <td>{{ $value['lokasi_perusahaan'] }}</td>
+                                @endif
+                                
                             </tr>
                         @endforeach   
                     </tbody>
@@ -245,19 +261,40 @@
                 <form action="{{ route('frontend.profile-update', 'jobs') }}" method="post" class="row g-3">
                     @csrf
                     <div class="field_wrapper">
-                        <a href="javascript:void(0);" class="add_button" title="Tambah Item Pekerjaan"><i class="bi bi-plus-square-fill text-green-600"></i></a>
+                        {{-- <a href="javascript:void(0);" class="add_button" title="Tambah Item Pekerjaan"><i class="bi bi-plus-square-fill text-green-600"></i></a> --}}
                         
                         <div class="row mt-3">
-                            <div class="col-md-3">
-                                <label for="tahun_masuk_bekerja" class="form-label">Tahun Masuk Bekerja</label>
-                                <input type="text" class="form-control" id="tahun_masuk_bekerja" name="tahun_masuk_bekerja[]">
+                            <div class="col-md-6">
+                                <label for="tahun_masuk_bekerja" class="form-label">Tahun Awal</label>
+                                <input type="number" class="form-control" id="tahun_masuk_bekerja" name="tahun_masuk_bekerja[]">
                             </div>
-                            <div class="col-md-3">
-                                <label for="tahun_berhenti_bekerja" class="form-label">Tahun Berhenti Bekerja</label>
-                                <input type="text" class="form-control" id="tahun_berhenti_bekerja" name="tahun_berhenti_bekerja[]">
+                            <div class="col-md-6">
+                                <label for="tahun_berhenti_bekerja" class="form-label">Tahun Berakhir / Sekarang</label>
+                                <input type="number" class="form-control" id="tahun_berhenti_bekerja" name="tahun_berhenti_bekerja[]">
                             </div>
-                            <div class="col-md-3">
-                                <label for="jenis_pekerjaan" class="form-label">Jenis Pekerjaan</label>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <label for="profesi_id" class="form-label">Profesi</label>
+                                <select name="profesi_id[]" id="profesi_id" class="form-control">
+                                    <option value="">Pilih</option>
+                                    @foreach ($profesi as $p)
+                                    <option value="{{ $p->id }}">{{ $p->nama_profesi }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="jabatan_id" class="form-label">Jabatan (Fungsional)</label>
+                                <select name="jabatan_id[]" id="jabatan_id" class="form-control">
+                                    <option value="">Pilih</option>
+                                    @foreach ($jabatan as $j)
+                                    <option value="{{ $j->id }}">{{ $j->nama_jabatan }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            {{-- <div class="col-md-6">
+                                <label for="jenis_pekerjaan" class="form-label">Profesi</label>
                                 <select name="jenis_pekerjaan[]" id="jenis_pekerjaan" class="form-control">
                                     <option value="">Pilih</option>
                                     @foreach ([
@@ -271,8 +308,12 @@
                                     <option value="{{ $jenis_pekerjaan }}">{{ $jenis_pekerjaanLabel }}</option>
                                     @endforeach
                                 </select>
-                            </div>
-                            <div class="col-md-3">
+                            </div> --}}
+                            
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-md-6">
                                 <label for="bidang_pekerjaan" class="form-label">Bidang Pekerjaan</label>
                                 <select name="bidang_pekerjaan[]" id="bidang_pekerjaan" class="form-control">
                                     <option value="">Pilih</option>
@@ -282,41 +323,34 @@
                                     "Industri / Manufaktur"=>"Industri / Manufaktur",
                                     "Pertambangan"=>"Pertambangan",
                                     "Konsultan"=>"Konsultan",
+                                    "Hiburan"=>"Hiburan",
                                     "Lainnya"=>"Lainnya",
                                     ] as $bidang_pekerjaan => $bidang_pekerjaanLabel)
                                     <option value="{{ $bidang_pekerjaan }}">{{ $bidang_pekerjaanLabel }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                        </div>
-
-                        <div class="row mt-3 mb-5">
-                            <div class="col-md-3">
+                            <div class="col-md-6">
                                 <label for="posisi" class="form-label">Posisi Pekerjaan</label>
-                                <select name="posisi[]" id="posisi" class="form-control">
-                                    <option value="">Pilih</option>
-                                    @foreach ($posisi as $p)
-                                    <option value="{{ $p->id }}">{{ $p->nama_posisi }}</option>
-                                    @endforeach
-                                </select>
+                                <input type="text" name="posisi[]" id="posisi" class="form-control" placeholder="Misal: Manajer Property">
                             </div>
-                            <div class="col-md-3">
+                            {{-- <div class="col-md-6">
                                 <label for="subposisi" class="form-label">Sebagai</label>
                                 <select name="subposisi[]" id="subposisi" class="form-control">
                                     <option value="">Pilih</option>
-                                    {{-- @foreach ($subposisi as $sp)
-                                    <option value="{{ $sp->id }}">{{ $sp->nama_posisi }}</option>
-                                    @endforeach --}}
                                 </select>
-                            </div>
-                            <div class="col-md-3">
-                                <label for="nama_perusahaan" class="form-label">Nama Perusahaan</label>
+                            </div> --}}
+                        </div>
+
+                        <div class="row mt-3 mb-5">
+                            <div class="col-md-6">
+                                <label for="nama_perusahaan" class="form-label">Nama Perusahaan / Instansi</label>
                                 <textarea class="form-control" name="nama_perusahaan[]" id="nama_perusahaan" rows="3">
                                     
                                 </textarea>
                             </div>
-                            <div class="col-md-3">
-                                <label for="alamat" class="form-label">Alamat Perusahaan</label>
+                            <div class="col-md-6">
+                                <label for="alamat" class="form-label">Alamat Perusahaan / Instansi</label>
                                 <textarea class="form-control" name="alamat[]" id="alamat" rows="3">
                                     
                                 </textarea>
@@ -361,7 +395,7 @@
                         <div class="row mt-3">
                             <div class="col-md-7">
                                 <label for="kompetensi" class="form-label">Kompetensi</label>
-                                <input type="text" class="form-control" id="kompetensi" name="kompetensi">
+                                <input type="text" class="form-control" id="kompetensi" name="kompetensi" placeholder="Misal: MS. Office Specialist 2019">
                                 {{-- <input type="text" class="form-control" id="kompetensi" name="kompetensi[]"> --}}
                             </div>
 
@@ -407,7 +441,7 @@
 
                         <div class="mb-3">
                             <label for="keahlian" class="form-label">Keahlian</label>
-                            <input type="text" name="keahlian[]" class="form-control" placeholder="Jenis Keahlian">
+                            <input type="text" name="keahlian[]" class="form-control" placeholder="Misal: Desain Grafis">
                         </div>
                     </div>
 
@@ -520,7 +554,7 @@
         var addButton = $('.add_button');
         var wrapper = $('.field_wrapper');
         var x = 1;
-        var fieldHtml = '<div><div style="height: 10px;"></div><a href="javascript:void(0);" class="remove_button" title="Hapus Item Pekerjaan"><i class="bi bi-dash-square-fill"></i></a><div class="row mt-3"><div class="col-md-3"><label for="tahun_masuk_bekerja" class="form-label">Tahun Masuk Bekerja</label><input type="number" class="form-control" id="tahun_masuk_bekerja" name="tahun_masuk_bekerja[]"></div><div class="col-md-3"><label for="tahun_berhenti_bekerja" class="form-label">Tahun Berhenti Bekerja</label><input type="number" class="form-control" id="tahun_berhenti_bekerja" name="tahun_berhenti_bekerja[]"></div><div class="col-md-3"><label for="jenis_pekerjaan" class="form-label">Jenis Pekerjaan</label><select name="jenis_pekerjaan[]" id="jenis_pekerjaan" class="form-control"><option value="">Pilih</option>@foreach (["ASN/BUMN"=>"ASN/BUMN","TNI"=>"TNI","POLRI"=>"POLRI","Swasta"=>"Swasta","Berwirausaha"=>"Berwirausaha","Tidak Bekerja"=>"Tidak Bekerja",] as $jenis_pekerjaan => $jenis_pekerjaanLabel)<option value="{{ $jenis_pekerjaan }}">{{ $jenis_pekerjaanLabel }}</option>@endforeach</select></div><div class="col-md-3"><label for="bidang_pekerjaan" class="form-label">Bidang Pekerjaan</label><select name="bidang_pekerjaan[]" id="bidang_pekerjaan" class="form-control"><option value="">Pilih</option>@foreach (["Pemerintahan"=>"Pemerintahan","Pendidikan"=>"Pendidikan","Industri / Manufaktur"=>"Industri / Manufaktur","Pertambangan"=>"Pertambangan","Konsultan"=>"Konsultan","Lainnya"=>"Lainnya",] as $bidang_pekerjaan => $bidang_pekerjaanLabel)<option value="{{ $bidang_pekerjaan }}">{{ $bidang_pekerjaanLabel }}</option>@endforeach</select></div></div><div class="row mt-3 mb-5"><div class="col-md-3"><label for="posisi" class="form-label">Posisi Pekerjaan</label><select name="posisi[]" id="posisi" class="form-control"><option value="">Pilih</option>@foreach ($posisi as $p)<option value="{{ $p->id }}">{{ $p->nama_posisi }}</option>@endforeach</select></div><div class="col-md-3"><label for="subposisi" class="form-label">Sebagai</label><select name="subposisi[]" id="subposisi" class="form-control"><option value="">Pilih</option>@foreach ($subposisi as $sp)<option value="{{ $sp->id }}">{{ $sp->nama_posisi }}</option>@endforeach</select></div><div class="col-md-3"><label for="nama_perusahaan" class="form-label">Nama Perusahaan</label><textarea class="form-control" name="nama_perusahaan[]" id="nama_perusahaan" rows="3"></textarea></div><div class="col-md-3"><label for="alamat" class="form-label">Alamat Perusahaan</label><textarea class="form-control" name="alamat[]" id="alamat" rows="3"></textarea></div></div></div>';
+        var fieldHtml = '<div><div style="height: 10px;"></div><a href="javascript:void(0);" class="remove_button" title="Hapus Item Pekerjaan"><i class="bi bi-dash-square-fill"></i></a><div class="row mt-3"><div class="col-md-6"><label for="tahun_masuk_bekerja" class="form-label">Tahun Awal</label><input type="number" class="form-control" id="tahun_masuk_bekerja" name="tahun_masuk_bekerja[]"></div><div class="col-md-6"><label for="tahun_berhenti_bekerja" class="form-label">Tahun Berakhir / Sampai Sekarang</label><input type="number" class="form-control" id="tahun_berhenti_bekerja" name="tahun_berhenti_bekerja[]"></div></div><div class="row mt-3"><div class="col-md-6"><label for="profesi_id" class="form-label">Profesi</label><select name="profesi_id[]" id="profesi_id" class="form-control"><option value="">Pilih</option>@foreach ($profesi as $p)<option value="{{ $p->id }}">{{ $p->nama_profesi }}</option>@endforeach</select></div><div class="col-md-6"><label for="jabatan_id" class="form-label">Jabatan (Fungsional)</label><select name="jabatan_id[]" id="jabatan_id" class="form-control"><option value="">Pilih</option>@foreach ($jabatan as $j)<option value="{{ $j->id }}">{{ $j->nama_jabatan }}</option>@endforeach</select></div></div><div class="row mt-3"><div class="col-md-12"><label for="bidang_pekerjaan" class="form-label">Bidang Pekerjaan</label><select name="bidang_pekerjaan[]" id="bidang_pekerjaan" class="form-control"><option value="">Pilih</option>@foreach (["Pemerintahan"=>"Pemerintahan","Pendidikan"=>"Pendidikan","Industri / Manufaktur"=>"Industri / Manufaktur","Pertambangan"=>"Pertambangan","Konsultan"=>"Konsultan","Hiburan"=>"Hiburan","Lainnya"=>"Lainnya",] as $bidang_pekerjaan => $bidang_pekerjaanLabel)<option value="{{ $bidang_pekerjaan }}">{{ $bidang_pekerjaanLabel }}</option>@endforeach</select></div></div><div class="row mt-3 mb-5"><div class="col-md-6"><label for="nama_perusahaan" class="form-label">Nama Perusahaan / Instansi</label><textarea class="form-control" name="nama_perusahaan[]" id="nama_perusahaan" rows="3"></textarea></div><div class="col-md-6"><label for="alamat" class="form-label">Alamat Perusahaan / Instansi</label><textarea class="form-control" name="alamat[]" id="alamat" rows="3"></textarea></div></div></div>';
 
         $(addButton).click(function(){
             if(x < maxField){
@@ -560,23 +594,23 @@
         //     $(this).siblings('span').text(val);
         // })
 
-        $('#posisi').on('change', function() {
-            var subposisi = $(this).val();
-            if (subposisi) {
+        $('#profesi_id').on('change', function() {
+            var jabatan = $(this).val();
+            if (jabatan) {
                 $.ajax({
-                    url: '/alumni-page/subposisi/' + subposisi,
+                    url: '/alumnift/jabatan/' + jabatan,
                     type: 'GET',
                     dataType: 'json',
                     success: function(data) {
                         // console.log(data);
-                        $('#subposisi').empty();
+                        $('#jabatan_id').empty();
                         $.each(data, function(key, value) {
-                            $('#subposisi').append('<option value="' + key + '">' + value + '</option>');
+                            $('#jabatan_id').append('<option value="' + key + '">' + value + '</option>');
                         })
                     }
                 })
             } else {
-                $('#subposisi').empty();
+                $('#jabatan_id').empty();
             }
         })
     })
@@ -614,6 +648,12 @@
 
     $(function() {
         $('#upload').on('change', function(){
+            readURL(input);
+        })
+    })
+
+    $(function() {
+        $('#upload1').on('change', function(){
             readURL(input);
         })
     })

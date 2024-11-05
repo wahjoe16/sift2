@@ -49,9 +49,9 @@
                             <div class="col-sm-6">
                                 <select name="subcategory_id" id="subcategory_id" class="form-control select2">
                                     <option value="">Pilih</option>
-                                    @foreach ($subcategory as $s)
+                                    {{-- @foreach ($subcategory as $s)
                                         <option value="{{ $s->id }}">{{ $s->subcategory_name }}</option>
-                                    @endforeach
+                                    @endforeach --}}
                                 </select>
                             </div>
                         </div>
@@ -60,6 +60,9 @@
                             <div class="col-sm-6">
                                 <select name="tingkat_id" id="tingkat_id" class="form-control select2">
                                     <option value="">Pilih</option>
+                                    {{-- @foreach ($tingkat as $t)
+                                        <option value="{{ $t->id }}">{{ $t->tingkat }}</option>
+                                    @endforeach --}}
                                 </select>
                             </div>
                         </div>
@@ -68,9 +71,9 @@
                             <div class="col-sm-6">
                                 <select name="prestasi_id" id="prestasi_id" class="form-control select2">
                                     <option value="">Pilih</option>
-                                    @foreach ($prestasi as $p)
+                                    {{-- @foreach ($prestasi as $p)
                                         <option value="{{ $p->id }}">{{ $p->prestasi }}</option>
-                                    @endforeach
+                                    @endforeach --}}
                                 </select>
                             </div>
                         </div>
@@ -138,7 +141,7 @@
                         console.log(data);
                         jQuery('select[name="subcategory_id"]').empty();
                         jQuery.each(data, function(key, value) {
-                            $('select[name="subcategory_id"]').append('<option value="' + key + '">' + value + '</option>');
+                            $('select[name="subcategory_id"]').append('<option>Pilih</option><option value="' + key + '">' + value + '</option>');
                         })
                     }
                 })
@@ -158,7 +161,7 @@
                         console.log(data);
                         jQuery('select[name="tingkat_id"]').empty();
                         jQuery.each(data, function(key, value) {
-                            $('select[name="tingkat_id"]').append('<option value="' + value.tingkat_skkft.id + '">' + value.tingkat_skkft.tingkat + '</option>');
+                            $('select[name="tingkat_id"]').append('<option>Pilih</option><option value="' + value.tingkat_skkft.id + '">' + value.tingkat_skkft.tingkat + '</option>');
                         })
                     }
                 })
@@ -178,7 +181,7 @@
                         console.log(data);
                         jQuery('select[name="prestasi_id"]').empty();
                         jQuery.each(data, function(key, value) {
-                            $('select[name="prestasi_id"]').append('<option value="' + value.prestasi_skkft.id + '">' + value.prestasi_skkft.prestasi + '</option>');
+                            $('select[name="prestasi_id"]').append('<option>Pilih</option><option value="' + value.prestasi_skkft.id + '">' + value.prestasi_skkft.prestasi + '</option>');
                         })
                     }
                 })
@@ -198,7 +201,7 @@
                         console.log(data);
                         jQuery('select[name="jabatan_id"]').empty();
                         jQuery.each(data, function(key, value) {
-                            $('select[name="jabatan_id"]').append('<option value="' + value.jabatan_skkft.id + '">' + value.jabatan_skkft.jabatan + '</option>');
+                            $('select[name="jabatan_id"]').append('<option>Pilih</option><option value="' + value.jabatan_skkft.id + '">' + value.jabatan_skkft.jabatan + '</option>');
                         })
                     }
                 })

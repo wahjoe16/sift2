@@ -16,12 +16,14 @@ use App\Http\Controllers\DependenDropdownController;
 use App\Http\Controllers\DownloadSeminarController;
 use App\Http\Controllers\DownloadSidangController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\JabatanProfesiController;
 use App\Http\Controllers\JabatanSkkftController;
 use App\Http\Controllers\KegiatanSkkftController;
 use App\Http\Controllers\MyArchiveController;
 use App\Http\Controllers\PointSkkftController;
 use App\Http\Controllers\PosisiPekerjaanController;
 use App\Http\Controllers\PrestasiSkkftController;
+use App\Http\Controllers\ProfesiAlumniController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\SertifikatSkkftController;
@@ -147,6 +149,9 @@ Route::group(['prefix' => '/datamaster'], function () {
         // CRUD POSISI DAN SUBPOSISI PEKERJAAN ALUMNI
         Route::resource('/posisi-pekerjaan', PosisiPekerjaanController::class);
         Route::resource('/subposisi-pekerjaan', SubPosisiPekerjaanController::class);
+
+        Route::resource('/profesi-alumni', ProfesiAlumniController::class);
+        Route::resource('/jabatan-profesi', JabatanProfesiController::class);
         
         
         // view pelaksanaan seminar
@@ -425,12 +430,14 @@ Route::group(['prefix' => '/archives'], function () {
 });
 
 // FRONT-END PROTAL ALUMNI
-Route::group(['prefix' => '/alumni-page'], function(){
+Route::group(['prefix' => '/alumnift'], function(){
 
     Route::get('/', [FrontendController::class, 'portal'])->name('frontend.portal');
     Route::post('/regist', [FrontendController::class, 'register'])->name('frontend.register');
     Route::post('/login', [FrontendController::class, 'login'])->name('frontend.login');
-    Route::get('/subposisi/{id}', [FrontendController::class, 'getSubposisi'])->name('subposisi.get');
+    Route::get('/jabatan/{id}', [FrontendController::class, 'getJabatan'])->name('jabatan.get');
+    Route::get('/list-friend-alumni/data', [FrontendController::class, 'dataFriendAlumni'])->name('frontend.data-friend-alumni');
+    Route::get('/list-friend-alumni/detail/{id}', [FrontendController::class, 'showFriendAlumni'])->name('frontend.alumniDetail');
     
     
     Route::group(['middleware' => ['alumni']], function(){
@@ -441,6 +448,8 @@ Route::group(['prefix' => '/alumni-page'], function(){
         Route::post('/change-img-banner', [FrontendController::class, 'changeImageBannner'])->name('frontend.change-banner');
         Route::post('/change-profile-photo', [FrontendController::class, 'changeProfilePhoto'])->name('frontend.change-photo');
         Route::post('/post-create', [FrontendController::class, 'createPost'])->name('frontend.create-post');
+        Route::get('/list-friend-alumni', [FrontendController::class, 'listFriendAlumni'])->name('frontend.list-friend-alumni');
+        Route::get('/view-friend-alumni/{id}', [FrontendController::class, 'viewFriendAlumni'])->name('frontend.view-friend-alumni');
     });
 });
 

@@ -15,8 +15,8 @@
                         <button type="submit" class="btn btn-info btn-md text-white rounded-pill">Selengkapnya</button>
                     </div>
                     <div class="col-md-6 col-sm-12">
-                        <button class="btn btn-outline-light btn-lg rounded-pill" style="padding-left: 30px; padding-right: 30px;" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight1" aria-controls="offcanvasRight">Daftar</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <button class="btn btn-outline-light btn-lg rounded-pill" style="padding-left: 30px; padding-right: 30px;" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight2" aria-controls="offcanvasRight">Masuk</button>
+                        <button class="btn btn-outline-light btn-lg rounded-pill" style="padding-left: 30px; padding-right: 30px;" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight1" aria-controls="offcanvasRight">Sign up</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-outline-light btn-lg rounded-pill" style="padding-left: 30px; padding-right: 30px;" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight2" aria-controls="offcanvasRight">Sign in</button>
 
                         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight1" aria-labelledby="offcanvasRightLabel">
                             <div class="offcanvas-header header-canvas">
@@ -25,7 +25,7 @@
                             </div>
                             <div class="offcanvas-body body-canvas">
                                 {{-- <form id="registerForm" action="{{ route('frontend.register') }}" method="post">@csrf --}}
-                                <form id="registerForm" action="javascript:;" method="post">@csrf 
+                                <form id="registerForm" action="{{ route('frontend.register') }}" method="post">@csrf 
                                     <input type="text" name="nama" class="form-control form-control-lg rounded-pill" placeholder="Nama Lengkap" required>
                                     <input type="email" name="email" class="form-control form-control-lg rounded-pill" placeholder="Email" required>
                                     <input type="text" name="nik" class="form-control form-control-lg rounded-pill" placeholder="NPM (Tidak Wajib)">
@@ -40,7 +40,7 @@
                                     <button class="btn btn-link" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight2" aria-controls="offcanvasRight">Sudah punya akun?</button>
                                     <br><br>
                                     <div class="d-grid gap-2">
-                                        <button class="btn btn-info text-white rounded-pill" type="submit">Daftar</button>
+                                        <button class="btn btn-info text-white rounded-pill" type="submit">Sign up</button>
                                     </div>
                                 </form>
                             </div>
@@ -57,7 +57,7 @@
                                     <input type="password" name="password" class="form-control form-control-lg rounded-pill" placeholder="Kata Sandi">
                                     <br>
                                     <div class="d-grid gap-2">
-                                        <button class="btn btn-info text-white rounded-pill" type="submit">Masuk</button>
+                                        <button class="btn btn-info text-white rounded-pill" type="submit">Sign in</button>
                                     </div>
                                 </form>
                             </div>
@@ -74,10 +74,69 @@
         </div>
     </section>
 
+    <section id="list-alumni">
+        <div class="container">
+            <div class="feature-content">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <table class="table table-hover table-list-alumni">
+                            <thead>
+                                <th>#</th>
+                                <th>Nama</th>
+                                <th>Program Studi</th>
+                                <th>Angkatan</th>
+                                <th></th>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="col-lg-3 offset-lg-1 mb-auto mt-auto">
+                        <h2 style="line-height: 40px; text-align:center; color: grey;" class="">Alumni-alumni Fakultas Teknik UNISBA</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="angkatan-chart">
+        <div class="feature-content">
+            <div class="container">
+                <h2>Presentasi Pekerjaan</h2>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card-group">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 style="line-height: 40px; text-align:center; color: grey;" class="">Presentasi Jenis Pekerjaan Alumni</h4>
+                                </div>
+                                <div class="card-body">
+                                    {!! $angkatanAlumniChart->container() !!}
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 style="line-height: 40px; text-align:center; color: grey;" class="">Presentasi Bidang Pekerjaan Alumni</h4>
+                                </div>
+                                <div class="card-body">
+                                    {!! $bidangPekerjaanAlumniChart->container() !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="{{ $angkatanAlumniChart->cdn() }}"></script>
+    <script src="{{ $bidangPekerjaanAlumniChart->cdn() }}"></script>
+
+    {{ $angkatanAlumniChart->script() }}
+    {{ $bidangPekerjaanAlumniChart->script() }}
+
 @endsection
 
 @push('login-register_scripts')
-    <script>
+    {{-- <script>
         $(document).ready(function(){
             // register alumni with ajax
             $("#registerForm").submit(function(){
@@ -94,6 +153,38 @@
                     }
                 })
             })
+
+            // $('.table-list-alumni').DataTable();
         })
+    </script> --}}
+
+    <script>
+        let table;
+
+        $(function(){
+            table = $('.table-list-alumni').DataTable({
+                processing: true,
+                autoWidth: false,
+                ajax: {
+                    url: '{{ route("frontend.data-friend-alumni") }}',
+                },
+                columns: [{
+                    data: 'foto',
+                    searchable: false,
+                    sortable: false
+                }, {
+                    data: 'users.nama'
+                }, {
+                    data: 'program_studi'
+                }, {
+                    data: 'angkatan'
+                }, {
+                    data: 'aksi',
+                    searchable: false,
+                    sortable: false
+                }]
+            })
+        })
+
     </script>
 @endpush
