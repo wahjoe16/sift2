@@ -68,388 +68,178 @@
             @include('frontend.side-menu-profile')
         </div>
         <div class="col-lg-9">
-            @if ($slug == 'personal')
-                <h5><i class="bi bi-info-circle icon-menu-profile" style="color: #3a9e66;"></i> Edit Infomasi Alumni</h5>
-                <hr>
-                <p style="color: grey;"></p>
-                <hr>
-                <form action="{{ route('frontend.profile-update', 'personal') }}" method="post">
-                    @csrf
-                    <div class="row mt-3">
-                        <div class="col-lg-6">
-                            <label for="nama" class="form-label">Nama Lengkap</label>
-                            <input type="text" name="nama" class="form-control" placeholder="Misal: Muhammad Farhan" value="{{ Auth::guard('alumni')->user()->nama }}">
-                        </div>
-                        <div class="col-lg-6">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" name="email" class="form-control" placeholder="Misal: farhan.123@gmail.com" value="{{ Auth::guard('alumni')->user()->email }}">
-                        </div>
+            @if ($slug == 'profil')
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <button class="nav-link active" id="nav-info-tab" data-bs-toggle="tab" data-bs-target="#nav-info" type="button" role="tab" aria-controls="nav-info" aria-selected="true">Informasi Alumni</button>
+                        <button class="nav-link" id="nav-pendidikan-tab" data-bs-toggle="tab" data-bs-target="#nav-pendidikan" type="button" role="tab" aria-controls="nav-pendidikan" aria-selected="false">Riwayat Pendidikan</button>
+                        <button class="nav-link" id="nav-jobs-tab" data-bs-toggle="tab" data-bs-target="#nav-jobs" type="button" role="tab" aria-controls="nav-jobs" aria-selected="false">Pengalaman Bekerja</button>
+                        <button class="nav-link" id="nav-kompetensi-tab" data-bs-toggle="tab" data-bs-target="#nav-kompetensi" type="button" role="tab" aria-controls="nav-kompetensi" aria-selected="false">Kompetensi</button>
+                        <button class="nav-link" id="nav-skill-tab" data-bs-toggle="tab" data-bs-target="#nav-skill" type="button" role="tab" aria-controls="nav-skill" aria-selected="false">Keahlian</button>
                     </div>
-                    
-                    <div class="row mt-3">
-                        <div class="col-lg-6">
-                            <label for="alamat" class="form-label">Alamat</label>
-                            <textarea class="form-control" name="alamat" id="alamat" rows="3">
-                                {{ $dataAlumni->alamat }}
-                            </textarea>
-                            <input class="form-check-input" name="allow_alamat" type="checkbox" value="1" @if($dataAlumni->allow_view_alamat != '') checked @endif id="allow_alamat">
-                            <label class="form-check-label" for="allow_alamat" style="color: #1a75d6; font-size: 13px;">
-                                Ijinkan Alamat di publish
-                            </label>
-                        </div>
-                        <div class="col-lg-6">
-                            <label for="no_hp" class="form-label">Telepon / HP</label>
-                            <input type="text" name="no_hp" class="form-control" id="no_hp" placeholder="Misal: 085733456345" value="{{ $dataAlumni->no_hp }}">
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-info" role="tabpanel" aria-labelledby="nav-info-tab">
+                        <div class="mt-5">
+                            <h5 class="mb-4"><i class="bi bi-info-circle icon-menu-profile" style="color: #3a9e66;"></i> Update Infomasi Alumni</h5>
+                            <form action="{{ route('frontend.profile-update', 'personal') }}" method="post">
+                                @csrf
+                                <div class="row mt-3">
+                                    <div class="col-lg-6">
+                                        <label for="nama" class="form-label">Nama Lengkap</label>
+                                        <input type="text" name="nama" class="form-control" placeholder="Misal: Muhammad Farhan" value="{{ Auth::guard('alumni')->user()->nama }}">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" name="email" class="form-control" placeholder="Misal: farhan.123@gmail.com" value="{{ Auth::guard('alumni')->user()->email }}">
+                                    </div>
+                                </div>
+                                
+                                <div class="row mt-3">
+                                    <div class="col-lg-6">
+                                        <label for="alamat" class="form-label">Alamat</label>
+                                        <textarea class="form-control" name="alamat" id="alamat" rows="3">
+                                            {{ $dataAlumni->alamat }}
+                                        </textarea>
+                                        <input class="form-check-input" name="allow_alamat" type="checkbox" value="1" @if($dataAlumni->allow_view_alamat != '') checked @endif id="allow_alamat">
+                                        <label class="form-check-label" for="allow_alamat" style="color: #1a75d6; font-size: 13px;">
+                                            Ijinkan Alamat di publish
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label for="no_hp" class="form-label">Telepon / HP</label>
+                                        <input type="text" name="no_hp" class="form-control" id="no_hp" placeholder="Misal: 085733456345" value="{{ $dataAlumni->no_hp }}">
 
-                            <input class="form-check-input" name="allow_telepon" type="checkbox" value="1" @if($dataAlumni->allow_view_no_hp != '') checked @endif id="allow_telepon">
-                            <label class="form-check-label" for="allow_telepon" style="color: #1a75d6; font-size: 13px;">
-                                Ijinkan Telepon / No HP di publish
-                            </label>
+                                        <input class="form-check-input" name="allow_telepon" type="checkbox" value="1" @if($dataAlumni->allow_view_no_hp != '') checked @endif id="allow_telepon">
+                                        <label class="form-check-label" for="allow_telepon" style="color: #1a75d6; font-size: 13px;">
+                                            Ijinkan Telepon / No HP di publish
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-lg-6">
+                                        <label for="pekerjaan_sekarang" class="form-label">Pekerjaan Sekarang</label>
+                                        <input type="text" name="pekerjaan_sekarang" class="form-control" placeholder="Misal: Manajer Keuangan" value="{{ $dataAlumni->pekerjaan_sekarang }}">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label for="perusahaan_sekarang" class="form-label">Nama Perusahaan / Instansi</label>
+                                        <input type="text" name="perusahaan_sekarang" class="form-control" placeholder="Misal: PT. Telekomunikasi Indonesia" value="{{ $dataAlumni->perusahaan_sekarang }}">
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3 mt-3">
+                                    <button type="submit" class="btn btn-success btn-md">Simpan</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
 
-                    <div class="row mt-3">
-                        <div class="col-lg-6">
-                            <label for="pekerjaan_sekarang" class="form-label">Pekerjaan Sekarang</label>
-                            <input type="text" name="pekerjaan_sekarang" class="form-control" placeholder="Misal: Manajer Keuangan" value="{{ $dataAlumni->pekerjaan_sekarang }}">
+                    <div class="tab-pane fade" id="nav-pendidikan" role="tabpanel" aria-labelledby="nav-pendidikan-tab">
+                        <div class="mt-5">
+                            <h5><i class="bi bi-mortarboard  icon-menu-profile" style="color: #0317fc"></i> Riwayat Pendidikan</h5>
+                            <button onclick="createPendidikan('{{ route('frontend.profile-update', 'lulusan') }}')" class="btn btn-success btn-sm mb-2 mt-2">TAMBAH DATA</button>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <ul class="list-group list-group-flush">
+                                                @foreach ($profilLulusan as $pl)
+                                                    <li class="list-group-item" style="margin-left: 5px;">
+                                                        <p class="card-text mt-3" style="font-size: 18px; font-weight: bold;"><i class="bi bi-bank"></i>&nbsp;&nbsp;{{ $pl['perguruan_tinggi'] }}<span>&nbsp;&nbsp;<button onclick="editPendidikan('{{ route('frontend.profile-edit', $pl['id']) }}')" class="btn btn-xs ms-auto"><i class="bi bi-pencil"></i></button></span></p>
+                                                        <p class="card-text" style="font-size: 15px; font-weight: 300; margin-top: -15px; margin-left: 26px">{{ $pl['jenjang'] }}, {{ $pl['program_studi'] }}</p>
+                                                        <p class="card-text" style="color: grey; font-size: 15px; font-weight: 300; margin-top: -15px; margin-left: 26px">{{ $pl['angkatan'] }} - {{ $pl['tahun_lulus'] }}</p>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @includeIf('frontend.modal-form.create_pendidikan')
                         </div>
-                        <div class="col-lg-6">
-                            <label for="perusahaan_sekarang" class="form-label">Nama Perusahaan / Instansi</label>
-                            <input type="text" name="perusahaan_sekarang" class="form-control" placeholder="Misal: PT. Telekomunikasi Indonesia" value="{{ $dataAlumni->perusahaan_sekarang }}">
-                        </div>
-                    </div>
-                    
-                    <div class="mb-3 mt-3">
-                        <button type="submit" class="btn btn-success btn-md">Simpan</button>
                     </div>
 
-                </form>
+                    <div class="tab-pane fade" id="nav-jobs" role="tabpanel" aria-labelledby="nav-jobs-tab">
+                        <div class="mt-5">
+                            <h5><i class="bi bi-suitcase-lg icon-menu-profile" style="color: #fc4e03;"></i> Pengalaman Pekerjaan</h5>
+                            <button onclick="createPekerjaan('{{ route('frontend.profile-update', 'jobs') }}')" class="btn btn-success btn-sm mb-2 mt-2">TAMBAH DATA</button>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <ul class="list-group list-group-flush">
+                                                @foreach ($jobsAlumni as $ja => $value)
+                                                    <li class="list-group-item" style="margin-left: 5px;">
+                                                        <p class="card-text mt-3" style="font-size: 18px; font-weight: bold;"><i class="bi bi-buildings-fill"></i>&nbsp;&nbsp;{{ $value['posisi'] }}<span>&nbsp;&nbsp;<button onclick="" class="btn btn-xs ms-auto"><i class="bi bi-pencil"></i></button></span></p>
+                                                        <p class="card-text" style="font-size: 15px; font-weight: 300; margin-top: -15px; margin-left: 26px;">{{ $value['nama_perusahaan'] }}</p>
+                                                        <p class="card-text" style="color: grey; font-size: 15px; font-weight: 300; margin-top: -15px; margin-left: 26px;">{{ $value['tahun_masuk_bekerja'] }} - {{ $value['tahun_berhenti_bekerja'] }}</p>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-            @elseif ($slug == 'lulusan')
-                <h5><i class="bi bi-mortarboard  icon-menu-profile" style="color: #0317fc"></i> Edit Profil Lulusan Alumni</h5>
-                <hr>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Jenjang</th>
-                            <th scope="col">Angkatan</th>
-                            <th scope="col">Tahun Lulus</th>
-                            <th scope="col">Perguruan Tinggi</th>
-                            <th scope="col">Program Studi</th>
-                        </tr>
-                    </thead>
-                    <tbody class="table-group-divider">
-                        @foreach ($profilLulusan as $pl => $value)
-                            <tr>
-                                <th scope="row">{{ $pl+1 }}</th>
-                                <td>{{ $value['jenjang'] }}</td>
-                                <td>{{ $value['angkatan'] }}</td>
-                                <td>{{ $value['tahun_lulus'] }}</td>
-                                <td>{{ $value['perguruan_tinggi'] }}</td>
-                                <td>{{ $value['program_studi'] }}</td>
-                            </tr>
-                        @endforeach   
-                    </tbody>
-                </table>
-                
-                <h5 class="mt-5">Tambah Riwayat Pendidikan</h5>
-                <hr>
-                <form action="{{ route('frontend.profile-update', 'lulusan') }}" method="post">
-                    @csrf
-                    <div class="row mb-3">
-                        <div class="col-lg-6">
-                            <label for="jenjang" class="form-label">Jenjang</label>
-                            <select name="jenjang" id="jenjang" class="form-control">
-                                <option value="">Pilih</option>
-                                @foreach ([
-                                "D3"=>"Diploma",
-                                "S1"=>"Sarjana",
-                                "S2"=>"Magister",
-                                "S3"=>"Doktor",
-                                "Profesi" => "Profesi"
-                                ] as $jenjang => $jenjangLabel)
-                                <option value="{{ $jenjang }}">{{ $jenjangLabel }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-lg-6">
-                            <label for="nik" class="form-label">NPM (Tidak Wajib)</label>
-                            <input type="text" name="nik" class="form-control" id="exampleFormControlInput1" placeholder="Nomor Pokok / Induk Mahasiswa">
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-lg-6">
-                            <label for="angkatan" class="form-label">Angkatan</label>
-                            <input type="number" name="angkatan" class="form-control" id="exampleFormControlInput1" placeholder="1234*">
-                        </div>
-                        <div class="col-lg-6">
-                            <label for="tahun_lulus" class="form-label">Tahun Lulus</label>
-                            <input type="number" name="tahun_lulus" class="form-control" id="exampleFormControlInput1" placeholder="1234*">
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-lg-6">
-                            <label for="perguruan_tinggi" class="form-label">Perguruan Tinggi</label>
-                            <input type="text" name="perguruan_tinggi" class="form-control" id="exampleFormControlInput1" placeholder="Misal: Universitas Islam Bandung">
-                        </div>
-                        <div class="col-lg-6">
-                            <label for="program_studi" class="form-label">Program Studi</label>
-                            <input type="text" name="program_studi" class="form-control" id="exampleFormControlInput1" placeholder="Misal: Teknik Pertambangan">
+                            @includeIf('frontend.modal-form.create_pekerjaan')
                             
                         </div>
                     </div>
-                    <div class="mt-3">
-                        <button type="submit" class="btn btn-success btn-md">Simpan</button>
-                    </div>
-                </form>
 
-            @elseif ($slug == 'jobs')
-
-                <h5><i class="bi bi-suitcase-lg icon-menu-profile" style="color: #fc4e03;"></i> Riwayat Pekerjaan</h5>
-                <hr>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Tahun Masuk Bekerja</th>
-                            <th scope="col">Tahun Berhenti Bekerja</th>
-                            <th scope="col">Posisi Pekerjaan</th>
-                            <th scope="col">Jabatan</th>
-                            <th scope="col">Nama Perusahaan</th>
-                            <th scope="col">Alamat Perusahaan</th>
-                        </tr>
-                    </thead>
-                    <tbody class="table-group-divider">
-                        @foreach ($jobsAlumni as $ja => $value)
-                            <tr>
-                                <th scope="row">{{ $ja+1 }}</th>
-                                <td>{{ $value['tahun_masuk_bekerja'] }}</td>
-                                <td>{{ $value['tahun_berhenti_bekerja'] }}</td>
-                                
-                                @if ($value['profesi_id'] == '')
-                                    <td>-</td>
-                                @else
-                                    <td>{{ $value['posisi'] }}</td>
-                                @endif
-
-                                @if ($value['jabatan_id'] == '')
-                                    <td>-</td>
-                                @else
-                                    <td>{{ $value['jabatan_profesi_alumni']['nama_jabatan'] }}</td>
-                                @endif
-
-                                @if ($value['nama_perusahaan'] == '')
-                                    <td>-</td>
-                                @else
-                                    <td>{{ $value['nama_perusahaan'] }}</td>
-                                @endif
-
-                                @if ($value['lokasi_perusahaan'] == '')
-                                    <td>-</td>
-                                @else
-                                    <td>{{ $value['lokasi_perusahaan'] }}</td>
-                                @endif
-                                
-                            </tr>
-                        @endforeach   
-                    </tbody>
-                </table>
-                
-                <h5 class="mt-5">Tambah Riwayat Pekerjaan</h5>
-            
-                <form action="{{ route('frontend.profile-update', 'jobs') }}" method="post" class="row g-3">
-                    @csrf
-                    <div class="field_wrapper">
-                        {{-- <a href="javascript:void(0);" class="add_button" title="Tambah Item Pekerjaan"><i class="bi bi-plus-square-fill text-green-600"></i></a> --}}
-                        
-                        <div class="row mt-3">
-                            <div class="col-md-6">
-                                <label for="tahun_masuk_bekerja" class="form-label">Tahun Awal</label>
-                                <input type="number" class="form-control" id="tahun_masuk_bekerja" name="tahun_masuk_bekerja[]">
+                    <div class="tab-pane fade" id="nav-kompetensi" role="tabpanel" aria-labelledby="nav-kompetensi-tab">
+                        <div class="mt-5">
+                            <h5><i class="bi bi-shield-plus icon-menu-profile" style="color: #87036f;"></i> Sertifikasi Kompetensi</h5>
+                            <button onclick="createKompetensi('{{ route('frontend.profile-update', 'kompetensi') }}')" class="btn btn-success btn-sm mb-2 mt-2">TAMBAH DATA</button>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <ul class="list-group list-group-flush">
+                                                @foreach ($skillAlumni as $sa => $value)
+                                                    <li class="list-group-item" style="margin-left: 5px;">
+                                                        <p class="card-text mt-3" style="font-size: 18px; font-weight: bold;"><i class="bi bi-card-list"></i>&nbsp;&nbsp;{{ $value['kompetensi'] }}<span>&nbsp;&nbsp;<button onclick="" class="btn btn-xs ms-auto"><i class="bi bi-pencil"></i></button></span></p>
+                                                        <p class="card-text" style="color: white; font-size: 15px; font-weight: 300; margin-top: -15px; margin-left: 26px""><a class="btn btn-info btn-sm" href="{{ url('/alumni/sertifikat/', $value['sertifikat_kompetensi']) }}"><i class="bi bi-link-45deg"></i> Lihat Sertifikat</a></p>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <label for="tahun_berhenti_bekerja" class="form-label">Tahun Berakhir / Sekarang</label>
-                                <input type="number" class="form-control" id="tahun_berhenti_bekerja" name="tahun_berhenti_bekerja[]">
-                            </div>
-                        </div>
 
-                        <div class="row mt-3">
-                            <div class="col-md-6">
-                                <label for="profesi_id" class="form-label">Profesi</label>
-                                <select name="profesi_id[]" id="profesi_id" class="form-control">
-                                    <option value="">Pilih</option>
-                                    @foreach ($profesi as $p)
-                                    <option value="{{ $p->id }}">{{ $p->nama_profesi }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="jabatan_id" class="form-label">Jabatan (Fungsional)</label>
-                                <select name="jabatan_id[]" id="jabatan_id" class="form-control">
-                                    <option value="">Pilih</option>
-                                    @foreach ($jabatan as $j)
-                                    <option value="{{ $j->id }}">{{ $j->nama_jabatan }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            {{-- <div class="col-md-6">
-                                <label for="jenis_pekerjaan" class="form-label">Profesi</label>
-                                <select name="jenis_pekerjaan[]" id="jenis_pekerjaan" class="form-control">
-                                    <option value="">Pilih</option>
-                                    @foreach ([
-                                    "ASN/BUMN"=>"ASN/BUMN",
-                                    "TNI"=>"TNI",
-                                    "POLRI"=>"POLRI",
-                                    "Swasta"=>"Swasta",
-                                    "Berwirausaha"=>"Berwirausaha",
-                                    "Tidak Bekerja"=>"Tidak Bekerja",
-                                    ] as $jenis_pekerjaan => $jenis_pekerjaanLabel)
-                                    <option value="{{ $jenis_pekerjaan }}">{{ $jenis_pekerjaanLabel }}</option>
-                                    @endforeach
-                                </select>
-                            </div> --}}
+                            @includeIf('frontend.modal-form.create_kompetensi')
                             
                         </div>
+                    </div>
 
-                        <div class="row mt-3">
-                            <div class="col-md-6">
-                                <label for="bidang_pekerjaan" class="form-label">Bidang Pekerjaan</label>
-                                <select name="bidang_pekerjaan[]" id="bidang_pekerjaan" class="form-control">
-                                    <option value="">Pilih</option>
-                                    @foreach ([
-                                    "Pemerintahan"=>"Pemerintahan",
-                                    "Pendidikan"=>"Pendidikan",
-                                    "Industri / Manufaktur"=>"Industri / Manufaktur",
-                                    "Pertambangan"=>"Pertambangan",
-                                    "Konsultan"=>"Konsultan",
-                                    "Hiburan"=>"Hiburan",
-                                    "Lainnya"=>"Lainnya",
-                                    ] as $bidang_pekerjaan => $bidang_pekerjaanLabel)
-                                    <option value="{{ $bidang_pekerjaan }}">{{ $bidang_pekerjaanLabel }}</option>
-                                    @endforeach
-                                </select>
+                    <div class="tab-pane fade" id="nav-skill" role="tabpanel" aria-labelledby="nav-skill-tab">
+                        <div class="mt-5">
+                            <h5><i class="bi bi-wrench-adjustable icon-menu-profile" style="color: #04d4c6;"></i> Keahlian</h5>
+                            <button onclick="createKeahlian('{{ route('frontend.profile-update', 'keahlian') }}')" class="btn btn-success btn-sm mb-2 mt-2">TAMBAH DATA</button>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <ul class="list-group list-group-flush">
+                                                @foreach ($keahlianAlumni as $ka => $value)
+                                                    <li class="list-group-item" style="margin-left: 5px;">
+                                                        <p class="card-text mt-3" style="font-size: 18px; font-weight: 300;"><i class="bi bi-check-square"></i>&nbsp;&nbsp;{{ $value['keahlian'] }}<span>&nbsp;&nbsp;<button onclick="" class="btn btn-xs ms-auto"><i class="bi bi-pencil"></i></button></span></p>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <label for="posisi" class="form-label">Posisi Pekerjaan</label>
-                                <input type="text" name="posisi[]" id="posisi" class="form-control" placeholder="Misal: Manajer Property">
-                            </div>
-                            {{-- <div class="col-md-6">
-                                <label for="subposisi" class="form-label">Sebagai</label>
-                                <select name="subposisi[]" id="subposisi" class="form-control">
-                                    <option value="">Pilih</option>
-                                </select>
-                            </div> --}}
-                        </div>
 
-                        <div class="row mt-3 mb-5">
-                            <div class="col-md-6">
-                                <label for="nama_perusahaan" class="form-label">Nama Perusahaan / Instansi</label>
-                                <textarea class="form-control" name="nama_perusahaan[]" id="nama_perusahaan" rows="3">
-                                    
-                                </textarea>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="alamat" class="form-label">Alamat Perusahaan / Instansi</label>
-                                <textarea class="form-control" name="alamat[]" id="alamat" rows="3">
-                                    
-                                </textarea>
-                            </div>
+                            @includeIf('frontend.modal-form.create_keahlian')
+                            
                         </div>
                     </div>
-
-                    <div class="mb-3">
-                        <button type="submit" class="btn btn-success btn-md">Simpan</button>
-                    </div>
-                </form>
-            
-            @elseif ($slug == 'kompetensi')
-
-                <h5><i class="bi bi-shield-plus icon-menu-profile" style="color: #87036f;"></i> Kompetensi</h5>
-                <hr>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Kompetensi</th>
-                            <th scope="col" class="text-center">Sertifikat Kompetensi</th>
-                        </tr>
-                    </thead>
-                    <tbody class="table-group-divider">
-                        @foreach ($skillAlumni as $sa => $value)
-                            <tr>
-                                <td scope="row">{{ $sa+1 }}</td>
-                                <td>{{ $value->kompetensi }}</td>
-                                <td class="text-center"><a href="{{ url('/alumni/sertifikat', $value->sertifikat_kompetensi) }}"><i class="bi bi-link-45deg"></i></a></td>
-                            </tr>
-                        @endforeach   
-                    </tbody>
-                </table>
-                
-                <form action="{{ route('frontend.profile-update', 'kompetensi') }}" method="post" enctype="multipart/form-data">
-                    @csrf
-                    <div class="field_wrapper">
-
-                        {{-- <a href="javascript:void(0);" class="add_button_kompetensi" title="Tambah Item Pekerjaan"><i class="bi bi-plus-square-fill text-green-600"></i></a> --}}
-
-                        <div class="row mt-3">
-                            <div class="col-md-7">
-                                <label for="kompetensi" class="form-label">Kompetensi</label>
-                                <input type="text" class="form-control" id="kompetensi" name="kompetensi" placeholder="Misal: MS. Office Specialist 2019">
-                                {{-- <input type="text" class="form-control" id="kompetensi" name="kompetensi[]"> --}}
-                            </div>
-
-                            <div class="col-md-5">
-                                <label for="sertifikat" class="form-label">Sertifikat Kompetensi</label>
-                                <input class="form-control" type="file" id="sertifikat" name="sertifikat">
-                                {{-- <input class="form-control" type="file" id="sertifikat" name="sertifikat[]"> --}}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-3">
-                        <button type="submit" class="btn btn-success btn-md">Simpan</button>
-                    </div>
-                </form>
-
-            @elseif ($slug == 'keahlian')
-
-                <h5><i class="bi bi-wrench-adjustable icon-menu-profile" style="color: #04d4c6;"></i> Keahlian</h5>
-                <hr>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Keahlian</th>
-                        </tr>
-                    </thead>
-                    <tbody class="table-group-divider">
-                        @foreach ($keahlianAlumni as $ka => $value)
-                            <tr>
-                                <td scope="row">{{ $ka+1 }}</td>
-                                <td>{{ $value->keahlian }}</td>  
-                            </tr>
-                        @endforeach   
-                    </tbody>
-                </table>
-                
-                <form action="{{ route('frontend.profile-update', 'keahlian') }}" method="post">
-                    @csrf
-                    <div class="field_wrapper">
-
-                        <a href="javascript:void(0);" class="add_button_keahlian" title="Tambah Item Keahlian"><i class="bi bi-plus-square-fill text-green-600"></i></a>
-
-                        <div class="mb-3">
-                            <label for="keahlian" class="form-label">Keahlian</label>
-                            <input type="text" name="keahlian[]" class="form-control" placeholder="Misal: Desain Grafis">
-                        </div>
-                    </div>
-
-                    <div class="mt-3">
-                        <button type="submit" class="btn btn-success btn-md">Simpan</button>
-                    </div>
-                </form>
-
+                </div>
+           
             @elseif ($slug == 'password')
 
                 <h5><i class="bi bi-lock icon-menu-profile" style="color: #e61049;"></i> Ganti Password</h5>
@@ -499,6 +289,117 @@
 
 <script>
 
+    $('#pekerjaan-form').validator().on('submit', function(e) {
+        if (!e.preventDefault()) {
+            $.post($('#pekerjaan-form form').attr('action'), $('#pekerjaan-form form').serialize())
+                .done((response) => {
+                    $('#pekerjaan-form').modal('hide');
+                })
+                .fail((errors) => {
+                    alert('Tidak dapat menyimpan data');
+                    return;
+                });
+        }
+    });
+
+    function createPekerjaan(url) {
+        $('#pekerjaan-form').modal('show');
+        $('#pekerjaan-form .pekerjaan-title').text('Tambah Data Pengalaman Pekerjaan');
+        
+        $('#pekerjaan-form form')[0].reset();
+        $('#pekerjaan-form form').attr('action', url);
+        $('#pekerjaan-form [name=_method]').val('post');
+    }
+
+    $('#pendidikan-form').validator().on('submit', function(e) {
+        if (!e.preventDefault()) {
+            $.post($('#pendidikan-form form').attr('action'), $('#pendidikan-form form').serialize())
+                .done((response) => {
+                    $('#pendidikan-form').modal('hide');
+                })
+                .fail((errors) => {
+                    alert('Tidak dapat menyimpan data');
+                    return;
+                });
+        }
+    });
+
+    function createPendidikan(url) {
+        $('#pendidikan-form').modal('show');
+        $('#pendidikan-form .pendidikan-title').text('Tambah Data Riwayat Pendidikan');
+        
+        $('#pendidikan-form form')[0].reset();
+        $('#pendidikan-form form').attr('action', url);
+        $('#pendidikan-form [name=_method]').val('post');
+    }
+
+    function editPendidikan(url) {
+        $('#pendidikan-form').modal('show');
+        $('#pendidikan-form .pendidikan-title').text('Edit Data Riwayat Pendidikan'); 
+        
+        $('#pendidikan-form form')[0].reset();
+        $('#pendidikan-form form').attr('action', url);
+        $('#pendidikan-form [name=_method]').val('put');
+
+        $.get(url)
+            .done((response) => {
+                $('#pendidikan-form #jenjang').val(response.jenjang);
+                $('#pendidikan-form #npm').val(response.npm);
+                $('#pendidikan-form #angkatan').val(response.angkatan);
+                $('#pendidikan-form #tahun_lulus').val(response.tahun_lulus);
+                $('#pendidikan-form #perguruan_tinggi').val(response.perguruan_tinggi);
+                $('#pendidikan-form #program_studi').val(response.program_studi);
+            })
+            .fail((errors) => {
+                alert('Tidak dapat menampilkan data');
+                return;
+            });
+    }
+
+    $('#kompetensi-form').validator().on('submit', function(e) {
+        if (!e.preventDefault()) {
+            $.post($('#kompetensi-form form').attr('action'), $('#kompetensi-form form').serialize())
+                .done((response) => {
+                    $('#kompetensi-form').modal('hide');
+                })
+                .fail((errors) => {
+                    alert('Tidak dapat menyimpan data');
+                    return;
+                });
+        }
+    });
+
+    function createKompetensi(url) {
+        $('#kompetensi-form').modal('show');
+        $('#kompetensi-form .kompetensi-title').text('Tambah Data Kompetensi');
+        
+        $('#kompetensi-form form')[0].reset();
+        $('#kompetensi-form form').attr('action', url);
+        $('#kompetensi-form [name=_method]').val('post');
+    }
+
+    $('#keahlian-form').validator().on('submit', function(e) {
+        if (!e.preventDefault()) {
+            $.post($('#keahlian-form form').attr('action'), $('#keahlian-form form').serialize())
+                .done((response) => {
+                    $('#keahlian-form').modal('hide');
+                })
+                .fail((errors) => {
+                    alert('Tidak dapat menyimpan data');
+                    return;
+                });
+        }
+    });
+
+    function createKeahlian(url) {
+        $('#keahlian-form').modal('show');
+        $('#keahlian-form .keahlian-title').text('Tambah Data Keahlian');
+        
+        $('#keahlian-form form')[0].reset();
+        $('#keahlian-form form').attr('action', url);
+        $('#keahlian-form [name=_method]').val('post');
+    }
+    
     $('#photo-form').validator().on('submit', function(e) {
         if (!e.preventDefault()) {
             $.post($('#photo-form form').attr('action'), $('#photo-form form').serialize())
@@ -511,7 +412,6 @@
                 });
         }
     });
-
 
     function photoForm(url) {
         $('#photo-form').modal('show');
@@ -548,42 +448,7 @@
     
 <script>
 
-    $(document).ready(function(){
-
-        var maxField = 10;
-        var addButton = $('.add_button');
-        var wrapper = $('.field_wrapper');
-        var x = 1;
-        var fieldHtml = '<div><div style="height: 10px;"></div><a href="javascript:void(0);" class="remove_button" title="Hapus Item Pekerjaan"><i class="bi bi-dash-square-fill"></i></a><div class="row mt-3"><div class="col-md-6"><label for="tahun_masuk_bekerja" class="form-label">Tahun Awal</label><input type="number" class="form-control" id="tahun_masuk_bekerja" name="tahun_masuk_bekerja[]"></div><div class="col-md-6"><label for="tahun_berhenti_bekerja" class="form-label">Tahun Berakhir / Sampai Sekarang</label><input type="number" class="form-control" id="tahun_berhenti_bekerja" name="tahun_berhenti_bekerja[]"></div></div><div class="row mt-3"><div class="col-md-6"><label for="profesi_id" class="form-label">Profesi</label><select name="profesi_id[]" id="profesi_id" class="form-control"><option value="">Pilih</option>@foreach ($profesi as $p)<option value="{{ $p->id }}">{{ $p->nama_profesi }}</option>@endforeach</select></div><div class="col-md-6"><label for="jabatan_id" class="form-label">Jabatan (Fungsional)</label><select name="jabatan_id[]" id="jabatan_id" class="form-control"><option value="">Pilih</option>@foreach ($jabatan as $j)<option value="{{ $j->id }}">{{ $j->nama_jabatan }}</option>@endforeach</select></div></div><div class="row mt-3"><div class="col-md-12"><label for="bidang_pekerjaan" class="form-label">Bidang Pekerjaan</label><select name="bidang_pekerjaan[]" id="bidang_pekerjaan" class="form-control"><option value="">Pilih</option>@foreach (["Pemerintahan"=>"Pemerintahan","Pendidikan"=>"Pendidikan","Industri / Manufaktur"=>"Industri / Manufaktur","Pertambangan"=>"Pertambangan","Konsultan"=>"Konsultan","Hiburan"=>"Hiburan","Lainnya"=>"Lainnya",] as $bidang_pekerjaan => $bidang_pekerjaanLabel)<option value="{{ $bidang_pekerjaan }}">{{ $bidang_pekerjaanLabel }}</option>@endforeach</select></div></div><div class="row mt-3 mb-5"><div class="col-md-6"><label for="nama_perusahaan" class="form-label">Nama Perusahaan / Instansi</label><textarea class="form-control" name="nama_perusahaan[]" id="nama_perusahaan" rows="3"></textarea></div><div class="col-md-6"><label for="alamat" class="form-label">Alamat Perusahaan / Instansi</label><textarea class="form-control" name="alamat[]" id="alamat" rows="3"></textarea></div></div></div>';
-
-        $(addButton).click(function(){
-            if(x < maxField){
-                x++;
-                $(wrapper).append(fieldHtml);
-            }
-        })
-
-        $(wrapper).on('click', '.remove_button', function(e){
-            e.preventDefault();
-            $(this).parent('div').remove();
-            x--;
-        })
-        
-        var addButtonKeahlian = $('.add_button_keahlian');
-        var fieldHtmlKeahlian = '<div><div style="height: 10px;"></div><a href="javascript:void(0);" class="remove_button_keahlian" title="Hapus Item Keahlian"><i class="bi bi-dash-square-fill"></i></a><div class="mb-3"><label for="keahlian" class="form-label">Keahlian</label><input type="text" name="keahlian[]" class="form-control" placeholder="Jenis Keahlian"></div></div>';
-
-        $(addButtonKeahlian).click(function(){
-            if(x < maxField){
-                x++;
-                $(wrapper).append(fieldHtmlKeahlian);
-            }
-        })
-
-        $(wrapper).on('click', '.remove_button_keahlian', function(e){
-            e.preventDefault();
-            $(this).parent('div').remove();
-            x--;
-        })
+    $(document).ready(function(){       
 
         // $("i").click(function () {
         //     $("input[type='file']").trigger('click');

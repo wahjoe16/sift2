@@ -110,6 +110,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Archive::class, 'my_archives');
     }
 
+    public function alumni()
+    {
+        return $this->hasMany(Alumni::class, 'id', 'user_id');
+    }
+
     public static function boot()
     {
         parent::boot();

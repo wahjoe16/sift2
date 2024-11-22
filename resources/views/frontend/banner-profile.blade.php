@@ -27,7 +27,7 @@
             <img class="rounded-circle" src="{{ asset('user/foto/user.png') }}" alt="" style="width: 300px important;">
         @endif
         <div class="element-foto-profile">
-            <button onclick="photoForm('{{ route('frontend.change-photo') }}')" style="margin-left: 25px; position:relative; top: 0px;" type="button" class="btn btn-light btn-sm"><i class="bi bi-pencil"></i></button>
+            <button onclick="photoForm('{{ route('frontend.change-photo') }}')" style="margin-left: 25px; position:relative; top: 0px;" type="button" class="btn btn-sm"><i class="bi bi-pencil"></i></button>
             {{-- <button class="btn btn-light btn-sm rounded-circle square"><i class="bi bi-pencil"></i></button> --}}
             {{-- <i class="bi bi-pencil"></i><span class="name">No file selected</span> --}}
             {{-- <input type="file" name="" id=""> --}}

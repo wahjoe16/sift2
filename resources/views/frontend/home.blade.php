@@ -14,9 +14,10 @@
                         </p>
                         <button type="submit" class="btn btn-info btn-md text-white rounded-pill">Selengkapnya</button>
                     </div>
-                    <div class="col-md-6 col-sm-12">
-                        <button class="btn btn-outline-light btn-lg rounded-pill" style="padding-left: 30px; padding-right: 30px;" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight1" aria-controls="offcanvasRight">Sign up</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <button class="btn btn-outline-light btn-lg rounded-pill" style="padding-left: 30px; padding-right: 30px;" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight2" aria-controls="offcanvasRight">Sign in</button>
+                    <div class="col-md-4 col-sm-12 offset-md-1 mt-auto mb-auto">
+                        <div><button class="btn btn-outline-light btn-lg rounded-pill" style="padding-left: 30px; padding-right: 30px; width: 250px;" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight1" aria-controls="offcanvasRight">Sign up</button></div>
+                        <br><br>
+                        <div><button class="btn btn-primary btn-lg rounded-pill" style="padding-left: 30px; padding-right: 30px; width: 250px;" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight2" aria-controls="offcanvasRight">Sign in</button></div>
 
                         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight1" aria-labelledby="offcanvasRightLabel">
                             <div class="offcanvas-header header-canvas">
@@ -127,6 +128,8 @@
         </div>
     </section>
 
+    {{-- @includeIf('frontend.modal-form.view_profile') --}}
+
     <script src="{{ $angkatanAlumniChart->cdn() }}"></script>
     <script src="{{ $bidangPekerjaanAlumniChart->cdn() }}"></script>
 
@@ -187,4 +190,27 @@
         })
 
     </script>
+
+    {{-- <script>
+        function viewAlumni(url) {
+            $('#modal-form').modal('show');
+
+            $.get(url)
+                .done((response) => {
+                    $('#modal-form .nama').text(response.nama);
+                    $('#modal-form .jobsnow').text(response.pekerjaan_sekarang);
+                    $('#modal-form .img-banner').html(`<img src="{{ url('user/banner/') }}/${response.banner_img}" class="card-img-top" style="max-width: 100%; height: 200px; object-fit: cover;">`);
+                    $('#modal-form .foto-profile').html(`<img src="{{ url('user/foto/') }}/${response.foto}" class="rounded-circle foto-friend" style="position: relative; bottom: 68px; left: 20px;">`);
+                    $('#modal-form .email').text(response.email);
+                    $('#modal-form .hp').text(response.no_hp);
+
+                    $('#modal-form .job-list').each(function(){
+                        $(this).html('');
+                        response.pekerjaan_lalu.forEach((job) => {
+                            $(this).append(`<li>${job}</li>`);
+                        });
+                    });
+                })
+        }
+    </script> --}}
 @endpush

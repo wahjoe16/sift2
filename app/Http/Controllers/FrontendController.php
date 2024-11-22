@@ -26,10 +26,11 @@ class FrontendController extends Controller
     public function portal(AngkatanAlumniChart $angkatanAlumniChart, BidangPekerjaanAlumniChart $bidangPekerjaanAlumniChart)
     {
         $data = ProfilLulusanAlumni::with('users')->where('jenjang', '=', 'S1')->get()->toArray();
+        $alumni = Alumni::get();
         $jobs = Alumni::get();
-        // dd($jobs);
+        // dd($alumni);
         return view('frontend.home', [
-            'data' => $data, 'jobs' => $jobs, 
+            'data' => $data, 'jobs' => $jobs, 'alumni' => $alumni,
             'angkatanAlumniChart' => $angkatanAlumniChart->build(),
             'bidangPekerjaanAlumniChart' => $bidangPekerjaanAlumniChart->build()
         ]);
@@ -126,7 +127,10 @@ class FrontendController extends Controller
         $user = User::where('id', Auth::guard('alumni')->user()->id)->first();
         // dd($user);
 
-        if ($slug == 'personal') {
+        if ($slug == 'profil') {
+            
+        }
+        elseif ($slug == 'personal') {
 
             if ($request->isMethod('POST')) {
 
@@ -190,7 +194,7 @@ class FrontendController extends Controller
                 $lulusan->angkatan = $request->angkatan;
                 $lulusan->tahun_lulus = $request->tahun_lulus;
                 $lulusan->jenjang = $request->jenjang;
-                $lulusan->npm = $request->nik;
+                $lulusan->npm = $request->npm;
                 $lulusan->program_studi = $request->program_studi;
                 $lulusan->perguruan_tinggi = $request->perguruan_tinggi;
                 $lulusan->save();
@@ -325,6 +329,14 @@ class FrontendController extends Controller
         // dd($jobsAlumni);
 
         return view('frontend.profile', compact('slug', 'dataAlumni', 'jobsAlumni', 'skillAlumni', 'keahlianAlumni','profilLulusan', 'profilAlumni', 'profesi', 'jabatan'));
+    }
+
+    public function profileEditLulusan(Request $request, $id)
+    {
+        $data = ProfilLulusanAlumni::find($id);
+        $data->update($request->all());
+
+        return redirect()->back()->with('success', 'Data riwayat pendidikan berhasil diperbarui');    
     }
 
     public function getJabatan($id)
@@ -467,10 +479,36 @@ class FrontendController extends Controller
                 return '<img src="'.url('user/foto/'. $data['users']['foto']).'" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover" alt="Foto">';
             })
             ->addColumn('aksi', function($data){
-                return '<a href="'.route('frontend.alumniDetail', $data['users']['id']).'"><i class="bi bi-search"></i></a>';
+                return '
+                    <a target="_blank" href="'.route('frontend.alumniDetail', $data['user_id']).'"><i class="bi bi-search"></i></a>
+                ';
+                // return '
+                //     <button onclick="viewAlumni(`' . route('frontend.alumniDetail', $data['user_id']) . '`)" class="btn btn-primary btn-sm"><i class="bi bi-search"></i></button>
+                // ';
             })
             ->rawColumns(['foto', 'aksi'])
             ->make(true);
+    }
+
+    public function showFriendAlumni($id)
+    {
+        // $data = User::select('users.id', 'users.nama', 'users.email', 'users.foto', 'alumni.alamat', 'alumni.no_hp', 'alumni.banner_img', 'alumni.pekerjaan_sekarang', 'jobs_alumni.posisi', 'jobs_alumni.nama_perusahaan', 'jobs_alumni.tahun_masuk_bekerja', 'jobs_alumni.tahun_berhenti_bekerja')
+        // ->leftJoin('alumni', 'alumni.user_id', 'users.id')
+        // ->leftJoin('jobs_alumni', 'jobs_alumni.user_id', 'users.id')
+        // ->find($id);
+        
+        // return response()->json($data);
+
+        $data = User::find($id);
+        $dataAlumni = Alumni::where('user_id', $id)->first();
+        $profilLulusan = ProfilLulusanAlumni::where('user_id', $id)->first();
+        $riwayatKerja = JobsAlumni::where('user_id', $id)->get();
+        $pendidikan = ProfilLulusanAlumni::where('user_id', $id)->orderBy('angkatan', 'asc')->get();
+        $kompetensi = SkillAlumni::where('user_id', $id)->get();
+        $keahlian = KeahlianAlumni::where('user_id', $id)->get();
+        $postingan = PostAlumni::where('user_id', $id)->get();
+
+        return view('frontend.show_detail_alumni', compact('data', 'dataAlumni', 'profilLulusan', 'riwayatKerja', 'pendidikan', 'kompetensi', 'keahlian', 'postingan'));
     }
 
     public function viewFriendAlumni($id)

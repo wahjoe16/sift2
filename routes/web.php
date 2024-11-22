@@ -445,6 +445,7 @@ Route::group(['prefix' => '/alumnift'], function(){
         Route::get('/dashboard', [FrontendController::class, 'dashboard'])->name('dashboardFrontend.index');
         Route::get('a-portal-logout', [FrontendController::class, 'logout'])->name('frontend.logout');
         Route::match(['get', 'post'], '/profile-update/{slug}', [FrontendController::class, 'profileUpdate'])->name('frontend.profile-update');
+        Route::match(['get', 'put'], '/profile-edit/{id}', [FrontendController::class, 'profileEditLulusan'])->name('frontend.profile-edit');
         Route::post('/change-img-banner', [FrontendController::class, 'changeImageBannner'])->name('frontend.change-banner');
         Route::post('/change-profile-photo', [FrontendController::class, 'changeProfilePhoto'])->name('frontend.change-photo');
         Route::post('/post-create', [FrontendController::class, 'createPost'])->name('frontend.create-post');
