@@ -12,18 +12,18 @@
                     <div class="row mt-3">
                         <div class="col-md-6">
                             <label for="tahun_masuk_bekerja" class="form-label">Tahun Awal</label>
-                            <input type="number" class="form-control" id="tahun_masuk_bekerja" name="tahun_masuk_bekerja[]">
+                            <input type="number" class="form-control" id="tahun_masuk_bekerja" name="tahun_masuk_bekerja">
                         </div>
                         <div class="col-md-6">
                             <label for="tahun_berhenti_bekerja" class="form-label">Tahun Berakhir / Sekarang</label>
-                            <input type="number" class="form-control" id="tahun_berhenti_bekerja" name="tahun_berhenti_bekerja[]">
+                            <input type="number" class="form-control" id="tahun_berhenti_bekerja" name="tahun_berhenti_bekerja">
                         </div>
                     </div>
 
                     <div class="row mt-3">
                         <div class="col-md-6">
                             <label for="profesi_id" class="form-label">Profesi</label>
-                            <select name="profesi_id[]" id="profesi_id" class="form-control">
+                            <select name="profesi_id" id="profesi_id" class="form-control">
                                 <option value="">Pilih</option>
                                 @foreach ($profesi as $p)
                                 <option value="{{ $p->id }}">{{ $p->nama_profesi }}</option>
@@ -32,7 +32,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="jabatan_id" class="form-label">Jabatan (Fungsional)</label>
-                            <select name="jabatan_id[]" id="jabatan_id" class="form-control">
+                            <select name="jabatan_id" id="jabatan_id" class="form-control">
                                 <option value="">Pilih</option>
                                 @foreach ($jabatan as $j)
                                 <option value="{{ $j->id }}">{{ $j->nama_jabatan }}</option>
@@ -61,7 +61,7 @@
                     <div class="row mt-3">
                         <div class="col-md-6">
                             <label for="bidang_pekerjaan" class="form-label">Bidang Pekerjaan</label>
-                            <select name="bidang_pekerjaan[]" id="bidang_pekerjaan" class="form-control">
+                            <select name="bidang_pekerjaan" id="bidang_pekerjaan" class="form-control">
                                 <option value="">Pilih</option>
                                 @foreach ([
                                 "Pemerintahan"=>"Pemerintahan",
@@ -78,7 +78,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="posisi" class="form-label">Posisi Pekerjaan</label>
-                            <input type="text" name="posisi[]" id="posisi" class="form-control" placeholder="Misal: Manajer Property">
+                            <input type="text" name="posisi" id="posisi" class="form-control" placeholder="Misal: Manajer Property">
                         </div>
                         {{-- <div class="col-md-6">
                             <label for="subposisi" class="form-label">Sebagai</label>
@@ -91,13 +91,13 @@
                     <div class="row mt-3 mb-5">
                         <div class="col-md-6">
                             <label for="nama_perusahaan" class="form-label">Nama Perusahaan / Instansi</label>
-                            <textarea class="form-control" name="nama_perusahaan[]" id="nama_perusahaan" rows="3">
+                            <textarea class="form-control" name="nama_perusahaan" id="nama_perusahaan" rows="3">
                                 
                             </textarea>
                         </div>
                         <div class="col-md-6">
-                            <label for="alamat" class="form-label">Alamat Perusahaan / Instansi</label>
-                            <textarea class="form-control" name="alamat[]" id="alamat" rows="3">
+                            <label for="lokasi_perusahaan" class="form-label">Alamat Perusahaan / Instansi</label>
+                            <textarea class="form-control" name="lokasi_perusahaan" id="lokasi_perusahaan" rows="3">
                                 
                             </textarea>
                         </div>

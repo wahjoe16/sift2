@@ -339,6 +339,14 @@ class FrontendController extends Controller
         return redirect()->back()->with('success', 'Data riwayat pendidikan berhasil diperbarui');    
     }
 
+    public function profileEditPekerjaan(Request $request, $id)
+    {
+        $data = JobsAlumni::find($id);
+        $data->update($request->all());
+
+        return redirect()->back()->with('success', 'Data pekerjaan berhasil diperbarui');
+    }
+
     public function getJabatan($id)
     {
         $data = JabatanProfesi::where('profesi_id', $id)->pluck('nama_jabatan', 'id');

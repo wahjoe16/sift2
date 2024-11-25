@@ -28,10 +28,10 @@
                                         <input type="checkbox" name="select_all" id="select_all">
                                     </th> --}}
                                     <th width="7%">No</th>
-                                    <th>NPM</th>
                                     <th>Nama</th>
-                                    <th>Program Studi</th>
                                     <th>Email</th>
+                                    <th>Alamat</th>
+                                    <th>No Handphone</th>
                                     <th width="15%"><i class="fa fa-cogs"></i> Aksi</th>
                                 </tr>
                             </thead>
@@ -70,17 +70,17 @@
                     sortable: false
                 },
                 {
-                    data: 'nik'
-                },
-                {
                     data: 'nama'
-                },
-                {
-                    data: 'program_studi'
                 },
                 {
                     data: 'email',
                     defaultContent: 'N/A',
+                },
+                {
+                    data: 'alamat'
+                },
+                {
+                    data: 'no_hp'
                 },
                 {
                     data: 'aksi',

@@ -172,7 +172,7 @@
                                             <ul class="list-group list-group-flush">
                                                 @foreach ($jobsAlumni as $ja => $value)
                                                     <li class="list-group-item" style="margin-left: 5px;">
-                                                        <p class="card-text mt-3" style="font-size: 18px; font-weight: bold;"><i class="bi bi-buildings-fill"></i>&nbsp;&nbsp;{{ $value['posisi'] }}<span>&nbsp;&nbsp;<button onclick="" class="btn btn-xs ms-auto"><i class="bi bi-pencil"></i></button></span></p>
+                                                        <p class="card-text mt-3" style="font-size: 18px; font-weight: bold;"><i class="bi bi-buildings-fill"></i>&nbsp;&nbsp;{{ $value['posisi'] }}<span>&nbsp;&nbsp;<button onclick="editPekerjaan('{{ route('frontend.profile-edit-pekerjaan', $value['id']) }}')" class="btn btn-xs ms-auto"><i class="bi bi-pencil"></i></button></span></p>
                                                         <p class="card-text" style="font-size: 15px; font-weight: 300; margin-top: -15px; margin-left: 26px;">{{ $value['nama_perusahaan'] }}</p>
                                                         <p class="card-text" style="color: grey; font-size: 15px; font-weight: 300; margin-top: -15px; margin-left: 26px;">{{ $value['tahun_masuk_bekerja'] }} - {{ $value['tahun_berhenti_bekerja'] }}</p>
                                                     </li>
@@ -309,6 +309,30 @@
         $('#pekerjaan-form form')[0].reset();
         $('#pekerjaan-form form').attr('action', url);
         $('#pekerjaan-form [name=_method]').val('post');
+    }
+
+    function editPekerjaan(url) {
+        $('#pekerjaan-form').modal('show');
+        $('#pekerjaan-form .pekerjaan-title').text('Edit Data Pengalaman Pekerjaan'); 
+        
+        $('#pekerjaan-form form')[0].reset();
+        $('#pekerjaan-form form').attr('action', url);
+        $('#pekerjaan-form [name=_method]').val('put');
+
+        $.get(url)
+            .done((response) => {
+                $('#pekerjaan-form #tahun_masuk_bekerja').val(response.tahun_masuk_bekerja);
+                $('#pekerjaan-form #tahun_berhenti_bekerja').val(response.tahun_berhenti_bekerja);
+                $('#pekerjaan-form #profesi_id').val(response.profesi_id);
+                $('#pekerjaan-form #jabatan_id').val(response.jabatan_id);
+                $('#pekerjaan-form #bidang_pekerjaan').val(response.bidang_pekerjaan);
+                $('#pekerjaan-form #posisi').val(response.posisi);
+                $('#pekerjaan-form #nama_perusahaan').val(response.nama_perusahaan);
+                $('#pekerjaan-form #lokasi_perusahaan').val(response.lokasi_perusahaan);
+            })
+            .fail((errors) => {
+                alert('Tidak dapat mengambil data');
+            });
     }
 
     $('#pendidikan-form').validator().on('submit', function(e) {

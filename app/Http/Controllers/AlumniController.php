@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Imports\AlumniImport;
 use App\Models\Alumni;
+use App\Models\JobsAlumni;
+use App\Models\KeahlianAlumni;
+use App\Models\ProfilLulusanAlumni;
+use App\Models\SkillAlumni;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -12,12 +16,21 @@ class AlumniController extends Controller
 {
     public function index()
     {
+        // $data = User::select('users.id', 'users.nama', 'users.email', 'users.foto', 'alumni.alamat', 'alumni.no_hp')
+        // ->leftjoin('alumni', 'alumni.user_id', 'users.id')
+        // ->where([
+        //     'level' => 3,
+        //     'status_aktif' => 0
+        // ])->get();
+        // dd($data);
         return view('alumni.index');
     }
 
     public function data()
     {
-        $data = User::where([
+        $data = User::select('users.id', 'users.nama', 'users.email', 'alumni.alamat', 'alumni.no_hp')
+        ->leftjoin('alumni', 'alumni.user_id', 'users.id')
+        ->where([
             'level' => 3,
             'status_aktif' => 0
         ]);
@@ -72,9 +85,20 @@ class AlumniController extends Controller
 
     public function show($id)
     {
-        $data = User::find($id);
-        $alumni = Alumni::where('user_id', $id)->first();
-        return view('alumni.show', compact('data', 'alumni'));
+        $data = User::select(
+            'users.id', 'users.nama', 'users.email', 'users.foto', 
+            'alumni.alamat', 'alumni.no_hp', 'alumni.pekerjaan_sekarang', 'alumni.perusahaan_sekarang',
+        )
+        ->leftjoin('alumni', 'alumni.user_id', 'users.id')
+        ->find($id);
+
+        $dataPendidikan = ProfilLulusanAlumni::where('user_id', $id)->get();
+        $dataPekerjaan = JobsAlumni::where('user_id', $id)->get();
+        $dataKompetensi = SkillAlumni::where('user_id', $id)->get();
+        $dataKeahlian = KeahlianAlumni::where('user_id', $id)->get();
+        // dd($dataPendidikan);
+        // $alumni = Alumni::where('user_id', $id)->first();
+        return view('alumni.show', compact('data', 'dataPendidikan', 'dataPekerjaan', 'dataKompetensi', 'dataKeahlian'));
     }
 
     public function edit($id)
