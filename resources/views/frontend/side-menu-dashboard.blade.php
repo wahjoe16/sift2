@@ -40,7 +40,7 @@
         </div>
     </div>
     <br>
-    <div class="card">
+    {{-- <div class="card">
         <div class="card-body body-activity">
             <ul class="list-group">
                 <li class="list-group-item borderless"><i class="bi bi-newspaper" style="color: #3a9e66;"></i>&nbsp;&nbsp;Feed</li>
@@ -49,5 +49,5 @@
                 <li class="list-group-item borderless"><i class="bi bi-image-fill" style="color: #87036f;"></i>&nbsp;&nbsp;Media</li>
             </ul>
         </div>
-    </div>
+    </div> --}}
 </div>

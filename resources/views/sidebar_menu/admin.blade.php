@@ -30,8 +30,14 @@
     </a>
     <ul class="treeview-menu">
         <li>
-            <a href="{{ route('alumni.index') }}" @if(Session::get('page')=='indexArsip' ) style="background: #3c8dbc !important; color:white !important" @endif>
+            <a href="{{ route('alumni.index') }}" @if(Session::get('page')=='indexAlumni' ) style="background: #3c8dbc !important; color:white !important" @endif>
                 <i class="fa fa-database"></i> <span>Data Alumni</span>
+            </a>
+            <a href="{{ route('masukan-alumni.index') }}" @if(Session::get('page')=='indexAlumni' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                <i class="fa fa-long-arrow-down"></i> <span>Saran & Masukan Alumni</span>
+            </a>
+            <a href="{{ route('reset-password-alumni.index') }}" @if(Session::get('page')=='indexAlumni' ) style="background: #3c8dbc !important; color:white !important" @endif>
+                <i class="fa fa-unlock-alt"></i> <span>Permintaan Reset Password</span>
             </a>
         </li>
     </ul>

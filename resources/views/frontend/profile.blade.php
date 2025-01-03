@@ -138,7 +138,7 @@
                     <div class="tab-pane fade" id="nav-pendidikan" role="tabpanel" aria-labelledby="nav-pendidikan-tab">
                         <div class="mt-5">
                             <h5><i class="bi bi-mortarboard  icon-menu-profile" style="color: #0317fc"></i> Riwayat Pendidikan</h5>
-                            <button onclick="createPendidikan('{{ route('frontend.profile-update', 'lulusan') }}')" class="btn btn-success btn-sm mb-2 mt-2">TAMBAH DATA</button>
+                            <button onclick="createPendidikan('{{ route('frontend.profile-update', 'lulusan') }}')" class="btn btn-success btn-sm mb-2 mt-2"><i class="bi bi-plus-circle"></i>&nbsp;&nbsp;TAMBAH DATA</button>
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="card">
@@ -164,7 +164,7 @@
                     <div class="tab-pane fade" id="nav-jobs" role="tabpanel" aria-labelledby="nav-jobs-tab">
                         <div class="mt-5">
                             <h5><i class="bi bi-suitcase-lg icon-menu-profile" style="color: #fc4e03;"></i> Pengalaman Pekerjaan</h5>
-                            <button onclick="createPekerjaan('{{ route('frontend.profile-update', 'jobs') }}')" class="btn btn-success btn-sm mb-2 mt-2">TAMBAH DATA</button>
+                            <button onclick="createPekerjaan('{{ route('frontend.profile-update', 'jobs') }}')" class="btn btn-success btn-sm mb-2 mt-2"><i class="bi bi-plus-circle"></i>&nbsp;&nbsp;TAMBAH DATA</button>
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="card">
@@ -191,7 +191,7 @@
                     <div class="tab-pane fade" id="nav-kompetensi" role="tabpanel" aria-labelledby="nav-kompetensi-tab">
                         <div class="mt-5">
                             <h5><i class="bi bi-shield-plus icon-menu-profile" style="color: #87036f;"></i> Sertifikasi Kompetensi</h5>
-                            <button onclick="createKompetensi('{{ route('frontend.profile-update', 'kompetensi') }}')" class="btn btn-success btn-sm mb-2 mt-2">TAMBAH DATA</button>
+                            <button onclick="createKompetensi('{{ route('frontend.profile-update', 'kompetensi') }}')" class="btn btn-success btn-sm mb-2 mt-2"><i class="bi bi-plus-circle"></i>&nbsp;&nbsp;TAMBAH DATA</button>
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="card">
@@ -217,7 +217,7 @@
                     <div class="tab-pane fade" id="nav-skill" role="tabpanel" aria-labelledby="nav-skill-tab">
                         <div class="mt-5">
                             <h5><i class="bi bi-wrench-adjustable icon-menu-profile" style="color: #04d4c6;"></i> Keahlian</h5>
-                            <button onclick="createKeahlian('{{ route('frontend.profile-update', 'keahlian') }}')" class="btn btn-success btn-sm mb-2 mt-2">TAMBAH DATA</button>
+                            <button onclick="createKeahlian('{{ route('frontend.profile-update', 'keahlian') }}')" class="btn btn-success btn-sm mb-2 mt-2"><i class="bi bi-plus-circle"></i>&nbsp;&nbsp;TAMBAH DATA</button>
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="card">
@@ -243,8 +243,6 @@
             @elseif ($slug == 'password')
 
                 <h5><i class="bi bi-lock icon-menu-profile" style="color: #e61049;"></i> Ganti Password</h5>
-                <hr>
-                <p style="color: grey;">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate</p>
                 <hr>
                 <form action="{{ route('frontend.profile-update', 'password') }}" method="post">
                     @csrf
@@ -274,7 +272,7 @@
                         <button type="submit" class="btn btn-success btn-md">Simpan</button>
                     </div>
                 </form>
-
+    
             @endif
         </div>
     </div>

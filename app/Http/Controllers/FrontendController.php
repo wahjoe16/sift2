@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Charts\AngkatanAlumniChart;
-use App\Charts\BidangPekerjaanAlumniChart;
 use App\Models\Alumni;
 use App\Models\JabatanProfesi;
 use App\Models\JobsAlumni;
 use App\Models\KeahlianAlumni;
+use App\Models\MasukanAlumni;
+use App\Models\MediaSosialAlumni;
 use App\Models\Posisi;
 use App\Models\PostAlumni;
 use App\Models\ProfesiAlumni;
@@ -23,16 +23,45 @@ use Illuminate\Support\Facades\Hash;
 
 class FrontendController extends Controller
 {
-    public function portal(AngkatanAlumniChart $angkatanAlumniChart, BidangPekerjaanAlumniChart $bidangPekerjaanAlumniChart)
+    public function portal()
     {
         $data = ProfilLulusanAlumni::with('users')->where('jenjang', '=', 'S1')->get()->toArray();
+        $pieChart = JobsAlumni::get();
+        $dataBidang = [
+            $pieChart->where('bidang_pekerjaan', 'Pemerintahan')->count(),
+            $pieChart->where('bidang_pekerjaan', 'Pendidikan')->count(),
+            $pieChart->where('bidang_pekerjaan', 'Industri / Manufaktur')->count(),
+            $pieChart->where('bidang_pekerjaan', 'Pertambangan')->count(),
+            $pieChart->where('bidang_pekerjaan', 'Konsultan')->count(),
+            $pieChart->where('bidang_pekerjaan', 'Hiburan')->count(),
+            $pieChart->where('bidang_pekerjaan', 'Ritel')->count(),
+            $pieChart->where('bidang_pekerjaan', 'Kesehatan')->count(),
+            $pieChart->where('bidang_pekerjaan', 'Keuangan')->count(),
+            $pieChart->where('bidang_pekerjaan', 'Lingkungan Hidup')->count(),
+            $pieChart->where('bidang_pekerjaan', 'Pertanian')->count(),
+            $pieChart->where('bidang_pekerjaan', 'Perikanan')->count(),
+            $pieChart->where('bidang_pekerjaan', 'Teknologi Informasi')->count(),
+            $pieChart->where('bidang_pekerjaan', 'Lainnya')->count(),
+
+        ];
+
+        $dataProfesi = [
+            $pieChart->where('profesi_id', '1')->count(),
+            $pieChart->where('profesi_id', '2')->count(),
+            $pieChart->where('profesi_id', '3')->count(),
+            $pieChart->where('profesi_id', '4')->count(),
+            $pieChart->where('profesi_id', '5')->count(),
+            $pieChart->where('profesi_id', '6')->count(),
+            $pieChart->where('profesi_id', '7')->count(),
+            $pieChart->where('profesi_id', '8')->count()
+        ];
+
         $alumni = Alumni::get();
         $jobs = Alumni::get();
-        // dd($alumni);
+        // dd($dataProfesi);
         return view('frontend.home', [
             'data' => $data, 'jobs' => $jobs, 'alumni' => $alumni,
-            'angkatanAlumniChart' => $angkatanAlumniChart->build(),
-            'bidangPekerjaanAlumniChart' => $bidangPekerjaanAlumniChart->build()
+            'dataBidang' => $dataBidang, 'dataProfesi' => $dataProfesi
         ]);
     }
 
@@ -85,8 +114,8 @@ class FrontendController extends Controller
                 return redirect()->back()->with('error', 'Registrasi gagal, silahkan coba lagi');
             }
 
-            return redirect()->back()->with('success', 'Registrasi berhasil, anda sudah terdaftar! Silahkan Sign-in untuk melanjutkan');
-            }
+            return redirect()->back()->with('success_regist', 'Registrasi berhasil, anda sudah terdaftar! Silahkan Sign-in untuk melanjutkan');
+        }
     }
 
     public function login(Request $request)
@@ -122,10 +151,9 @@ class FrontendController extends Controller
         return view('frontend.dashboard', compact('dataUser', 'dataAlumni', 'alumni', 'listAlumni', 'postingan', 'profilLulusan'));
     }
 
-    public function profileUpdate($slug, Request $request)
+    public function profileUpdate($slug, Request $request, $id = null)
     {
         $user = User::where('id', Auth::guard('alumni')->user()->id)->first();
-        // dd($user);
 
         if ($slug == 'profil') {
             
@@ -316,7 +344,7 @@ class FrontendController extends Controller
                     return redirect()->back()->with('success', 'Password user berhasil diubah!');
                 }
             }
-        }
+        } 
 
         $dataAlumni = Alumni::where('user_id', Auth::guard('alumni')->user()->id)->first();
         $profilAlumni = ProfilLulusanAlumni::where('user_id', Auth::guard('alumni')->user()->id)->first();
@@ -329,6 +357,40 @@ class FrontendController extends Controller
         // dd($jobsAlumni);
 
         return view('frontend.profile', compact('slug', 'dataAlumni', 'jobsAlumni', 'skillAlumni', 'keahlianAlumni','profilLulusan', 'profilAlumni', 'profesi', 'jabatan'));
+    }
+
+    public function medsosUpdate(Request $request)
+    {
+        $dataAlumni = Alumni::where('user_id', Auth::guard('alumni')->user()->id)->first();
+        $dataMedsos = MediaSosialAlumni::where('user_id', Auth::guard('alumni')->user()->id)->first();
+        // dd($dataMedsos);       
+                        
+        if ($request->isMethod('POST')) {
+            
+            if ($dataMedsos == '') {
+                $medsos = new MediaSosialAlumni();
+                $medsos->user_id = Auth::guard('alumni')->user()->id;
+                $medsos->link_linkedin = $request->link_linkedin;
+                $medsos->link_instagram = $request->link_instagram;
+                $medsos->link_twitter = $request->link_twitter;
+                $medsos->link_facebook = $request->link_facebook;
+                $medsos->link_youtube = $request->link_youtube;
+                $medsos->link_website = $request->link_website;
+                $medsos->save();
+            } else {
+                $dataMedsos->link_linkedin = $request->link_linkedin;
+                $dataMedsos->link_instagram = $request->link_instagram;
+                $dataMedsos->link_twitter = $request->link_twitter;
+                $dataMedsos->link_facebook = $request->link_facebook;
+                $dataMedsos->link_youtube = $request->link_youtube;
+                $dataMedsos->link_website = $request->link_website;
+                $dataMedsos->save();
+            }
+            
+            return redirect()->back()->with('success', 'Data media sosial berhasil diperbarui');
+        }   
+
+        return view('frontend.medsos', compact('dataAlumni', 'dataMedsos'));   
     }
 
     public function profileEditLulusan(Request $request, $id)
@@ -531,6 +593,28 @@ class FrontendController extends Controller
         $postingan = PostAlumni::where('user_id', $id)->get();
         // dd($pendidikan);
         return view('frontend.view_detail_alumni', compact('data', 'dataAlumni', 'profilLulusan', 'riwayatKerja', 'pendidikan', 'kompetensi', 'keahlian', 'postingan'));
+    }
+
+    public function createMasukanAlumni(Request $request)
+    {
+        if ($request->isMethod('POST')) {
+            $this->validate($request, [
+                'masukan_fakultas' => 'required',
+                'masukan_aplikasi' => 'required',
+            ]);
+
+
+            MasukanAlumni::create([
+                'user_id' => Auth::guard('alumni')->user()->id,
+                'masukan_fakultas' => $request->masukan_fakultas,
+                'masukan_aplikasi' => $request->masukan_aplikasi
+            ]);
+
+            return redirect()->back()->with('success', 'Masukan berhasil disimpan!');
+        }
+
+        $data = MasukanAlumni::get();
+        return view('frontend.masukan-alumni', compact('data'));
     }
 
     public function logout()

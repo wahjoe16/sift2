@@ -70,6 +70,13 @@
                                 "Pertambangan"=>"Pertambangan",
                                 "Konsultan"=>"Konsultan",
                                 "Hiburan"=>"Hiburan",
+                                "Kesehatan"=>"Kesehatan",
+                                "Keuangan"=>"Keuangan",
+                                "Lingkungan Hidup"=>"Lingkungan Hidup",
+                                "Pertanian"=>"Pertanian",
+                                "Perikanan"=>"Perikanan",
+                                "Ritel" => "Ritel",
+                                "Teknologi Informasi"=>"Teknologi Informasi",
                                 "Lainnya"=>"Lainnya",
                                 ] as $bidang_pekerjaan => $bidang_pekerjaanLabel)
                                 <option value="{{ $bidang_pekerjaan }}">{{ $bidang_pekerjaanLabel }}</option>

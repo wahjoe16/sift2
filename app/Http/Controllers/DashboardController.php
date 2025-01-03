@@ -52,7 +52,7 @@ class DashboardController extends Controller
 
     public function dataMahasiswa()
     {
-        $data = User::where('level', 3)->orderBy('nik', 'ASC')->get();
+        $data = User::where(['level' => 3, 'status_aktif' => 1])->orderBy('nik', 'DESC')->get();
 
         return datatables()
             ->of($data)

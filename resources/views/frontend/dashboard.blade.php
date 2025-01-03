@@ -33,8 +33,8 @@
         </div>
         <div class="col-lg-3">
             <div class="card">
-                <div class="card-header">
-                    Para alumni FT
+                <div class="card-header text-center">
+                    Alumni FT
                 </div>
                 <div class="card-body">
                     @foreach ($listAlumni as $la)
@@ -44,9 +44,11 @@
                             @else
                                 <img class="rounded-circle" src="{{ asset('user/foto/user.png') }}" alt="">
                             @endif
-                            <div class="member-caption">
+                            <div class="member-caption mb-5">
                                 <h6><a href="{{ route('frontend.view-friend-alumni', $la['id']) }}">{{ $la->nama }}</a></h6>
-                                <p><small class="text-body-secondary">Ikuti</small></p>
+                                @if ($la->pekerjaan_sekarang != '')
+                                    <p><small class="text-body-secondary">{{ $la->pekerjaan_sekarang }} di {{ $la->perusahaan_sekarang }}</small></p>
+                                @endif
                             </div>
                         </div>
                     @endforeach

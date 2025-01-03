@@ -56,6 +56,9 @@
                                 <form action="{{ route('frontend.login') }}" method="post">@csrf
                                     <input type="email" name="email" class="form-control form-control-lg rounded-pill" placeholder="Email">
                                     <input type="password" name="password" class="form-control form-control-lg rounded-pill" placeholder="Kata Sandi">
+                                    <div class="mt-2 mb-2 text-end">
+                                        <a href="{{ route('forgot.password.form') }}">Lupa Kata Sandi?</a>
+                                    </div>
                                     <br>
                                     <div class="d-grid gap-2">
                                         <button class="btn btn-info text-white rounded-pill" type="submit">Sign in</button>
@@ -66,10 +69,40 @@
                     </div>
                 </div>
                 <div class="row text-center mt-5">
-                    <div class="col-md-12">
+                    <div class="col-md-8 ms-auto me-auto">
                         @includeIf('layouts.alert')
                     </div>
         
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="angkatan-chart">
+        <div class="feature-content">
+            <div class="container">
+                <h2>Presentasi Pekerjaan</h2>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card-group">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 style="line-height: 40px; text-align:center; color: grey;" class="">Bidang Pekerjaan</h4>
+                                </div>
+                                <div class="card-body" style="height: 500px;">
+                                    <canvas id="myChartBidangPekerjaan"></canvas>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 style="line-height: 40px; text-align:center; color: grey;" class="">Profesi</h4>
+                                </div>
+                                <div class="card-body" style="height: 500px;">
+                                    <canvas id="myChartProfesiPekerjaan"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -98,47 +131,89 @@
         </div>
     </section>
 
-    <section id="angkatan-chart">
-        <div class="feature-content">
-            <div class="container">
-                <h2>Presentasi Pekerjaan</h2>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card-group">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 style="line-height: 40px; text-align:center; color: grey;" class="">Presentasi Jenis Pekerjaan Alumni</h4>
-                                </div>
-                                <div class="card-body">
-                                    {!! $angkatanAlumniChart->container() !!}
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 style="line-height: 40px; text-align:center; color: grey;" class="">Presentasi Bidang Pekerjaan Alumni</h4>
-                                </div>
-                                <div class="card-body">
-                                    {!! $bidangPekerjaanAlumniChart->container() !!}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    {{-- @includeIf('frontend.modal-form.view_profile') --}}
-
-    <script src="{{ $angkatanAlumniChart->cdn() }}"></script>
-    <script src="{{ $bidangPekerjaanAlumniChart->cdn() }}"></script>
-
-    {{ $angkatanAlumniChart->script() }}
-    {{ $bidangPekerjaanAlumniChart->script() }}
+    {{-- @includeIf('frontend.modal-form.view_profile') --}}   
 
 @endsection
 
 @push('login-register_scripts')
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+
+        var namaBidang = [
+            'Pemerintahan', 'Pendidikan', 'Industri / Manufaktur', 'Pertambangan', 'Konsultan', 'Hiburan', 
+            'Ritel', 'Kesehatan', 'Keuangan', 'Lingkungan Hidup', 'Pertanian', 'Perikanan', 'Teknologi Informasi', 'Lainnya'
+        ];
+
+        var color = [
+            '#026dc4', '#06b8a9', '#065903', '#f5d505', '#004b6b', '#ab5102', '#e80000',
+            '#87db42','#09de14','#1bf7f3','#7e1bf7','#8c0088','#e80074','#bdc7c0'
+        ];
+
+        var dataBidangValues = @json(array_values($dataBidang));
+        console.log(dataBidangValues);
+        console.log(namaBidang);
+
+        const ctx = document.getElementById('myChartBidangPekerjaan');
+
+        const data = {
+            labels: namaBidang,
+            datasets: [{
+                label: 'Bidang Pekerjaan Alumni',
+                data: dataBidangValues,
+                backgroundColor: color,
+                hoverOffset: 4
+            }]
+        };
+
+        new Chart(ctx, {
+            type: 'pie',
+            data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+            }
+        });
+
+    </script>
+
+    <script>
+
+        var namaProfesi = ['ASN/BUMN', 'TNI', 'POLRI', 'Dosen', 'Guru' ,'Pegawai Swasta', 'Berwirausaha', 'Ibu Rumah Tangga'];
+
+        var colorProfesi = ['#026dc4', '#06b8a9', '#71eb34', '#f5d505', '#f25c11', '#cc1dba', '#e80000', '#bdc7c0'];
+
+        var dataProfesiValues = @json(array_values($dataProfesi));
+
+        const ctx2 = document.getElementById('myChartProfesiPekerjaan');
+
+        const data2 = {
+            labels: namaProfesi,
+            datasets: [{
+                label: 'Profesi Alumni',
+                data: dataProfesiValues,
+                backgroundColor: colorProfesi,
+                hoverOffset: 4
+            }]
+        };
+
+        new Chart(ctx2, {
+            type: 'pie',
+            data: data2,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: false
+                    }
+                }
+            }
+        });
+
+    </script>
     {{-- <script>
         $(document).ready(function(){
             // register alumni with ajax

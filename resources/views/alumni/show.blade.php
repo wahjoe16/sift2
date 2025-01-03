@@ -64,6 +64,7 @@
                             <li><a href="#tab_2" data-toggle="tab">Pengalaman Pekerjaan</a></li>
                             <li><a href="#tab_3" data-toggle="tab">Kompetensi</a></li>
                             <li><a href="#tab_4" data-toggle="tab">Keahlian</a></li>
+                            <li><a href="#tab_5" data-toggle="tab">Media Sosial</a></li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab_1">
@@ -117,6 +118,77 @@
                                             <p><i class="fa fa-wrench"></i>&nbsp;<span><b>{{ $dkh->keahlian }}</b></span><br></p>
                                         </li>
                                     @endforeach
+                                </ul>
+                            </div>
+                            <div class="tab-pane" id="tab_5">
+                                <ul class="list-group list-group-unbordered">
+                                    @if (is_null($dataMedsos))
+                                        <li class="list-group-item">
+                                            <p><i class="fa fa-linkedin-square"></i>&nbsp;<span><b>Linked In</b></span><br></p>
+                                            <p><i class="fa fa-link"></i>&nbsp;&nbsp;-<br></p>
+                                        </li>
+                                    @else
+                                        <li class="list-group-item">
+                                            <p><i class="fa fa-linkedin-square"></i>&nbsp;<span><b>Linked In</b></span><br></p>
+                                            <p><i class="fa fa-link"></i>&nbsp;&nbsp;{{ $dataMedsos->link_linkedin }}<br></p>
+                                        </li>
+                                    @endif
+                                    @if (is_null($dataMedsos))
+                                        <li class="list-group-item">
+                                            <p><i class="fa fa-instagram"></i>&nbsp;<span><b>Instagram</b></span><br></p>
+                                            <p><i class="fa fa-link"></i>&nbsp;&nbsp;-<br></p>
+                                        </li>
+                                    @else
+                                        <li class="list-group-item">
+                                            <p><i class="fa fa-instagram"></i>&nbsp;<span><b>Instagram</b></span><br></p>
+                                            <p><i class="fa fa-link"></i>&nbsp;&nbsp;{{ $dataMedsos->link_instagram }}<br></p>
+                                        </li>
+                                    @endif
+                                    @if (is_null($dataMedsos))
+                                        <li class="list-group-item">
+                                            <p><i class="fa fa-facebook-square"></i>&nbsp;<span><b>Facebook</b></span><br></p>
+                                            <p><i class="fa fa-link"></i>&nbsp;&nbsp;-<br></p>
+                                        </li>
+                                    @else
+                                        <li class="list-group-item">
+                                            <p><i class="fa fa-facebook-square"></i>&nbsp;<span><b>Facebook</b></span><br></p>
+                                            <p><i class="fa fa-link"></i>&nbsp;&nbsp;{{ $dataMedsos->link_facebook }}<br></p>
+                                        </li>
+                                    @endif
+                                    @if (is_null($dataMedsos))
+                                        <li class="list-group-item">
+                                            <p><i class="fa fa-twitter-square"></i>&nbsp;<span><b>Twitter X</b></span><br></p>
+                                            <p><i class="fa fa-link"></i>&nbsp;&nbsp;-<br></p>
+                                        </li>
+                                    @else
+                                        <li class="list-group-item">
+                                            <p><i class="fa fa-twitter-square"></i>&nbsp;<span><b>Twitter X</b></span><br></p>
+                                            <p><i class="fa fa-link"></i>&nbsp;&nbsp;{{ $dataMedsos->link_twitter }}<br></p>
+                                        </li>
+                                    @endif
+                                    @if (is_null($dataMedsos))
+                                        <li class="list-group-item">
+                                            <p><i class="fa fa-youtube-play"></i>&nbsp;<span><b>Youtube</b></span><br></p>
+                                            <p><i class="fa fa-link"></i>&nbsp;&nbsp;-<br></p>
+                                        </li>
+                                    @else
+                                        <li class="list-group-item">
+                                            <p><i class="fa fa-youtube-play"></i>&nbsp;<span><b>Youtube</b></span><br></p>
+                                            <p><i class="fa fa-link"></i>&nbsp;&nbsp;{{ $dataMedsos->link_youtube }}<br></p>
+                                        </li>
+                                    @endif
+                                    @if (is_null($dataMedsos))
+                                        <li class="list-group-item">
+                                            <p><i class="fa fa-globe"></i>&nbsp;<span><b>Personal Website</b></span><br></p>
+                                            <p><i class="fa fa-link"></i>&nbsp;&nbsp;-<br></p>
+                                        </li>
+                                    @else
+                                        <li class="list-group-item">
+                                            <p><i class="fa fa-globe"></i>&nbsp;<span><b>Personal Website</b></span><br></p>
+                                            <p><i class="fa fa-link"></i>&nbsp;&nbsp;{{ $dataMedsos->link_website }}<br></p>
+                                        </li>
+                                    @endif
+                                    
                                 </ul>
                             </div>
                         </div>

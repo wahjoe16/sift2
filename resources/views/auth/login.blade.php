@@ -13,7 +13,7 @@
                     <form method="post" action="{{ route('login') }}">@csrf
                         <div class="form-group first">
                             <label for="username">EMAIL/NIK/NPM</label>
-                            <input type="text" class="form-control @error('auth') is-invalid @enderror" id="auth" name="auth" :value="old('auth'" required>
+                            <input type="text" class="form-control @error('auth') is-invalid @enderror" id="auth" name="auth" :value="old('auth')" required>
                             @error('auth')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -42,9 +42,12 @@
                             @endif
                         </div> -->
 
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary btn-block">
                             {{ __('Login') }}
                         </button>
+                        <div style="padding: 20px; 0;">
+                            <a href="{{ route('frontend.portal') }}">Sistem Informasi Database Alumni FT</a>
+                        </div>
                     </form>
                 </div>
             </div>

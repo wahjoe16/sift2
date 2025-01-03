@@ -29,6 +29,8 @@
                                             <td>
                                                 @if ($d->status_skkft == 1)
                                                     <span class="label label-success">Disetujui</span>
+                                                @elseif ($d->status_skkft == 0)
+                                                    <span class="label label-warning text-black">Waiting for approval</span>
                                                 @else
                                                     <span class="label label-danger">Ditolak</span>
                                                 @endif
@@ -58,7 +60,7 @@
                                                         Poin Sudah Mencapai Bobot Minimal ({{$pk['bobotnya']}}% Dari 150 Poin)
                                                     </div>
                                                     @else
-                                                    <div class="alert alert-warning alert-dismissible">
+                                                    <div class="alert alert-warning alert-dismissible text-black">
                                                         Poin Belum Mencapai Bobot Minimal ({{$pk['bobotnya']}}% Dari 150 Poin)
                                                     </div>
                                                 @endif
@@ -80,6 +82,12 @@
                                                 ($poinKategori['5']['poin'] >= 15) &&
                                                 ($poinKategori['6']['poin'] >= 15)
                                             )
+                                                <td colspan="4" class="text-center">
+                                                    <form action="{{ route('sertifikat.store') }}" method="POST">@csrf
+                                                        <button type="submit" class="btn btn-flat btn-md btn-success">Ajukan Sertifikat</button>
+                                                    </form>
+                                                </td>
+                                            @elseif (is_null($dataSertifikat) && $totalPoin >= 400 && $userS2)
                                                 <td colspan="4" class="text-center">
                                                     <form action="{{ route('sertifikat.store') }}" method="POST">@csrf
                                                         <button type="submit" class="btn btn-flat btn-md btn-success">Ajukan Sertifikat</button>

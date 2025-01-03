@@ -15,6 +15,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DependenDropdownController;
 use App\Http\Controllers\DownloadSeminarController;
 use App\Http\Controllers\DownloadSidangController;
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\JabatanProfesiController;
 use App\Http\Controllers\JabatanSkkftController;
@@ -52,6 +53,11 @@ use Maatwebsite\Excel\Row;
 */
 
 Route::get('/', fn () => redirect()->route('login'));
+
+Route::get('password/forgot', [ForgotPasswordController::class, 'showForgotForm'])->name('forgot.password.form');
+Route::post('password/forgot', [ForgotPasswordController::class, 'sendResetLink'])->name('forgot.password.link');
+Route::get('password/reset/{token}', [ForgotPasswordController::class,'showResetForm'])->name('reset.password.form');
+
 
 Route::group(['middleware' => 'ceklevel:1,2,3'], function () {
 
@@ -120,7 +126,8 @@ Route::group(['prefix' => '/datamaster'], function () {
         Route::resource('/alumni', AlumniController::class)->except(['index', 'show']);
         Route::get('/alumni/page/import', [AlumniController::class, 'importPageAlumni'])->name('alumni.import-page');
         Route::post('/alumni/import', [AlumniController::class, 'importAlumni'])->name('alumni.import');
-        Route::post('/alumni/reset-pwd/{id}', [AlumniController::class, 'resetPwd'])->name('alumni.reset-password');
+        Route::get('/alumni/reset-pwd/{id}', [ForgotPasswordController::class, 'viewResetPwd'])->name('alumni.reset-password');
+        Route::post('/alumni/reset-pwd/{id}', [ForgotPasswordController::class, 'storeResetPwd'])->name('alumni.store-reset-password');
         // CRUD SEMESTER
         Route::resource('/semester', SemesterController::class);
         Route::get('/semester-data', [SemesterController::class, 'data'])->name('semester.data');
@@ -152,7 +159,6 @@ Route::group(['prefix' => '/datamaster'], function () {
 
         Route::resource('/profesi-alumni', ProfesiAlumniController::class);
         Route::resource('/jabatan-profesi', JabatanProfesiController::class);
-        
         
         // view pelaksanaan seminar
         Route::get('pelaksanaan-sidang/pembahasan-pwk', [ApproveSeminarController::class, 'viewAdminPwk'])->name('adminPembahasanPwk.index');
@@ -187,6 +193,8 @@ Route::group(['prefix' => '/datamaster'], function () {
         Route::get('/alumni', [AlumniController::class, 'index'])->name('alumni.index');
         Route::get('/alumni-data', [AlumniController::class, 'data'])->name('alumni.data');
         Route::get('/alumni/{id}', [AlumniController::class, 'show'])->name('alumni.show');
+        Route::get('/masukan-alumni', [AlumniController::class, 'indexMasukan'])->name('masukan-alumni.index');
+        Route::get('/reset_password-alumni', [ForgotPasswordController::class, 'indexResetPassword'])->name('reset-password-alumni.index');
     });
    
 });
@@ -445,6 +453,7 @@ Route::group(['prefix' => '/alumnift'], function(){
         Route::get('/dashboard', [FrontendController::class, 'dashboard'])->name('dashboardFrontend.index');
         Route::get('a-portal-logout', [FrontendController::class, 'logout'])->name('frontend.logout');
         Route::match(['get', 'post'], '/profile-update/{slug}', [FrontendController::class, 'profileUpdate'])->name('frontend.profile-update');
+        Route::match(['get', 'post'], '/medsos-update', [FrontendController::class, 'medsosUpdate'])->name('frontend.medsos-update');
         Route::match(['get', 'put'], '/profile-edit/{id}', [FrontendController::class, 'profileEditLulusan'])->name('frontend.profile-edit');
         Route::match(['get', 'put'], '/profile-edit-pekerjaan/{id}', [FrontendController::class, 'profileEditPekerjaan'])->name('frontend.profile-edit-pekerjaan');
         Route::post('/change-img-banner', [FrontendController::class, 'changeImageBannner'])->name('frontend.change-banner');
@@ -452,6 +461,7 @@ Route::group(['prefix' => '/alumnift'], function(){
         Route::post('/post-create', [FrontendController::class, 'createPost'])->name('frontend.create-post');
         Route::get('/list-friend-alumni', [FrontendController::class, 'listFriendAlumni'])->name('frontend.list-friend-alumni');
         Route::get('/view-friend-alumni/{id}', [FrontendController::class, 'viewFriendAlumni'])->name('frontend.view-friend-alumni');
+        Route::match(['get', 'post'], '/masukan-alumni', [FrontendController::class, 'createMasukanAlumni'])->name('frontend.create-masukan-alumni');
     });
 });
 

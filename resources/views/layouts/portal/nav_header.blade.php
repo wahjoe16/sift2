@@ -55,7 +55,10 @@
                             <a href="{{ route('frontend.profile-update', 'profil') }}" class="btn btn-default btn-flat"><i class="bi bi-person-lines-fill"></i>&nbsp;&nbsp;&nbsp;update profil</a>
                         </li>
                         <li>
-                            <a href="{{ route('frontend.logout') }}" class="btn btn-default btn-flat"><i class="bi bi-box-arrow-left"></i>&nbsp;&nbsp;&nbsp;sign out</a>
+                            <a href="{{ route('frontend.create-masukan-alumni') }}" class="btn btn-default btn-flat"><i class="bi bi-box-arrow-down"></i>&nbsp;&nbsp;&nbsp;masukan</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('frontend.logout') }}" class="btn btn-default btn-flat"><i class="bi bi-power"></i>&nbsp;&nbsp;&nbsp;sign out</a>
                         </li>
                         
                     </ul>

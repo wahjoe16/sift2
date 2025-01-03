@@ -10,6 +10,7 @@ use App\Models\SertifikatSkkft;
 use App\Models\Skpi;
 use App\Models\SubcategorySkkft;
 use App\Models\Tingkat;
+use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -244,6 +245,12 @@ class KegiatanSkkftController extends Controller
         // $text = "Apakah anda Yakin?";
         // confirmDelete($title, $text);
         $data = Kegiatan::where('user_id', auth()->user()->id)->get();
+        // $userS2 = User::where([
+        //     'level' => 3,
+        //     'program_studi' => 'Magister Perencanaan Wilayah dan Kota',
+        //     'status_aktif' => 1,
+        // ])->get();
+        $userS2 = auth()->user()->program_studi == 'Magister Perencanaan Wilayah dan Kota';
         $dataSertifikat = SertifikatSkkft::where('user_id', auth()->user()->id)->first();
         $dataSkpi = Skpi::where('user_id', auth()->user()->id)->first();
         $statusSertifikatSkkft = SertifikatSkkft::where('user_id', auth()->user()->id)->first();
@@ -287,7 +294,7 @@ class KegiatanSkkftController extends Controller
             ];
         }
 
-        return view('kegiatan_skkft.summary', compact('data', 'dataSertifikat', 'dataSkpi' , 'statusSertifikatSkkft', 'dataPoin', 'poinKategori', 'totalPoin'));
+        return view('kegiatan_skkft.summary', compact('data', 'userS2', 'dataSertifikat', 'dataSkpi' , 'statusSertifikatSkkft', 'dataPoin', 'poinKategori', 'totalPoin'));
     }
 
     public function dataSkkft()

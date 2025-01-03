@@ -32,7 +32,9 @@
                                 @foreach ([
                                 "Teknik Pertambangan"=>"Teknik Pertambangan",
                                 "Perencanaan Wilayah dan Kota"=>"Perencanaan Wilayah dan Kota",
-                                "Teknik Industri"=>"Teknik Industri"
+                                "Teknik Industri"=>"Teknik Industri",
+                                "Magister Perencanaan Wilayah dan Kota"=>"Magister Perencanaan Wilayah dan Kota",
+                                "Program Profesi Insinyur"=>"Program Profesi Insinyur",
                                 ] as $programStudi => $prodiLabel)
                                 <option value="{{ $programStudi }}">{{ $prodiLabel }}</option>
                                 @endforeach

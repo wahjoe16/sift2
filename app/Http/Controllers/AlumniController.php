@@ -6,6 +6,8 @@ use App\Imports\AlumniImport;
 use App\Models\Alumni;
 use App\Models\JobsAlumni;
 use App\Models\KeahlianAlumni;
+use App\Models\MasukanAlumni;
+use App\Models\MediaSosialAlumni;
 use App\Models\ProfilLulusanAlumni;
 use App\Models\SkillAlumni;
 use App\Models\User;
@@ -16,13 +18,6 @@ class AlumniController extends Controller
 {
     public function index()
     {
-        // $data = User::select('users.id', 'users.nama', 'users.email', 'users.foto', 'alumni.alamat', 'alumni.no_hp')
-        // ->leftjoin('alumni', 'alumni.user_id', 'users.id')
-        // ->where([
-        //     'level' => 3,
-        //     'status_aktif' => 0
-        // ])->get();
-        // dd($data);
         return view('alumni.index');
     }
 
@@ -41,9 +36,10 @@ class AlumniController extends Controller
             ->addColumn('aksi', function ($data){
                 return '
                     <div class="btn-group">
-                        <a href="'.route('alumni.show', $data->id).'" class="btn btn-flat btn-info"><i class="fa fa-search"></i></a>
-                        <a href="'.route('alumni.edit', $data->id).'" class="btn btn-flat btn-warning"><i class="fa fa-edit"></i></a>
-                        <a href="'.route('alumni.destroy', $data->id).'" class="btn btn-flat btn-danger"><i class="fa fa-trash"></i></a>
+                        <a href="'.route('alumni.show', $data->id).'" class="btn btn-sm btn-info"><i class="fa fa-search"></i></a>
+                        <a href="'.route('alumni.edit', $data->id).'" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+                        <a href="'.route('alumni.destroy', $data->id).'" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                        <a href="'.route('alumni.reset-password', $data->id).'" class="btn btn-sm btn-primary"><i class="fa fa-unlock-alt"></i></a>
                     </div>
                 ';
             })
@@ -96,9 +92,16 @@ class AlumniController extends Controller
         $dataPekerjaan = JobsAlumni::where('user_id', $id)->get();
         $dataKompetensi = SkillAlumni::where('user_id', $id)->get();
         $dataKeahlian = KeahlianAlumni::where('user_id', $id)->get();
-        // dd($dataPendidikan);
+        $dataMedsos = MediaSosialAlumni::where('user_id', $id)->first();
+        // dd($dataMedsos);
         // $alumni = Alumni::where('user_id', $id)->first();
-        return view('alumni.show', compact('data', 'dataPendidikan', 'dataPekerjaan', 'dataKompetensi', 'dataKeahlian'));
+        return view('alumni.show', compact('data', 'dataPendidikan', 'dataPekerjaan', 'dataKompetensi', 'dataKeahlian', 'dataMedsos'));
+    }
+
+    public function indexMasukan()
+    {
+        $data = MasukanAlumni::get();
+        return view('alumni.index_masukan', compact('data'));
     }
 
     public function edit($id)
@@ -148,6 +151,7 @@ class AlumniController extends Controller
         return redirect()->route('alumni.index')->with('success', 'Data alumni berhasil diimport!');
     }
 
+    /* ===
     public function resetPwd($id)
     {
         $data = User::find($id);
@@ -156,6 +160,7 @@ class AlumniController extends Controller
 
         return redirect()->route('alumni.index')->with('success', 'Password alumni berhasil diubah!');
     }
+    === */
 
     public function showEdit(Request $request)
     {
