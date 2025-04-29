@@ -30,6 +30,7 @@
                             @enderror
                         </div>
 
+                        <input type="checkbox" onclick="showHide()"> Tampilkan Password
                         <!-- <div class="d-flex mb-5 align-items-center">
                             <label class="control control--checkbox mb-0"><span class="caption">Remember me</span>
                                 <input type="checkbox" checked="checked" />
@@ -41,7 +42,7 @@
                             </a>
                             @endif
                         </div> -->
-
+                        <br><br>
                         <button type="submit" class="btn btn-primary btn-block">
                             {{ __('Login') }}
                         </button>
@@ -56,3 +57,16 @@
 </div>
 
 @endsection
+
+@push('login_script')
+    <script>
+        function showHide() {
+            var x = document.getElementById("password");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
+@endpush

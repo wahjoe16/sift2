@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Alumni;
+use App\Models\CommentPost;
 use App\Models\JabatanProfesi;
 use App\Models\JobsAlumni;
 use App\Models\KeahlianAlumni;
@@ -146,7 +147,8 @@ class FrontendController extends Controller
             'level' => 3, 
             'status_aktif' => 0
         ])->where('id', '!=', Auth::guard('alumni')->user()->id)->orderBy('id', 'desc')->paginate(5);
-        $postingan = PostAlumni::with('users')->orderBy('id', 'desc')->get()->toArray();
+        $postingan = PostAlumni::with('users')->latest()->get();
+        // $post = PostAlumni::find($id);
         // dd($dataAlumni);
         return view('frontend.dashboard', compact('dataUser', 'dataAlumni', 'alumni', 'listAlumni', 'postingan', 'profilLulusan'));
     }
@@ -233,29 +235,25 @@ class FrontendController extends Controller
         } elseif ($slug == 'jobs') {          
 
             if ($request->isMethod('POST')) {
+                
+                $jobs = new JobsAlumni();
+                $jobs->user_id = $user->id;
+                $jobs->tahun_masuk_bekerja = $request['tahun_masuk_bekerja'];
+                $jobs->tahun_berhenti_bekerja = $request['tahun_berhenti_bekerja'];
+                // $jobs->jenis_pekerjaan = $request['jenis_pekerjaan'];
+                $jobs->bidang_pekerjaan = $request['bidang_pekerjaan'];
+                $jobs->profesi_id = $request['profesi_id'];
+                $jobs->posisi = $request['posisi'];
 
-                foreach ($request['tahun_masuk_bekerja'] as $key => $value) {
-                    if (!empty($value)) {
-                        $jobs = new JobsAlumni();
-                        $jobs->user_id = $user->id;
-                        $jobs->tahun_masuk_bekerja = $value;
-                        $jobs->tahun_berhenti_bekerja = $request['tahun_berhenti_bekerja'][$key];
-                        // $jobs->jenis_pekerjaan = $request['jenis_pekerjaan'][$key];
-                        $jobs->bidang_pekerjaan = $request['bidang_pekerjaan'][$key];
-                        $jobs->profesi_id = $request['profesi_id'][$key];
-                        $jobs->posisi = $request['posisi'][$key];
-
-                        if ($request['jabatan_id'] != '') {
-                            $jobs->jabatan_id = $request['jabatan_id'][$key];
-                        } else {
-                            $jobs->jabatan_id = null;
-                        }
-                        
-                        $jobs->nama_perusahaan = $request['nama_perusahaan'][$key];
-                        $jobs->lokasi_perusahaan = $request['alamat'][$key];
-                        $jobs->save();
-                    }
+                if ($request['jabatan_id'] != '') {
+                    $jobs->jabatan_id = $request['jabatan_id'];
+                } else {
+                    $jobs->jabatan_id = null;
                 }
+                
+                $jobs->nama_perusahaan = $request['nama_perusahaan'];
+                $jobs->lokasi_perusahaan = $request['alamat'];
+                $jobs->save();
 
                 return redirect()->back()->with('success', 'Data Riwayat Pekerjaan alumni Berhasil Diperbarui');
 
@@ -521,6 +519,34 @@ class FrontendController extends Controller
 
             return redirect()->back()->with('success', 'Postingan sukses ditambahkan!');
         }
+    }
+
+    public function showPost($id)
+    {
+        $post = PostAlumni::with('users')->find($id);
+        $comments = CommentPost::with('user_comment_post')->where('post_id', $id)->get();
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'Detil data post',
+            'data' => $post,
+            'comments' => $comments
+        ]);
+    }
+
+    public function commentPost(Request $request, $id)
+    {   
+        CommentPost::create([
+            'user_id' => Auth::guard('alumni')->user()->id,
+            'post_id' => $id,
+            'komentar' => $request->komentar
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Komentar berhasil ditambahkan!',
+        ]);
+       
     }
 
     public function listFriendAlumni()

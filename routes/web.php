@@ -459,6 +459,8 @@ Route::group(['prefix' => '/alumnift'], function(){
         Route::post('/change-img-banner', [FrontendController::class, 'changeImageBannner'])->name('frontend.change-banner');
         Route::post('/change-profile-photo', [FrontendController::class, 'changeProfilePhoto'])->name('frontend.change-photo');
         Route::post('/post-create', [FrontendController::class, 'createPost'])->name('frontend.create-post');
+        Route::get('/post/{id}', [FrontendController::class, 'showPost'])->name('frontend.show-post');
+        Route::post('/post/{id}/comment-post', [FrontendController::class, 'commentPost'])->name('frontend.comment-post');
         Route::get('/list-friend-alumni', [FrontendController::class, 'listFriendAlumni'])->name('frontend.list-friend-alumni');
         Route::get('/view-friend-alumni/{id}', [FrontendController::class, 'viewFriendAlumni'])->name('frontend.view-friend-alumni');
         Route::match(['get', 'post'], '/masukan-alumni', [FrontendController::class, 'createMasukanAlumni'])->name('frontend.create-masukan-alumni');

@@ -123,4 +123,14 @@ class User extends Authenticatable
             $model->archives()->detach();
         });
     }
+
+    public function posts()
+    {
+        return $this->hasMany(PostAlumni::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(CommentAlumni::class);
+    }
 }

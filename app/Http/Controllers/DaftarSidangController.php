@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DaftarSidang;
 use App\Models\DaftarSeminar;
 use App\Models\Semester;
+use App\Models\SertifikatSkkft;
 use App\Models\TahunAjaran;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -20,9 +21,10 @@ class DaftarSidangController extends Controller
         $dataLogSidang = DaftarSidang::where('mahasiswa_id', $dataMhs->id)->first();
         $dataLogSeminar = DaftarSeminar::where('mahasiswa_id', $dataMhs->id)->first();
         $dataSeminar = DaftarSeminar::where('mahasiswa_id', $dataMhs->id)->where('status', 1)->first();
+        $dataSertifikatSkkft = SertifikatSkkft::where('user_id', $dataMhs->id)->first();
         // dd($dataSeminar);
         Session::put('page', 'indexSkripsi');
-        return view('daftar_sidang.tmb.index', compact('dataSidang', 'dataLogSidang', 'dataLogSeminar', 'dataSeminar'));
+        return view('daftar_sidang.tmb.index', compact('dataSidang', 'dataLogSidang', 'dataLogSeminar', 'dataSeminar', 'dataSertifikatSkkft'));
     }
 
     public function daftarTmb()
@@ -270,8 +272,9 @@ class DaftarSidangController extends Controller
         $dataLogSidang = DaftarSidang::where('mahasiswa_id', $dataMhs->id)->first();
         $dataLogSeminar = DaftarSeminar::where('mahasiswa_id', $dataMhs->id)->first();
         $dataSeminar = DaftarSeminar::where('mahasiswa_id', $dataMhs->id)->where('status', 1)->first();
+        $dataSertifikatSkkft = SertifikatSkkft::where('user_id', $dataMhs->id)->first();
         Session::put('page', 'sidangTA');
-        return view('daftar_sidang.ti.index', compact('dataSidang', 'dataLogSidang', 'dataLogSeminar', 'dataSeminar'));
+        return view('daftar_sidang.ti.index', compact('dataSidang', 'dataLogSidang', 'dataLogSeminar', 'dataSeminar', 'dataSertifikatSkkft'));
     }
 
     public function daftarTi()
@@ -783,8 +786,9 @@ class DaftarSidangController extends Controller
         $dataLogSidang = DaftarSidang::where('mahasiswa_id', $dataMhs->id)->first();
         $dataLogSeminar = DaftarSeminar::where('mahasiswa_id', $dataMhs->id)->first();
         $dataSeminar = DaftarSeminar::where('mahasiswa_id', $dataMhs->id)->where('status', 1)->first();
+        $dataSertifikatSkkft = SertifikatSkkft::where('user_id', $dataMhs->id)->first();
         Session::put('page', 'ST');
-        return view('daftar_sidang.pwk.index', compact('dataSidang', 'dataLogSidang', 'dataLogSeminar', 'dataSeminar'));
+        return view('daftar_sidang.pwk.index', compact('dataSidang', 'dataLogSidang', 'dataLogSeminar', 'dataSeminar', 'dataSertifikatSkkft'));
     }
 
     public function daftarPwk()

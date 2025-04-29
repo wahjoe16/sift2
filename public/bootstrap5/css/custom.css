@@ -140,7 +140,28 @@ li.borderless {
 .feed-header small {
     position: absolute;
     width: 200px;
-    top: 45px;
+    top: 25px;
+}
+
+.feed-header-modal > img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    /* border: 2px solid white; */
+    margin-right: 10px;
+    /* padding-top: 8px; */
+}
+
+.modal-header-cap > p {
+    position: absolute;
+    top: 10px;
+    left: 90px;
+}
+
+.modal-header-cap small {
+    position: absolute;
+    width: 200px;
+    top: 25px;
 }
 
 .feed-body > p {

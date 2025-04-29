@@ -27,6 +27,8 @@
     <script src="{{ url('login_form/js/popper.min.js') }}"></script>
     <script src="{{ url('login_form/js/bootstrap.min.js') }}"></script>
     <script src="{{ url('login_form/js/main.js') }}"></script>
+
+    @stack('login_script')
 </body>
 
 </html>

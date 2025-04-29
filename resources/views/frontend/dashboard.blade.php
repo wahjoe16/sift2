@@ -8,16 +8,17 @@
 
         <div class="col-lg-6">
             @include('frontend.post')
+            
             <br>
             @foreach ($postingan as $p)
                 <div class="card feeds-card">
                     <div class="card-header feed-header">
-                        <img src="{{ url('/user/foto', $p['users']['foto']) }}" class="float-start" alt="">
-                        <p><a href="{{ route('frontend.view-friend-alumni', $p['user_id']) }}">{{ $p['users']['nama'] }}</a></p>
-                        <p><small class="text-body-secondary">{{ tanggal_indonesia($p['created_at'], false) }}</small></p>
+                        <img src="{{ url('/user/foto', $p->users->foto) }}" class="float-start" alt="">
+                        <p><a href="{{ route('frontend.view-friend-alumni', $p->user_id) }}">{{ $p->users->nama }}</a></p>
+                        <p><small class="text-body-secondary">{{ tanggal_indonesia($p->created_at, false) }}</small></p>
                     </div>
                     <div class="card-body feed-body">
-                        <?php $paragraphs = explode(PHP_EOL, $p['deskripsi']); ?>
+                        <?php $paragraphs = explode(PHP_EOL, $p->deskripsi); ?>
 
                         @foreach ($paragraphs as $paragraph)
                             <p>{{{ $paragraph }}}</p>
@@ -25,9 +26,11 @@
                         
                     </div>
                     @if (!is_null($p['media']))
-                        <img src="{{ url('/alumni/postingan', $p['media']) }}" class="card-img-bottom img-card" alt="...">
+                        <img src="{{ url('/alumni/postingan', $p->media) }}" class="card-img-bottom img-card" alt="...">
                     @endif
-                    
+                    <div class="card-footer">
+                        <a href="javascript:void(0)" id="btn-comment-post" data-id="{{ $p->id }}" class="btn btn-light btn-sm ms-auto">komentar</a>
+                    </div>
                 </div>
             @endforeach
         </div>
@@ -59,7 +62,8 @@
         </div>
     </div>
 
-    @includeIf('frontend.modal-form.post')
+    @include('frontend.modal-form.post')
+    @include('frontend.modal-form.comment_post_form')
 
 @endsection
 
@@ -99,5 +103,6 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+
     </script>
 @endpush
