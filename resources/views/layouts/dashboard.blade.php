@@ -5,78 +5,128 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Fakultas Teknik | UNISBA</title>
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport"/>
 
     <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}" type="image/x-icon">
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="{{ asset('AdminLTE-2/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ asset('AdminLTE-2/bower_components/font-awesome/css/font-awesome.min.css') }}">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="{{ asset('AdminLTE-2/bower_components/Ionicons/css/ionicons.min.css') }}">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('AdminLTE-2/dist/css/AdminLTE.min.css') }}">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="{{ asset('AdminLTE-2/dist/css/skins/_all-skins.min.css') }}">
 
-    <!-- dropify file input -->
-    <link rel="stylesheet" href="{{ url('AdminLTE-2/bower_components/dropify/dist/css/dropify.min.css')  }}">
+    <!-- Fonts and icons -->
+    <script src="{{ url('/kai/assets/js/plugin/webfont/webfont.min.js') }}"></script>
+    <script>
+      WebFont.load({
+        google: { families: ["Public Sans:300,400,500,600,700"] },
+        custom: {
+          families: [
+            "Font Awesome 5 Solid",
+            "Font Awesome 5 Regular",
+            "Font Awesome 5 Brands",
+            "simple-line-icons",
+          ],
+          urls: ["{{ url('/kai/assets/css/fonts.min.css') }}"],
+        },
+        active: function () {
+          sessionStorage.fonts = true;
+        },
+      });
+    </script>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{{ url('/kai/assets/css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ url('/kai/assets/css/plugins.min.css') }}" />
+    <link rel="stylesheet" href="{{ url('/kai/assets/css/kaiadmin.min.css') }}" />
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+    <!-- dropify file input -->
+    <link rel="stylesheet" href="{{ url('/kai/assets/bower_components/dropify/dist/css/dropify.min.css')  }}">
+
 </head>
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
 
-<body class="hold-transition skin-blue layout-top-nav">
+<body>
     <div class="wrapper">
 
-        @includeIf('layouts.header')
-        <!-- Full Width Column -->
-        <div class="content-wrapper">
+        @include('layouts.sidebar')
+
+        <div class="main-panel">
+            @include('layouts.header')
+
             <div class="container">
-                <section class="content-header">
-                    <h1>
-                        Selamat Datang di Sistem Informasi Fakultas Teknik <b>{{ auth()->user()->nama }}</b>
-                    </h1>
-                    <ol class="breadcrumb">
-                        @section('breadcrumb')
-                        <li><a href="{{ route('dashboard') }}"><i class="fa fa-home"></i> Home</a></li>
-                        @show
-                    </ol>
-                </section>
-                @yield('content')
+                <div class="page-inner">
+                    @yield('content')
+                </div>
             </div>
         </div>
 
         <!-- /.content-wrapper -->
-        @includeIf('layouts.footer')
+        @include('layouts.footer')
     </div>
     <!-- ./wrapper -->
 
-    <!-- jQuery 3 -->
-    <script src="{{ asset('AdminLTE-2/bower_components/jquery/dist/jquery.min.js') }}"></script>
-    <!-- Bootstrap 3.3.7 -->
-    <script src="{{ asset('AdminLTE-2/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-    <!-- SlimScroll -->
-    <script src="{{ asset('AdminLTE-2/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
-    <!-- FastClick -->
-    <script src="{{ asset('AdminLTE-2/bower_components/fastclick/lib/fastclick.js') }}"></script>
-    <!-- AdminLTE App -->
-    <script src="{{ asset('AdminLTE-2/dist/js/adminlte.min.js') }}"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="{{ asset('AdminLTE-2/dist/js/demo.js') }}"></script>
+    <!--   Core JS Files   -->
+    <script src="{{ url('/kai/assets/js/core/jquery-3.7.1.min.js') }}"></script>
+    <script src="{{ url('/kai/assets/js/core/popper.min.js') }}"></script>
+    <script src="{{ url('/kai/assets/js/core/bootstrap.min.js') }}"></script>
+
+    <!-- jQuery Scrollbar -->
+    <script src="{{ url('/kai/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
+
+    <!-- Chart JS -->
+    <script src="{{ url('/kai/assets/js/plugin/chart.js/chart.min.js') }}"></script>
+
+    <!-- jQuery Sparkline -->
+    <script src="{{ url('/kai/assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js') }}"></script>
+
+    <!-- Chart Circle -->
+    <script src="{{ url('/kai/assets/js/plugin/chart-circle/circles.min.js') }}"></script>
+
+    <!-- Datatables -->
+    <script src="{{ url('/kai/assets/js/plugin/datatables/datatables.min.js') }}"></script>
+
+    <!-- Bootstrap Notify -->
+    <script src="{{ url('/kai/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
+
+    <!-- jQuery Vector Maps -->
+    <script src="{{ url('/kai/assets/js/plugin/jsvectormap/jsvectormap.min.js') }}"></script>
+    <script src="{{ url('/kai/assets/js/plugin/jsvectormap/world.js') }}"></script>
+
+    <!-- Sweet Alert -->
+    <script src="{{ url('/kai/assets/js/plugin/sweetalert/sweetalert.min.js') }}"></script>
 
     <!-- dropify file upload -->
-    <script src="{{ url('AdminLTE-2/bower_components/dropify/dist/js/dropify.min.js')  }}"></script>
+    <script src="{{ url('/kai/assets/bower_components/dropify/dist/js/dropify.min.js')  }}"></script>
+
+    <!-- Kaiadmin JS -->
+    <script src="{{ url('/kai/assets/js/kaiadmin.min.js') }}"></script>
+
+    <script>
+        $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
+            type: "line",
+            height: "70",
+            width: "100%",
+            lineWidth: "2",
+            lineColor: "#177dff",
+            fillColor: "rgba(23, 125, 255, 0.14)",
+        });
+
+        $("#lineChart2").sparkline([99, 125, 122, 105, 110, 124, 115], {
+            type: "line",
+            height: "70",
+            width: "100%",
+            lineWidth: "2",
+            lineColor: "#f3545d",
+            fillColor: "rgba(243, 84, 93, .14)",
+        });
+
+        $("#lineChart3").sparkline([105, 103, 123, 100, 95, 105, 115], {
+            type: "line",
+            height: "70",
+            width: "100%",
+            lineWidth: "2",
+            lineColor: "#ffa534",
+            fillColor: "rgba(255, 165, 52, .14)",
+        });
+    </script>
 
     @include('sweetalert::alert')
 
