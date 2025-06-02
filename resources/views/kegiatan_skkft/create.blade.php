@@ -1,123 +1,107 @@
-@extends('layouts.master')
-
-<!-- Select2 -->
-<link rel="stylesheet" href="{{ asset('AdminLTE-2/bower_components/select2/dist/css/select2.min.css') }}">
+@extends('layouts.dashboard')
 
 <!-- bootstrap datepicker -->
-<link rel="stylesheet" href="{{ asset('AdminLTE-2/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
+<link rel="stylesheet" href="{{ asset('kai/assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
 
 @section('content')
 
-<section class="content">
+<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+    <div>
+        <h3 class="fw-bold">Tambah Data Kegiatan SKKFT</h3>
+    </div>
+</div>
+@include('layouts.alert')
+<form action="{{ route('kegiatan.store') }}" method="post" enctype="multipart/form-data">@csrf
     <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="text-muted">
-                        {{ $title }}
-                    </h3>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Informasi Kegiatan</h5>
                 </div>
-                <div class="box-body">
-                    <form action="{{ route('kegiatan.store') }}" method="post" enctype="multipart/form-data">@csrf
-                        <div class="form-group row">
-                            <label for="nama_kegiatan" class="col-lg-2 col-lg-offset-1 control-label">Nama Kegiatan</label>
-                            <div class="col-lg-6">
-                                <input type="text" name="nama_kegiatan" id="nama_kegiatan" class="form-control" required autofocus>
-                                <span class="help-block with-errors"></span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="tanggal" class="col-lg-2 col-lg-offset-1 control-label">Tanggal Kegiatan</label>
-                            <div class="col-lg-6">
-                                <input type="text" name="tanggal" id="tanggal" class="form-control" required autofocus>
-                                <span class="help-block with-errors"></span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-2 col-lg-offset-1 control-label" for="category_id">Kategori SKKFT</label>
-                            <div class="col-sm-6">
-                                <select name="category_id" id="category_id" class="form-control select2">
-                                    <option value="">Pilih</option>
-                                    @foreach($category as $c)
-                                    <option value="{{ $c['id'] }}">{{ $c['category_name'] }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-2 col-lg-offset-1 control-label" for="subcategory_id">Sub Kategori SKKFT</label>
-                            <div class="col-sm-6">
-                                <select name="subcategory_id" id="subcategory_id" class="form-control select2">
-                                    <option value="">Pilih</option>
-                                    {{-- @foreach ($subcategory as $s)
-                                        <option value="{{ $s->id }}">{{ $s->subcategory_name }}</option>
-                                    @endforeach --}}
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-2 col-lg-offset-1 control-label" for="tingkat_id">Tingkat</label>
-                            <div class="col-sm-6">
-                                <select name="tingkat_id" id="tingkat_id" class="form-control select2">
-                                    <option value="">Pilih</option>
-                                    {{-- @foreach ($tingkat as $t)
-                                        <option value="{{ $t->id }}">{{ $t->tingkat }}</option>
-                                    @endforeach --}}
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-2 col-lg-offset-1 control-label" for="prestasi_id">Prestasi</label>
-                            <div class="col-sm-6">
-                                <select name="prestasi_id" id="prestasi_id" class="form-control select2">
-                                    <option value="">Pilih</option>
-                                    {{-- @foreach ($prestasi as $p)
-                                        <option value="{{ $p->id }}">{{ $p->prestasi }}</option>
-                                    @endforeach --}}
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-2 col-lg-offset-1 control-label" for="jabatan_id">Jabatan</label>
-                            <div class="col-sm-6">
-                                <select name="jabatan_id" id="jabatan_id" class="form-control select2">
-                                    <option value="">Pilih</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-2 col-lg-offset-1 control-label" for="bukti_fisik">Upload Bukti Fisik</label>
-                            <div class="col-sm-6">
-                                <input type="file" name="bukti_fisik" class="dropify" id="bukti_fisik">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-lg-2"></div>
-                            <div class="col-lg-6">
-                                <button class="btn btn-sm btn-flat btn-primary"><i class="fa fa-save"></i> Simpan</button>
-                                <a href="{{ route('poin-skkft.index') }}" class="btn btn-sm btn-light"><i class="fa fa-arrow-circle-left"></i> Batal</a>
-                            </div>
-                        </div>
-                    </form>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="nama_kegiatan">Nama Kegiatan&nbsp;<sub>(Minimal 30 karakter)</sub></label>
+                        <input type="text" name="nama_kegiatan" id="nama_kegiatan" class="form-control" required autofocus>
+                        <span class="help-block with-errors"></span>
+                    </div>
+                    <div class="form-group pb-5">
+                        <label for="tanggal">Tanggal Kegiatan</label>
+                        <input type="text" name="tanggal" id="tanggal" class="form-control" required autofocus>
+                        <span class="help-block with-errors"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Kategori Kegiatan</h5>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="category_id">Kategori</label>
+                        <select name="category_id" id="category_id" class="form-control">
+                            <option value="">Pilih</option>
+                            @foreach($category as $c)
+                            <option value="{{ $c['id'] }}">{{ $c['category_name'] }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="subcategory_id">Sub Kategori</label>
+                        <select name="subcategory_id" id="subcategory_id" class="form-control">
+                            <option value="">Pilih</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="tingkat_id">Tingkat</label>
+                        <select name="tingkat_id" id="tingkat_id" class="form-control">
+                            <option value="">Pilih</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="prestasi_id">Prestasi</label>
+                        <select name="prestasi_id" id="prestasi_id" class="form-control">
+                            <option value="">Pilih</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="jabatan_id">Jabatan</label>
+                        <select name="jabatan_id" id="jabatan_id" class="form-control">
+                            <option value="">Pilih</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Upload File Bukti Fisik</h5>
+                </div>
+                <div class="card-body">
+                    <input type="file" name="bukti_fisik" class="dropify" id="bukti_fisik">
                 </div>
             </div>
         </div>
     </div>
-</section>
+
+    <div class="row">
+        <div class="btn-groups">
+            <button class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
+            <a href="{{ route('poin-skkft.index') }}" class="btn btn-light"><i class="fas fa-arrow-circle-left"></i> Batal</a>
+        </div>
+    </div>
+</form>    
 
 @endsection
 
 @push('scripts_page')
 
-<!-- Select2 -->
-<script src="{{ asset('AdminLTE-2/bower_components/select2/dist/js/select2.full.min.js') }}"></script>
 <!-- bootstrap datepicker -->
-<script src="{{ asset('AdminLTE-2/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+<script src="{{ asset('kai/assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
 <script>
     $(function() {
-        //Initialize Select2 Elements
-        $('.select2').select2()
-
         // dropify
         $('.dropify').dropify();
 
