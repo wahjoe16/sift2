@@ -1,45 +1,63 @@
-@extends('layouts.master')
+@extends('layouts.dashboard')
 
 @section('content')
 
-<section class="content">
-    @includeIf('layouts.alert')
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box">
-                <div class="box-header with-border">
-                    <div class="btn-group">
-                        <button onclick="addForm('{{ route('dosen.store') }}')" class="btn btn-success btn-sm btn-flat"><i class="fa fa-plus-circle"></i> Tambah</button>
-                        <a href="{{ route('dosen.import-page') }}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-upload"></i> Import</a>
-                        {{-- <a href="{{ route('dosen.editAll') }}" class="btn btn-warning btn-sm btn-flat"><i class="fa fa-edit"></i> Edit</a> --}}
-                        <button onclick="deleteSelected('{{ route('dosen.delete-selected') }}')" class="btn btn-danger btn-sm btn-flat"><i class="fa fa-trash"></i> Hapus</button>
-                    </div>
+<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+    <div>
+        <h3 class="fw-bold">Data Dosen</h3>
+    </div>
+</div>
+
+@includeIf('layouts.alert')
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="btn-group">
+                    <button onclick="addForm('{{ route('dosen.store') }}')" class="btn btn-success btn-sm btn-flat"><i class="fas fa-plus-circle"></i> Tambah</button>
+                    <a href="{{ route('dosen.import-page') }}" class="btn btn-primary btn-sm btn-flat"><i class="fas fa-upload"></i> Import</a>
+                    {{-- <a href="{{ route('dosen.editAll') }}" class="btn btn-warning btn-sm btn-flat"><i class="fa fa-edit"></i> Edit</a> --}}
+                    <button onclick="deleteSelected('{{ route('dosen.delete-selected') }}')" class="btn btn-danger btn-sm btn-flat"><i class="fas fa-trash"></i> Hapus</button>
                 </div>
-                <div class="box-body table-responsive">
-                    <form action="" method="post" class="form-dosen">
-                        @csrf
-                        <table class="table table-striped table-bordered table-dosen">
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <form action="" method="post" class="form-dosen">@csrf
+                        <table id="basic-datatables" class="display table table-striped table-hover table-dosen">
                             <thead>
-                                <th>
-                                    <input type="checkbox" name="select_all" id="select_all">
-                                </th>
-                                <th width="5%">No</th>
-                                <th>Foto Profil</th>
-                                <th>NIK</th>
-                                <th>Nama</th>
-                                <th>Program Studi</th>
-                                <th>Email</th>
-                                <th width="15%"><i class="fa fa-cogs"></i> Aksi</th>
+                                <tr>
+                                    <th>
+                                        <input type="checkbox" name="select_all" id="select_all">
+                                    </th>
+                                    <th>Foto Profil</th>
+                                    <th>Nik</th>
+                                    <th>Nama</th>
+                                    <th>Program Studi</th>
+                                    <th width="5%"><i class="fas fa-cogs"></i></th>
+                                </tr>
                             </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>
+                                        <input type="checkbox" name="select_all" id="select_all">
+                                    </th>
+                                    <th>Foto Profil</th>
+                                    <th>Nik</th>
+                                    <th>Nama</th>
+                                    <th>Program Studi</th>
+                                    <th width="5%"><i class="fas fa-cogs"></i></th>
+                                </tr>
+                            </tfoot>
                         </table>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</div>
 
-@includeIf('dosen.form')
+@include('dosen.form')
 
 @endsection
 
@@ -65,11 +83,6 @@
                     data: 'select_all',
                 },
                 {
-                    data: 'DT_RowIndex',
-                    searchable: false,
-                    sortable: false
-                },
-                {
                     data: 'foto'
                 },
                 {
@@ -80,9 +93,6 @@
                 },
                 {
                     data: 'program_studi'
-                },
-                {
-                    data: 'email'
                 },
                 {
                     data: 'aksi',
@@ -109,7 +119,7 @@
 
     function addForm(url) {
         $('#modal-form').modal('show');
-        $('#modal-form .modal-title').text('Tambah Dosen');
+        $('#modal-form .modal-title').text('Tambah Data Dosen');
 
         $('#modal-form form')[0].reset();
         $('#modal-form form').attr('action', url);

@@ -15,10 +15,8 @@ class CategorySkkftController extends Controller
      */
     public function index()
     {
-        Session::put('page', 'indexCatSkkft');
-        $title="Kategori SKKFT";
         $category_skkft=CategorySkkft::get();
-        return view('category_skkft.index', compact('title','category_skkft'));
+        return view('category_skkft.index', compact('category_skkft'));
     }
 
     /**
@@ -28,7 +26,6 @@ class CategorySkkftController extends Controller
      */
     public function create()
     {
-        Session::put('page', 'indexCatSkkft');
         $title="Tambah data kategori SKKFT";
         return view('category_skkft.create', compact('title'));
     }
@@ -69,7 +66,6 @@ class CategorySkkftController extends Controller
      */
     public function edit($id)
     {
-        Session::put('page', 'indexCatSkkft');
         $title="Edit data kategori SKKFT";
         $category_skkft = CategorySkkft::find($id);
         return view('category_skkft.edit', compact('title','category_skkft'));

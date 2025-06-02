@@ -9,5 +9,27 @@
         "bold": "C:\\xampp\\htdocs\\sift2\\storage\\fonts\/roboto_slab_bold_1ce1446d3fc27a1ca8d0ed5af1ef8208",
         "800": "C:\\xampp\\htdocs\\sift2\\storage\\fonts\/roboto_slab_800_5264f44770f5a1cece326ab24259d03f",
         "900": "roboto_slab_900_27e7fc632573a11f7af2e0ebc82b75ec"
+    },
+    "lato": {
+        "100_italic": "C:\\laragon\\www\\sift2\\storage\\fonts\/lato_100_italic_44e4c60a7625d0726917c5586600eef3",
+        "300_italic": "C:\\laragon\\www\\sift2\\storage\\fonts\/lato_300_italic_5d458a0bea2edc814cad9956eabe8265",
+        "italic": "C:\\laragon\\www\\sift2\\storage\\fonts\/lato_italic_b7fa5abebbe1668203ae32668ec9cd2e",
+        "bold_italic": "C:\\laragon\\www\\sift2\\storage\\fonts\/lato_bold_italic_6fe97904fa17d2ccdc33faba12fa878c",
+        "900_italic": "C:\\laragon\\www\\sift2\\storage\\fonts\/lato_900_italic_9d745788e8b9254eca55b7b9d6642bc8",
+        "100": "C:\\laragon\\www\\sift2\\storage\\fonts\/lato_100_70daffc5a0e459436079609c81930e2f",
+        "300": "C:\\laragon\\www\\sift2\\storage\\fonts\/lato_300_bfdde39714afa6c7c8803648317f8517",
+        "normal": "C:\\laragon\\www\\sift2\\storage\\fonts\/lato_normal_51116b245f08d5e5cdb537d25637e400",
+        "bold": "C:\\laragon\\www\\sift2\\storage\\fonts\/lato_bold_39c477866ca5e9b58b0b56a69b4bac5a",
+        "900": "lato_900_f2c6fe94dc8549ffc66e6fb626318e87"
+    },
+    "suse": {
+        "100": "C:\\laragon\\www\\sift2\\storage\\fonts\/suse_100_1ac09b28c981de45d63b514df2eef623",
+        "200": "C:\\laragon\\www\\sift2\\storage\\fonts\/suse_200_92e31ed8e68c094e2e3d84d59f092fe8",
+        "300": "C:\\laragon\\www\\sift2\\storage\\fonts\/suse_300_98cdd39e3eeb1a45e000c7236f549713",
+        "normal": "C:\\laragon\\www\\sift2\\storage\\fonts\/suse_normal_915fc78de25747d34c1e2e48fa6810ef",
+        "500": "C:\\laragon\\www\\sift2\\storage\\fonts\/suse_500_32f2ae527a1f26c16b1eb9b104a1c70f",
+        "600": "C:\\laragon\\www\\sift2\\storage\\fonts\/suse_600_078711e9d64d8fa582de5c57b13d69cb",
+        "bold": "C:\\laragon\\www\\sift2\\storage\\fonts\/suse_bold_29978b5cabb32cf17db42c1b6a0c81c5",
+        "800": "suse_800_6aa4864d2ee2a19b3662b4ef3c1ad730"
     }
 }

@@ -15,7 +15,6 @@ class JabatanSkkftController extends Controller
      */
     public function index()
     {
-        Session::put('page', 'indexJabatanSkkft');
         $title="Jabatan SKKFT";
         $jabatan_skkft=Jabatan::get();
         return view('jabatan_skkft.index', compact('title','jabatan_skkft'));
@@ -28,7 +27,6 @@ class JabatanSkkftController extends Controller
      */
     public function create()
     {
-        Session::put('page', 'indexJabatanSkkft');
         $title="Tambah data Jabatan SKKFT";
         return view('jabatan_skkft.create', compact('title'));
     }
@@ -68,7 +66,6 @@ class JabatanSkkftController extends Controller
      */
     public function edit($id)
     {
-        Session::put('page', 'indexJabatanSkkft');
         $title="Edit data Jabatan SKKFT";
         $jabatan_skkft = Jabatan::find($id);
         return view('jabatan_skkft.edit', compact('title','jabatan_skkft'));

@@ -20,7 +20,6 @@ class PointSkkftController extends Controller
      */
     public function index()
     {
-        Session::put('page', 'indexPoinSkkft');
         $title="Poin SKKFT";
         $poin_skkft=PoinSkkft::get();
         return view('poin_skkft.index', compact('title','poin_skkft'));
@@ -33,7 +32,6 @@ class PointSkkftController extends Controller
      */
     public function create()
     {
-        Session::put('page', 'indexPoinSkkft');
         $title="Tambah data Poin SKKFT";
         $category=CategorySkkft::get();
         $subcategory=SubcategorySkkft::get();
@@ -84,7 +82,6 @@ class PointSkkftController extends Controller
      */
     public function edit($id)
     {
-        Session::put('page', 'indexPoinSkkft');
         $title="Edit data Poin SKKFT";
         $category=CategorySkkft::get();
         $subcategory=SubcategorySkkft::get();

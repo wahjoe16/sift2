@@ -16,7 +16,6 @@ class SubPosisiPekerjaanController extends Controller
      */
     public function index()
     {
-        Session::put('page', 'indexSubPosisi');
         $data = SubPosisi::all();
         return view('subposisi.index', compact('data'));
     }
@@ -29,7 +28,7 @@ class SubPosisiPekerjaanController extends Controller
     public function create()
     {
         $data = Posisi::get();
-        $title = "Tambah data sub posisi pekerjaan";
+        $title = "Tambah Data";
         return view('subposisi.create', compact('title', 'data'));
     }
 

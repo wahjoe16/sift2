@@ -116,7 +116,7 @@ class SkpiController extends Controller
             })
             ->addColumn('aksi', function ($data) {
                 return '
-                    <a href="'.route('skpi.edit', $data->id).'" class="btn btn-warning text-black btn-flat btn-sm"><i class="fa fa-edit"></i></a>
+                    <a href="'.route('skpi.edit', $data->id).'" class="btn btn-warning text-black btn-flat btn-xs"><i class="fas fa-pen"></i></a>
                 ';
             })
             ->rawColumns(['tanggal','aksi'])
@@ -134,7 +134,7 @@ class SkpiController extends Controller
             })
             ->addColumn('aksi', function ($data) {
                 return '
-                    <a href="'.route('skpi.edit', $data->id).'" class="btn btn-warning text-black btn-flat btn-sm"><i class="fa fa-edit"></i></a>
+                    <a href="'.route('skpi.edit', $data->id).'" class="btn btn-warning text-black btn-flat btn-xs"><i class="fas fa-pen"></i></a>
                 ';
             })
             ->rawColumns(['tanggal','aksi'])

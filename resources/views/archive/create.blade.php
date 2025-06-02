@@ -1,7 +1,7 @@
-@extends('layouts.master')
+@extends('layouts.dashboard')
 
 <!-- Select2 -->
-<link rel="stylesheet" href="{{ asset('AdminLTE-2/bower_components/select2/dist/css/select2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('kai/assets/bower_components/select2/dist/css/select2.min.css') }}">
 
 @push('css_page')
 <style>
@@ -13,174 +13,176 @@
 
 @section('content')
 
-<section class="content">
-    @includeIf('layouts.alert')
+<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+    <div>
+        <h3>Arsip Fakultas Teknik</h3>
+    </div>
+</div>
+
+@include('layouts.alert')
+
+<form action="{{ route('ft-arsip.store') }}" method="post" enctype="multipart/form-data">@csrf
     <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="text-muted">
-                        {{ $title }}
-                    </h3>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Informasi Arsip</h5>
                 </div>
-                <div class="box-body">
-                    <form action="{{ route('ft-arsip.store') }}" method="post" enctype="multipart/form-data">@csrf
-                        <div class="form-group row">
-                            <label class="col-lg-2 col-lg-offset-1 control-label" for="section_id">Nama</label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" name="name" id="name" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-2 col-lg-offset-1 control-label" for="section_id">Sesi Arsip</label>
-                            <div class="col-sm-6">
-                                <select name="section_id" id="section_id" class="form-control select2" required>
-                                    <option value="">Pilih</option>
-                                    @foreach($section as $s)
-                                    <option value="{{ $s['id'] }}">{{ $s['name'] }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-2 col-lg-offset-1 control-label" for="category_archive_id">Kategori Arsip</label>
-                            <div class="col-sm-6">
-                                <select name="category_archive_id" id="category_archive_id" class="form-control select2" required>
-                                    <option value="">Pilih</option>
-                                    @foreach($category as $c)
-                                    <option value="{{ $c['id'] }}">{{ $c['name'] }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-2 col-lg-offset-1 control-label" for="subcategory_archive_id">Subkategori Arsip</label>
-                            <div class="col-sm-6">
-                                <select name="subcategory_archive_id" id="subcategory_archive_id" class="form-control select2" required>
-                                    <option value="">Pilih</option>
-                                    @foreach($subcategory as $s)
-                                    <option value="{{ $s['id'] }}">{{ $s['name'] }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-2 col-lg-offset-1 control-label" for="tahun_ajaran_id">Tahun Akademik</label>
-                            <div class="col-sm-6">
-                                <select name="tahun_ajaran_id" id="tahun_ajaran_id" class="form-control select2" required>
-                                    <option value="">Pilih</option>
-                                    @foreach($ta as $t)
-                                    <option value="{{ $t['id'] }}">{{ $t['tahun_ajaran'] }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-2 col-lg-offset-1 control-label" for="semester_id">Semester</label>
-                            <div class="col-sm-6">
-                                <select name="semester_id" id="semester_id" class="form-control select2" required>
-                                    <option value="">Pilih</option>
-                                    @foreach($smt as $s)
-                                    <option value="{{ $s['id'] }}">{{ $s['semester'] }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-2 col-lg-offset-1 control-label" for="select_all">Pilih Dosen</label>
-                            <div class="col-sm-9">
-                                <input type="checkbox" name="select_all" id="select_all"> Pilih Semua
-                                <hr>
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <input type="checkbox" name="select_tmb" id="select_tmb"> Pilih Dosen Tambang
-                                            <ul>
-                                                <h5><b>Teknik Pertambangan</b></h5>
-                                                @foreach ($dosenTmb as $tmb)
-                                                <li>
-                                                    <input type="checkbox" name="dosen_id[]" id="select_tmb" value="{{ $tmb->id }}"> {{ $tmb->nama }} <br>
-                                                </li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <input type="checkbox" name="select_ti" id="select_ti"> Pilih Dosen TI
-                                            <ul>
-                                                <h5><b>Teknik Industri</b></h5>
-                                                @foreach ($dosenTi as $ti)
-                                                <li>
-                                                    <input type="checkbox" name="dosen_id[]" id="select_ti" value="{{ $ti->id }}"> {{ $ti->nama }} <br>
-                                                </li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <input type="checkbox" name="select_pwk" id="select_pwk"> Pilih Dosen PWK
-                                            <ul>
-                                                <h5><b>Perencanaan Wilayah dan Kota</b></h5>
-                                                @foreach ($dosenPwk as $pwk)
-                                                <li>
-                                                    <input type="checkbox" name="dosen_id[]" id="select_pwk" value="{{ $pwk->id }}"> {{ $pwk->nama }} <br>
-                                                </li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <input type="checkbox" name="select_psppi" id="select_psppi"> Pilih Dosen PSPPI
-                                            <ul>
-                                                <h5><b>Program Profesi Insinyur</b></h5>
-                                                @foreach ($dosenPsppi as $psppi)
-                                                <li>
-                                                    <input type="checkbox" name="dosen_id[]" id="select_psppi" value="{{ $psppi->id }}"> {{ $psppi->nama }} <br>
-                                                </li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <input type="checkbox" name="select_mpwk" id="select_mpwk"> Pilih Dosen MPWK
-                                            <ul>
-                                                <h5><b>Magister Perencanaan Wilayah dan Kota</b></h5>
-                                                @foreach ($dosenMpwk as $mpwk)
-                                                <li>
-                                                    <input type="checkbox" name="dosen_id[]" id="select_mpwk" value="{{ $mpwk->id }}"> {{ $mpwk->nama }} <br>
-                                                </li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-2 col-lg-offset-1 control-label" for="description">Upload File Arsip</label>
-                            <div class="col-sm-6">
-                                <!-- <input type="file" name="file[]" class="dropify" multiple> -->
-                                <input type="file" name="file" class="dropify" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-lg-2"></div>
-                            <div class="col-lg-6">
-                                <button class="btn btn-sm btn-flat btn-primary"><i class="fa fa-save"></i> Simpan</button>
-                                <a href="{{ route('ft-arsip.index') }}" class="btn btn-sm btn-light"><i class="fa fa-arrow-circle-left"></i> Batal</a>
-                            </div>
-                        </div>
-                    </form>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="section_id">Nama Arsip</label>
+                        <input type="text" class="form-control" name="name" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="section_id">Bidang Arsip</label>
+                        <select name="section_id" id="section_id" class="form-control select2" required>
+                            <option value="">Pilih</option>
+                            @foreach($section as $s)
+                            <option value="{{ $s['id'] }}">{{ $s['name'] }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="category_archive_id">Kategori Arsip</label>
+                        <select name="category_archive_id" id="category_archive_id" class="form-control select2" required>
+                            <option value="">Pilih</option>
+                            @foreach($category as $c)
+                            <option value="{{ $c['id'] }}">{{ $c['name'] }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="subcategory_archive_id">Subkategori Arsip</label>
+                        <select name="subcategory_archive_id" id="subcategory_archive_id" class="form-control select2" required>
+                            <option value="">Pilih</option>
+                            @foreach($subcategory as $s)
+                            <option value="{{ $s['id'] }}">{{ $s['name'] }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="tahun_ajaran_id">Tahun Akademik</label>
+                        <select name="tahun_ajaran_id" id="tahun_ajaran_id" class="form-control select2" required>
+                            <option value="">Pilih</option>
+                            @foreach($ta as $t)
+                            <option value="{{ $t['id'] }}">{{ $t['tahun_ajaran'] }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="semester_id">Semester</label>
+                        <select name="semester_id" id="semester_id" class="form-control select2" required>
+                            <option value="">Pilih</option>
+                            @foreach($smt as $s)
+                            <option value="{{ $s['id'] }}">{{ $s['semester'] }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5>File Arsip</h5>
+                </div>
+                <div class="card-body">
+                    <input type="file" name="file" class="dropify" required>
                 </div>
             </div>
         </div>
     </div>
-</section>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Dosen</h5>
+                </div>
+                <div class="card-body">
+                    <input type="checkbox" name="select_all" id="select_all"> Pilih Semua
+                    <div class="row">
+                        <div class="col-5 col-md-4">
+                            <div class="nav flex-column nav-pills nav-secondary nav-pills-no-bd" id="v-pills-tab-without-border" role="tablist" aria-orientation="vertical">
+                                <a class="nav-link active" id="v-pills-tambang-tab-nobd" data-bs-toggle="pill" href="#v-pills-tambang-nobd" role="tab" aria-controls="v-pills-tambang-nobd" aria-selected="true">Teknik Pertambangan</a>
+                                <a class="nav-link" id="v-pills-industri-tab-nobd" data-bs-toggle="pill" href="#v-pills-industri-nobd" role="tab" aria-controls="v-pills-industri-nobd" aria-selected="false">Teknik Industri</a>
+                                <a class="nav-link" id="v-pills-pwk-tab-nobd" data-bs-toggle="pill" href="#v-pills-pwk-nobd" role="tab" aria-controls="v-pills-pwk-nobd" aria-selected="false">Perencanaan Wilayah dan Kota</a>
+                                <a class="nav-link" id="v-pills-mpwk-tab-nobd" data-bs-toggle="pill" href="#v-pills-mpwk-nobd" role="tab" aria-controls="v-pills-mpwk-nobd" aria-selected="false">Magister Perencanaan Wilayah dan Kota</a>
+                                <a class="nav-link" id="v-pills-insinyur-tab-nobd" data-bs-toggle="pill" href="#v-pills-insinyur-nobd" role="tab" aria-controls="v-pills-insinyur-nobd" aria-selected="false">Program Profesi Insinyur</a>
+                            </div>
+                        </div>
+                        <div class="col-7 col-md-8">
+                            <div class="tab-content" id="v-pills-without-border-tabContent">
+                                <div class="tab-pane fade show active" id="v-pills-tambang-nobd" role="tabpanel" aria-labelledby="v-pills-tambang-tab-nobd">
+                                    <input type="checkbox" name="select_tmb" id="select_tmb"> Pilih Semua Dosen Teknik Pertambangan
+                                    <ul style="list-style: none;">
+                                        @foreach ($dosenTmb as $tmb)
+                                        <li>
+                                            <input type="checkbox" name="dosen_id[]" id="select_tmb" value="{{ $tmb->id }}"> {{ $tmb->nama }} <br>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                <div class="tab-pane fade" id="v-pills-industri-nobd" role="tabpanel" aria-labelledby="v-pills-industri-tab-nobd">
+                                    <input type="checkbox" name="select_ti" id="select_ti"> Pilih Semua Dosen Teknik Industri
+                                    <ul style="list-style: none;">
+                                        @foreach ($dosenTi as $ti)
+                                        <li>
+                                            <input type="checkbox" name="dosen_id[]" id="select_ti" value="{{ $ti->id }}"> {{ $ti->nama }} <br>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                <div class="tab-pane fade" id="v-pills-pwk-nobd" role="tabpanel" aria-labelledby="v-pills-pwk-tab-nobd">
+                                    <input type="checkbox" name="select_pwk" id="select_pwk"> Pilih Dosen PWK
+                                    <ul style="list-style: none;">
+                                        @foreach ($dosenPwk as $pwk)
+                                        <li>
+                                            <input type="checkbox" name="dosen_id[]" id="select_pwk" value="{{ $pwk->id }}"> {{ $pwk->nama }} <br>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                <div class="tab-pane fade" id="v-pills-mpwk-nobd" role="tabpanel" aria-labelledby="v-pills-mpwk-tab-nobd">
+                                    <input type="checkbox" name="select_mpwk" id="select_mpwk"> Pilih Dosen MPWK
+                                    <ul style="list-style: none;">
+                                        @foreach ($dosenMpwk as $mpwk)
+                                        <li>
+                                            <input type="checkbox" name="dosen_id[]" id="select_mpwk" value="{{ $mpwk->id }}"> {{ $mpwk->nama }} <br>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                <div class="tab-pane fade" id="v-pills-insinyur-nobd" role="tabpanel" aria-labelledby="v-pills-insinyur-tab-nobd">
+                                    <input type="checkbox" name="select_psppi" id="select_psppi"> Pilih Dosen PSPPI
+                                    <ul style="list-style: none;">
+                                        @foreach ($dosenPsppi as $psppi)
+                                        <li>
+                                            <input type="checkbox" name="dosen_id[]" id="select_psppi" value="{{ $psppi->id }}"> {{ $psppi->nama }} <br>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-sm btn-primary"><i class="fas fa-save"></i> Simpan</button>
+            <a href="{{ route('ft-arsip.index') }}" class="btn btn-sm btn-light"><i class="fas fa-arrow-circle-left"></i> Batal</a>
+        </div>
+    </div>
+</form>
 
 @endsection
 
 @push('scripts_page')
 
 <!-- Select2 -->
-<script src="{{ asset('AdminLTE-2/bower_components/select2/dist/js/select2.full.min.js') }}"></script>
+<script src="{{ asset('kai/assets/bower_components/select2/dist/js/select2.full.min.js') }}"></script>
 <script>
     $(function() {
         //Initialize Select2 Elements

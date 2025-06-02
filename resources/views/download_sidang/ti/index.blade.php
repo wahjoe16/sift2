@@ -1,7 +1,7 @@
-@extends('layouts.master')
+@extends('layouts.dashboard')
 
 <!-- Select2 -->
-<link rel="stylesheet" href="{{ asset('AdminLTE-2/bower_components/select2/dist/css/select2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('kai/assets/bower_components/select2/dist/css/select2.min.css') }}">
 
 @push('css_page')
 <style>
@@ -14,100 +14,91 @@
 
 @section('content')
 
-<section class="content">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3>Download Dokumen Sidang Tugas Akhir</h3>
-                </div>
-                <div class="box-body">
-                    <div class="col-md-12">
-                        <form action="">
-                            <div class="form-row">
-                                <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                                    <label for="tahunajaran">Filter Tahun Akademik</label>
-                                    <select name="tahunajaran" id="tahunajaran" class="form-control select2">
-                                        <option value="">Pilih</option>
-                                        @foreach ($ta as $t)
-                                        <option value="{{ $t->id }}">{{ $t->tahun_ajaran }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                                    <label for="semester">Filter Semester</label>
-                                    <select name="semester" id="semester" class="form-control select2">
-                                        <option value="">Pilih</option>
-                                        @foreach ($smt as $s)
-                                        <option value="{{ $s->id }}">{{ $s->semester }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                        </form>
-                        <table class="table table-striped table-bordered table-download-sidang display nowrap" style="width: 100%;">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>NPM</th>
-                                    <th>Nama</th>
-                                    <th>Tahun Akademik</th>
-                                    <th>Semester</th>
-                                    <th>Status</th>
-                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat1"></th> -->
-                                    <th>Fotocopy Kwitansi Bimbingan TA</th>
-                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat2"></th> -->
-                                    <th>Fotocopy Kwitansi Sidang TA</th>
-                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat3"></th> -->
-                                    <th>Fotocopy Kwitansi Seminar TA</th>
-                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat4"></th> -->
-                                    <th>Fotocopy Sertifikat Pesantren Calon Sarjana</th>
-                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat5"></th> -->
-                                    <th>Formulir Rencana Studi (FRS)</th>
-                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat6"></th> -->
-                                    <th>Bukti Penyerahan Draft TA</th>
-                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat7"></th> -->
-                                    <th>Bukti Bebas Perpustakaan Pusat UNISBA</th>
-                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat8"></th> -->
-                                    <th>Bukti Bebas Perpustakaan TI</th>
-                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat9"></th> -->
-                                    <th>Transkrip Nilai Terakhir</th>
-                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat10"></th> -->
-                                    <th>Persetujuan Sidang dari Dosen Pembimbing</th>
-                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat10"></th> -->
-                                    <th>Fotocopy Sertifikat TOEFL</th>
-                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat10"></th> -->
-                                    <th>Foto</th>
-                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat10"></th> -->
-                                    <th>Bukti Bebas Pinjaman / Tunggakan</th>
-                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat10"></th> -->
-                                    <th>Menghadiri Seminar / Sidang</th>
-                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat10"></th> -->
-                                    <th>Form Hafalan Surat Al-Quran</th>
-                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat10"></th> -->
-                                    <th>Print out bukti pengecekan Plagiarisme</th>
-                                    <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat10"></th> -->
-                                    <th>Sertifikat SKKFT</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-                <div class="box-footer">
-                    <div class="btn-group">
-                        <!-- <button class="btn btn-success btn-sm btn-flat btn-download"><i class="fa fa-download"></i> Download Selected</button> -->
-                        <!-- <a href="{{ route('seminarTmbPdf.export') }}" class="btn btn-danger btn-sm btn-flat"><i class="fa fa-file-pdf-o"></i> Export PDF</a> -->
-                    </div>
-                </div>
+<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+    <div>
+        <h3 class="fw-bold">Download Dokumen Sidang Tugas Akhir</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="row my-3">
+            <div class="col-md-6">
+                <label for="tahunajaran">Filter Tahun Akademik</label>
+                <select name="tahunajaran" id="tahunajaran" class="form-control select2">
+                    <option value="">Pilih</option>
+                    @foreach ($ta as $t)
+                    <option value="{{ $t->id }}">{{ $t->tahun_ajaran }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="semester">Filter Semester</label>
+                <select name="semester" id="semester" class="form-control select2">
+                    <option value="">Pilih</option>
+                    @foreach ($smt as $s)
+                    <option value="{{ $s->id }}">{{ $s->semester }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-striped table-bordered table-download-sidang display nowrap" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>NPM</th>
+                            <th>Nama</th>
+                            <th>Tahun Akademik</th>
+                            <th>Semester</th>
+                            <th>Status</th>
+                            <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat1"></th> -->
+                            <th>Fotocopy Kwitansi Bimbingan TA</th>
+                            <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat2"></th> -->
+                            <th>Fotocopy Kwitansi Sidang TA</th>
+                            <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat3"></th> -->
+                            <th>Fotocopy Kwitansi Seminar TA</th>
+                            <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat4"></th> -->
+                            <th>Fotocopy Sertifikat Pesantren Calon Sarjana</th>
+                            <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat5"></th> -->
+                            <th>Formulir Rencana Studi (FRS)</th>
+                            <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat6"></th> -->
+                            <th>Bukti Penyerahan Draft TA</th>
+                            <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat7"></th> -->
+                            <th>Bukti Bebas Perpustakaan Pusat UNISBA</th>
+                            <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat8"></th> -->
+                            <th>Bukti Bebas Perpustakaan TI</th>
+                            <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat9"></th> -->
+                            <th>Transkrip Nilai Terakhir</th>
+                            <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat10"></th> -->
+                            <th>Persetujuan Sidang dari Dosen Pembimbing</th>
+                            <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat10"></th> -->
+                            <th>Fotocopy Sertifikat TOEFL</th>
+                            <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat10"></th> -->
+                            <th>Foto</th>
+                            <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat10"></th> -->
+                            <th>Bukti Bebas Pinjaman / Tunggakan</th>
+                            <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat10"></th> -->
+                            <th>Menghadiri Seminar / Sidang</th>
+                            <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat10"></th> -->
+                            <th>Form Hafalan Surat Al-Quran</th>
+                            <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat10"></th> -->
+                            <th>Print out bukti pengecekan Plagiarisme</th>
+                            <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat10"></th> -->
+                            <th>Sertifikat SKKFT</th>
+                        </tr>
+                    </thead>
+                </table>
             </div>
         </div>
     </div>
-</section>
+</div>
 
 @endsection
 
 @push('scripts_page')
-<script src="{{ asset('AdminLTE-2/bower_components/select2/dist/js/select2.full.min.js') }}"></script>
+<script src="{{ asset('kai/assets/bower_components/select2/dist/js/select2.full.min.js') }}"></script>
 
 <script>
     let table;

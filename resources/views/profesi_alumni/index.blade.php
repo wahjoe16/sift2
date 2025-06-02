@@ -1,48 +1,51 @@
-@extends('layouts.master')
+@extends('layouts.dashboard')
 
 @section('content')
 
-<section class="content">
-    @includeIf('layouts.alert')
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box">
-                <div class="box-header with-border">
-                    <div class="btn-group">
-                        <a href="{{ route('profesi-alumni.create') }}" class="btn btn-success btn-sm btn-flat"><i class="fa fa-plus-circle"></i> Tambah</a>
-                    </div>
+<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+    <div>
+        <h3 class="fw-bold">Profesi Alumni</h3>
+    </div>
+</div>
+
+@include('layouts.alert')
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="btn-group">
+                    <a href="{{ route('profesi-alumni.create') }}" class="btn btn-success btn-sm"><i class="fas fa-plus-circle"></i> Tambah</a>
                 </div>
-                <div class="box-body table-responsive">
-                    <form action="" method="post" class="form-admin">@csrf
-                        <table class="table table-striped table-bordered table-posisi">
-                            <thead>
-                                <th width="5%">No</th>
-                                <th>Profesi Alumni</th>
-                                <th width="9%"><i class="fa fa-cogs"></i> Aksi</th>
-                            </thead>
-                            <tbody>
-                                @foreach ($data as $d => $value)
-                                    <tr>
-                                        <td>{{ $d + 1 }}</td>
-                                        <td>{{ $value->nama_profesi }}</td>
-                                        <td>
-                                            <a href="{{ route('profesi-alumni.edit', $value->id) }}" class="btn btn-warning btn-sm btn-flat"><i class="fa fa-edit"></i></a>
-                                            <form action="{{ route('profesi-alumni.destroy', $value->id) }}" method="post" onsubmit="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm btn-flat"><i class="fa fa-trash"></i></button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </form>
-                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped table-posisi">
+                    <thead>
+                        <th width="5%">No</th>
+                        <th>Profesi Alumni</th>
+                        <th width="9%"><i class="fa fa-cogs"></i> Aksi</th>
+                    </thead>
+                    <tbody>
+                        @foreach ($data as $d => $value)
+                            <tr>
+                                <td>{{ $d + 1 }}</td>
+                                <td>{{ $value->nama_profesi }}</td>
+                                <td>
+                                    <a href="{{ route('profesi-alumni.edit', $value->id) }}" class="btn btn-warning btn-xs"><i class="fas fa-pen"></i></a>
+                                    <form action="{{ route('profesi-alumni.destroy', $value->id) }}" method="post" onsubmit="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-xs"><i class="fas fa-trash"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-</section>
+</div>
 
 @endsection

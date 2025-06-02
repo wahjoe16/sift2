@@ -1,6 +1,14 @@
-<li class="header">Data Lulusan</li>
-<li>
-    <a href="{{ route('rekap-sidangPwk.index') }}" @if(Session::get('page')=='rekapTerbuka' ) style="background: #3c8dbc !important; color:white !important" @endif>
-        <i class="fa  fa-file-text"></i> <span>Rekap Lulusan</span>
+<li class="nav-section">
+    <span class="sidebar-mini-icon">
+        <i class="fa fa-ellipsis-h"></i>
+    </span>
+    <h4 class="text-section">Data Lulusan</h4>
+</li>
+
+<li class="nav-item {{ Route::is('rekap-sidangPwk.index') ? 'active' : '' }}">
+    <a href="{{ route('rekap-sidangPwk.index') }}">
+        <i class="fas fa-clipboard-list"></i>
+        <p>Rekap Lulusan</p>
+        <span class="badge badge-secondary"></span>
     </a>
 </li>

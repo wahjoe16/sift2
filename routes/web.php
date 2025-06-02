@@ -205,6 +205,7 @@ Route::group(['prefix'=>'/skkft'], function(){
     Route::get('dropdownlist/tingkat-skkft/{id}', [DependenDropdownController::class, 'getDataTingkat'])->name('get-tingkatskkft.data');
     Route::get('dropdownlist/prestasi-skkft/{id}', [DependenDropdownController::class, 'getDataPrestasi'])->name('get-prestasiskkft.data');
     Route::get('dropdownlist/jabatan-skkft/{id}', [DependenDropdownController::class, 'getDataJabatan'])->name('get-jabatanskkft.data');
+    Route::get('data-sertifikat-skkft', [DashboardController::class, 'getDataSertifikatSkkft'])->name('sertifikat-skkft.data');
 
     // SKKFT ADMIN
     Route::group(['middleware'=>'ceklevel:1'], function(){

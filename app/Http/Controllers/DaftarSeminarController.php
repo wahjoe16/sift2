@@ -795,8 +795,9 @@ class DaftarSeminarController extends Controller
         $dosen2 = User::where('level', 2)->get();
         $tahun_ajaran = TahunAjaran::get();
         $semester = Semester::get();
+        $dataLog = DaftarSeminar::where('mahasiswa_id', auth()->user()->id)->first();
 
-        return view('daftar_seminar.pwk.create', compact('title', 'semester', 'tahun_ajaran', 'dosen1', 'dosen2'));
+        return view('daftar_seminar.pwk.create', compact('title', 'semester', 'tahun_ajaran', 'dosen1', 'dosen2', 'dataLog'));
     }
 
     public function storePwk(Request $request)

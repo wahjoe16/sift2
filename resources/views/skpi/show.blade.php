@@ -1,50 +1,43 @@
-@extends('layouts.master')
+@extends('layouts.dashboard')
 
 @section('content')
 
-<section class="content">
-    <h3>Rekap SKKFT <strong>{{ $data->user_skkft->nama }}</strong></h3>
-    @includeIf('layouts.alert')
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box">
-                <div class="box-header with-border">
-                    <div class="btn-group">
-                        <button disabled onclick="deleteSelected('{{ route('skpi.delete-selected') }}')" class="btn btn-danger btn-sm btn-flat btn-hapus-pilih"><i class="fa fa-trash"></i> Hapus yang dipilih</button>
-                    </div>
+<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+    <div>
+        <h3 class="fw-bold">Rekap SKKFT <strong>{{ $data->user_skkft->nama }}</h3>
+    </div>
+</div>
+@include('layouts.alert')
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="btn-group">
+                    <button disabled onclick="deleteSelected('{{ route('skpi.delete-selected') }}')" class="btn btn-danger btn-sm btn-hapus-pilih"><i class="fas fa-trash"></i> Hapus yang dipilih</button>
                 </div>
-                <div class="box-body table-responsive">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <form action="" method="post" id="form-skpi">@csrf
-                                <table class="table table-striped table-bordered table-skkft">
-                                    <thead>
-                                        <th width="5%">No</th>
-                                        <th>Nama Kegiatan</th>
-                                        <th>Kategori</th>
-                                        <th>Sub Kategori</th>
-                                        <th>Tingkat</th>
-                                        <th>Prestasi</th>
-                                        <th>Jabatan</th>
-                                        <th>Link Bukti Fisik</th>
-                                        <th><input type="checkbox" name="select_all" id="select_all" class="select_all"></th>
-                                        <th width="12%"><i class="fa fa-cogs"></i></th>
-                                    </thead>
-                                </table>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="box-footer with-border">
-                    <form action="{{ route('skpi.verify', $data->id) }}" method="POST">@csrf
-                        <button type="submit" class="btn btn-info btn-md btn-flat"><i class="fa fa-check"></i> Terbitkan SKPI</button>
-                    </form>
-                </div>
+            </div>
+            <div class="card-body">
+                <form action="" method="post" id="form-skpi">@csrf
+                    <table class="table table-striped table-bordered table-skkft">
+                        <thead>
+                            <th>Nama Kegiatan</th>
+                            <th>Kategori</th>
+                            <th>Sub Kategori</th>
+                            <th>Link Bukti Fisik</th>
+                            <th><input type="checkbox" name="select_all" id="select_all" class="select_all"></th>
+                            <th width="12%"><i class="fas fa-cogs"></i></th>
+                        </thead>
+                    </table>
+                </form>
+            </div>
+            <div class="card-footer">
+                <form action="{{ route('skpi.verify', $data->id) }}" method="POST">@csrf
+                    <button type="submit" class="btn btn-info btn-sm"><i class="fas fa-check"></i> Terbitkan SKPI</button>
+                </form>
             </div>
         </div>
     </div>
-</section>
-
+</div>
 @endsection
 
 @push('scripts_page')
@@ -61,11 +54,7 @@
                 url: '{{ route("kegiatanSkpi.data", $data->id) }}',
             },
             columns: [
-                {
-                    data: 'DT_RowIndex',
-                    searchable: false,
-                    sortable: false
-                },
+                
                 {
                     data: 'nama_kegiatan'
                 },
@@ -74,18 +63,6 @@
                 },
                 {
                     data: 'subcategories_skkft.subcategory_name'
-                },
-                {
-                    data: 'tingkat_skkft.tingkat',
-                    defaultContent: "-",
-                },
-                {
-                    data: 'prestasi_skkft.prestasi',
-                    defaultContent: "-",
-                },
-                {
-                    data: 'jabatan_skkft.jabatan',
-                    defaultContent: "-",
                 },
                 {
                     data: 'bukti_fisik'

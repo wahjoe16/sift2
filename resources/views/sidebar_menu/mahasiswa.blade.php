@@ -1,77 +1,120 @@
-<li class="treeview">
-    <a href="#">
-        <i class="fa fa-street-view"></i>
-        <span>SKKFT</span>
-        <span class="pull-right-container">
-        <i class="fa fa-angle-left pull-right"></i>
-        </span>
+<li class="nav-item {{ Route::is('kegiatan.index') || Route::is('kegiatan.summary')
+                    || Route::is('kegiatan.show') || Route::is('kegiatan.create') ? 'active' : '' }}">
+    <a data-bs-toggle="collapse" href="#skkft-mhs">
+        <i class="fas fa-bolt"></i>
+        <p>SKKFT</p>
+        <span class="caret"></span>
     </a>
-    <ul class="treeview-menu">
-        <li>
-            <a href="{{ route('kegiatan.index') }}" @if(Session::get('page')=='indexKegiatanSkkft') style="background: #3c8dbc !important; color:white !important" @endif>
-                <i class="fa fa-leanpub"></i> <span>Kegiatan SKKFT</span>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('kegiatan.summary') }}" @if(Session::get('page')=='summaryKegiatanSkkft') style="background: #3c8dbc !important; color:white !important" @endif>
-                <i class="fa fa-database"></i> <span>Rangkuman Kegiatan SKKFT</span>
-            </a>
-        </li>
-    </ul>
+    <div class="collapse {{ Route::is('kegiatan.index') || Route::is('kegiatan.create')
+                         || Route::is('kegiatan.show') || Route::is('kegiatan.summary')
+                         || Route::is('kegiatan.edit')|| Route::is('kegiatan-bukfis.edit') ? 'show' : '' }}" id="skkft-mhs">
+        <ul class="nav nav-collapse">
+            <li class=" {{ Route::is('kegiatan.index') || Route::is('kegiatan.create')
+                        || Route::is('kegiatan.show')|| Route::is('kegiatan.edit')
+                        || Route::is('kegiatan-bukfis.edit') ? 'active' : '' }}">
+                <a href="{{ route('kegiatan.index') }}">
+                    <span class="sub-item">Kegiatan</span>
+                </a>
+            </li>
+            <li class=" {{ Route::is('kegiatan.summary') ? 'active' : '' }}">
+                <a href="{{ route('kegiatan.summary') }}">
+                    <span class="sub-item">Summary SKKFT</span>
+                </a>
+            </li>
+        </ul>
+    </div>
 </li>
 
-<li class="treeview">
-    <a href="#">
-        <i class="fa fa-graduation-cap"></i>
-        <span>Pelaksanaan Sidang</span>
-        <span class="pull-right-container">
-        <i class="fa fa-angle-left pull-right"></i>
-        </span>
-    </a>
-    <ul class="treeview-menu">
-        {{-- Menu Pelaksanaan Sidang Untuk Mahasiswa Tambang --}}
-        @if (auth()->user()->level == 3 && auth()->user()->program_studi == 'Teknik Pertambangan')
-            <li>
-                <a href="{{ route('seminar_tmb.index') }}" @if(Session::get('page')=='indexKolokium' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                    <i class="fa fa-level-up"></i> <span>Kolokium Skripsi</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('sidang_tmb.index') }}" @if(Session::get('page')=='indexSkripsi' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                    <i class="fa  fa-file-text"></i> <span>Sidang Skripsi</span>
-                </a>
-            </li>
-        @endif
-        {{-- Akhir Menu Pelaksanaan Sidang Untuk Mahasiswa Tambang --}}
+<li class="nav-item {{ Route::is('seminar_tmb.index') || Route::is('sidang_tmb.index')
+                    || Route::is('seminar_tmb.daftar') || Route::is('seminar_tmb.show')
+                    || Route::is('seminar_tmb.edit') || Route::is('sidang_tmb.edit')
+                    || Route::is('sidang_tmb.daftar') || Route::is('sidang_tmb.show')
+                    || Route::is('seminar_ti.index') || Route::is('sidang_ti.index')
+                    || Route::is('seminar_ti.daftar') || Route::is('seminar_ti.show')
+                    || Route::is('seminar_ti.edit') || Route::is('sidang_ti.daftar') 
+                    || Route::is('sidang_ti.show') || Route::is('sidang_ti.edit')
+                    || Route::is('seminar_pwk.index') || Route::is('sidang_pwk.index')
+                    || Route::is('seminar_pwk.daftar') || Route::is('seminar_pwk.show')
+                    || Route::is('seminar_pwk.edit') || Route::is('sidang_pwk.daftar') 
+                    || Route::is('sidang_pwk.show') || Route::is('sidang_pwk.edit') ? 'active' : '' }}">
+    @if (auth()->user()->level == 3 && auth()->user()->program_studi == 'Teknik Pertambangan')
+        <a data-bs-toggle="collapse" href="#sidang-tmb-mhs">
+            <i class="fas fa-graduation-cap"></i>
+            <p>Pelaksanaan Sidang</p>
+            <span class="caret"></span>
+        </a>
+        <div class="collapse {{ Route::is('seminar_tmb.index') || Route::is('sidang_tmb.index')
+                             || Route::is('seminar_tmb.daftar') || Route::is('seminar_tmb.show')
+                             || Route::is('seminar_tmb.edit') || Route::is('sidang_tmb.edit')
+                             || Route::is('sidang_tmb.daftar') || Route::is('sidang_tmb.show') ? 'show' : '' }}" id="sidang-tmb-mhs">
+            <ul class="nav nav-collapse">
+                <li class="{{ Route::is('seminar_tmb.index') || Route::is('seminar_tmb.daftar')
+                           || Route::is('seminar_tmb.edit') || Route::is('seminar_tmb.show') ? 'active' : '' }}">
+                    <a href="{{ route('seminar_tmb.index') }}">
+                        <span class="sub-item">Kolokium Skripsi</span>
+                    </a>
+                </li>
+                <li class="{{ Route::is('sidang_tmb.index') || Route::is('sidang_tmb.daftar')
+                           || Route::is('sidang_tmb.show') || Route::is('sidang_tmb.edit') ? 'active' : '' }}">
+                    <a href="{{ route('sidang_tmb.index') }}">
+                        <span class="sub-item">Sidang Skripsi</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    @endif
 
-        {{-- Menu Pelaksanaan Sidang Untuk Mahasiswa Industri --}}
-        @if (auth()->user()->level == 3 && auth()->user()->program_studi == 'Teknik Industri')
-            <li>
-                <a href="{{ route('seminar_ti.index') }}" @if(Session::get('page')=='seminarTA' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                    <i class="fa fa-level-up"></i> <span>Seminar Tugas Akhir</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('sidang_ti.index') }}" @if(Session::get('page')=='sidangTA' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                    <i class="fa  fa-file-text"></i> <span>Sidang Tugas Akhir</span>
-                </a>
-            </li>
-        @endif
-        {{-- Akhir Menu Pelaksanaan Sidang Untuk Mahasiswa Industri --}}
+    @if (auth()->user()->level == 3 && auth()->user()->program_studi == 'Teknik Industri')
+        <a data-bs-toggle="collapse" href="#sidang-ti-mhs">
+            <i class="fas fa-graduation-cap"></i>
+            <p>Pelaksanaan Sidang</p>
+            <span class="caret"></span>
+        </a>
+        <div class="collapse {{ Route::is('seminar_ti.index') || Route::is('sidang_ti.index')
+                             || Route::is('seminar_ti.daftar') || Route::is('seminar_ti.show')
+                             || Route::is('seminar_ti.edit') || Route::is('sidang_ti.daftar') 
+                             || Route::is('sidang_ti.show') || Route::is('sidang_ti.edit') ? 'show' : '' }}" id="sidang-ti-mhs">
+            <ul class="nav nav-collapse">
+                <li class="{{ Route::is('seminar_ti.index') || Route::is('seminar_ti.daftar')
+                           || Route::is('seminar_ti.show') || Route::is('seminar_ti.edit') ? 'active' : '' }}">
+                    <a href="{{ route('seminar_ti.index') }}">
+                        <span class="sub-item">Seminar Tugas Akhir</span>
+                    </a>
+                </li>
+                <li  class="{{ Route::is('sidang_ti.index') || Route::is('sidang_ti.daftar') 
+                            || Route::is('sidang_ti.show') || Route::is('sidang_ti.edit') ? 'active' : '' }}">
+                    <a href="{{ route('sidang_ti.index') }}">
+                        <span class="sub-item">Sidang Tugas Akhir</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    @endif
 
-        {{-- Menu Pelaksanaan Sidang Untuk Mahasiswa Perencanaan Wilayah dan Kota --}}
-        @if (auth()->user()->level == 3 && auth()->user()->program_studi == 'Perencanaan Wilayah dan Kota')
-            <li>
-                <a href="{{ route('seminar_pwk.index') }}" @if(Session::get('page')=='SP' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                    <i class="fa fa-level-up"></i> <span>Sidang Pembahasan</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('sidang_pwk.index') }}" @if(Session::get('page')=='ST' ) style="background: #3c8dbc !important; color:white !important" @endif>
-                    <i class="fa  fa-file-text"></i> <span>Sidang Terbuka</span>
-                </a>
-            </li>
-        @endif
-        {{-- Akhir Menu Pelaksanaan Sidang Untuk Mahasiswa Perencanaan Wilayah dan Kota --}}
-    </ul>
+    @if (auth()->user()->level == 3 && auth()->user()->program_studi == 'Perencanaan Wilayah dan Kota')
+        <a data-bs-toggle="collapse" href="#sidang-pwk-mhs">
+            <i class="fas fa-graduation-cap"></i>
+            <p>Pelaksanaan Sidang</p>
+            <span class="caret"></span>
+        </a>
+        <div class="collapse {{ Route::is('seminar_pwk.index') || Route::is('sidang_pwk.index')
+                             || Route::is('seminar_pwk.daftar') || Route::is('seminar_pwk.show')
+                             || Route::is('seminar_pwk.edit') || Route::is('sidang_pwk.daftar') 
+                             || Route::is('sidang_pwk.show') || Route::is('sidang_pwk.edit') ? 'show' : '' }}" id="sidang-pwk-mhs">
+            <ul class="nav nav-collapse">
+                <li class="{{ Route::is('seminar_pwk.index') || Route::is('seminar_pwk.daftar') 
+                           || Route::is('seminar_pwk.show') || Route::is('seminar_pwk.edit') ? 'active' : '' }}" id="sidang-pwk-mhs">
+                    <a href="{{ route('seminar_pwk.index') }}">
+                        <span class="sub-item">Sidang Pembahasan</span>
+                    </a>
+                </li>
+                <li  class="{{ Route::is('sidang_pwk.index') || Route::is('sidang_pwk.daftar') 
+                            || Route::is('sidang_pwk.show') || Route::is('sidang_pwk.edit') ? 'active' : '' }}" id="sidang-pwk-mhs">
+                    <a href="{{ route('sidang_pwk.index') }}">
+                        <span class="sub-item">Sidang Terbuka</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    @endif
 </li>

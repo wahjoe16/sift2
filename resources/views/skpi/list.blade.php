@@ -1,55 +1,57 @@
-@extends('layouts.master')
+@extends('layouts.dashboard')
 
 @section('content')
 
-<section class="content-header">
-    <h3>Data SKPI</h3>
-</section>
+<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+    <div>
+        <h3 class="fw-bold">Data SKPI</h3>
+    </div>
+</div>
 
-<section class="content">
-    @includeIf('layouts.alert')
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box">
-                <div class="box-body table-responsive">
-                    <div class="nav-tabs-custom">
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a href="#tab_1" data-toggle="tab">Data Pengajuan SKPI</a></li>
-                            <li><a href="#tab_2" data-toggle="tab">Database SKPI</a></li>
-                        </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="tab_1">
-                                <table class="table table-striped table-bordered table-print_skpi">
-                                    <thead>
-                                        <th width="5%">No</th>
-                                        <th>Nama Mahasiswa</th>
-                                        <th>NPM</th>
-                                        <th>Program Studi</th>
-                                        <th>Tanggal Pengajuan</th>
-                                        <th width="12%"><i class="fa fa-cogs"></i> Aksi</th>
-                                    </thead>
-                                </table>
-                            </div>
-                            <div class="tab-pane" id="tab_2">
-                                <table class="table table-striped table-bordered table-database_skpi">
-                                    <thead>
-                                        <th width="5%">No</th>
-                                        <th>Nama Mahasiswa</th>
-                                        <th>NPM</th>
-                                        <th>Program Studi</th>
-                                        <th>Tanggal Pengajuan</th>
-                                        <th width="12%"><i class="fa fa-cogs"></i> Aksi</th>
-                                    </thead>
-                                </table>
-                            </div>
-                        </div>
+@include('layouts.alert')
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <ul class="nav nav-pills nav-secondary nav-pills-no-bd" id="pills-tab-without-border" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="pills-home-tab-nobd" data-bs-toggle="pill" href="#pills-home-nobd" role="tab" aria-controls="pills-home-nobd" aria-selected="true">Data Pengajuan SKPI</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-profile-tab-nobd" data-bs-toggle="pill" href="#pills-profile-nobd" role="tab" aria-controls="pills-profile-nobd" aria-selected="false">Database SKPI</a>
+                    </li>
+                </ul>
+                <div class="tab-content mt-2 mb-3" id="pills-without-border-tabContent">
+                    <div class="tab-pane fade show active" id="pills-home-nobd" role="tabpanel" aria-labelledby="pills-home-tab-nobd">
+                        <table class="table table-striped table-print_skpi">
+                            <thead>
+                                <th width="5%">No</th>
+                                <th>Nama Mahasiswa</th>
+                                <th>NPM</th>
+                                <th>Program Studi</th>
+                                <th>Tanggal Pengajuan</th>
+                                <th width="12%"><i class="fa fa-cogs"></i> Aksi</th>
+                            </thead>
+                        </table>
                     </div>
-                    
+                    <div class="tab-pane fade" id="pills-profile-nobd" role="tabpanel" aria-labelledby="pills-profile-tab-nobd">
+                        <table class="table table-striped table-database_skpi">
+                            <thead>
+                                <th width="5%">No</th>
+                                <th>Nama Mahasiswa</th>
+                                <th>NPM</th>
+                                <th>Program Studi</th>
+                                <th>Tanggal Pengajuan</th>
+                                <th width="12%"><i class="fa fa-cogs"></i> Aksi</th>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</div>
 
 @endsection
 

@@ -15,7 +15,6 @@ class TingkatSkkftController extends Controller
      */
     public function index()
     {
-        Session::put('page', 'indexTingkatSkkft');
         $title="Tingkat SKKFT";
         $tingkat_skkft=Tingkat::get();
         return view('tingkat_skkft.index', compact('title','tingkat_skkft'));
@@ -28,7 +27,6 @@ class TingkatSkkftController extends Controller
      */
     public function create()
     {
-        Session::put('page', 'indexTingkatSkkft');
         $title="Tambah data Tingkat SKKFT";
         return view('tingkat_skkft.create', compact('title'));
     }

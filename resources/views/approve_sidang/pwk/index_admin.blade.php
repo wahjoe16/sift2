@@ -34,8 +34,6 @@
     </div>
 </section>
 
-@includeIf('mahasiswa.form')
-
 @endsection
 
 @push('scripts_page')

@@ -49,7 +49,7 @@ class ApproveSeminarController extends Controller
             })
             ->addColumn('approve', function ($data) {
                 return '
-                    <a href="' . route('approve-seminarTmb.store', $data->id) . '" class="btn btn-warning btn-xs btn-flat"><i class="fa fa-edit"></i></a>
+                    <a href="' . route('approve-seminarTmb.store', $data->id) . '" class="btn btn-warning btn-xs"><i class="fas fa-pen"></i></a>
                 ';
             })
             ->rawColumns(['tanggal_pengajuan', 'approve'])
@@ -74,11 +74,11 @@ class ApproveSeminarController extends Controller
             })
             ->addColumn('status', function ($data) {
                 if ($data->status == 0) {
-                    return '<span class="label bg-yellow text-black">Waiting for Approval</span>';
+                    return '<span class="badge badge-warning text-black">Waiting for Approval</span>';
                 } elseif ($data->status == 1) {
-                    return '<span class="label bg-green">Approved</span>';
+                    return '<span class="badge badge-success">Approved</span>';
                 } elseif ($data->status == 2) {
-                    return '<span class="label bg-red">Rejected</span>';
+                    return '<span class="badge badge-danger">Rejected</span>';
                 }
             })
             ->addColumn('approve', function ($data) {
@@ -238,7 +238,6 @@ class ApproveSeminarController extends Controller
             ->filterColumn('semester.semester', function ($query, $keyword) {
                 $query->whereRelation('semester', 'id', $keyword);
             })
-            ->addIndexColumn()
             ->addColumn('tanggal_pengajuan', function ($data) {
                 return tanggal_indonesia($data->created_at, false);
             })
@@ -330,7 +329,7 @@ class ApproveSeminarController extends Controller
             })
             ->addColumn('approve', function ($data) {
                 return '
-                    <a href="' . route('approve-seminarTi.store', $data->id) . '" class="btn btn-warning btn-xs btn-flat"><i class="fa fa-edit"></i></a>
+                    <a href="' . route('approve-seminarTi.store', $data->id) . '" class="btn btn-warning btn-xs"><i class="fas fa-pen"></i></a>
                 ';
             })
             ->rawColumns(['tanggal_pengajuan', 'approve'])
@@ -355,11 +354,11 @@ class ApproveSeminarController extends Controller
             })
             ->addColumn('status', function ($data) {
                 if ($data->status == 0) {
-                    return '<span class="label bg-yellow text-black">Waiting for Approval</span>';
+                    return '<span class="badge badge-warning text-black">Waiting for Approval</span>';
                 } elseif ($data->status == 1) {
-                    return '<span class="label bg-green">Approved</span>';
+                    return '<span class="badge badge-success">Approved</span>';
                 } elseif ($data->status == 2) {
-                    return '<span class="label bg-red">Rejected</span>';
+                    return '<span class="badge badge-danger">Rejected</span>';
                 }
             })
             ->addColumn('approve', function ($data) {
@@ -539,7 +538,7 @@ class ApproveSeminarController extends Controller
             })
             ->addColumn('approve', function ($data) {
                 return '
-                    <a href="' . route('approve-seminarPwk.store', $data->id) . '" class="btn btn-warning btn-xs btn-flat"><i class="fa fa-edit"></i></a>
+                    <a href="' . route('approve-seminarPwk.store', $data->id) . '" class="btn btn-warning btn-xs"><i class="fas fa-pen"></i></a>
                 ';
             })
             ->rawColumns(['tanggal_pengajuan', 'approve'])
@@ -564,11 +563,11 @@ class ApproveSeminarController extends Controller
             })
             ->addColumn('status', function ($data) {
                 if ($data->status == 0) {
-                    return '<span class="label bg-yellow text-black">Waiting for Approval</span>';
+                    return '<span class="badge badge-warning text-black">Waiting for Approval</span>';
                 } elseif ($data->status == 1) {
-                    return '<span class="label bg-green">Approved</span>';
+                    return '<span class="badge badge-success">Approved</span>';
                 } elseif ($data->status == 2) {
-                    return '<span class="label bg-red">Rejected</span>';
+                    return '<span class="badge badge-danger">Rejected</span>';
                 }
             })
             ->addColumn('approve', function ($data) {

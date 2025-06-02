@@ -1,142 +1,142 @@
-@extends('layouts.master')
-
-<!-- Select2 -->
-<link rel="stylesheet" href="{{ asset('AdminLTE-2/bower_components/select2/dist/css/select2.min.css') }}">
+@extends('layouts.dashboard')
 
 @section('content')
 
-<section class="content-header">
-    <h3>Approval Kegiatan SKKFT</h3>
-</section>
+<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+    <div>
+        <h3 class="fw-bold">Approval Kegiatan SKKFT</h3>
+    </div>
+</div>
 
-<section class="content">
-    @includeIf('layouts.alert')
-    <form action="{{ route('approveKegiatan.update', $dataPengajuan->id) }}" class="form-horizontal" method="post">@csrf
-        <div class="row">
-            <div class="col-md-4">
-                <div class="box box-warning">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Informasi Mahasiswa</h3>
+@include('layouts.alert')
+
+<form action="{{ route('approveKegiatan.update', $dataPengajuan->id) }}" class="form-horizontal" method="post">@csrf
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card card-post card-round">
+                <img class="card-img-top" src="{{ asset('/media/unisba.JPG') }}" alt="Card image cap" />
+                <div class="card-body">
+                    <div class="d-flex">
+                        <div class="avatar avatar-xl">
+                            <img src="{{ asset('/user/foto/' . $dataPengajuan->user_skkft->foto) }}" alt="..." class="avatar-img rounded-circle" />
+                        </div>
+                        <div class="info-post ms-2">
+                            <p class="username">{{ $dataPengajuan->user_skkft->nama }}</p>
+                            <p class="date text-muted">{{ $dataPengajuan->user_skkft->nik }}</p>
+                        </div>
                     </div>
-                    <div class="box-body box-profile">
-                        <img class="profile-user-img img-responsive img-circle" src="{{ asset('/user/foto/' . $dataPengajuan->user_skkft->foto) }}" alt="User profile picture">
-                        <h3 class="profile-username text-center">{{ $dataPengajuan->user_skkft->nama }}</h3>
-                        <p class="text-muted text-center">{{ $dataPengajuan->user_skkft->nik }}</p>
-                        <ul class="list-group list-group-unbordered">
-                            <li class="list-group-item">
-                                <p>Program Studi</p>
-                                <b>{{ $dataPengajuan->user_skkft->program_studi }}</b>
-                            </li>
-                            <li class="list-group-item">
-                                <p>Email</p>
-                                <b>{{ $dataPengajuan->user_skkft->email }}</b>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="box box-warning">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Informasi Kegiatan SKKFT</h3>
-                    </div>
-                    <div class="box-body">
-                        <ul class="list-group list-group-unbordered">
-                        <li class="list-group-item">
-                            <b>Nama Kegiatan</b> <p>{{ $dataPengajuan->nama_kegiatan }}</p>
-                        </li>
-                        <li class="list-group-item">
-                            <b>Tanggal Kegiatan</b> <p class="pull-right">{{ tanggal_indonesia($dataPengajuan->tanggal) }}</p>
-                        </li>
-                        <li class="list-group-item">
-                            <b>Tanggal Pengajuan</b> <p class="pull-right">{{ tanggal_indonesia($dataPengajuan->created_at) }}</p>
-                        </li>
-                        <li class="list-group-item">
-                            <b>Kategori</b> <p class="pull-right">{{ $dataPengajuan->categories_skkft->category_name }}</p>
-                        </li>
-                        <li class="list-group-item">
-                            <b>Sub Kategori</b> <p class="pull-right">{{ $dataPengajuan->subcategories_skkft->subcategory_name }}</p>
-                        </li>
-                        <li class="list-group-item">
-                            <b>Tingkat</b> 
-                            @if ($dataPengajuan->tingkat_id != '')
-                                <p class="pull-right">{{ $dataPengajuan->tingkat_skkft->tingkat }}</p>
-                            @else
-                            <p class="pull-right">-</p>
-                            @endif
-                        </li>
-                        <li class="list-group-item">
-                            <b>Prestasi</b> 
-                            @if ($dataPengajuan->prestasi_id != '')
-                                <p class="pull-right">{{ $dataPengajuan->prestasi_skkft->prestasi }}</p>
-                            @else
-                            <p class="pull-right">-</p>
-                            @endif
-                        </li>
-                        <li class="list-group-item">
-                            <b>Jabatan</b> 
-                            @if ($dataPengajuan->jabatan_id != '')
-                                <p class="pull-right">{{ $dataPengajuan->jabatan_skkft->jabatan }}</p>
-                            @else
-                            <p class="pull-right">-</p>
-                            @endif
-                        </li>
-                        <li class="list-group-item">
-                            <b>Bukti Fisik</b><a href="{{ url('/mahasiswa/skkft', $dataPengajuan->bukti_fisik) }}" target="_blank" class="pull-right">{{ $dataPengajuan->bukti_fisik }}</a>
-                        </li>
-                    </ul>
-                    </div>
+
+                    <div class="separator-solid"></div>
+                    <h3 class="card-title">Program Studi</h3>
+                    <p class="card-text">{{ $dataPengajuan->user_skkft->program_studi }}</p>
+
+                    <div class="separator-solid"></div>
+                    <h3 class="card-title">Email</h3>
+                    <p class="card-text">{{ $dataPengajuan->user_skkft->email }}</p>
+                    
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group row">
-                    <label for="status_skkft" class="col-lg-2">Status SKKFT</label>
-                    <div class="col-sm-6">
-                        <select class="form-control select2" id="status_skkft" name="status_skkft">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Informasi Kegiatan SKKFT</h5>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Nama Kegiatan</h3>
+                    <p class="card-text">{{ $dataPengajuan->nama_kegiatan }}</p>
+
+                    <div class="separator-solid"></div>
+                    <h3 class="card-title">Tanggal Kegiatan</h3>
+                    <p class="card-text">{{ tanggal_indonesia($dataPengajuan->tanggal) }}</p>
+
+                    <div class="separator-solid"></div>
+                    <h3 class="card-title">Tanggal Pengajuan</h3>
+                    <p class="card-text">{{ tanggal_indonesia($dataPengajuan->created_at) }}</p>
+
+                    <div class="separator-solid"></div>
+                    <h3 class="card-title">Kategori</h3>
+                    <p class="card-text">{{ $dataPengajuan->categories_skkft->category_name }}</p>
+
+                    <div class="separator-solid"></div>
+                    <h3 class="card-title">Sub Kategori</h3>
+                    <p class="card-text">{{ $dataPengajuan->subcategories_skkft->subcategory_name }}</p>
+
+                    <div class="separator-solid"></div>
+                    <h3 class="card-title">Tingkat</h3>
+                    <p class="card-text">
+                        @if ($dataPengajuan->tingkat_id != '')
+                            {{ $dataPengajuan->tingkat_skkft->tingkat }}
+                        @else
+                        -
+                        @endif
+                    </p>
+
+                    <div class="separator-solid"></div>
+                    <h3 class="card-title">Prestasi</h3>
+                    <p class="card-text">
+                        @if ($dataPengajuan->prestasi_id != '')
+                            {{ $dataPengajuan->prestasi_skkft->prestasi }}
+                        @else
+                        -
+                        @endif
+                    </p>
+
+                    <div class="separator-solid"></div>
+                    <h3 class="card-title">Jabatan</h3>
+                    <p class="card-text">
+                        @if ($dataPengajuan->jabatan_id != '')
+                            {{ $dataPengajuan->jabatan_skkft->jabatan }}
+                        @else
+                        -
+                        @endif
+                    </p>
+
+                    <div class="separator-solid"></div>
+                    <h3 class="card-title">Bukti Fisik</h3>
+                    <p class="card-text">
+                        <a href="{{ url('/mahasiswa/skkft', $dataPengajuan->bukti_fisik) }}">{{ $dataPengajuan->bukti_fisik }}</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Approval SKKFT</h5>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="status_skkft">Status SKKFT</label>
+                        <select class="form-control" id="status_skkft" name="status_skkft">
                             <option value="">-- Pilih --</option>
                             <option value="1" @if($dataPengajuan->status == 1) selected @endif>Diterima</option>
                             <option value="2" @if($dataPengajuan->status == 2) selected @endif>Ditolak</option>
                         </select>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputError" class="col-lg-2">Keterangan</label>
-                    <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="inputError" class="col-lg-2">Keterangan</label>
                         <textarea name="keterangan" id="inputError" class="form-control @error('keterangan') is-invalid @enderror" rows="3" placeholder="Masukan Keterangan"></textarea>
                         @error('keterangan') <span class="help-block">{{$message}}</span> @enderror
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="status_skpi" class="col-lg-2">Status SKPI</label>
-                    <div class="col-sm-6">
-                        <input type="checkbox" name="status_skpi" value="1" @if($dataPengajuan->status_skpi == 1) checked @endif>
+                    <div class="form-group">
+                        <label for="status_skpi" class="col-lg-2">Status SKPI</label>
+                        <div class="col-sm-6">
+                            <input type="checkbox" name="status_skpi" value="1" @if($dataPengajuan->status_skpi == 1) checked @endif>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-2">
-                <button type="submit" class="btn btn-info btn-flat mr-2">Simpan</button>
-                <a href="{{ route('dashboardSkkft.index') }}" class="btn btn-light">Batal</a>
-            </div>
-            <div class="col-sm-10">
-
-            </div>
+    </div>
+    <div class="row">
+        <div class="btn-groups">
+            <button type="submit" class="btn btn-info mr-2">Simpan</button>
+            <a href="{{ route('dashboardSkkft.index') }}" class="btn btn-light">Batal</a>
         </div>
-    </form>
-</section>
+    </div>
+</form>
 
 @endsection
-
-@push('scripts_page')
-    <!-- Select2 -->
-    <script src="{{ asset('AdminLTE-2/bower_components/select2/dist/js/select2.full.min.js') }}"></script>
-    <script>
-        $(function() {
-            //Initialize Select2 Elements
-            $('.select2').select2()
-        })
-    </script>
-@endpush

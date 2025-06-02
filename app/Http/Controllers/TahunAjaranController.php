@@ -12,7 +12,6 @@ class TahunAjaranController extends Controller
     {
         $title = 'Hapus Tahun Akademik!';
         $text = "Apakah anda yakin?";
-        Session::put('page', 'indexTa');
         confirmDelete($title, $text);
 
         return view('tahun_ajaran.index');
@@ -27,8 +26,8 @@ class TahunAjaranController extends Controller
             ->addIndexColumn()
             ->addColumn('aksi', function ($data) {
                 return '
-                    <a href="' . route('tahunajaran.edit', $data->id) . '" class="btn btn-xs btn-warning btn-flat"><i class="fa fa-edit"></i></a>
-                    <a href="' . route('tahunajaran.destroy', $data->id) . '" class="btn btn-xs btn-danger btn-flat" data-confirm-delete="true"><i class="fa fa-trash"></i></a>  
+                    <a href="' . route('tahunajaran.edit', $data->id) . '" class="btn btn-xs btn-warning"><i class="fas fa-pen"></i></a>
+                    <a href="' . route('tahunajaran.destroy', $data->id) . '" class="btn btn-xs btn-danger" data-confirm-delete="true"><i class="fas fa-trash"></i></a>  
             ';
             })
             ->rawColumns(['aksi'])

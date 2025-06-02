@@ -1,72 +1,81 @@
-@extends('layouts.master')
+@extends('layouts.dashboard')
 
 @section('content')
 
-<section class="content">
-    @includeIf('layouts.alert')
-    <h3>Detail Arsip</h3>
-    <div class="row">
-        <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="box box-info">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Informasi Arsip</h3>
-                </div>
-                <div class="box-body">
-                    <strong><i class="fa fa-tag margin-r-5"></i> ID Arsip</strong>
-                    <p class="text-muted">{{ $data->id }}</p>
-                    <hr>
-                    <strong><i class="fa fa-book margin-r-5"></i> Nama Arsip</strong>
-                    <p class="text-muted">{{ $data->name }}</p>
-                    <hr>
-                    <strong><i class="fa fa-folder margin-r-5"></i> Bidang</strong>
-                    <p class="text-muted">{{ $data->section->name }}</p>
-                    <hr>
-                    <strong><i class="fa fa-cube margin-r-5"></i> Kategori</strong>
-                    <p class="text-muted">{{ $data->category_archive->name }}</p>
-                    <hr>
-                    <strong><i class="fa fa-navicon margin-r-5"></i> Sub Kategori</strong>
-                    @if ($data->subcategory_archive_id != '')
-                    <p class="text-muted">{{ $data->subcategory_archive->name }}</p>
-                    @else
-                    <p>-</p>
-                    @endif
-                    <hr>
-                    <strong><i class="fa fa-hourglass margin-r-5"></i> Tahun Akademik</strong>
-                    <p class="text-muted">{{ $data->tahun_ajaran->tahun_ajaran }}</p>
-                    <hr>
-                    <strong><i class="fa fa-hourglass-end margin-r-5"></i> Semester</strong>
-                    <p class="text-muted">{{ $data->semester->semester }}</p>
-                    <hr>
-                    <strong><i class="fa fa-hourglass-end margin-r-5"></i> Tanggal Upload</strong>
-                    <p class="text-muted">{{ tanggal_indonesia($data->created_at) }}</p>
-                    <hr>
-                    {{-- <strong><i class="fa fa-user margin-r-5"></i> Diupload Oleh</strong>
-                    <p class="text-muted">{{ $data['user_upload']['nama'] }}</p>
-                    <hr> --}}
-                    <strong><i class="fa fa-user margin-r-5"></i> Dokumen atas Dosen</strong>
-                    @foreach ($data->users as $item)
-                    <p class="text-muted">{{ $item->nama }}</p><br>
-                    @endforeach
+<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+    <div>
+        <h3>Detail Arsip Fakultas Teknik</h3>
+    </div>
+</div>
 
-                    <hr>
-                </div>
+@include('layouts.alert')
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5>Informasi Arsip</h5>
             </div>
-        </div>
-        <div class="col-md-8 col-sm-6 col-xs-12">
-            <div class="box box-info">
-                <div class="box-header with-border">
-                    <h4>Nama File : {{ $data->file }}</h4>
-                </div>
-                <div class="box-body">
-                    <iframe src="{{ asset('file/archives/'.$data->file) }}" frameborder="0" width="700" height="500"></iframe>
-                </div>
+            <div class="card-body">
+                <h3 class="card-title"> ID Arsip</h3>
+                <p class="card-text">{{ $data->id }}</p>
+
+                <div class="separator-solid"></div>
+                <h3 class="card-title">Nama Arsip</h3>
+                <p class="card-text">{{ $data->name }}</p>
+
+                <div class="separator-solid"></div>
+                <h3 class="card-title">Bidang</h3>
+                <p class="card-text">{{ $data->section->name }}</p>
+
+                <div class="separator-solid"></div>
+                <h3 class="card-title">Kategori</h3>
+                <p class="card-text">{{ $data->category_archive->name }}</p>
+
+                <div class="separator-solid"></div>
+                <h3 class="card-title">Sub Kategori</h3>
+                <p class="card-text">
+                    @if ($data->subcategory_archive_id != '')
+                    {{ $data->subcategory_archive->name }}
+                    @else
+                    -
+                    @endif
+                </p>
+
+                <div class="separator-solid"></div>
+                <h3 class="card-title">Tahun Akademik</h3>
+                <p class="card-text">{{ $data->tahun_ajaran->tahun_ajaran }}</p>
+
+                <div class="separator-solid"></div>
+                <h3 class="card-title">Semester</h3>
+                <p class="card-text">{{ $data->semester->semester }}</p>
+
+                <div class="separator-solid"></div>
+                <h3 class="card-title">Tanggal Upload</h3>
+                <p class="card-text">{{ tanggal_indonesia($data->created_at) }}</p>
+
+                <div class="separator-solid"></div>
+                <h3 class="card-title">Dokumen atas Dosen</h3>
+                <p class="card-text">
+                    @foreach ($data->users as $item)
+                    <ul>
+                        <li>{{ $item->nama }}</li>
+                    </ul>
+                    @endforeach
+                </p>
             </div>
         </div>
     </div>
-</section>
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5>File Arsip : {{ $data->file }}</h5>
+            </div>
+            <div class="card-body">
+                <iframe src="{{ asset('file/archives/'.$data->file) }}" frameborder="0" width="700" height="500"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
 
 @endsection
-
-@push('scripts_page')
-
-@endpush

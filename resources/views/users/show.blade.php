@@ -1,33 +1,44 @@
-@extends('layouts.master')
+@extends('layouts.dashboard')
 
 @section('content')
 
-<section class="content-header">
-    <h3>Detail Profil {{ $data->nama }}</h3>
-</section>
+<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+    <div>
+        <h3 class="fw-bold">Detail Profil {{ $data->nama }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ID USER {{ $data->id }}}</h3>
+    </div>
+</div>
 
-<section class="content">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box box-info">
-                <div class="box-header with-border">
-                    <h4>Informasi User</h4>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-profile">
+            <div class="card-header" style="background-image: url('assets/img/blogpost.jpg')">
+                <div class="profile-picture">
+                    <div class="avatar avatar-xxl">
+                        <img src="{{ asset('/user/foto/' . $data->foto) }}" alt="..." class="avatar-img rounded-circle" />
+                    </div>
                 </div>
-                <div class="box-body box-profile">
-                    <img class="profile-user-img img-responsive img-circle" src="{{ asset('/user/foto/' . $data->foto) }}" alt="">
-                    <h3 class="profile-username text-center">{{ $data->nama }}</h3>
-                    <p class="text-muted text-center">{{ $data->nik }}</p>
-                    <ul class="list-group list-group-unbordered">
-                        <li class="list-group-item">
-                            <p class="text-center">Program Studi</p>
-                            <p class="text-center"><b>{{ $data->program_studi }}</b></p>
-                        </li>
-                        <li class="list-group-item">
-                            <p class="text-center">Email</p>
-                            <p class="text-center"><b>{{ $data->email }}</b></p>
-                        </li>
-                        <li class="list-group-item">
-                            <p class="text-center">Jabatan</p>
+            </div>
+            <div class="card-body">
+                <div class="user-profile text-center">
+                    <div class="name">{{ $data->nama }}</div>
+                    <div class="job">{{ $data->program_studi }}</div>
+                    <div class="desc">{{ $data->nik }}</div>
+                    
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="row user-stats text-center">
+                    <div class="col">
+                        <div class="number">Program Studi</div>
+                        <div class="title"><strong>{{ $data->program_studi }}</strong></div>
+                    </div>
+                    <div class="col">
+                        <div class="number">Email</div>
+                        <div class="title"><strong>{{ $data->email }}</strong></div>
+                    </div>
+                    <div class="col">
+                        <div class="number">Jabatan</div>
+                        <div class="title">
                             @if ($data->level == 1)
                             <p class="text-center"><b>Tenaga Kependidikan</b></p>
                             @elseif ($data->level == 2)
@@ -35,19 +46,18 @@
                             @elseif ($data->level == 3)
                             <p class="text-center"><b>Mahasiswa</b></p>
                             @endif
-
-                        </li>
-                    </ul>
-                </div>
-                <div class="box-footer">
-                    <form action="{{ route('user-password.reset', $data->id) }}" method="post">
-                        @csrf
-                        <button class="btn btn-sm btn-flat btn-danger">Reset Password</button>
-                    </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</div>
+<div class="row">
+    <form action="{{ route('user-password.reset', $data->id) }}" method="post">
+        @csrf
+        <button class="btn btn-danger">Reset Password</button>
+    </form>
+</div>
 
 @endsection

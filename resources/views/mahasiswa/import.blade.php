@@ -1,39 +1,40 @@
-@extends('layouts.master')
+@extends('layouts.dashboard')
 
 @section('content')
 
-<section class="content">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box box-widget">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Import data mahasiswa</h3>
-                </div>
-                <div class="box-body">
-                    <form action="{{ route('mahasiswa.import') }}" method="post" enctype="multipart/form-data">
-                        @csrf
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Import data mahasiswa</h3>
+            </div>
+            <div class="card-body">
+                <form action="{{ route('mahasiswa.import') }}" method="post" enctype="multipart/form-data">
+                    @csrf
 
-                        <div class="form-group row">
-                            <label for="file" class="col-sm-2 control-label">File Excel</label>
+                    <div class="form-group row">
+                        <label for="file" class="col-sm-2 control-label">File Excel</label>
 
-                            <div class="col-sm-10">
-                                <input type="file" name="file" class="dropify" id="file">
-                            </div>
+                        <div class="col-sm-10">
+                            <input type="file" name="file" class="dropify" id="file">
                         </div>
-                        <div class="form-group row">
-                            <div class="col-sm-2"></div>
-                            <div class="col-sm-10">
-                                <button class="btn btn-sm btn-flat btn-primary"><i class="fa fa-save"></i> Simpan</button>
-                                <a href="{{ route('mahasiswa.index') }}" class="btn btn-danger btn-sm btn-flat"><i class="fa fa-arrow-circle-left"></i> Batal</a>
-                            </div>
-
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-10">
+                            <button class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
+                            <a href="{{ route('mahasiswa.index') }}" class="btn btn-danger"><i class="fa fa-arrow-circle-left"></i> Batal</a>
                         </div>
-                    </form>
-                </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <h4><a href="{{ asset('') }}">Download file sample untuk import data mahasiswa</a></h4>
             </div>
         </div>
     </div>
-</section>
+</div>
 
 @endsection
 

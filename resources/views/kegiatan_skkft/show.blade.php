@@ -1,138 +1,122 @@
-@extends('layouts.master')
+@extends('layouts.dashboard')
 
 @section('content')
 
-<section class="content">
-    @includeIf('layouts.alert')
-    <h3>Detail Kegiatan SKKFT</h3>
-    <div class="row">
-        <div class="col-md-8">
-            <div class="box box-info">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Informasi Kegiatan SKKFT</h3>
-                </div>
-                <div class="box-body">
-                    <ul class="list-group list-group-unbordered">
-                        <li class="list-group-item">
-                            <b>Nama Kegiatan</b> <p class="pull-right">{{ $kegiatan->nama_kegiatan }}</p>
-                        </li>
-                        <li class="list-group-item">
-                            <b>Tanggal Kegiatan</b> <p class="pull-right">{{ tanggal_indonesia($kegiatan->tanggal) }}</p>
-                        </li>
-                        <li class="list-group-item">
-                            <b>Kategori</b> <p class="pull-right">{{ $kegiatan->categories_skkft->category_name }}</p>
-                        </li>
-                        <li class="list-group-item">
-                            <b>Sub Kategori</b> <p class="pull-right">{{ $kegiatan->subcategories_skkft->subcategory_name }}</p>
-                        </li>
-                        <li class="list-group-item">
-                            <b>Tingkat</b> 
-                            @if ($kegiatan->tingkat_id != '')
-                                <p class="pull-right">{{ $kegiatan->tingkat_skkft->tingkat }}</p>
-                            @else
-                            <p class="pull-right">-</p>
-                            @endif
-                        </li>
-                        <li class="list-group-item">
-                            <b>Prestasi</b> 
-                            @if ($kegiatan->prestasi_id != '')
-                                <p class="pull-right">{{ $kegiatan->prestasi_skkft->prestasi }}</p>
-                            @else
-                            <p class="pull-right">-</p>
-                            @endif
-                        </li>
-                        <li class="list-group-item">
-                            <b>Jabatan</b> 
-                            @if ($kegiatan->jabatan_id != '')
-                                <p class="pull-right">{{ $kegiatan->jabatan_skkft->jabatan }}</p>
-                            @else
-                            <p class="pull-right">-</p>
-                            @endif
-                        </li>
-                        <li class="list-group-item">
-                            <b>Bukti Fisik</b><a href="{{ url('/mahasiswa/skkft', $kegiatan->bukti_fisik) }}" class="pull-right">{{ $kegiatan->bukti_fisik }}</a>
-                        </li>
-                        <li class="list-group-item">
-                            <b>Status SKKFT</b> 
-                            @if ($kegiatan->status_skkft == 0)
-                                <p class="pull-right"><span class="label bg-yellow text-black">Menunggu Verifikasi</span></p>
-                            @elseif ($kegiatan->status_skkft == 1)
-                                <p class="pull-right"><span class="label bg-green">Diterima</span></p>
-                            @else
-                            <p class="pull-right"><span class="label bg-red">Ditolak</span></p>
-                            @endif
-                        </li>
-                        <li class="list-group-item">
-                            <b>Status SKPI</b> 
-                            @if ($kegiatan->status_skpi == 0)
-                                <p class="pull-right"><span class="label bg-yellow text-black">Menunggu Verifikasi</span></p>
-                            @elseif ($kegiatan->status_skpi == 1)
-                                <p class="pull-right"><span class="label bg-green">Ya</span></p>
-                            @else
-                            <p class="pull-right"><span class="label bg-red">Tidak</span></p>
-                            @endif
-                        </li>
-                        @if ($kegiatan->keterangan != '')
-                            <p class="pull-right">{{ $kegiatan->keterangan }}</p>
-                        @endif
-                    </ul>
-                </div>
-                <div class="box-footer with-border">
-                    <a href="{{ route('kegiatan.index') }}" class="btn btn-danger btn-sm btn-flat"><i class="fa fa-backward"></i> Kembali</a>
-                    <a href="{{ route('kegiatan.edit', $kegiatan->id) }}" class="btn btn-warning btn-sm btn-flat"><i class="fa fa-edit"></i> Edit</a>
-                </div>
+<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+    <div>
+        <h3 class="fw-bold">Detail Kegiatan SKKFT</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5>Informasi Kegiatan</h5>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Nama Kegiatan</h3>
+                <p class="card-text">{{ $kegiatan->nama_kegiatan }}</p>
+
+                <div class="separator-solid"></div>
+                <h3 class="card-title">Tanggal Kegiatan</h3>
+                <p class="card-text">{{ tanggal_indonesia($kegiatan->tanggal) }}</p>
+
+                <div class="separator-solid"></div>
+                <h3 class="card-title">Tanggal Pengajuan</h3>
+                <p class="card-text">{{ tanggal_indonesia($kegiatan->created_at) }}</p>
+
+                <div class="separator-solid"></div>
+                <h3 class="card-title">Bukti Fisik</h3>
+                <p class="card-text"><a href="{{ url('/mahasiswa/skkft', $kegiatan->bukti_fisik) }}">{{ $kegiatan->bukti_fisik }}</a></p>
+
+                <div class="separator-solid"></div>
+                <h3 class="card-title">Status SKKFT</h3>
+                <p class="card-text">
+                    @if ($kegiatan->status_skkft == 0)
+                        <button type="button" class="btn btn-icon btn-round btn-warning">
+                            <i class="fa fa-exclamation-circle"></i>
+                        </button>&nbsp;Menunggu Approval
+                    @elseif ($kegiatan->status_skkft == 1)
+                        <button type="button" class="btn btn-icon btn-round btn-success">
+                            <i class="fa fa-check"></i>
+                        </button>&nbsp;Diterima
+                    @else
+                        <button type="button" class="btn btn-icon btn-round btn-danger">
+                            <i class="fa fa-xmark"></i>
+                        </button>&nbsp;Ditolak
+                    @endif
+                </p>
+
+                <div class="separator-solid"></div>
+                <h3 class="card-title">Status SKPI</h3>
+                <p class="card-text">
+                    @if ($kegiatan->status_skpi == 0)
+                        <button type="button" class="btn btn-icon btn-round btn-warning">
+                            <i class="fa fa-exclamation-circle"></i>
+                        </button>&nbsp;Menunggu Approval
+                    @elseif ($kegiatan->status_skpi == 1)
+                        <button type="button" class="btn btn-icon btn-round btn-success">
+                            <i class="fa fa-check"></i>
+                        </button>&nbsp;Diterima
+                    @else
+                        <button type="button" class="btn btn-icon btn-round btn-danger">
+                            <i class="fa fa-xmark"></i>
+                        </button>&nbsp;Ditolak
+                    @endif
+                </p>
+
+                <div class="separator-solid"></div>
+                <h3 class="card-title">Keterangan</h3>
+                <p class="card-text">{{ $kegiatan->keterangan }}</p>
             </div>
         </div>
-        {{-- <div class="col-12">
-            <div class="box box-info">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Informasi Kegiatan SKKFT</h3>
-                </div>
-                <div class="box-body">
-                    <strong><i class="fa fa-tag margin-r-5"></i> Nama Kegiatan</strong>
-                    <p class="text-muted">{{ $kegiatan->nama_kegiatan }}</p>
-                    <hr>
-                    <strong><i class="fa fa-book margin-r-5"></i> Tanggal Kegiatan</strong>
-                    <p class="text-muted">{{ tanggal_indonesia($kegiatan->tanggal) }}</p>
-                    <hr>
-                    <strong><i class="fa fa-folder margin-r-5"></i> Kategori</strong>
-                    <p class="text-muted">{{ $kegiatan->categories_skkft->category_name }}</p>
-                    <hr>
-                    <strong><i class="fa fa-cube margin-r-5"></i> Sub Kategori</strong>
-                    <p class="text-muted">{{ $kegiatan->subcategories_skkft->subcategory_name }}</p>
-                    <hr>
-                    <strong><i class="fa fa-navicon margin-r-5"></i> Tingkat</strong>
-                    @if ($kegiatan->tingkat_id != '')
-                    <p class="text-muted"></p>
-                    @else
-                    <p>-</p>
-                    @endif
-                    <hr>
-                    <strong><i class="fa fa-hourglass margin-r-5"></i> Prestasi</strong>
-                    @if ($kegiatan->prestasi_id != '')
-                    <p class="text-muted">{{ $kegiatan->prestasi_skkft->prestasi }}</p>
-                    @else
-                    <p>-</p>
-                    @endif
-                    <hr>
-                    <strong><i class="fa fa-hourglass-end margin-r-5"></i> Jabatan</strong>
-                    @if ($kegiatan->jabatan_id != '')
-                    <p class="text-muted">{{ $kegiatan->jabatan_skkft->jabatan }}</p>
-                    @else
-                    <p>-</p>
-                    @endif
-                    <hr>
-                    <strong><i class="fa fa-hourglass-end margin-r-5"></i> Bukti Fisik</strong>
-                    <p class="text-muted"><a href="{{ url('/mahasiswa/skkft', $kegiatan->bukti_fisik) }}" target="_blank">{{ $kegiatan->bukti_fisik }}</a></p>
-                    <hr>
-                </div>
-            </div>
-        </div> --}}
     </div>
-</section>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5>Kategori Kegiatan</h5>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Kategori</h3>
+                <p class="card-text">{{ $kegiatan->categories_skkft->category_name }}</p>
+
+                <div class="separator-solid"></div>
+                <h3 class="card-title">Sub Kategori</h3>
+                <p class="card-text">{{ $kegiatan->subcategories_skkft->subcategory_name }}</p>
+
+                <div class="separator-solid"></div>
+                <h3 class="card-title">Tingkat</h3>
+                <p class="card-text">
+                    @if ($kegiatan->tingkat_id != '')
+                        {{ $kegiatan->tingkat_skkft->tingkat }}
+                    @else
+                    -
+                    @endif
+                </p>
+
+                <div class="separator-solid"></div>
+                <h3 class="card-title">Prestasi</h3>
+                <p class="card-text">
+                    @if ($kegiatan->prestasi_id != '')
+                        {{ $kegiatan->prestasi_skkft->prestasi }}
+                    @else
+                    -
+                    @endif
+                </p>
+
+                <div class="separator-solid"></div>
+                <h3 class="card-title">Jabatan</h3>
+                <p class="card-text">
+                    @if ($kegiatan->jabatan_id != '')
+                        {{ $kegiatan->jabatan_skkft->jabatan }}
+                    @else
+                    -
+                    @endif
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
 
 @endsection
-
-@push('scripts_page')
-
-@endpush

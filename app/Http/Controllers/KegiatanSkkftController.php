@@ -51,7 +51,7 @@ class KegiatanSkkftController extends Controller
         $this->validate($request, [
             'category_id' =>'required',
             'subcategory_id' =>'required',
-            'nama_kegiatan' =>'required',
+            'nama_kegiatan' =>'required|min:30',
             'tanggal' =>'required',
             'bukti_fisik' =>'required|mimes:pdf|max:1000'
         ],[

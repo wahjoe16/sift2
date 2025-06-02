@@ -10,7 +10,6 @@ class ProfesiAlumniController extends Controller
 {
     public function index()
     {
-        Session::put('page', 'indexProfesi');
         $data = ProfesiAlumni::get();
         return view('profesi_alumni.index', compact('data'));
     }

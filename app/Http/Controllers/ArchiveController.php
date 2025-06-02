@@ -33,7 +33,6 @@ class ArchiveController extends Controller
         $text = "Anda yakin akan menghapus arsip?";
         confirmDelete($title2, $text);
         $title = "Tambah data Arsip";
-        Session::put('page', 'indexArsip');
         return view('archive.index', compact('title', 'ta', 'smt', 'category', 'subcategory'));
     }
 
@@ -78,14 +77,13 @@ class ArchiveController extends Controller
             ->filterColumn('subcategory_archives.name', function ($query, $keyword) {
                 $query->whereRelation('subcategory_archive', 'id', $keyword);
             })
-            ->addIndexColumn()
             ->addColumn('action', function ($data) {
                 $path = asset("/file/archives/$data->file");
                 return '
-                <a href="' . route('ft-arsip.show', $data->id) . '" target="_blank" class="btn btn-info btn-flat btn-sm"><i class="fa fa-search"></i></a>
-                <a href="' . route('ft-arsip.download', $data->id) . '" class="btn btn-primary btn-flat btn-sm"><i class="fa fa-download"></i></a>
-                <a href="' . route('ft-arsip.edit', $data->id) . '" class="btn btn-warning btn-flat btn-sm"><i class="fa fa-edit"></i></a>
-                <a href="' . route('ft-arsip.destroy', $data->id) . '" class="btn btn-danger btn-flat btn-sm" data-confirm-delete="true"><i class="fa fa-trash"></i></a>
+                <a href="' . route('ft-arsip.show', $data->id) . '" target="_blank" class="btn btn-info btn-xs"><i class="fas fa-search"></i></a>
+                <a href="' . route('ft-arsip.download', $data->id) . '" class="btn btn-primary btn-xs"><i class="fas fa-download"></i></a>
+                <a href="' . route('ft-arsip.edit', $data->id) . '" class="btn btn-warning btn-xs"><i class="fas fa-pen"></i></a>
+                <a href="' . route('ft-arsip.destroy', $data->id) . '" class="btn btn-danger btn-xs" data-confirm-delete="true"><i class="fas fa-trash"></i></a>
             ';
             })
             ->rawColumns(['action', 'file'])
@@ -149,17 +147,16 @@ class ArchiveController extends Controller
             ->filterColumn('subcategory_archives.name', function ($query, $keyword) {
                 $query->whereRelation('subcategory', 'id', $keyword);
             })
-            ->addIndexColumn()
             ->addColumn('action', function ($data) {
                 $path = asset("/file/archives/$data->file");
                 return '
-                <a href="' . route('ft-arsip.show', $data->id) . '" target="_blank" class="btn btn-info btn-flat btn-sm"><i class="fa fa-search"></i></a>
-                <a href="' . route('ft-arsip.download', $data->id) . '" class="btn btn-primary btn-flat btn-sm"><i class="fa fa-download"></i></a>
-                <a href="' . route('ft-arsip.edit', $data->id) . '" class="btn btn-warning btn-flat btn-sm"><i class="fa fa-edit"></i></a>
-                <a href="' . route('ft-arsip.destroy', $data->id) . '" class="btn btn-danger btn-flat btn-sm" data-confirm-delete="true"><i class="fa fa-trash"></i></a>
+                <a href="' . route('ft-arsip.show', $data->id) . '" target="_blank" class="btn btn-info btn-xs"><i class="fas fa-search"></i></a>
+                <a href="' . route('ft-arsip.download', $data->id) . '" class="btn btn-primary btn-xs"><i class="fas fa-download"></i></a>
+                <a href="' . route('ft-arsip.edit', $data->id) . '" class="btn btn-warning btn-xs"><i class="fas fa-pen"></i></a>
+                <a href="' . route('ft-arsip.destroy', $data->id) . '" class="btn btn-danger btn-xs" data-confirm-delete="true"><i class="fas fa-trash"></i></a>
             ';
             })
-            ->rawColumns(['select_all', 'action'])
+            ->rawColumns(['action'])
             ->make(true);
     }
 
@@ -332,7 +329,7 @@ class ArchiveController extends Controller
             'subcategory_archive_id' => $request['subcategory_archive_id'],
             'tahun_ajaran_id' => $request['tahun_ajaran_id'],
             'semester_id' => $request['semester_id'],
-            'file' => $data['file'],
+            'file' => $data['file'] ?? $request->current_file,
         ]);
         
         $archive->users()->sync($request['dosen_id']);

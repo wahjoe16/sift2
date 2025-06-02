@@ -1,15 +1,21 @@
-<div class="col-md-6 col-sm-6 col-xs-12">
-    <div class="small-box bg-aqua">
-        <div class="inner">
-            <h3>Sidang</h3>
-
-            <p>Dokumentasi Persyaratan</p>
+<div class="col-sm-6 col-md-3">
+    <a href="{{ route('dashboard.sidang') }}">
+        <div class="card card-stats card-round">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="icon-big text-center">
+                            <i class="icon-notebook text-warning"></i>
+                        </div>
+                    </div>
+                    <div class="col-8 col-stats">
+                        <div class="numbers">
+                            <p class="card-category">Dokumentasi Persyaratan</p>
+                            <h4 class="card-title">Sidang</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="icon">
-            <i class="fa fa-graduation-cap"></i>
-        </div>
-        <a href="{{ route('dashboard.sidang') }}" class="small-box-footer">
-            Klik Disini <i class="fa fa-arrow-circle-right"></i>
-        </a>
-    </div>
+    </a>
 </div>

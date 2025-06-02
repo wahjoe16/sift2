@@ -76,9 +76,9 @@ class MyArchiveController extends Controller
             ->addIndexColumn()
             ->addColumn('action', function ($data) {
                 return '
-                <a href="' . route('my-archive.show', $data->id) . '" target="_blank" class="btn btn-info btn-flat btn-sm"><i class="fa fa-search"></i></a>
-                <a href="' . route('my-archive.download', $data->id) . '" class="btn btn-primary btn-flat btn-sm" target="_blank"><i class="fa fa-download"></i></a>
-                <a href="' . route('my-archive.add', $data->id) . '" class="btn btn-success btn-flat btn-sm"><i class="fa fa-plus"></i></a>
+                <a href="' . route('my-archive.show', $data->id) . '" target="_blank" class="btn btn-info btn-xs"><i class="fas fa-search"></i></a>
+                <a href="' . route('my-archive.download', $data->id) . '" class="btn btn-primary btn-xs" target="_blank"><i class="fas fa-download"></i></a>
+                <a href="' . route('my-archive.add', $data->id) . '" class="btn btn-success btn-xs"><i class="fas fa-plus"></i></a>
             ';
             })
             ->rawColumns(['action', 'file'])
@@ -159,10 +159,10 @@ class MyArchiveController extends Controller
             ->addColumn('aksi', function ($myarchive) {
                 $path = asset("/file/archives/$myarchive->file");
                 return '
-                <a href="' . route('my-archive.show', $myarchive->id) . '" target="_blank" class="btn btn-info btn-flat btn-sm"><i class="fa fa-search"></i></a>
-                <a href="' . route('my-archive.download', $myarchive->id) . '" class="btn btn-primary btn-flat btn-sm"><i class="fa fa-download"></i></a>
-                <a href="' . route('my-archive.edit', $myarchive->id) . '" class="btn btn-warning btn-flat btn-sm"><i class="fa fa-edit"></i></a>
-                <a href="' . route('my-archive.destroy', $myarchive->id) . '" class="btn btn-danger btn-flat btn-sm" data-confirm-delete="true"><i class="fa fa-trash"></i></a>
+                <a href="' . route('my-archive.show', $myarchive->id) . '" target="_blank" class="btn btn-info btn-xs"><i class="fas fa-search"></i></a>
+                <a href="' . route('my-archive.download', $myarchive->id) . '" class="btn btn-primary btn-xs"><i class="fas fa-download"></i></a>
+                <a href="' . route('my-archive.edit', $myarchive->id) . '" class="btn btn-warning btn-xs"><i class="fas fa-pen"></i></a>
+                <a href="' . route('my-archive.destroy', $myarchive->id) . '" class="btn btn-danger btn-xs" data-confirm-delete="true"><i class="fas fa-trash"></i></a>
                 ';
             })
             ->rawColumns(['select_all', 'aksi'])
@@ -344,7 +344,6 @@ class MyArchiveController extends Controller
             ->filterColumn('subcategory_archives.name', function ($query, $keyword) {
                 $query->whereRelation('subcategory', 'id', $keyword);
             })
-            ->addIndexColumn()
             ->addColumn('action', function ($data) {
                 return '
                     <a href="' . route('my-archive.show', $data->id) . '" target="_blank" class="btn btn-info btn-flat btn-sm"><i class="fa fa-search"></i></a>

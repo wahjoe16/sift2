@@ -11,6 +11,7 @@ use App\Models\CategorySkkft;
 use App\Models\DaftarSeminar;
 use App\Models\DaftarSidang;
 use App\Models\Kegiatan;
+use App\Models\SertifikatSkkft;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,7 +22,37 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('home');
+        $arsip = Archive::count();
+        $alumni = User::where('status_aktif', 0)->count();
+        // dd($user);
+        return view('home', [
+            'arsip' => $arsip, 'alumni' => $alumni,
+        ]);
+    }
+
+    public function getDataSertifikatSkkft()
+    {
+        $data = SertifikatSkkft::select('sertifikat_skkft.id', 'sertifikat_skkft.user_id', 'users.nik', 'users.nama', 'users.foto', 'users.program_studi')
+                ->leftJoin('users', 'users.id', 'sertifikat_skkft.user_id')
+                ->where('status', 1)->get();
+                
+        return datatables()
+            ->of($data)
+            ->addColumn('foto', function($data){
+                $path = asset("/user/foto/$data->foto");
+                return '
+                    <div class="avatar-lg text-center">
+                        <img src=' . $path . ' class="avatar-img rounded-circle" />
+                    </div>
+                ';
+            })
+            ->addColumn('aksi', function ($data) {
+                return '
+                    <a href="' . route('dashboardMahasiswa.show', $data->user_id) . '"><i class="fas fa-search"></i></a>
+                ';
+            })
+            ->rawColumns(['foto', 'aksi'])
+            ->make(true);
     }
 
     public function indexSidang(MahasiswaPieChart $mahasiswaPieChart, DosenPieChart $dosenPieChart, TrenLulusanChart $trenLulusanChart)

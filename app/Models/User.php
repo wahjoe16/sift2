@@ -36,7 +36,10 @@ class User extends Authenticatable
         'email',
         'telepon',
         'status_aktif',
-        'tahun_lulus'
+        'tahun_lulus',
+        'foto',
+        'tempat_lahir',
+        'tanggal_lahir'
     ];
 
     protected $guard = 'alumni';

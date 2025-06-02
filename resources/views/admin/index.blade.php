@@ -1,42 +1,63 @@
-@extends('layouts.master')
+@extends('layouts.dashboard')
 
 @section('content')
 
-<section class="content">
-    @includeIf('layouts.alert')
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box">
-                <div class="box-header with-border">
-                    <div class="btn-group">
-                        <button onclick="addForm('{{ route('admin.store') }}')" class="btn btn-success btn-sm btn-flat"><i class="fa fa-plus-circle"></i> Tambah</button>
-                        <button onclick="deleteSelected('{{ route('admin.delete-selected') }}')" class="btn btn-danger btn-sm btn-flat"><i class="fa fa-trash"></i> Hapus</button>
-                    </div>
+<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+    <div>
+        <h3 class="fw-bold">Data Admin</h3>
+    </div>
+</div>
+
+@includeIf('layouts.alert')
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="btn-group">
+                    <button onclick="addForm('{{ route('admin.store') }}')" class="btn btn-success btn-sm"><i class="fas fa-plus-circle"></i> Tambah</button>
+                    <button onclick="deleteSelected('{{ route('admin.delete-selected') }}')" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Hapus</button>
                 </div>
-                <div class="box-body table-responsive">
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
                     <form action="" method="post" class="form-admin">@csrf
-                        <table class="table table-striped table-bordered table-admin">
+                        <table id="basic-datatables" class="display table table-striped table-hover table-admin">
                             <thead>
-                                <th>
-                                    <input type="checkbox" name="select_all" id="select_all">
-                                </th>
-                                <th width="5%">No</th>
-                                <th>Foto Profil</th>
-                                <th>NIK</th>
-                                <th>Nama</th>
-                                <th>Email</th>
-                                <th>Status Super Admin</th>
-                                <th width="15%"><i class="fa fa-cogs"></i> Aksi</th>
+                                <tr>
+                                    <th>
+                                        <input type="checkbox" name="select_all" id="select_all">
+                                    </th>
+                                    <th>Foto Profil</th>
+                                    <th>NIK</th>
+                                    <th>Nama</th>
+                                    <th>Email</th>
+                                    <th>Status Super Admin</th>
+                                    <th width="5%"><i class="fas fa-cogs"></i></th>
+                                </tr>
                             </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>
+                                        <input type="checkbox" name="select_all" id="select_all">
+                                    </th>
+                                    <th>Foto Profil</th>
+                                    <th>NIK</th>
+                                    <th>Nama</th>
+                                    <th>Email</th>
+                                    <th>Status Super Admin</th>
+                                    <th width="5%"><i class="fas fa-cogs"></i></th>
+                                </tr>
+                            </tfoot>
                         </table>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</div>
 
-@includeIf('admin.form')
+@include('admin.form')
 
 @endsection
 
@@ -55,11 +76,6 @@
             },
             columns: [{
                     data: 'select_all',
-                },
-                {
-                    data: 'DT_RowIndex',
-                    searchable: false,
-                    sortable: false
                 },
                 {
                     data: 'foto'

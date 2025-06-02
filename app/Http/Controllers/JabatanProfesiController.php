@@ -16,7 +16,6 @@ class JabatanProfesiController extends Controller
      */
     public function index()
     {
-        Session::put('page', 'indexJabatanProfesi');
         $data = JabatanProfesi::get();
         return view('jabatan_profesi.index', compact('data'));
     }
@@ -28,7 +27,6 @@ class JabatanProfesiController extends Controller
      */
     public function create()
     {
-        Session::put('page', 'indexJabatanProfesi');
         $profesi = ProfesiAlumni::get();
         return view('jabatan_profesi.create', compact('profesi'));
     }

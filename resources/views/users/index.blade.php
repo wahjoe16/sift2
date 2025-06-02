@@ -1,32 +1,47 @@
-@extends('layouts.master')
+@extends('layouts.dashboard')
 
 @section('content')
 
-<section class="content">
-    @includeIf('layouts.alert')
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box">
-                <div class="box-body table-responsive">
-                    <form action="" method="post" class="form-users">
-                        @csrf
-                        <table class="table table-striped table-bordered table-users">
-                            <thead>
-                                <th width="5%">No</th>
+<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+    <div>
+        <h3 class="fw-bold">All Users</h3>
+    </div>
+</div>
+
+@includeIf('layouts.alert')
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="basic-datatables" class="display table table-striped table-hover table-users">
+                        <thead>
+                            <tr>
                                 <th>Foto Profil</th>
                                 <th>NIK/NPM</th>
                                 <th>Nama</th>
                                 <th>Program Studi</th>
                                 <th>Jabatan</th>
-                                <th width="7%"><i class="fa fa-cogs"></i> Aksi</th>
-                            </thead>
-                        </table>
-                    </form>
+                                <th width="5%"><i class="fas fa-cogs"></i></th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Foto Profil</th>
+                                <th>NIK/NPM</th>
+                                <th>Nama</th>
+                                <th>Program Studi</th>
+                                <th>Jabatan</th>
+                                <th width="5%"><i class="fas fa-cogs"></i></th>
+                            </tr>
+                        </tfoot>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</div>
 
 @endsection
 
@@ -43,11 +58,7 @@
             ajax: {
                 url: '{{ route("users.data") }}',
             },
-            columns: [{
-                    data: 'DT_RowIndex',
-                    searchable: false,
-                    sortable: false
-                },
+            columns: [
                 {
                     data: 'foto'
                 },

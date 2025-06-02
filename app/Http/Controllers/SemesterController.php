@@ -13,7 +13,6 @@ class SemesterController extends Controller
     {
         $title = "Hapus data semester!";
         $text = "Apakah anda yakin?";
-        Session::put('page', 'indexSemester');
         confirmDelete($title, $text);
 
         return view('semester.index');
@@ -28,8 +27,8 @@ class SemesterController extends Controller
             ->addIndexColumn()
             ->addColumn('aksi', function ($data) {
                 return '
-                    <a href="' . route('semester.edit', $data->id) . '" class="btn btn-xs btn-warning btn-flat"><i class="fa fa-edit"></i></a>
-                    <a href="' . route('semester.destroy', $data->id) . '" class="btn btn-xs btn-danger btn-flat" data-confirm-delete="true"><i class="fa fa-trash"></i></a>
+                    <a href="' . route('semester.edit', $data->id) . '" class="btn btn-xs btn-warning"><i class="fas fa-pen"></i></a>
+                    <a href="' . route('semester.destroy', $data->id) . '" class="btn btn-xs btn-danger" data-confirm-delete="true"><i class="fas fa-trash"></i></a>
                 ';
             })
             ->rawColumns(['aksi'])

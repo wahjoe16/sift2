@@ -30,16 +30,16 @@ class UserController extends Controller
 
         $request->validate([
             'nama' => 'required',
-            'program_studi' => 'required_if:level, 2, 3',
+            'program_studi' => 'required_if:level, 3',
             'email' => 'required',
             'telepon' => 'required',
-            'foto' => 'required|mimes:png,jpg',
+            'foto' => 'mimes:png,jpg',
         ], [
             'nama.required' => 'Nama tidak boleh kosong',
             'program_studi.required' => 'Program Studi tidak boleh kosong',
             'email.required' => 'Email tidak boleh kosong',
             'telepon.required' => 'Telepon tidak boleh kosong',
-            'foto.required' => 'Foto tidak boleh kosong',
+            // 'foto.required' => 'Foto tidak boleh kosong',
             'foto.mimes' => 'Foto harus mempunyai format jpg atau png'
         ]);
 
@@ -47,17 +47,35 @@ class UserController extends Controller
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
 
+            // if (!is_null($file)) {
+            //     File::delete(public_path('/user/foto/'. $user->foto));
+            //     $nama = 'user-' . date('Y-m-dHis') . '.' . $file->getClientOriginalExtension();
+            //     $file->move(public_path('/user/foto'), $nama);
+            //     $user->foto = $nama;
+            // } else if (empty($file)) {
+            //     $user->foto = $request->current_user_foto;
+            // } else {
+            //     $user->foto = '';
+            // }
+
             if (!is_null($file)) {
                 File::delete(public_path('/user/foto/'. $user->foto));
                 $nama = 'user-' . date('Y-m-dHis') . '.' . $file->getClientOriginalExtension();
                 $file->move(public_path('/user/foto'), $nama);
-                $user->foto = $nama;
-            } else if (!empty($request->current_user_foto)) {
-                $user->foto = $request->current_user_foto;
-            } else {
-                $user->foto = '';
             }
         }
+
+        // $user->update([
+        //     'nama' => $request->nama,
+        //     'tanggal_lahir' => date('Y-m-d', strtotime($request->tanggal_lahir)),
+        //     'tempat_lahir' => $request->tempat_lahir,
+        //     'email' => $request->email,
+        //     'telepon' => $request->telepon,
+        //     'program_studi' => $request->program_studi,
+        //     'tipe_dosen' => $request->tipe_dosen,
+        //     'jabatan' => $request->jabatan,
+        //     'foto' => $nama ?? $request->current_user_foto
+        // ]);
 
         $user->nama = $request->nama;
         $user->tanggal_lahir = date('Y-m-d', strtotime($request->tanggal_lahir));
@@ -67,6 +85,7 @@ class UserController extends Controller
         $user->program_studi = $request->program_studi;
         $user->tipe_dosen = $request->tipe_dosen;
         $user->jabatan = $request->jabatan;
+        $user->foto = $nama ?? $request->current_user_foto;
 
         $user->save();
         return redirect()->back()->with('success', 'Profil berhasil diubah!','success');
@@ -117,7 +136,11 @@ class UserController extends Controller
             })
             ->addColumn('foto', function ($admin) {
                 $path = asset("/user/foto/$admin->foto");
-                return '<img src=' . $path . ' class="img-circle img-bordered-sm" width="40"/>';
+                return '
+                    <div class="avatar-lg text-center">
+                        <img src=' . $path . ' class="avatar-img rounded-circle" />
+                    </div>
+                ';
             })
             ->addColumn('status_superadmin', function ($admin) {
                 if ($admin->status_superadmin == 1) {
@@ -128,8 +151,8 @@ class UserController extends Controller
             })
             ->editColumn('aksi', function ($admin) {
                 return '
-                    <a href="' . route('admin.edit', $admin->id) . '" class="btn btn-xs btn-warning btn-flat"><i class="fa fa-edit"></i></a>
-                    <a href="' . route('admin.destroy', $admin->id) . '" class="btn btn-xs btn-danger btn-flat" data-confirm-delete="true"><i class="fa fa-trash"></i></a>
+                    <a href="' . route('admin.edit', $admin->id) . '" class="btn btn-xs btn-warning"><i class="fas fa-pen"></i></a>
+                    <a href="' . route('admin.destroy', $admin->id) . '" class="btn btn-xs btn-danger" data-confirm-delete="true"><i class="fas fa-trash"></i></a>
                 ';
             })
             ->rawColumns(['aksi', 'select_all', 'foto', 'status_superadmin'])
@@ -216,19 +239,22 @@ class UserController extends Controller
         $mahasiswa = User::where('level', 3)->get();
         return datatables()
             ->of($mahasiswa)
-            ->addIndexColumn()
             ->addColumn('select_all', function ($mahasiswa) {
                 return '<input type="checkbox" name="id[]" value="' . $mahasiswa->id . '" />';
             })
             ->addColumn('foto', function ($mahasiswa) {
                 $path = asset("/user/foto/$mahasiswa->foto");
-                return '<img src=' . $path . ' class="img-circle img-bordered-sm" width="40"/>';
+                return '
+                    <div class="avatar-lg text-center">
+                        <img src=' . $path . ' class="avatar-img rounded-circle" />
+                    </div>
+                ';
             })
             ->addColumn('aksi', function ($mahasiswa) {
                 return '
-                    <a href="' . route('dashboardMahasiswa.show', $mahasiswa->id) . '" class="btn btn-xs btn-info btn-flat"><i class="fa fa-search"></i></a>
-                    <a href="' . route('mahasiswa.edit', $mahasiswa->id) . '" class="btn btn-xs btn-warning btn-flat"><i class="fa fa-edit"></i></a>
-                    <a href="' . route('mahasiswa.destroy', $mahasiswa->id) . '" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></a>
+                    <a href="' . route('dashboardMahasiswa.show', $mahasiswa->id) . '" class="btn btn-xs btn-info"><i class="fas fa-search"></i></a>
+                    <a href="' . route('mahasiswa.edit', $mahasiswa->id) . '" class="btn btn-xs btn-warning"><i class="fas fa-pen"></i></a>
+                    <a href="' . route('mahasiswa.destroy', $mahasiswa->id) . '" class="btn btn-xs btn-danger"><i class="fas fa-trash"></i></a>
                 ';
             })
             ->rawColumns(['aksi', 'select_all', 'foto'])
@@ -297,12 +323,21 @@ class UserController extends Controller
         return redirect()->back()->with('success', 'Data mahasiswa berhasil dihapus!');
     }
 
+    public function deleteSelectedMahasiswa(Request $request)
+    {
+        foreach ($request->id as $id) {
+            $dosen = User::find($id);
+            $dosen->delete();
+        }
+
+        return redirect()->route('mahasiswa.index')->with('success', 'Data Mahasiswa berhasil dihapus!');
+    }
+
     public function indexDosen()
     {
         $title = 'Delete User!';
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
-        Session::put('page', 'indexDosen');
         return view('dosen.index');
     }
 
@@ -312,19 +347,22 @@ class UserController extends Controller
 
         return datatables()
             ->of($dosen)
-            ->addIndexColumn()
             ->addColumn('select_all', function ($dosen) {
                 return '<input type="checkbox" name="id[]" value="' . $dosen->id . '" />';
             })
             ->addColumn('foto', function ($dosen) {
                 $path = asset("/user/foto/$dosen->foto");
-                return '<img src=' . $path . ' class="img-circle img-bordered-sm" width="40"/>';
+                return '
+                    <div class="avatar-lg text-center">
+                        <img src=' . $path . ' class="avatar-img rounded-circle" />
+                    </div>
+                ';
             })
             ->addColumn('aksi', function ($dosen) {
                 return '
-                    <a href="' . route('dashboardDosen.show', $dosen->id) . '" class="btn btn-xs btn-info btn-flat"><i class="fa fa-search"></i></a>
-                    <a href="' . route('dosen.edit', $dosen->id) . '" class="btn btn-xs btn-warning btn-flat"><i class="fa fa-edit"></i></a>
-                    <a href="' . route('dosen.destroy', $dosen->id) . '" class="btn btn-xs btn-danger btn-flat" data-confirm-delete="true"><i class="fa fa-trash"></i></a>
+                    <a href="' . route('dashboardDosen.show', $dosen->id) . '" class="btn btn-xs btn-info btn-flat"><i class="fas fa-search"></i></a>
+                    <a href="' . route('dosen.edit', $dosen->id) . '" class="btn btn-xs btn-warning btn-flat"><i class="fas fa-pen"></i></a>
+                    <a href="' . route('dosen.destroy', $dosen->id) . '" class="btn btn-xs btn-danger btn-flat" data-confirm-delete="true"><i class="fas fa-trash"></i></a>
                 ';
             })
             ->rawColumns(['aksi', 'select_all', 'foto'])
@@ -578,7 +616,11 @@ class UserController extends Controller
             ->addIndexColumn()
             ->addColumn('foto', function ($data) {
                 $path = asset("/user/foto/$data->foto");
-                return '<img src=' . $path . ' class="img-circle img-bordered-sm" width="40"/>';
+                return '
+                    <div class="avatar-lg text-center">
+                        <img src=' . $path . ' class="avatar-img rounded-circle" />
+                    </div>
+                ';
             })
             ->addColumn('level', function ($data) {
                 if ($data->level == 1) {
@@ -606,20 +648,23 @@ class UserController extends Controller
 
     public function tendikMahasiswa()
     {
-        Session::put('page', 'tendikMahasiswa');
         return view('mahasiswa.tendik');
     }
 
     public function tendikDataMahasiswa()
     {
-        $mahasiswa = User::where('level', 3)->orderBy('nik', 'asc')->get();
+        $mahasiswa = User::where(['level' => 3, 'status_aktif' => 1])->orderBy('nik', 'asc')->get();
 
         return datatables()
             ->of($mahasiswa)
             ->addIndexColumn()
             ->addColumn('foto', function ($mahasiswa) {
                 $path = asset("/user/foto/$mahasiswa->foto");
-                return '<img src=' . $path . ' class="img-circle img-bordered-sm" width="40"/>';
+                return '
+                    <div class="avatar-lg text-center">
+                        <img src=' . $path . ' class="avatar-img rounded-circle" />
+                    </div>
+                ';
             })
             ->addColumn('aksi', function ($mahasiswa) {
                 return '
@@ -632,7 +677,6 @@ class UserController extends Controller
 
     public function tendikDosen()
     {
-        Session::put('page', 'tendikDosen');
         return view('dosen.tendik');
     }
 
@@ -645,7 +689,11 @@ class UserController extends Controller
             ->addIndexColumn()
             ->addColumn('foto', function ($dosen) {
                 $path = asset("/user/foto/$dosen->foto");
-                return '<img src=' . $path . ' class="img-circle img-bordered-sm" width="40"/>';
+                return '
+                    <div class="avatar-lg text-center">
+                        <img src=' . $path . ' class="avatar-img rounded-circle" />
+                    </div>
+                ';
             })
             ->addColumn('aksi', function ($dosen) {
                 return '
@@ -658,7 +706,6 @@ class UserController extends Controller
 
     public function tendikAdmin()
     {
-        Session::put('page', 'tendikAdmin');
         return view('admin.tendik');
     }
 
@@ -671,13 +718,17 @@ class UserController extends Controller
             ->addIndexColumn()
             ->addColumn('foto', function ($admin) {
                 $path = asset("/user/foto/$admin->foto");
-                return '<img src=' . $path . ' class="img-circle img-bordered-sm" width="40"/>';
+                return '
+                    <div class="avatar-lg text-center">
+                        <img src=' . $path . ' class="avatar-img rounded-circle" />
+                    </div>
+                ';
             })
             ->addColumn('status_superadmin', function ($admin) {
                 if ($admin->status_superadmin == 1) {
-                    return 'Aktif';
+                    return '<span class="badge badge-success">Aktif</span>';
                 } else if ($admin->status_superadmin == 0) {
-                    return 'Tidak Aktif';
+                    return '<span class="badge badge-danger">Tidak Aktif</span>';
                 }
             })
             ->addColumn('aksi', function ($admin) {

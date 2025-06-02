@@ -15,7 +15,6 @@ class PrestasiSkkftController extends Controller
      */
     public function index()
     {
-        Session::put('page', 'indexPrestasiSkkft');
         $title="Prestasi SKKFT";
         $prestasi_skkft=PrestasiSkkft::get();
         return view('prestasi_skkft.index', compact('title','prestasi_skkft'));
@@ -28,7 +27,6 @@ class PrestasiSkkftController extends Controller
      */
     public function create()
     {
-        Session::put('page', 'indexPrestasiSkkft');
         $title="Tambah data Prestasi SKKFT";
         return view('prestasi_skkft.create', compact('title'));
     }
@@ -68,7 +66,6 @@ class PrestasiSkkftController extends Controller
      */
     public function edit($id)
     {
-        Session::put('page', 'indexPrestasiSkkft');
         $title="Edit data Prestasi SKKFT";
         $prestasi_skkft = PrestasiSkkft::find($id);
         return view('prestasi_skkft.edit', compact('title','prestasi_skkft'));

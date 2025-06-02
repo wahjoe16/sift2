@@ -36,10 +36,10 @@ class AlumniController extends Controller
             ->addColumn('aksi', function ($data){
                 return '
                     <div class="btn-group">
-                        <a href="'.route('alumni.show', $data->id).'" class="btn btn-sm btn-info"><i class="fa fa-search"></i></a>
-                        <a href="'.route('alumni.edit', $data->id).'" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
-                        <a href="'.route('alumni.destroy', $data->id).'" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
-                        <a href="'.route('alumni.reset-password', $data->id).'" class="btn btn-sm btn-primary"><i class="fa fa-unlock-alt"></i></a>
+                        <a href="'.route('alumni.show', $data->id).'" class="btn btn-xs btn-info"><i class="fas fa-search"></i></a>
+                        <a href="'.route('alumni.edit', $data->id).'" class="btn btn-xs btn-warning"><i class="fas fa-pen"></i></a>
+                        <a href="'.route('alumni.destroy', $data->id).'" class="btn btn-xs btn-danger"><i class="fas fa-trash"></i></a>
+                        <a href="'.route('alumni.reset-password', $data->id).'" class="btn btn-xs btn-primary"><i class="fas fa-unlock-alt"></i></a>
                     </div>
                 ';
             })

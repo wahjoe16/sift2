@@ -21,7 +21,6 @@ class SubcategoryArsipController extends Controller
         $text = "Anda yakin akan menghapus sub kategori arsip?";
         confirmDelete($title2, $text);
         $title = "Tambah Data Sub Kategori Arsip";
-        Session::put('page', 'indexSubCatArsip');
         return view('subcategory_archive.index', compact('title'));
     }
 
@@ -33,8 +32,8 @@ class SubcategoryArsipController extends Controller
             ->addIndexColumn()
             ->addColumn('action', function ($data) {
                 return '
-                <a href="' . route('sub-category-archive.edit', $data->id) . '" class="btn btn-warning btn-flat btn-xs"><i class="fa fa-edit"></i></a>
-                <a href="' . route('sub-category-archive.destroy', $data->id) . '" class="btn btn-danger btn-flat btn-xs" data-confirm-delete="true"><i class="fa fa-trash"></i></a>
+                <a href="' . route('sub-category-archive.edit', $data->id) . '" class="btn btn-warning btn-xs"><i class="fas fa-pen"></i></a>
+                <a href="' . route('sub-category-archive.destroy', $data->id) . '" class="btn btn-danger btn-xs" data-confirm-delete="true"><i class="fas fa-trash"></i></a>
             ';
             })
             ->rawColumns(['action'])
@@ -48,7 +47,7 @@ class SubcategoryArsipController extends Controller
      */
     public function create()
     {
-        $title = "Tambah data sub kategori arsip";
+        $title = "Tambah Data";
         $section = Section::get();
         $category = CategoryArchive::get();
         return view('subcategory_archive.create', compact('title', 'section', 'category'));
@@ -97,7 +96,7 @@ class SubcategoryArsipController extends Controller
      */
     public function edit($id)
     {
-        $title = "Edit data kategori arsip";
+        $title = "Edit Data";
         $data = SubcategoryArchive::find($id);
         $section = Section::get();
         $category = CategoryArchive::get();

@@ -1,32 +1,34 @@
-@extends('layouts.master')
+@extends('layouts.dashboard')
 
 @section('content')
 
-<section class="content-header">
-    <h3>Database Kegiatan SKKFT</h3>
-</section>
-<section class="content">
-    @includeIf('layouts.alert')
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box">
-                <div class="box-body table-responsive">
-                    <table class="table table-striped table-bordered table-kegiatan_skkft">
-                        <thead>
-                            <th width="5%">No</th>
-                            <th>NPM</th>
-                            <th>Nama Mahasiswa</th>
-                            <th>Nama Kegiatan</th>
-                            <th>Kategori</th>
-                            <th>Sub Kategori</th>
-                            <th width="12%"><i class="fa fa-cogs"></i> Aksi</th>
-                        </thead>
-                    </table>
-                </div>
+<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+    <div>
+        <h3 class="fw-bold">Pengajuan Kegiatan SKKFT</h3>
+    </div>
+</div>
+
+@include('layouts.alert') 
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <table class="display table table-striped table-hover table-kegiatan_skkft">
+                    <thead>
+                        <th width="5%">No</th>
+                        <th>NPM</th>
+                        <th>Nama Mahasiswa</th>
+                        <th>Nama Kegiatan</th>
+                        <th>Kategori</th>
+                        <th>Sub Kategori</th>
+                        <th width="12%"><i class="fa fa-cogs"></i> Aksi</th>
+                    </thead>
+                </table>
             </div>
         </div>
     </div>
-</section>
+</div>
 
 @endsection
 

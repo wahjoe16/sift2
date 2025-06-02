@@ -15,7 +15,6 @@ class PosisiPekerjaanController extends Controller
      */
     public function index()
     {
-        Session::put('page', 'indexPosisi');
         $data = Posisi::all();
         return view('posisi.index', compact('data'));
     }
@@ -27,8 +26,7 @@ class PosisiPekerjaanController extends Controller
      */
     public function create()
     {
-        Session::put('page', 'indexPosisi');
-        $title = "Tambah data posisi pekerjaan";
+        $title = "Tambah Data";
         return view('posisi.create', compact('title'));
     }
 

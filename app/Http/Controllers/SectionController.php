@@ -19,7 +19,6 @@ class SectionController extends Controller
         $text = "Anda yakin akan menghapus bidang arsip?";
         confirmDelete($title2, $text);
         $title = "Tambah data bidang arsip";
-        Session::put('page', 'indexSection');
         return view('section.index', compact('title'));
     }
 
@@ -31,8 +30,8 @@ class SectionController extends Controller
             ->addIndexColumn()
             ->addColumn('action', function ($data) {
                 return '
-                <a href="' . route('sections.edit', $data->id) . '" class="btn btn-warning btn-flat btn-xs"><i class="fa fa-edit"></i></a>
-                <a href="' . route('sections.destroy', $data->id) . '" class="btn btn-danger btn-flat btn-xs" data-confirm-delete="true"><i class="fa fa-trash"></i></a>
+                <a href="' . route('sections.edit', $data->id) . '" class="btn btn-warning btn-xs"><i class="fas fa-pen"></i></a>
+                <a href="' . route('sections.destroy', $data->id) . '" class="btn btn-danger btn-xs" data-confirm-delete="true"><i class="fas fa-trash"></i></a>
             ';
             })
             ->rawColumns(['action'])

@@ -6,58 +6,65 @@
 
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title"></h4>
+                    <h1 class="modal-title fs-5"></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    
                 </div>
                 <div class="modal-body">
-                    <div class="form-group row">
-                        <label for="nik" class="col-lg-2 col-lg-offset-1 control-label">NIK</label>
-                        <div class="col-lg-6">
-                            <input type="text" name="nik" id="nik" class="form-control" required autofocus>
+                    <div class="form-group">
+                        <label for="nik">NIK</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="icon-tag"></i></span>
+                            <input type="text" name="nik" id="nik" class="form-control form-control-lg" required autofocus>
                             <span class="help-block with-errors"></span>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label for="nama" class="col-lg-2 col-lg-offset-1 control-label">Nama</label>
-                        <div class="col-lg-6">
-                            <input type="text" name="nama" id="nama" class="form-control" required autofocus>
+                    <div class="form-group">
+                        <label for="nama">Nama</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="icon-user"></i></span>
+                            <input type="text" name="nama" id="nama" class="form-control form-control-lg" required autofocus>
                             <span class="help-block with-errors"></span>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label for="program_studi" class="col-lg-2 col-lg-offset-1 control-label">Program Studi</label>
-                        <div class="col-lg-6">
-                            <select name="program_studi" id="program_studi" class="form-control text-black">
+                    <div class="form-group">
+                        <label for="program_studi"><strong>Program Studi</strong></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="icon-screen-desktop"></i></span>
+                            <select name="program_studi" id="program_studi" class="form-select form-control" id="largeSelect" >
                                 <option value="">Select</option>
                                 @foreach ([
-                                "Teknik Pertambangan"=>"Teknik Pertambangan",
-                                "Perencanaan Wilayah dan Kota"=>"Perencanaan Wilayah dan Kota",
-                                "Teknik Industri"=>"Teknik Industri",
-                                "Program Profesi Insinyur"=>"Program Profesi Insinyur",
-                                "Magister Perencanaan Wilayah dan Kota"=>"Magister Perencanaan Wilayah dan Kota"
-                                ] as $programStudi => $prodiLabel)
-                                <option value="{{ $programStudi }}">{{ $prodiLabel }}</option>
+                                    "Teknik Pertambangan"=>"Teknik Pertambangan",
+                                    "Teknik Industri"=>"Teknik Industri",
+                                    "Perencanaan Wilayah dan Kota"=>"Perencanaan Wilayah dan Kota",
+                                    "Program Profesi Insinyur"=>"Program Profesi Insinyur",
+                                    "Magister Perencanaan Wilayah dan Kota"=>"Magister Perencanaan Wilayah dan Kota"
+                                    ] as $prodi => $prodiLabel)
+                                    <option value="{{ $prodi }}">{{ $prodiLabel }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label for="email" class="col-lg-2 col-lg-offset-1 control-label">Email</label>
-                        <div class="col-lg-6">
-                            <input type="email" name="email" id="email" class="form-control" autofocus>
+                    <div class="form-group">
+                        <label for="email"><strong>Email</strong></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="icon-envelope"></i></span>
+                            <input type="email" name="email" id="email" required class="form-control" placeholder="Email" aria-label="Username" aria-describedby="basic-addon1"/>
                             <span class="help-block with-errors"></span>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label for="telepon" class="col-lg-2 col-lg-offset-1 control-label">Telepon</label>
-                        <div class="col-lg-6">
-                            <input type="text" name="telepon" id="telepon" class="form-control" autofocus>
+                    <div class="form-group">
+                        <label for="telepon"><strong>Telepon</strong></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="icon-screen-smartphone"></i></span>
+                            <input type="telepon" name="telepon" id="telepon" required class="form-control" placeholder="Telepon" aria-label="Username" aria-describedby="basic-addon1"/>
                             <span class="help-block with-errors"></span>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label for="status_superadmin" class="col-lg-2 col-lg-offset-1 control-label">Status Super Admin</label>
-                        <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="status_superadmin"><strong>Status Super Admin</strong></label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="icon-star"></i></span>
                             <select name="status_superadmin" id="status_superadmin" class="form-control" required>
                                 <option value="">== Pilih ==</option>
                                 <option value="0">Tidak</option>
@@ -68,8 +75,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-sm btn-flat btn-primary"><i class="fa fa-save"></i> Simpan</button>
-                    <button type="button" class="btn btn-sm btn-flat btn-warning" data-dismiss="modal"><i class="fa fa-arrow-circle-left"></i> Batal</button>
+                    <button class="btn btn-flat btn-primary"><i class="fas fa-save"></i> Simpan</button>
+                    <button type="button" class="btn btn-flat btn-warning" data-bs-dismiss="modal"><i class="fa fa-arrow-circle-left"></i> Batal</button>
                 </div>
             </div>
         </form>
