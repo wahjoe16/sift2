@@ -21,7 +21,7 @@ class MyArchiveController extends Controller
 {
     public function indexArchive()
     {
-        $ta = TahunAjaran::get();
+        $ta = TahunAjaran::orderBy('tahun_ajaran', 'DESC')->get();
         $smt = Semester::get();
         $category = CategoryArchive::get();
         $subcategory = SubcategoryArchive::get();
@@ -41,7 +41,7 @@ class MyArchiveController extends Controller
             'tahun_ajaran',
             'semester',
             'user_upload'
-        ])->orderBy('section_id', 'asc');
+        ])->orderBy('id', 'DESC');
 
         if (request('tahun_ajaran_id')) {
             $data->whereRelation('tahun_ajaran', 'id', request('tahun_ajaran_id'));
@@ -96,7 +96,7 @@ class MyArchiveController extends Controller
 
     public function myArchive()
     {
-        $ta = TahunAjaran::get();
+        $ta = TahunAjaran::orderBy('tahun_ajaran', 'DESC')->get();
         $smt = Semester::get();
         $category = CategoryArchive::get();
         $subcategory = SubcategoryArchive::get();
@@ -175,7 +175,7 @@ class MyArchiveController extends Controller
         $section = Section::get();
         $category = CategoryArchive::get();
         $subcategory = SubcategoryArchive::get();
-        $ta = TahunAjaran::orderBy('tahun_ajaran', 'desc')->get();
+        $ta = TahunAjaran::orderBy('tahun_ajaran', 'DESC')->get();
         $smt = Semester::get();
 
         return view('my-archive.create', compact('subcategory', 'ta', 'smt', 'category', 'section', 'title'));
@@ -238,7 +238,7 @@ class MyArchiveController extends Controller
         $section = Section::get();
         $category = CategoryArchive::get();
         $subcategory = SubcategoryArchive::get();
-        $ta = TahunAjaran::orderBy('tahun_ajaran', 'desc')->get();
+        $ta = TahunAjaran::orderBy('tahun_ajaran', 'DESC')->get();
         $smt = Semester::get();
         return view('my-archive.edit', compact('data', 'title', 'section', 'category', 'subcategory', 'ta', 'smt'));
     }
@@ -291,7 +291,7 @@ class MyArchiveController extends Controller
 
     public function indexGeneral()
     {
-        $ta = TahunAjaran::orderBy('tahun_ajaran')->get();
+        $ta = TahunAjaran::orderBy('tahun_ajaran', 'DESC')->get();
         $smt = Semester::get();
         $category = CategoryArchive::get();
         $subcategory = SubcategoryArchive::get();

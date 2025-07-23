@@ -6,7 +6,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="card card-stats card-danger">
+        <div class="card card-stats card-warning">
             <div class="card-body">
                 <div class="row">
                     <div class="col-2">
@@ -26,6 +26,30 @@
                                 <li>Bagi mahasiswa wanita, unggah foto menggunakan latar belakang biru, dan memakai pakaian resmi serta memakai hijab.</li>
                                 <li>Silahkan download panduan SKKFT <a href="">di sini.</a></li>
                             </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-stats card-danger">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-2">
+                        <div class="icon-big text-center">
+                            <i class="fas fa-bell"></i>
+                            <h4 style="text-transform: uppercase;">Peringatan Keras!</h4>
+                        </div>
+                    </div>
+                    <div class="col-10 col-stats">
+                        <div class="numbers">
+                            <strong style="text-transform: uppercase;">Dilarang keras memalsukan bukti Fisik. Jika terdeteksi memakai bukti fisik palsu akan ditindak tegas dan akan merugikan Anda!</strong>
+                            <hr>
+                            <p>"Dan sesungguhnya Kami telah menguji orang-orang yang sebelum mereka, maka sesungguhnya Allah mengetahui orang-orang yang benar dan sesungguhnya Dia mengetahui orang-orang yang dusta."<br> QS. Al-Ankabut ayat 3</p>
                         </div>
                     </div>
                 </div>

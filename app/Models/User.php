@@ -134,6 +134,6 @@ class User extends Authenticatable
 
     public function comments()
     {
-        return $this->hasMany(CommentAlumni::class);
+        return $this->hasMany(CommentPost::class);
     }
 }
