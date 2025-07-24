@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\KegiatanSkkftExport;
 use App\Models\Kegiatan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ApproveSkkftController extends Controller
 {
@@ -39,6 +41,11 @@ class ApproveSkkftController extends Controller
             })
             ->rawColumns(['aksi'])
             ->make(true);
+    }
+
+    public function exportData()
+    {
+        return Excel::download(new KegiatanSkkftExport, 'rekap-kegiatan-skkft_' . date('Y-m-d-his') . '.xlsx');
     }
 
     public function showKegiatan($id)

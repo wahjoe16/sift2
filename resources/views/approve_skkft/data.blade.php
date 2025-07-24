@@ -26,6 +26,9 @@
                     </thead>
                 </table>
             </div>
+            <div class="card-footer">
+                <a href="{{ route('dataSkkft.export') }}" class="btn btn-success btn-sm"><i class="fa fa-download"></i>&nbsp; Export Data</a>
+            </div>
         </div>
     </div>
 </div>

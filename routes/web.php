@@ -212,6 +212,7 @@ Route::group(['prefix'=>'/skkft'], function(){
         Route::get('/dashboard-skkft', [ApproveSkkftController::class, 'index'])->name('dashboardSkkft.index');
         Route::get('/data-skkft-index', [ApproveSkkftController::class, 'indexData'])->name('dataSkkft.index');
         Route::get('/data-skkft', [ApproveSkkftController::class, 'ajaxIndexData'])->name('dataSkkft.data');
+        Route::get('/export-data-skkft', [ApproveSkkftController::class, 'exportData'])->name('dataSkkft.export');
         Route::get('/data-skkft-show/{id}', [ApproveSkkftController::class, 'showKegiatan'])->name('skkft.show');
         Route::get('/approve-skkft/{id}', [ApproveSkkftController::class, 'edit'])->name('approveKegiatan.edit');
         Route::post('/update-skkft/{id}', [ApproveSkkftController::class, 'update'])->name('approveKegiatan.update');
