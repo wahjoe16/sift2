@@ -17,19 +17,25 @@
             <div class="card-body">
                 <table class="table table-striped table-sertifikat_skkft">
                     <thead>
-                        <th width="5%">No</th>
+                        <th>Foto Profil</th>
                         <th>Nama Mahasiswa</th>
                         <th>NPM</th>
+                        <th>Program Studi</th>
                         <th>Tanggal Pengajuan</th>
                         <th width="12%"><i class="fa fa-cogs"></i> Aksi</th>
                     </thead>
                     <tbody>
                         @foreach($data as $d)
                         <tr>
-                            <td>{{ $loop->index + 1 }}</td>
+                            <td>
+                                <div class="avatar-lg text-center">
+                                    <img src="{{ url('/user/foto/', $d->user_skkft->foto ?? '') }}" alt="..." class="avatar-img rounded-circle" />
+                                </div>
+                            </td>
                             <td>{{ $d->user_skkft->nama }}</td>
                             <td>{{ $d->user_skkft->nik }}</td>
-                            <td>{{ tanggal_indonesia($d->tanggal) }}</td>
+                            <td>{{ $d->user_skkft->program_studi }}</td>
+                            <td>{{ tanggal_indonesia($d->tanggal, false) }}</td>
                             <td>
                                 <a href="{{ route('sertifikat.show', $d->id) }}" class="btn btn-info btn-xs"><i class="fa fa-search"></i></a>
                             </td>

@@ -340,4 +340,33 @@ class KegiatanSkkftController extends Controller
         $pdf = Pdf::loadView('sertifikat.generate', $data)->setPaper('A4', 'landscape');
         return $pdf->download('sertifikat_skkft.pdf');
     }
+
+    public function adminGenerateSkkft($id)
+    {
+        $sertifikat = SertifikatSkkft::find($id);
+        // $user = $sertifikat->user_skkft();
+        // dd($sertifikat);
+               
+        $sql = "
+            select category_skkft.category_name, sum(kegiatan.point) as poin from kegiatan
+            left join category_skkft on category_skkft.id = kegiatan.category_id
+            where kegiatan.id =? and kegiatan.status_skkft = 1
+            group by category_skkft.category_name
+        ";
+
+        $dataPoin = DB::select($sql, [$sertifikat]);
+        $data = [
+            'nama' => $sertifikat->user_skkft->nama,
+            'npm' => $sertifikat->user_skkft->nik,
+            'foto' => $sertifikat->user_skkft->foto,
+            'tanggal' => tanggal_indonesia($sertifikat->tanggal, false),
+            'wadek' => 'Dr. Eng. Ir. M. Rahman Ardhiansyah, S.T., M.T., IPM.',
+            'poin' => $dataPoin
+        ];
+       
+        // $template = view('sertifikat.generate', $data)->render();
+
+        $pdf = Pdf::loadView('sertifikat.generate_admin', $data)->setPaper('A4', 'landscape');
+        return $pdf->download('sertifikat_skkft.pdf');
+    }
 }

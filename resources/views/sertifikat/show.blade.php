@@ -9,40 +9,32 @@
 </div>
 @include('layouts.alert')
 <div class="row">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
-                <h5>Rekap SKKFT <strong>{{ $dataSertifikat->user_skkft->nama }}</strong></h5>
-            </div>
+    <div class="col-md-4">
+        <div class="card card-post card-round">
+            <img class="card-img-top" src="{{ asset('/media/unisba.JPG') }}" alt="Card image cap" />
             <div class="card-body">
-                <table class="table table-striped table-skkft">
-                    <thead>
-                        <th width="5%">No</th>
-                        <th>Nama Kegiatan</th>
-                        <th>Poin</th>
-                        <th>Status</th>
-                    </thead>
-                    <tbody>
-                        @foreach ($dataKegiatan as $dk)
-                            <tr>
-                                <td>{{$loop->index + 1 }}</td>
-                                <td>{{ $dk->nama_kegiatan }}</td>
-                                <td>{{ $dk->point }}</td>
-                                <td>
-                                    @if ($dk->status_skkft == 1)
-                                        <span class="badge badge-success">Diterima</span>
-                                    @else
-                                        <span class="badge badge-danger">Ditolak</span>
-                                    @endif
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                <div class="d-flex">
+                    <div class="avatar avatar-xl">
+                        <img src="{{ asset('/user/foto/' . $dataSertifikat->user_skkft->foto) }}" alt="..." class="avatar-img rounded-circle" />
+                    </div>
+                    <div class="info-post ms-2">
+                        <p class="username">{{ $dataSertifikat->user_skkft->nama }}</p>
+                        <p class="date text-muted">{{ $dataSertifikat->user_skkft->nik }}</p>
+                    </div>
+                </div>
+
+                <div class="separator-solid"></div>
+                <h3 class="card-title">Program Studi</h3>
+                <p class="card-text">{{ $dataSertifikat->user_skkft->program_studi }}</p>
+
+                <div class="separator-solid"></div>
+                <h3 class="card-title">Email</h3>
+                <p class="card-text">{{ $dataSertifikat->user_skkft->email }}</p>
+                
             </div>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-8">
         <div class="card">
             <div class="card-header">
                 <h5>Summary SKKFT</h5>
@@ -78,22 +70,63 @@
                                 <td class="text-right" colspan="2"><b>Total Poin</b></td>
                                 <td colspan="2"><b>{{ $totalPoin }}</b></td>
                             </tr>
-                            <tr>
-                                <td colspan="2" class="text-center">
-                                    <form action="{{ route('sertifikat.verify', $dataSertifikat->id) }}" method="POST">@csrf
-                                        <button type="submit" class="btn btn-success btn-md btn-flat">Terbitkan Sertifikat</button>
-                                    </form>
-                                </td>
-                                <td colspan="2" class="text-center">
-                                    <form action="{{ route('sertifikat.reject', $dataSertifikat->id) }}" method="POST">@csrf
-                                        <button type="submit" class="btn btn-danger btn-md btn-flat">Tolak Sertifikat</button>
-                                    </form>
-                                </td>
-                            </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Rekap SKKFT <strong>{{ $dataSertifikat->user_skkft->nama }}</strong></h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped table-skkft">
+                    <thead>
+                        <th width="5%">No</th>
+                        <th>Nama Kegiatan</th>
+                        <th>Kategori</th>
+                        <th>Sub Kategori</th>
+                        <th>Poin</th>
+                        <th>Bukti Fisik</th>
+                        <th>Status</th>
+                    </thead>
+                    <tbody>
+                        @foreach ($dataKegiatan as $dk)
+                            <tr>
+                                <td>{{$loop->index + 1 }}</td>
+                                <td>{{ $dk->nama_kegiatan }}</td>
+                                <td>{{ $dk->categories_skkft->category_name }}</td>
+                                <td>{{ $dk->subcategories_skkft->subcategory_name }}</td>
+                                <td>{{ $dk->point }}</td>
+                                <td><a href="{{ url('/mahasiswa/skkft', $dk->bukti_fisik) }}" target="_blank" class="btn btn-info btn-sm">Lihat Berkas</a></td>
+                                <td>
+                                    @if ($dk->status_skkft == 1)
+                                        <span class="badge badge-success">Diterima</span>
+                                    @else
+                                        <span class="badge badge-danger">Ditolak</span>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <form action="{{ route('sertifikat.verify', $dataSertifikat->id) }}" method="POST">@csrf
+            <button type="submit" class="btn btn-success btn-md btn-flat">Terbitkan Sertifikat</button>
+        </form>
+    </div>
+    <div class="col-md-3">
+        <form action="{{ route('sertifikat.reject', $dataSertifikat->id) }}" method="POST">@csrf
+            <button type="submit" class="btn btn-danger btn-md btn-flat">Tolak Sertifikat</button>
+        </form>
     </div>
 </div>
 

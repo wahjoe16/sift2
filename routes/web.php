@@ -228,6 +228,7 @@ Route::group(['prefix'=>'/skkft'], function(){
         Route::get('/skpi-list', [SkpiController::class, 'list'])->name('skpi.list');
         Route::get('/skpi-list/data', [SkpiController::class, 'datalist'])->name('skpi.data');
         Route::get('/skpi-list/data-accept', [SkpiController::class, 'datalistAccept'])->name('skpi.data-accept');
+        Route::get('/sertifikat-skkft-generate-admin/{id}', [KegiatanSkkftController::class, 'adminGenerateSkkft'])->name('adminSertifikatSkkft.generate');
     });
     
     // SKKFT DOSEN

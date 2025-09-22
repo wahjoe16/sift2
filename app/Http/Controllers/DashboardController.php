@@ -48,7 +48,7 @@ class DashboardController extends Controller
             })
             ->addColumn('aksi', function ($data) {
                 return '
-                    <a href="' . route('dashboardMahasiswa.show', $data->user_id) . '"><i class="fas fa-search"></i></a>
+                    <a href="' . route('adminSertifikatSkkft.generate', $data->id) . '"><i class="fas fa-download"></i></a>
                 ';
             })
             ->rawColumns(['foto', 'aksi'])
