@@ -249,7 +249,7 @@
                         </tr>
                         <tr>
                             <td>9</td>
-                            <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_9) }}" target="_blank">Bukti Penyerahan Draft</a></td>
+                            <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_9) }}" target="_blank">Softcopy Draft</a></td>
                             <td>
                                 @if($data->status_9 == '')
                                 -

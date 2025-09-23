@@ -57,6 +57,24 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label for="dosen3_id">Dosen Penguji 1 Seminar</label>
+                        <select name="dosen3_id" id="dosen3_id" class="form-control select2">
+                            <option value="">Pilih</option>
+                            @foreach($dosen3 as $d)
+                            <option value="{{ $d['id'] }}" @if(!empty($d['id']==$data['dosen3_id'])) selected @endif>{{ $d['nama'] }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="dosen4_id">Dosen Penguji 2 Seminar</label>
+                        <select name="dosen4_id" id="dosen4_id" class="form-control select2">
+                            <option value="">Pilih</option>
+                            @foreach($dosen4 as $d)
+                            <option value="{{ $d['id'] }}" @if(!empty($d['id']==$data['dosen4_id'])) selected @endif>{{ $d['nama'] }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
@@ -66,7 +84,7 @@
                     <h5>Judul Tugas Akhir</h5>
                 </div>
                 <div class="card-body">
-                    <textarea name="judul_skripsi" class="form-control" id="" cols="30" rows="13">{{ $data->judul_skripsi }}</textarea>
+                    <textarea name="judul_skripsi" class="form-control" id="" cols="30" rows="20">{{ $data->judul_skripsi }}</textarea>
                 </div>
             </div>
         </div>

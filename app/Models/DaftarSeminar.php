@@ -32,6 +32,16 @@ class DaftarSeminar extends Model
         return $this->belongsTo(User::class, 'dosen2_id', 'id');
     }
 
+    // public function dosen_3()
+    // {
+    //     return $this->belongsTo(User::class, 'dosen3_id', 'id');
+    // }
+
+    // public function dosen_4()
+    // {
+    //     return $this->belongsTo(User::class, 'dosen4_id', 'id');
+    // }
+
     public function mahasiswa()
     {
         return $this->belongsTo(User::class, 'mahasiswa_id', 'id');

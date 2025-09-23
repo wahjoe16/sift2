@@ -511,7 +511,7 @@ class DaftarSeminarController extends Controller
                 'syarat_6' => 'required|mimes:pdf|max:1024',
                 'syarat_7' => 'required|mimes:pdf|max:1024',
                 'syarat_8' => 'required|mimes:pdf|max:1024',
-                'syarat_9' => 'required|mimes:pdf|max:1024',
+                'syarat_9' => 'required|mimes:pdf|max:10240',
             ];
 
             $customMessage = [
@@ -528,7 +528,7 @@ class DaftarSeminarController extends Controller
                 'syarat_6.required' => 'Form Bebas Tunggakan / Pinjaman Harus Diisi',
                 'syarat_7.required' => 'Print out bukti pengecekan Plagiarisme <= 25% Harus Diisi',
                 'syarat_8.required' => 'Bukti Monitoring Hafalan Harus Diisi',
-                'syarat_9.required' => 'Bukti penyerahan Draft Tugas Akhir (Bab 1-3) sebanyak 4 eksemplar Harus Diisi',
+                'syarat_9.required' => 'Bukti Softcopy Draft Tugas Akhir Harus Diisi',
                 'syarat_1.mimes' => 'Format File Formulir pendaftaran Seminar terisi Harus PDF',
                 'syarat_2.mimes' => 'Format File Copy Berita Acara Pembimbingan / Kartu Bimbingan Harus PDF',
                 'syarat_3.mimes' => 'Format File Persetujuan Seminar dari Dosen Pembimbing Harus PDF',
@@ -537,7 +537,7 @@ class DaftarSeminarController extends Controller
                 'syarat_6.mimes' => 'Format File Form Bebas Tunggakan / Pinjaman Harus PDF',
                 'syarat_7.mimes' => 'Format File Print out bukti pengecekan Plagiarisme <= 25% Harus PDF',
                 'syarat_8.mimes' => 'Format File Bukti Monitoring Hafalan Harus PDF',
-                'syarat_9.mimes' => 'Format File Bukti penyerahan Draft Tugas Akhir (Bab 1-3) sebanyak 4 eksemplar Harus PDF',
+                'syarat_9.mimes' => 'Format File Bukti Softcopy Draft Tugas Akhir Harus PDF',
                 'syarat_1.max' => 'File Formulir pendaftaran Seminar terisi tidak boleh lebih dari 1MB',
                 'syarat_2.max' => 'File Copy Berita Acara Pembimbingan / Kartu Bimbingan tidak boleh lebih dari 1MB',
                 'syarat_3.max' => 'File Persetujuan Seminar dari Dosen Pembimbing tidak boleh lebih dari 1MB',
@@ -546,7 +546,7 @@ class DaftarSeminarController extends Controller
                 'syarat_6.max' => 'File Form Bebas Tunggakan / Pinjaman tidak boleh lebih dari 1MB',
                 'syarat_7.max' => 'File Print out bukti pengecekan Plagiarisme <= 25% tidak boleh lebih dari 1MB',
                 'syarat_8.max' => 'File Bukti Monitoring Hafalan tidak boleh lebih dari 1MB',
-                'syarat_9.max' => 'File Bukti penyerahan Draft Tugas Akhir (Bab 1-3) sebanyak 4 eksemplar tidak boleh lebih dari 1MB',
+                'syarat_9.max' => 'File Bukti Softcopy Draft tidak boleh lebih dari 10MB',
             ];
 
             $this->validate($request, $rules, $customMessage);
@@ -629,7 +629,7 @@ class DaftarSeminarController extends Controller
                 'syarat_6' => 'mimes:pdf|max:1024',
                 'syarat_7' => 'mimes:pdf|max:1024',
                 'syarat_8' => 'mimes:pdf|max:1024',
-                'syarat_9' => 'mimes:pdf|max:1024',
+                'syarat_9' => 'mimes:pdf|max:10240',
             ];
 
             $customMessage = [
@@ -646,7 +646,7 @@ class DaftarSeminarController extends Controller
                 'syarat_6.mimes' => 'Format File Form Bebas Tunggakan / Pinjaman Harus PDF',
                 'syarat_7.mimes' => 'Format File Print out bukti pengecekan Plagiarisme <= 25% Harus PDF',
                 'syarat_8.mimes' => 'Format File Bukti Monitoring Hafalan Harus PDF',
-                'syarat_9.mimes' => 'Format File Bukti penyerahan Draft Tugas Akhir (Bab 1-3) sebanyak 4 eksemplar Harus PDF',
+                'syarat_9.mimes' => 'Format File Softcopy Draft Tugas Akhir (Bab 1-3) sebanyak 4 eksemplar Harus PDF',
                 'syarat_1.max' => 'File Formulir pendaftaran Seminar terisi tidak boleh lebih dari 1MB',
                 'syarat_2.max' => 'File Copy Berita Acara Pembimbingan / Kartu Bimbingan tidak boleh lebih dari 1MB',
                 'syarat_3.max' => 'File Persetujuan Seminar dari Dosen Pembimbing tidak boleh lebih dari 1MB',
@@ -655,7 +655,7 @@ class DaftarSeminarController extends Controller
                 'syarat_6.max' => 'File Form Bebas Tunggakan / Pinjaman tidak boleh lebih dari 1MB',
                 'syarat_7.max' => 'File Print out bukti pengecekan Plagiarisme <= 25% tidak boleh lebih dari 1MB',
                 'syarat_8.max' => 'File Bukti Monitoring Hafalan tidak boleh lebih dari 1MB',
-                'syarat_9.max' => 'File Bukti penyerahan Draft Tugas Akhir (Bab 1-3) sebanyak 4 eksemplar tidak boleh lebih dari 1MB',
+                'syarat_9.max' => 'File Softcopy Draft Tugas Akhir (Bab 1-3) sebanyak 4 eksemplar tidak boleh lebih dari 1MB',
             ];
 
             $this->validate($request, $rules, $customMessage);

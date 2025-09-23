@@ -70,7 +70,7 @@
                                     <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat8"></th> -->
                             <th>Bukti Monitoring Hafalan</th>
                             <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat9"></th> -->
-                            <th>Bukti Penyerahan Draft</th>
+                            <th>Softcopy Draft</th>
                         </tr>
                     </thead>
                 </table>

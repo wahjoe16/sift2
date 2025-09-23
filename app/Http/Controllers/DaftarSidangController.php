@@ -283,6 +283,8 @@ class DaftarSidangController extends Controller
         Session::put('page', 'sidangTA');
         $dosen1 = User::where('level', 2)->get();
         $dosen2 = User::where('level', 2)->get();
+        $dosen3 = User::where('level', 2)->get();
+        $dosen4 = User::where('level', 2)->get();
         $tahun_ajaran = TahunAjaran::get();
         $semester = Semester::get();
         $dataMhs = auth()->user();
@@ -291,7 +293,7 @@ class DaftarSidangController extends Controller
         $dataLogSeminar = DaftarSeminar::where('mahasiswa_id', $dataMhs->id)->first();
         $dataSeminar = DaftarSeminar::where('mahasiswa_id', $dataMhs->id)->where('status', 1)->first();
 
-        return view('daftar_sidang.ti.create', compact('title', 'semester', 'tahun_ajaran', 'dosen1', 'dosen2', 'dataSidang', 'dataLogSidang', 'dataLogSeminar', 'dataSeminar'));
+        return view('daftar_sidang.ti.create', compact('title', 'semester', 'tahun_ajaran', 'dosen1', 'dosen2', 'dosen3', 'dosen4' ,'dataSidang', 'dataLogSidang', 'dataLogSeminar', 'dataSeminar'));
     }
 
     public function storeTi(Request $request)
@@ -301,6 +303,8 @@ class DaftarSidangController extends Controller
                 'tahun_ajaran_id' => 'required',
                 'semester_id' => 'required',
                 'dosen1_id' => 'required',
+                'dosen3_id' => 'required',
+                'dosen4_id' => 'required',
                 'judul_skripsi' => 'required',
                 // 'tanggal_pengajuan' => 'required|date_format:m/d/Y',
                 'syarat_1' => 'required|mimes:pdf|max:1024',
@@ -325,6 +329,8 @@ class DaftarSidangController extends Controller
             $customMessage = [
                 'tahun_ajaran_id.required' => 'Tahun Ajaran Tidak Boleh Kosong',
                 'dosen1_id.required' => 'Dosen Pembimbing 1 Tidak Boleh Kosong',
+                'dosen3_id.required' => 'Dosen Penguji 1 Seminar Tidak Boleh Kosong',
+                'dosen4_id.required' => 'Dosen Penguji 2 Seminar Tidak Boleh Kosong',
                 'judul_skripsi.required' => 'Judul Skripsi Tidak Boleh Kosong',
                 // 'tanggal_pengajuan.required' => 'Tanggal Pengajuan Tidak Boleh Kosong',
                 // 'tanggal_pengajuan.date_format' => 'Format Tanggal Pengajuan Harus Benar',
@@ -407,6 +413,8 @@ class DaftarSidangController extends Controller
             $daftarSidang->semester_id = $request['semester_id'];
             $daftarSidang->dosen1_id = $request['dosen1_id'];
             $daftarSidang->dosen2_id = $request['dosen2_id'];
+            $daftarSidang->dosen3_id = $request['dosen3_id'];
+            $daftarSidang->dosen4_id = $request['dosen4_id'];
             $daftarSidang->judul_skripsi = $request['judul_skripsi'];
             // $daftarSidang->tanggal_pengajuan = date('Y-m-d', strtotime($request['tanggal_pengajuan']));
             $daftarSidang->syarat_1 = $dataFile[0];
@@ -565,9 +573,11 @@ class DaftarSidangController extends Controller
         Session::put('page', 'sidangTA');
         $dosen1 = User::where('level', 2)->get();
         $dosen2 = User::where('level', 2)->get();
+        $dosen3 = User::where('level', 2)->get();
+        $dosen4 = User::where('level', 2)->get();
         $tahun_ajaran = TahunAjaran::get();
         $semester = Semester::get();
-        return view('daftar_sidang.ti.edit', compact('data', 'title', 'semester', 'tahun_ajaran', 'dosen1', 'dosen2'));
+        return view('daftar_sidang.ti.edit', compact('data', 'title', 'semester', 'tahun_ajaran', 'dosen1', 'dosen2', 'dosen3', 'dosen4'));
     }
 
     public function updateTi(Request $request, $id)

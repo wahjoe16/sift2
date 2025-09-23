@@ -43,6 +43,24 @@
                 <p class="card-text">-</p>
                 @endif
 
+
+                {{-- <div class="separator-solid"></div>
+                <h6 class="card-title">Penguji 1 Seminar</h6>
+                @if ($data->dosen_3 != '')
+                <p class="card-text">{{ $data->dosen_3->nama }}</p>
+                @else
+                <p class="card-text">-</p>
+                @endif
+
+                <div class="separator-solid"></div>
+                <h6 class="card-title">Penguji 2 Seminar</h6>
+                @if ($data->dosen_4 != '')
+                <p class="card-text">{{ $data->dosen_4->nama }}</p>
+                @else
+                <p class="card-text">-</p>
+                @endif --}}
+
+
                 <div class="separator-solid"></div>
                 <h6 class="card-title">Judul Tugas Akhir</h6>
                 <p class="card-text">{{ $data->judul_skripsi }}</p>
@@ -124,7 +142,7 @@
                         </tr>
                         <tr>
                             <td>9</td>
-                            <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_9) }}" target="_blank">Bukti Penyerahan Draft</a></td>
+                            <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_9) }}" target="_blank">Softcopy Draft</a></td>
 
                         </tr>
                     </tbody>

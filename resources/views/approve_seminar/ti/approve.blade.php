@@ -245,7 +245,7 @@
                             </tr>
                             <tr>
                                 <td>9</td>
-                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_9) }}" target="_blank">Bukti Penyerahan Draft</a></td>
+                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_9) }}" target="_blank">Softcopy Draft</a></td>
                                 <td>
                                     @if ($data->status_9 == 2)
                                     <input type="radio" name="status_9" value="2" class="form-check-input" checked="checked" readonly>

@@ -24,7 +24,7 @@
                                 <li>Bagi mahasiswa, lengkapi profil anda agar menu di sidebar ditampilkan seluruhnya.</li>
                                 <li>Bagi mahasiswa pria, unggah foto menggunakan latar belakang biru, dan memakai pakaian resmi.</li>
                                 <li>Bagi mahasiswa wanita, unggah foto menggunakan latar belakang biru, dan memakai pakaian resmi serta memakai hijab.</li>
-                                <li>Silahkan download panduan SKKFT <a href="">di sini.</a></li>
+                                <li>Silahkan download panduan SKKFT <a href="{{ url('/skkft-template/Panduan SKKFT 2020 A5 fix.pdf') }}" target="_blank">di sini.</a></li>
                             </ol>
                         </div>
                     </div>

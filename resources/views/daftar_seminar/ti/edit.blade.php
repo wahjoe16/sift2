@@ -219,7 +219,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_9) }}">Bukti Penyerahan Draft</a></td>
+                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_9) }}">Softcopy Draft</a></td>
                                 <td>
                                     @if ($data->status_9 == 1)
                                     <span class="badge badge-success">Diterima</span>

@@ -132,7 +132,7 @@
                         <div class="row mb-3">
                             <div class="col-md-6 col-sm-12">
                                 <input type="file" name="syarat_9" class="dropify" id="syarat_9">
-                                <p for="exampleInputEmail2" class="col-form-label text-center" for="syarat_9">Bukti Penyerahan Draft</p>
+                                <p for="exampleInputEmail2" class="col-form-label text-center" for="syarat_9">Softcopy Draft <sub>(maksimal 10MB)</sub></p>
                             </div>
                         </div>
                     </div>

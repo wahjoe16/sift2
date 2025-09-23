@@ -47,7 +47,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="dosen1_id">Pembimbing 1</label>
+                        <label for="dosen1_id">Dosen Pembimbing 1</label>
                         <select name="dosen1_id" id="dosen1_id" class="form-control select2">
                             <option value="">Pilih</option>
                             @foreach($dosen1 as $d)
@@ -56,10 +56,28 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="dosen2_id">Pembimbing 2</label>
+                        <label for="dosen2_id">Dosen Pembimbing 2</label>
                         <select name="dosen2_id" id="dosen2_id" class="form-control select2">
                             <option value="">Pilih</option>
                             @foreach($dosen2 as $d)
+                            <option value="{{ $d['id'] }}">{{ $d['nama'] }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="dosen3_id">Dosen Penguji 1 Seminar</label>
+                        <select name="dosen3_id" id="dosen3_id" class="form-control select2">
+                            <option value="">Pilih</option>
+                            @foreach($dosen3 as $d)
+                            <option value="{{ $d['id'] }}">{{ $d['nama'] }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="dosen4_id">Dosen Penguji 2 Seminar</label>
+                        <select name="dosen4_id" id="dosen4_id" class="form-control select2">
+                            <option value="">Pilih</option>
+                            @foreach($dosen4 as $d)
                             <option value="{{ $d['id'] }}">{{ $d['nama'] }}</option>
                             @endforeach
                         </select>
@@ -73,7 +91,7 @@
                     <h5>Judul Tugas Akhir</h5>
                 </div>
                 <div class="card-body">
-                    <textarea name="judul_skripsi" class="form-control" id="" cols="30" rows="13"></textarea>
+                    <textarea name="judul_skripsi" class="form-control" id="" cols="30" rows="20"></textarea>
                 </div>
             </div>
         </div>

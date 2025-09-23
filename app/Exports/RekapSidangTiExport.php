@@ -39,6 +39,8 @@ class RekapSidangTiExport implements FromCollection, WithHeadings, WithMapping, 
             'Semester',
             'Dosen Pembimbing 1',
             'Dosen Pembimbing 2',
+            'Dosen Penguji 1 Seminar',
+            'Dosen Penguji 2 Seminar',
             'Judul Tugas Akhir',
             'Tanggal Pengajuan',
             'Tanggal Approve',
@@ -52,6 +54,19 @@ class RekapSidangTiExport implements FromCollection, WithHeadings, WithMapping, 
         } else {
             $dosen2 = $row->dosen_2->nama;
         }
+
+        if (!isset($row->dosen_3->nama)) {
+            $dosen3 = '-';
+        } else {
+            $dosen3 = $row->dosen_3->nama;
+        }
+
+        if (!isset($row->dosen_4->nama)) {
+            $dosen4 = '-';
+        } else {
+            $dosen4 = $row->dosen_4->nama;
+        }
+
         return [
             $row->mahasiswa->nama,
             $row->mahasiswa->nik,
@@ -59,6 +74,8 @@ class RekapSidangTiExport implements FromCollection, WithHeadings, WithMapping, 
             $row->semester->semester,
             $row->dosen_1->nama,
             $dosen2,
+            $dosen3,
+            $dosen4,
             $row->judul_skripsi,
             tanggal_indonesia($row->created_at),
             tanggal_indonesia($row->updated_at),

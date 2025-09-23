@@ -47,6 +47,14 @@
                     @endif
 
                     <div class="separator-solid"></div>
+                    <h3 class="card-title">Penguji 1 Seminar</h3>
+                    <p class="card-text">{{ $data->dosen_3->nama }}</p>
+
+                    <div class="separator-solid"></div>
+                    <h3 class="card-title">Penguji 2 Seminar</h3>
+                    <p class="card-text">{{ $data->dosen_4->nama }}</p>
+
+                    <div class="separator-solid"></div>
                     <h3 class="card-title">Judul Tugas Akhir</h3>
                     <p class="card-text">{{ $data->judul_skripsi }}</p>
 
