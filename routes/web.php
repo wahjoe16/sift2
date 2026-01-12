@@ -35,6 +35,7 @@ use App\Http\Controllers\SubPosisiPekerjaanController;
 use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\TingkatSkkftController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FileController;
 use App\Models\SertifikatSkkft;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -60,6 +61,10 @@ Route::get('password/reset/{token}', [ForgotPasswordController::class,'showReset
 
 
 Route::group(['middleware' => 'ceklevel:1,2,3'], function () {
+
+    // Proses mengakses File
+    Route::get('/profil-foto', [FileController::class, 'foto'])->name('profil.foto');
+    Route::get('/user-foto/{id}', [FileController::class, 'userFoto'])->name('user.foto');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile', [UserController::class, 'profile'])->name('user.profil');

@@ -14,7 +14,7 @@
                     <div class="d-flex">
                         <div class="avatar avatar-xxl">
                             @if(!empty(auth()->user()->foto))
-                            <img class="avatar-img rounded-circle" src="{{ asset('/user/foto/' . auth()->user()->foto ?? '') }}" alt="">
+                            <img class="avatar-img rounded-circle" src="{{ route('profil.foto') }}" alt="">
                             @else
                             <img class="avatar-img rounded-circle" src="{{ asset('user/foto/user.png') }}" alt="">
                             @endif
@@ -41,7 +41,7 @@
 
                     <div class="separator-solid"></div>
                     <h3 class="card-title">Foto Profil</h3>
-                    <input type="file" name="foto" class="dropify" id="foto" data-default-file="{{ asset('/user/foto/' . auth()->user()->foto ?? '') }}"  required autofocus>
+                    <input type="file" name="foto" class="dropify" id="foto" data-default-file="{{ route('profil.foto') }}"  required autofocus>
                     <input type="hidden" name="current_user_foto" id="current_user_foto" value="{{ auth()->user()->foto }}">
                 </div>
             </div>

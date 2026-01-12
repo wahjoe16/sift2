@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -30,65 +31,51 @@ class UserController extends Controller
 
         $request->validate([
             'nama' => 'required',
-            'program_studi' => 'required_if:level, 3',
-            'email' => 'required',
+            'program_studi' => 'required_if:level,3',
+            'email' => 'required|email',
             'telepon' => 'required',
-            'foto' => 'mimes:png,jpg',
-        ], [
-            'nama.required' => 'Nama tidak boleh kosong',
-            'program_studi.required' => 'Program Studi tidak boleh kosong',
-            'email.required' => 'Email tidak boleh kosong',
-            'telepon.required' => 'Telepon tidak boleh kosong',
-            // 'foto.required' => 'Foto tidak boleh kosong',
-            'foto.mimes' => 'Foto harus mempunyai format jpg atau png'
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:1024',
         ]);
 
-        // update foto
+        // ======================
+        // UPDATE FOTO (AMAN)
+        // ======================
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
 
-            // if (!is_null($file)) {
-            //     File::delete(public_path('/user/foto/'. $user->foto));
-            //     $nama = 'user-' . date('Y-m-dHis') . '.' . $file->getClientOriginalExtension();
-            //     $file->move(public_path('/user/foto'), $nama);
-            //     $user->foto = $nama;
-            // } else if (empty($file)) {
-            //     $user->foto = $request->current_user_foto;
-            // } else {
-            //     $user->foto = '';
-            // }
-
-            if (!is_null($file)) {
-                File::delete(public_path('/user/foto/'. $user->foto));
-                $nama = 'user-' . date('Y-m-dHis') . '.' . $file->getClientOriginalExtension();
-                $file->move(public_path('/user/foto'), $nama);
+            // hapus foto lama
+            if ($user->foto && Storage::exists($user->foto)) {
+                Storage::delete($user->foto);
             }
+
+            // nama file aman
+            $path = $file->storeAs(
+                'user/foto',
+                Str::uuid() . '.' . $file->extension()
+            );
+
+            $user->foto = $path;
         }
 
-        // $user->update([
-        //     'nama' => $request->nama,
-        //     'tanggal_lahir' => date('Y-m-d', strtotime($request->tanggal_lahir)),
-        //     'tempat_lahir' => $request->tempat_lahir,
-        //     'email' => $request->email,
-        //     'telepon' => $request->telepon,
-        //     'program_studi' => $request->program_studi,
-        //     'tipe_dosen' => $request->tipe_dosen,
-        //     'jabatan' => $request->jabatan,
-        //     'foto' => $nama ?? $request->current_user_foto
-        // ]);
-
-        $user->nama = $request->nama;
-        $user->tanggal_lahir = date('Y-m-d', strtotime($request->tanggal_lahir));
-        $user->tempat_lahir = $request->tempat_lahir;
-        $user->email = $request->email;
-        $user->telepon = $request->telepon;
-        $user->program_studi = $request->program_studi;
-        $user->tipe_dosen = $request->tipe_dosen;
-        $user->jabatan = $request->jabatan;
-        $user->foto = $nama ?? $request->current_user_foto;
+        // ======================
+        // UPDATE DATA USER
+        // ======================
+        $user->fill([
+            'nama' => $request->nama,
+            'tanggal_lahir' => $request->tanggal_lahir
+                ? date('Y-m-d', strtotime($request->tanggal_lahir))
+                : null,
+            'tempat_lahir' => $request->tempat_lahir,
+            'email' => $request->email,
+            'telepon' => $request->telepon,
+            'program_studi' => $request->program_studi,
+            'tipe_dosen' => $request->tipe_dosen,
+            'jabatan' => $request->jabatan,
+        ]);
 
         $user->save();
-        return redirect()->back()->with('success', 'Profil berhasil diubah!','success');
+
+        return back()->with('success', 'Profil berhasil diubah!');
     }
 
     public function password()
@@ -135,12 +122,16 @@ class UserController extends Controller
                 return '<input type="checkbox" name="id[]" value="' . $admin->id . '" />';
             })
             ->addColumn('foto', function ($admin) {
-                $path = asset("/user/foto/$admin->foto");
-                return '
-                    <div class="avatar-lg text-center">
-                        <img src=' . $path . ' class="avatar-img rounded-circle" />
-                    </div>
-                ';
+                if (!empty($admin->foto)) {
+                    $path = route('user.foto', $admin->id);
+                    return '
+                        <div class="avatar-lg text-center">
+                            <img src=' . $path . ' class="avatar-img rounded-circle" />
+                        </div>
+                    ';
+                } else {
+                    return 'No Photo';
+                }                
             })
             ->addColumn('status_superadmin', function ($admin) {
                 if ($admin->status_superadmin == 1) {
@@ -243,12 +234,16 @@ class UserController extends Controller
                 return '<input type="checkbox" name="id[]" value="' . $mahasiswa->id . '" />';
             })
             ->addColumn('foto', function ($mahasiswa) {
-                $path = asset("/user/foto/$mahasiswa->foto");
-                return '
-                    <div class="avatar-lg text-center">
-                        <img src=' . $path . ' class="avatar-img rounded-circle" />
-                    </div>
-                ';
+                if (!empty($mahasiswa->foto)) {
+                    $path = route('user.foto', $mahasiswa->id);
+                    return '
+                        <div class="avatar-lg text-center">
+                            <img src=' . $path . ' class="avatar-img rounded-circle" />
+                        </div>
+                    ';
+                } else {
+                    return 'No Photo';
+                } 
             })
             ->addColumn('aksi', function ($mahasiswa) {
                 return '
@@ -317,8 +312,12 @@ class UserController extends Controller
     public function deleteMahasiswa($id)
     {
         $mahasiswa = User::find($id);
-        File::delete('/user/foto', $mahasiswa->foto);
-        // dd($mahasiswa);
+        // hapus file foto jika ada
+        if ($mahasiswa->foto && Storage::exists($mahasiswa->foto)) {
+            Storage::delete($mahasiswa->foto);
+        }
+
+        // hapus data mahasiswa
         $mahasiswa->delete();
         return redirect()->back()->with('success', 'Data mahasiswa berhasil dihapus!');
     }
@@ -351,12 +350,16 @@ class UserController extends Controller
                 return '<input type="checkbox" name="id[]" value="' . $dosen->id . '" />';
             })
             ->addColumn('foto', function ($dosen) {
-                $path = asset("/user/foto/$dosen->foto");
-                return '
-                    <div class="avatar-lg text-center">
-                        <img src=' . $path . ' class="avatar-img rounded-circle" />
-                    </div>
-                ';
+                if ($dosen->foto) {
+                    $path = route('user.foto', $dosen->id);
+                    return '
+                        <div class="avatar-lg text-center">
+                            <img src=' . $path . ' class="avatar-img rounded-circle" />
+                        </div>
+                    ';
+                } else {
+                    return 'No Photo';
+                } 
             })
             ->addColumn('aksi', function ($dosen) {
                 return '
@@ -565,9 +568,14 @@ class UserController extends Controller
     public function deleteDosen($id)
     {
         $dosen = User::where('id', $id)->first();
-        File::delete('user/foto/' . $dosen->foto);
+        $dosen = User::find($id);
+        // hapus file foto jika ada
+        if ($dosen->foto && Storage::exists($dosen->foto)) {
+            Storage::delete($dosen->foto);
+        }
 
-        User::where('id', $id)->delete();
+        // hapus data dosen
+        $dosen->delete();
         return redirect()->route('dosen.index')->with('success', 'Data dosen berhasil dihapus!');
     }
 
@@ -615,12 +623,16 @@ class UserController extends Controller
             ->of($data)
             ->addIndexColumn()
             ->addColumn('foto', function ($data) {
-                $path = asset("/user/foto/$data->foto");
-                return '
-                    <div class="avatar-lg text-center">
-                        <img src=' . $path . ' class="avatar-img rounded-circle" />
-                    </div>
-                ';
+                if ($data->foto) {
+                    $path = route('user.foto', $data->id);
+                    return '
+                        <div class="avatar-lg text-center">
+                            <img src=' . $path . ' class="avatar-img rounded-circle" />
+                        </div>
+                    ';
+                } else {
+                    return 'No Photo';
+                } 
             })
             ->addColumn('level', function ($data) {
                 if ($data->level == 1) {
@@ -659,12 +671,16 @@ class UserController extends Controller
             ->of($mahasiswa)
             ->addIndexColumn()
             ->addColumn('foto', function ($mahasiswa) {
-                $path = asset("/user/foto/$mahasiswa->foto");
-                return '
-                    <div class="avatar-lg text-center">
-                        <img src=' . $path . ' class="avatar-img rounded-circle" />
-                    </div>
-                ';
+                if ($mahasiswa->foto) {
+                    $path = route('user.foto', $mahasiswa->id);
+                    return '
+                        <div class="avatar-lg text-center">
+                            <img src=' . $path . ' class="avatar-img rounded-circle" />
+                        </div>
+                    ';
+                } else {
+                    return 'No Photo';
+                } 
             })
             ->addColumn('aksi', function ($mahasiswa) {
                 return '
@@ -688,12 +704,16 @@ class UserController extends Controller
             ->of($dosen)
             ->addIndexColumn()
             ->addColumn('foto', function ($dosen) {
-                $path = asset("/user/foto/$dosen->foto");
-                return '
-                    <div class="avatar-lg text-center">
-                        <img src=' . $path . ' class="avatar-img rounded-circle" />
-                    </div>
-                ';
+                if ($dosen->foto) {
+                    $path = route('user.foto', $dosen->id);
+                    return '
+                        <div class="avatar-lg text-center">
+                            <img src=' . $path . ' class="avatar-img rounded-circle" />
+                        </div>
+                    ';
+                } else {
+                    return 'No Photo';
+                } 
             })
             ->addColumn('aksi', function ($dosen) {
                 return '
@@ -717,12 +737,16 @@ class UserController extends Controller
             ->of($admin)
             ->addIndexColumn()
             ->addColumn('foto', function ($admin) {
-                $path = asset("/user/foto/$admin->foto");
-                return '
-                    <div class="avatar-lg text-center">
-                        <img src=' . $path . ' class="avatar-img rounded-circle" />
-                    </div>
-                ';
+                if ($admin->foto) {
+                    $path = route('user.foto', $admin->id);
+                    return '
+                        <div class="avatar-lg text-center">
+                            <img src=' . $path . ' class="avatar-img rounded-circle" />
+                        </div>
+                    ';
+                } else {
+                    return 'No Photo';
+                } 
             })
             ->addColumn('status_superadmin', function ($admin) {
                 if ($admin->status_superadmin == 1) {

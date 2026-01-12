@@ -15,7 +15,12 @@
             <div class="card-body">
                 <div class="d-flex">
                     <div class="avatar avatar-xl">
-                        <img src="{{ asset('/user/foto/' . $data->mahasiswa->foto) }}" alt="..." class="avatar-img rounded-circle" />
+                        @if(!empty($data->mahasiswa->foto))
+                            <img class="avatar-img rounded-circle" src="{{ route('user.foto', $data->mahasiswa->id) }}" alt="">
+                        @else
+                            <img class="avatar-img rounded-circle" src="{{ asset('user/foto/user.png') }}" alt="">
+                        @endif
+                        {{-- <img src="{{ asset('/user/foto/' . $data->mahasiswa->foto) }}" alt="..." class="avatar-img rounded-circle" /> --}}
                     </div>
                     <div class="info-post ms-2">
                         <p class="username">{{ $data->mahasiswa->nama }}</p>

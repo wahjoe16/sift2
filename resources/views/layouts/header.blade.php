@@ -50,7 +50,12 @@
                 <li class="nav-item topbar-user dropdown hidden-caret">
                     <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
                         <div class="avatar-sm">
-                            <img src="{{ asset('/user/foto/' . auth()->user()->foto ?? '') }}" alt="..." class="avatar-img rounded-circle" />
+                            @if(!empty(auth()->user()->foto))
+                            <img class="avatar-img rounded-circle" src="{{ route('profil.foto') }}" alt="">
+                            @else
+                            <img class="avatar-img rounded-circle" src="{{ asset('user/foto/user.png') }}" alt="">
+                            @endif
+                            {{-- <img src="{{ route('user.foto') }}" alt="..." class="avatar-img rounded-circle" /> --}}
                         </div>
                         <span class="profile-username">
                             <span class="op-7">Hi,</span>
@@ -62,7 +67,11 @@
                             <li>
                                 <div class="user-box">
                                     <div class="avatar-lg">
-                                        <img src="{{ asset('/user/foto/' . auth()->user()->foto ?? '') }}" alt="image profile" class="avatar-img rounded" />
+                                        @if(!empty(auth()->user()->foto))
+                                        <img class="avatar-img rounded-circle" src="{{ route('profil.foto') }}" alt="">
+                                        @else
+                                        <img class="avatar-img rounded-circle" src="{{ asset('user/foto/user.png') }}" alt="">
+                                        @endif
                                     </div>
                                     <div class="u-text">
                                         <h4>{{ auth()->user()->nama }}</h4>

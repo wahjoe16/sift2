@@ -48,11 +48,19 @@
 
                     <div class="separator-solid"></div>
                     <h3 class="card-title">Penguji 1 Seminar</h3>
+                    @if ($data->dosen_3 != '')
                     <p class="card-text">{{ $data->dosen_3->nama }}</p>
+                    @else
+                    <p class="card-text">-</p>
+                    @endif
 
                     <div class="separator-solid"></div>
                     <h3 class="card-title">Penguji 2 Seminar</h3>
+                    @if ($data->dosen_4 != '')
                     <p class="card-text">{{ $data->dosen_4->nama }}</p>
+                    @else
+                    <p class="card-text">-</p>
+                    @endif
 
                     <div class="separator-solid"></div>
                     <h3 class="card-title">Judul Tugas Akhir</h3>

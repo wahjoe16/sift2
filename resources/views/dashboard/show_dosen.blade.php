@@ -16,7 +16,11 @@
             <div class="card-header" style="background-image: url('assets/img/blogpost.jpg')">
                 <div class="profile-picture">
                     <div class="avatar avatar-xxl">
-                        <img src="{{ asset('/user/foto/' . $data->foto) }}" alt="..." class="avatar-img rounded-circle" />
+                        @if(!empty($data->foto))
+                            <img class="avatar-img rounded-circle" src="{{ route('user.foto', $data->id) }}" alt="">
+                        @else
+                            <img class="avatar-img rounded-circle" src="{{ asset('user/foto/user.png') }}" alt="">
+                        @endif
                     </div>
                 </div>
             </div>

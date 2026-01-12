@@ -39,12 +39,16 @@ class DashboardController extends Controller
         return datatables()
             ->of($data)
             ->addColumn('foto', function($data){
-                $path = asset("/user/foto/$data->foto");
-                return '
-                    <div class="avatar-lg text-center">
-                        <img src=' . $path . ' class="avatar-img rounded-circle" />
-                    </div>
-                ';
+                if ($data->foto) {
+                    $path = route('user.foto', $data->user_id);
+                    return '
+                        <div class="avatar-lg text-center">
+                            <img src=' . $path . ' class="avatar-img rounded-circle" />
+                        </div>
+                    ';
+                } else {
+                    return 'No Photo';
+                } 
             })
             ->addColumn('aksi', function ($data) {
                 return '
@@ -89,8 +93,16 @@ class DashboardController extends Controller
             ->of($data)
             ->addIndexColumn()
             ->addColumn('foto', function ($data) {
-                $path = asset("$data->foto");
-                return '<img src=' . $path . ' class="img-circle img-bordered-sm" width="40"/>';
+                if (!empty($data->foto)) {
+                    $path = route('user.foto', $data->id);
+                    return '
+                        <div class="avatar-lg text-center">
+                            <img src=' . $path . ' class="avatar-img rounded-circle" />
+                        </div>
+                    ';
+                } else {
+                    return 'No Photo';
+                } 
             })
             ->addColumn('aksi', function ($data) {
                 return '
@@ -159,8 +171,16 @@ class DashboardController extends Controller
             ->of($data)
             ->addIndexColumn()
             ->addColumn('foto', function ($data) {
-                $path = asset("$data->foto");
-                return '<img src=' . $path . ' class="img-circle img-bordered-sm" width="40"/>';
+                if (!empty($data->foto)) {
+                    $path = route('user.foto', $data->id);
+                    return '
+                        <div class="avatar-lg text-center">
+                            <img src=' . $path . ' class="avatar-img rounded-circle" />
+                        </div>
+                    ';
+                } else {
+                    return 'No Photo';
+                } 
             })
             ->addColumn('aksi', function ($data) {
                 return '
