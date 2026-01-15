@@ -16,9 +16,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Mpdf\Mpdf;
 use Spatie\Browsershot\Browsershot;
 use Symfony\Component\HttpFoundation\File\UploadedFile as FileUploadedFile;
+use Illuminate\Support\Str;
 
 class KegiatanSkkftController extends Controller
 {
@@ -77,12 +79,28 @@ class KegiatanSkkftController extends Controller
         $data->jabatan_id = $request->jabatan_id;
 
         // store bukti fisik
+        /*
         $bukti_fisik = $request->file('bukti_fisik');
         $fileName = $npm . '_' . time() . '_' . $bukti_fisik->getClientOriginalName();
         $filePath = 'mahasiswa/skkft';
         $bukti_fisik->move($filePath, $fileName);
-
+        
         $data->bukti_fisik = $fileName;
+        */
+
+        // Upload bukti fisik PDF
+        if ($request->hasFile('bukti_fisik')) {
+            $file = $request->file('bukti_fisik');
+
+            // Simpan di disk 'public' (yaitu folder storage/app/public)
+            $path = $file->storeAs(
+                'mahasiswa/skkft',            // folder relatif di dalam disk 'public'
+                Str::uuid() . '.' . $file->extension(),
+                'public'                     // gunakan disk 'public'
+            );
+
+            $data->bukti_fisik = $path;       // contoh: 'mahasiswa/skkft/uuid.pdf'
+        }   
 
         $data->save();
 
@@ -171,18 +189,45 @@ class KegiatanSkkftController extends Controller
         $data->status_skkft = 0;
 
         // update bukti fisik
-        if($data->bukti_fisik !== ''){
-            $bukti_fisik = $request->file('bukti_fisik');
-            if (!is_null($bukti_fisik)) {
-                $this->deleteFile($data->bukti_fisik);
-                $fileName = $npm. '_'. time(). '_'. $bukti_fisik->getClientOriginalName();
-                $filePath ='mahasiswa/skkft';
-                $bukti_fisik->move($filePath, $fileName);
-                $data->bukti_fisik = $fileName;
-            } elseif (!empty($request->current_bukti_fisik)) {
+        // if($data->bukti_fisik !== ''){
+        //     $bukti_fisik = $request->file('bukti_fisik');
+        //     if (!is_null($bukti_fisik)) {
+        //         $this->deleteFile($data->bukti_fisik);
+        //         $fileName = $npm. '_'. time(). '_'. $bukti_fisik->getClientOriginalName();
+        //         $filePath ='mahasiswa/skkft';
+        //         $bukti_fisik->move($filePath, $fileName);
+        //         $data->bukti_fisik = $fileName;
+        //     } elseif (!empty($request->current_bukti_fisik)) {
+        //         $data->bukti_fisik = $request->current_bukti_fisik;
+        //     }else {
+        //         $data->bukti_fisik = '';
+        //     }
+        // }
+
+        if ($request->hasFile('bukti_fisik')) {
+            // Hapus file lama kalau ada
+            if (!empty($data->bukti_fisik) && Storage::disk('public')->exists($data->bukti_fisik)) {
+                Storage::disk('public')->delete($data->bukti_fisik);
+            }
+
+            // Upload file baru
+            $file = $request->file('bukti_fisik');
+
+            // Simpan di disk 'public' (yaitu folder storage/app/public)
+            $path = $file->storeAs(
+                'mahasiswa/skkft',            // folder relatif di dalam disk 'public'
+                Str::uuid() . '.' . $file->extension(),
+                'public'                     // gunakan disk 'public'
+            );
+
+            $data->bukti_fisik = $path;       // contoh: 'mahasiswa/skkft/uuid.pdf'
+
+        } else {
+            // Jika tidak upload file baru, cek apakah ada current file dari request
+            if (!empty($request->current_bukti_fisik)) {
                 $data->bukti_fisik = $request->current_bukti_fisik;
-            }else {
-                $data->bukti_fisik = '';
+            } else {
+                $data->bukti_fisik = null; // Atau '' kalau kamu suka
             }
         }
 
@@ -205,18 +250,45 @@ class KegiatanSkkftController extends Controller
         $data->user_id = auth()->user()->id;
 
         // update bukti fisik
-        if($data->bukti_fisik !== ''){
-            $bukti_fisik = $request->file('bukti_fisik');
-            if (!is_null($bukti_fisik)) {
-                $this->deleteFile($data->bukti_fisik);
-                $fileName = $npm. '_'. time(). '_'. $bukti_fisik->getClientOriginalName();
-                $filePath ='mahasiswa/skkft';
-                $bukti_fisik->move($filePath, $fileName);
-                $data->bukti_fisik = $fileName;
-            } elseif (!empty($request->current_bukti_fisik)) {
+        // if($data->bukti_fisik !== ''){
+        //     $bukti_fisik = $request->file('bukti_fisik');
+        //     if (!is_null($bukti_fisik)) {
+        //         $this->deleteFile($data->bukti_fisik);
+        //         $fileName = $npm. '_'. time(). '_'. $bukti_fisik->getClientOriginalName();
+        //         $filePath ='mahasiswa/skkft';
+        //         $bukti_fisik->move($filePath, $fileName);
+        //         $data->bukti_fisik = $fileName;
+        //     } elseif (!empty($request->current_bukti_fisik)) {
+        //         $data->bukti_fisik = $request->current_bukti_fisik;
+        //     }else {
+        //         $data->bukti_fisik = '';
+        //     }
+        // }
+
+        if ($request->hasFile('bukti_fisik')) {
+            // Hapus file lama kalau ada
+            if (!empty($data->bukti_fisik) && Storage::disk('public')->exists($data->bukti_fisik)) {
+                Storage::disk('public')->delete($data->bukti_fisik);
+            }
+
+            // Upload file baru
+            $file = $request->file('bukti_fisik');
+
+            // Simpan di disk 'public' (yaitu folder storage/app/public)
+            $path = $file->storeAs(
+                'mahasiswa/skkft',            // folder relatif di dalam disk 'public'
+                Str::uuid() . '.' . $file->extension(),
+                'public'                     // gunakan disk 'public'
+            );
+
+            $data->bukti_fisik = $path;       // contoh: 'mahasiswa/skkft/uuid.pdf'
+
+        } else {
+            // Jika tidak upload file baru, cek apakah ada current file dari request
+            if (!empty($request->current_bukti_fisik)) {
                 $data->bukti_fisik = $request->current_bukti_fisik;
-            }else {
-                $data->bukti_fisik = '';
+            } else {
+                $data->bukti_fisik = null; // Atau '' kalau kamu suka
             }
         }
 
@@ -327,9 +399,22 @@ class KegiatanSkkftController extends Controller
         ";
 
         $dataPoin = DB::select($sql, [$sertifikat]);
+        
+        $fotoDb = $sertifikat->user_skkft->foto;
+        $fotoPath = storage_path('app/'.$fotoDb);
+
+        $fotoBase64 = null;
+
+        if (file_exists($fotoPath)) {
+            $type = pathinfo($fotoPath, PATHINFO_EXTENSION);
+            $data = file_get_contents($fotoPath);
+            $fotoBase64 = 'data:image/'.$type.';base64,'.base64_encode($data);
+        }
+
         $data = [
             'nama' => $sertifikat->user_skkft->nama,
             'npm' => $sertifikat->user_skkft->nik,
+            'foto' => $fotoBase64,
             'tanggal' => tanggal_indonesia($sertifikat->tanggal, false),
             'wadek' => 'Dr. Eng. Ir. M. Rahman Ardhiansyah, S.T., M.T., IPM.',
             'poin' => $dataPoin
@@ -355,10 +440,29 @@ class KegiatanSkkftController extends Controller
         ";
 
         $dataPoin = DB::select($sql, [$sertifikat]);
+
+        $fotoDb = $sertifikat->user_skkft->foto;
+        $fotoPath = storage_path('app/'.$fotoDb);
+
+        // dd([
+        //     'foto_db' => $sertifikat->user_skkft->foto,
+        //     'path' => $fotoPath,
+        //     'exists' => file_exists($fotoPath),
+        //     'size' => file_exists($fotoPath) ? filesize($fotoPath) : null,
+        // ]);
+
+        $fotoBase64 = null;
+
+        if (file_exists($fotoPath)) {
+            $type = pathinfo($fotoPath, PATHINFO_EXTENSION);
+            $data = file_get_contents($fotoPath);
+            $fotoBase64 = 'data:image/'.$type.';base64,'.base64_encode($data);
+        }
+
         $data = [
             'nama' => $sertifikat->user_skkft->nama,
             'npm' => $sertifikat->user_skkft->nik,
-            'foto' => $sertifikat->user_skkft->foto,
+            'foto' => $fotoBase64,
             'tanggal' => tanggal_indonesia($sertifikat->tanggal, false),
             'wadek' => 'Dr. Eng. Ir. M. Rahman Ardhiansyah, S.T., M.T., IPM.',
             'poin' => $dataPoin

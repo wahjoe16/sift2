@@ -11,25 +11,25 @@
         "900": "roboto_slab_900_27e7fc632573a11f7af2e0ebc82b75ec"
     },
     "lato": {
-        "100_italic": "C:\\laragon\\www\\sift2\\storage\\fonts\/lato_100_italic_44e4c60a7625d0726917c5586600eef3",
-        "300_italic": "C:\\laragon\\www\\sift2\\storage\\fonts\/lato_300_italic_5d458a0bea2edc814cad9956eabe8265",
-        "italic": "C:\\laragon\\www\\sift2\\storage\\fonts\/lato_italic_b7fa5abebbe1668203ae32668ec9cd2e",
-        "bold_italic": "C:\\laragon\\www\\sift2\\storage\\fonts\/lato_bold_italic_6fe97904fa17d2ccdc33faba12fa878c",
-        "900_italic": "C:\\laragon\\www\\sift2\\storage\\fonts\/lato_900_italic_9d745788e8b9254eca55b7b9d6642bc8",
-        "100": "C:\\laragon\\www\\sift2\\storage\\fonts\/lato_100_70daffc5a0e459436079609c81930e2f",
-        "300": "C:\\laragon\\www\\sift2\\storage\\fonts\/lato_300_bfdde39714afa6c7c8803648317f8517",
-        "normal": "C:\\laragon\\www\\sift2\\storage\\fonts\/lato_normal_51116b245f08d5e5cdb537d25637e400",
-        "bold": "C:\\laragon\\www\\sift2\\storage\\fonts\/lato_bold_39c477866ca5e9b58b0b56a69b4bac5a",
-        "900": "lato_900_f2c6fe94dc8549ffc66e6fb626318e87"
+        "100_italic": "C:\\laragon\\www\\sift2\\storage\\fonts\/lato_100_italic_3b51391a1ab1a403529fb902e5612aa5",
+        "300_italic": "C:\\laragon\\www\\sift2\\storage\\fonts\/lato_300_italic_42089ca6fd2f3cd26693aaa395c5435d",
+        "italic": "C:\\laragon\\www\\sift2\\storage\\fonts\/lato_italic_58d1d1eae6bb191f4e369e586edf2f09",
+        "bold_italic": "C:\\laragon\\www\\sift2\\storage\\fonts\/lato_bold_italic_e64384b7bdb5d1abb422db8bc93e2e52",
+        "900_italic": "C:\\laragon\\www\\sift2\\storage\\fonts\/lato_900_italic_31f10adc7b19e67c5e4716c6e65a60db",
+        "100": "C:\\laragon\\www\\sift2\\storage\\fonts\/lato_100_959f2d7aff674af006e2617d22f81264",
+        "300": "C:\\laragon\\www\\sift2\\storage\\fonts\/lato_300_f0c6ee3e35bb77a61aee3101d2b14826",
+        "normal": "C:\\laragon\\www\\sift2\\storage\\fonts\/lato_normal_ed3f4ee6166e4a8d875402747e6fb7a0",
+        "bold": "C:\\laragon\\www\\sift2\\storage\\fonts\/lato_bold_67cbea2936080f3d5601566280ed0b77",
+        "900": "lato_900_b9ec795f5d1922eb05bbf2195a5377be"
     },
     "suse": {
-        "100": "C:\\laragon\\www\\sift2\\storage\\fonts\/suse_100_79a1d3d3dc82e554cfb262c20b80d3dc",
-        "200": "C:\\laragon\\www\\sift2\\storage\\fonts\/suse_200_ac5ad45008a21ad93b2e147f40e72d91",
-        "300": "C:\\laragon\\www\\sift2\\storage\\fonts\/suse_300_3e100489b3f84acebf9302bee0e8cb84",
-        "normal": "C:\\laragon\\www\\sift2\\storage\\fonts\/suse_normal_dc8c5b5bdbf4a1bc254dd0c5ee9fef43",
-        "500": "C:\\laragon\\www\\sift2\\storage\\fonts\/suse_500_868b76ca6453cc3609600af2d1d60fcd",
-        "600": "C:\\laragon\\www\\sift2\\storage\\fonts\/suse_600_7092842a5a378b6a2d6e5187119901f9",
-        "bold": "C:\\laragon\\www\\sift2\\storage\\fonts\/suse_bold_d458a89ef4f304b0f75f5ab6b4e5c201",
-        "800": "suse_800_a6b1792219334eb00d336659da8b8385"
+        "100": "C:\\laragon\\www\\sift2\\storage\\fonts\/suse_100_a7cabbc6bb264ca597449b88c794fc04",
+        "200": "C:\\laragon\\www\\sift2\\storage\\fonts\/suse_200_e92a41c724882f619365f7c321859db5",
+        "300": "C:\\laragon\\www\\sift2\\storage\\fonts\/suse_300_fe99f59d76ab922a15ecd6f81814a0d9",
+        "normal": "C:\\laragon\\www\\sift2\\storage\\fonts\/suse_normal_859f4606602ef3cc392e92cc037de335",
+        "500": "C:\\laragon\\www\\sift2\\storage\\fonts\/suse_500_02e11e549ea799726bd37898e19bd304",
+        "600": "C:\\laragon\\www\\sift2\\storage\\fonts\/suse_600_ed97aad0451e6acb3f45680217960d2d",
+        "bold": "C:\\laragon\\www\\sift2\\storage\\fonts\/suse_bold_98d2d509bfb5b50acf12210e8d554a6b",
+        "800": "suse_800_1bdccab762d42933bfd98daf5bf7a3b7"
     }
 }

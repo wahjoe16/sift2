@@ -76,7 +76,9 @@
             <table border="0" width="120%">
                 <tr>
                     <td width="20%"></td>
-                    <td width="15%"><img src="{{ asset('/user/foto/' . $foto ?? '') }}" width="170px"></td>
+                    <td width="15%">
+                        <img src="{{ $foto }}" width="170px">
+                    </td>
                     <td width="5%"></td>
                     <td>
                         Bandung, {{ $tanggal }}

@@ -18,7 +18,7 @@
                 <div class="card-body">
                     <div class="d-flex">
                         <div class="avatar avatar-xl">
-                            <img src="{{ asset('/user/foto/' . $dataPengajuan->user_skkft->foto) }}" alt="..." class="avatar-img rounded-circle" />
+                            <img src="{{ route('user.foto', $dataPengajuan->user_skkft->id) }}" alt="..." class="avatar-img rounded-circle" />
                         </div>
                         <div class="info-post ms-2">
                             <p class="username">{{ $dataPengajuan->user_skkft->nama }}</p>
@@ -95,7 +95,7 @@
                     <div class="separator-solid"></div>
                     <h3 class="card-title">Bukti Fisik</h3>
                     <p class="card-text">
-                        <a href="{{ url('/mahasiswa/skkft', $dataPengajuan->bukti_fisik) }}">{{ $dataPengajuan->bukti_fisik }}</a>
+                        <a href="{{ asset('storage/' . $dataPengajuan->bukti_fisik) }}">{{ $dataPengajuan->bukti_fisik }}</a>
                     </p>
                 </div>
             </div>

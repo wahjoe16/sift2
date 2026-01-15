@@ -28,7 +28,7 @@
 
                 <div class="separator-solid"></div>
                 <h3 class="card-title">Bukti Fisik</h3>
-                <p class="card-text"><a href="{{ url('/mahasiswa/skkft', $kegiatan->bukti_fisik) }}">{{ $kegiatan->bukti_fisik }}</a></p>
+                <p class="card-text"><a href="{{ asset('storage/' . $kegiatan->bukti_fisik) }}">{{ $kegiatan->bukti_fisik }}</a></p>
 
                 <div class="separator-solid"></div>
                 <h3 class="card-title">Status SKKFT</h3>

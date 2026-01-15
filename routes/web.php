@@ -65,6 +65,7 @@ Route::group(['middleware' => 'ceklevel:1,2,3'], function () {
     // Proses mengakses File
     Route::get('/profil-foto', [FileController::class, 'foto'])->name('profil.foto');
     Route::get('/user-foto/{id}', [FileController::class, 'userFoto'])->name('user.foto');
+    Route::get('/bukti_fisik/{id}/skkft', [FileController::class, 'buktiFisikSkkft'])->name('skkft.bukti_fisik');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile', [UserController::class, 'profile'])->name('user.profil');

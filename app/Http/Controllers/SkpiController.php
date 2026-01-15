@@ -48,7 +48,7 @@ class SkpiController extends Controller
             ->addIndexColumn()
             ->addColumn('bukti_fisik', function($dataKegiatan){
                 return '
-                    <a href="' . url('/mahasiswa/skkft', $dataKegiatan->bukti_fisik) . '" target="_blank"><i class="fa fa-link"></i></a>
+                    <a href="' . asset('storage/', $dataKegiatan->bukti_fisik) . '" target="_blank"><i class="fa fa-link"></i></a>
                 ';
             })
             ->addColumn('select_all', function($dataKegiatan){
@@ -243,7 +243,7 @@ class SkpiController extends Controller
         $templateProcessor->setValue('tanggal_pengajuan', tanggal_indonesia($data->tanggal, false));
         $templateProcessor->setImageValue('foto', 
                                             array(
-                                                'pathOnDisk' => public_path('user/foto/'.$data->user_skpi->foto),
+                                                'pathOnDisk' => storage_path('app/' . $data->user_skpi->foto),
                                                 'width' => 200,
                                                 'height' => 200,
                                                 'align' => 'center',

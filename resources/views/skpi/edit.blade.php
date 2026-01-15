@@ -67,7 +67,7 @@
                                         -
                                     @endif
                                 </td>
-                                <td class="text-center"><a href="{{ url('/mahasiswa/skkft', $d->bukti_fisik) }}" target="_blank"><i class="fa fa-link"></i></a></td>
+                                <td class="text-center"><a href="{{ asset('storage/' . $d->bukti_fisik) }}" target="_blank"><i class="fa fa-link"></i></a></td>
                                 
                             </tr>
                         @endforeach

@@ -15,7 +15,8 @@
             <div class="card-body">
                 <div class="d-flex">
                     <div class="avatar avatar-xl">
-                        <img src="{{ asset('/user/foto/' . $dataSertifikat->user_skkft->foto) }}" alt="..." class="avatar-img rounded-circle" />
+                        <img src="{{ route('user.foto', $dataSertifikat->user_skkft->id ?? '') }}" alt="..." class="avatar-img rounded-circle" />
+                        {{-- <img src="{{ asset('/user/foto/' . $dataSertifikat->user_skkft->foto) }}" alt="..." class="avatar-img rounded-circle" /> --}}
                     </div>
                     <div class="info-post ms-2">
                         <p class="username">{{ $dataSertifikat->user_skkft->nama }}</p>
@@ -101,7 +102,7 @@
                                 <td>{{ $dk->categories_skkft->category_name }}</td>
                                 <td>{{ $dk->subcategories_skkft->subcategory_name }}</td>
                                 <td>{{ $dk->point }}</td>
-                                <td><a href="{{ url('/mahasiswa/skkft', $dk->bukti_fisik) }}" target="_blank" class="btn btn-info btn-sm">Lihat Berkas</a></td>
+                                <td><a href="{{ asset('storage/' . $dk->bukti_fisik) }}" target="_blank" class="btn btn-info btn-sm">Lihat Berkas</a></td>
                                 <td>
                                     @if ($dk->status_skkft == 1)
                                         <span class="badge badge-success">Diterima</span>
