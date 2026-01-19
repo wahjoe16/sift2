@@ -14,6 +14,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use ZipArchive;
 
@@ -205,22 +207,30 @@ class MyArchiveController extends Controller
             'name.max' => 'Nama arsip tidak boleh lebih dari 255 karakter',
         ]);
 
-        foreach ($request->file as $file) {
-            $fileName = 'file_' . date('d-m-YHis') . '_' . $file->getClientOriginalName();
-            $path = 'file/archives';
-            $file->move($path, $fileName);
-            $data = new Archive();
-            $data->name = $request->name;
-            $data->section_id = $request->section_id;
-            $data->category_archive_id = $request->category_archive_id;
-            $data->subcategory_archive_id = $request->subcategory_archive_id;
-            $data->tahun_ajaran_id = $request->tahun_ajaran_id;
-            $data->semester_id = $request->semester_id;
-            $data->file = $fileName;
-            $user = auth()->user();
-            $data->save();
-            $data->users()->sync($user->id);
+        if ($request->hasFile('file')) {
+            foreach ($request->file('file') as $file) {
+
+                // simpan di disk public (yaitu folder storage/app/public)
+                $path = $file->storeAs(
+                    'file/archives',
+                    Str::uuid() . '.' . $file->extension(),
+                    'public'
+                );
+
+                $data = new Archive();
+                $data->name = $request->name;
+                $data->section_id = $request->section_id;
+                $data->category_archive_id = $request->category_archive_id;
+                $data->subcategory_archive_id = $request->subcategory_archive_id;
+                $data->tahun_ajaran_id = $request->tahun_ajaran_id;
+                $data->semester_id = $request->semester_id;
+                $data->file = $path;
+                $user = auth()->user();
+                $data->save();
+                $data->users()->sync($user->id);
+            }
         }
+
         return redirect()->route('my-archive.index')->with('success', 'Archive has been successfull created!');
     }
 
@@ -258,8 +268,24 @@ class MyArchiveController extends Controller
         $data = $request->only('name', 'section_id', 'category_archive_id', 'subcategory_archive_id', 'tahun_ajaran_id', 'semester_id');
 
         if ($request->hasFile('file')) {
-            $data['file'] = $this->saveFile($request->file('file'));
-            if ($archive->file !== '') $this->deleteFile($archive->file);
+            // $data['file'] = $this->saveFile($request->file('file'));
+            // if ($archive->file !== '') $this->deleteFile($archive->file);
+
+            // hapus file lama di storage/public jika ada
+            if (!empty($archive->file) && Storage::disk('public')->exists($archive->file)) {
+                Storage::disk('public')->delete($archive->file);
+            }
+
+            // simpan di disk public (yaitu folder storage/app/public)
+            $path = $request->file('file')->storeAs(
+                'file/archives',
+                Str::uuid() . '.' . $request->file('file')->extension(),
+                'public'
+            );
+
+            $data['file'] = $path;
+        } else {
+            $data['file'] = $request->oldfile;
         }
 
         $archive->update($data);
@@ -267,24 +293,16 @@ class MyArchiveController extends Controller
         return redirect()->route('my-archive.index')->with('success', 'Archive updated successfully!');
     }
 
-    public function saveFile(UploadedFile $file)
-    {
-        $fileName = 'file_' . date('d-m-YHis') . '_' . $file->getClientOriginalName();
-        $path = 'file/archives';
-        $file->move($path, $fileName);
-        return $fileName;
-    }
-
-    public function deleteFile($fileArsip)
-    {
-        $path = 'file/archives/' . $fileArsip;
-        return File::delete($path);
-    }
-
     public function deleteArchive($id)
     {
         $data = Archive::find($id);
-        if ($data->file !== '') $this->deleteFile($data->file);
+
+        // hapus file lama di storage/public jika ada
+        if (!empty($data->file) && Storage::disk('public')->exists($data->file)) {
+            Storage::disk('public')->delete($data->file);
+        }
+
+        // hapus data arsip dari DB
         $data->delete();
         return redirect()->back()->with('success', 'Archive deleted successfully!');
     }
@@ -357,7 +375,7 @@ class MyArchiveController extends Controller
     public function downloadFile($id)
     {
         $data = Archive::findOrFail($id);
-        $filePath = 'file/archives/' . $data->file;
+        $filePath = 'storage/' . $data->file;
         return Response::download($filePath);
     }
 
@@ -365,7 +383,7 @@ class MyArchiveController extends Controller
     {
         foreach ($request->archive_id as $id) {
             $archive = Archive::find($id);
-            $archiveFile = 'file/archives/' . $archive->file;
+            $archiveFile = 'storage/' . $archive->file;
             // return $archiveFile;
 
         }

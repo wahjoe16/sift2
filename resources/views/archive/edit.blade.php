@@ -88,7 +88,7 @@
                     <h5>File Arsip</h5>
                 </div>
                 <div class="card-body">
-                    <input type="file" name="file" class="dropify" data-default-file="{{ asset('/file/archives/')."/".$data->file }}">
+                    <input type="file" name="file" class="dropify" data-default-file="{{ asset('storage/')."/".$data->file }}">
                     <input type="hidden" name="current_file" id="current_file" value="{{ $data->file }}">
                 </div>
             </div>

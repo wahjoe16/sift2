@@ -94,7 +94,7 @@
                     <h5>Upload File Bukti Fisik</h5>
                 </div>
                 <div class="card-body">
-                    <input type="file" name="bukti_fisik" class="dropify" id="bukti_fisik" data-default-file="{{ asset('/mahasiswa/skkft/')."/".$kegiatan->bukti_fisik }}">
+                    <input type="file" name="bukti_fisik" class="dropify" id="bukti_fisik" data-default-file="{{ asset('storage/')."/".$kegiatan->bukti_fisik }}">
                     <input type="hidden" name="current_bukti_fisik" id="current_bukti_fisik" value="{{ $kegiatan->bukti_fisik }}">
                 </div>
             </div>

@@ -92,7 +92,8 @@
                         </div>
                     </div>
                     @endif --}}
-                    <input type="file" name="file[]" class="dropify" data-default-file="{{ asset('/file/archives/')."/".$data->file }}" multiple>
+                    <input type="file" name="file" class="dropify" data-default-file="{{ asset('storage/')."/".$data->file }}" multiple>
+                    <input type="hidden" name="oldfile" value="{{ $data->file }}">
                 </div>
             </div>
         </div>

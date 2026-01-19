@@ -72,7 +72,7 @@
                 <h5>File Arsip : {{ $data->file }}</h5>
             </div>
             <div class="card-body">
-                <iframe src="{{ asset('file/archives/'.$data->file) }}" frameborder="0" width="700" height="500"></iframe>
+                <iframe src="{{ asset('storage/'.$data->file) }}" frameborder="0" width="700" height="500"></iframe>
             </div>
         </div>
     </div>
