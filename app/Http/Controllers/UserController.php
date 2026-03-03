@@ -51,7 +51,8 @@ class UserController extends Controller
             // nama file aman
             $path = $file->storeAs(
                 'user/foto',
-                Str::uuid() . '.' . $file->extension()
+                Str::uuid() . '.' . $file->extension(),
+                'public'
             );
 
             $user->foto = $path;
@@ -123,7 +124,7 @@ class UserController extends Controller
             })
             ->addColumn('foto', function ($admin) {
                 if (!empty($admin->foto)) {
-                    $path = route('user.foto', $admin->id);
+                    $path = asset('storage/' . $admin->foto);
                     return '
                         <div class="avatar-lg text-center">
                             <img src=' . $path . ' class="avatar-img rounded-circle" />
@@ -235,7 +236,7 @@ class UserController extends Controller
             })
             ->addColumn('foto', function ($mahasiswa) {
                 if (!empty($mahasiswa->foto)) {
-                    $path = route('user.foto', $mahasiswa->id);
+                    $path = asset('storage/' . $mahasiswa->foto);
                     return '
                         <div class="avatar-lg text-center">
                             <img src=' . $path . ' class="avatar-img rounded-circle" />
@@ -351,7 +352,7 @@ class UserController extends Controller
             })
             ->addColumn('foto', function ($dosen) {
                 if ($dosen->foto) {
-                    $path = route('user.foto', $dosen->id);
+                    $path = asset('storage/' . $dosen->foto);
                     return '
                         <div class="avatar-lg text-center">
                             <img src=' . $path . ' class="avatar-img rounded-circle" />
@@ -624,7 +625,7 @@ class UserController extends Controller
             ->addIndexColumn()
             ->addColumn('foto', function ($data) {
                 if ($data->foto) {
-                    $path = route('user.foto', $data->id);
+                    $path = asset('storage/' . $data->foto);
                     return '
                         <div class="avatar-lg text-center">
                             <img src=' . $path . ' class="avatar-img rounded-circle" />

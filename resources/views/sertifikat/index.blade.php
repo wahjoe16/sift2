@@ -29,7 +29,7 @@
                         <tr>
                             <td>
                                 <div class="avatar-lg text-center">
-                                    <img src="{{ route('user.foto', $d->user_skkft->id ?? '') }}" alt="..." class="avatar-img rounded-circle" />
+                                    <img src="{{ asset('storage/' . $d->user_skkft->foto) }}" alt="..." class="avatar-img rounded-circle" />
                                     {{-- <img src="{{ url('/user/foto/', $d->user_skkft->foto ?? '') }}" alt="..." class="avatar-img rounded-circle" /> --}}
                                 </div>
                             </td>

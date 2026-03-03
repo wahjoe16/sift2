@@ -11,16 +11,16 @@
         @endif --}}
 
         @if (!empty($alumni->banner_img))
-            <img src="{{ url('/user/banner/', $alumni->banner_img) }}" class="card-img-top" alt="..." style="max-width: 100%; height: 80px; object-fit: cover; position:relative; bottom:18px;">  
+            <img src="{{ asset('storage/' . $alumni->banner_img) }}" class="card-img-top" alt="..." style="max-width: 100%; height: 80px; object-fit: cover; position:relative; bottom:18px;">  
         @else
-            <img src="{{ url('/media/banneralumni.jpg') }}" class="card-img-top" alt="..." style="max-width: 100%; height: 80px; object-fit: cover; position:relative; bottom:18px;">  
+            <img src="{{ asset('/media/banneralumni.jpg') }}" class="card-img-top" alt="..." style="max-width: 100%; height: 80px; object-fit: cover; position:relative; bottom:18px;">  
         @endif
         
         <div class="card-body body-profile">
             @if(!empty($dataUser->foto))
-                <img src="{{ asset('/user/foto/' . $dataUser->foto ?? '') }}" class="rounded-circle" alt="">
+                <img src="{{ asset('storage/' . $dataUser->foto ?? '') }}" class="rounded-circle" alt="">
             @else
-                <img class="rounded-circle" src="{{ asset('user/foto/user.png') }}" alt="">
+                <img class="rounded-circle" src="{{ asset('storage/user/foto/user.png') }}" alt="">
             @endif
             <h5 class="card-title">{{ $dataUser->nama }}</h5>
 

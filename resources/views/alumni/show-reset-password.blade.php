@@ -14,7 +14,7 @@
             <div class="card-header">
                 <div class="profile-picture">
                     <div class="avatar avatar-xxl">
-                        <img src="{{ asset('/user/foto/' . $data->foto) }}" alt="..." class="avatar-img rounded-circle" />
+                        <img src="{{ asset('storage/' . $data->foto) }}" alt="..." class="avatar-img rounded-circle" />
                     </div>
                 </div>
             </div>

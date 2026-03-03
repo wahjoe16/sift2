@@ -21,6 +21,8 @@ use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class FrontendController extends Controller
 {
@@ -102,14 +104,6 @@ class FrontendController extends Controller
             ]);
 
             Alumni::create(['user_id' => $data->id]);
-
-            // if (Auth::attempt([
-            //     'email' => $request->email,
-            //     'password' => $request->password
-            // ])) {
-            //     $redirectTo = url('/alumni-page/dashboard');
-            //     return response()->json(['url' => $redirectTo]);
-            // }
 
             if (!$data) {
                 return redirect()->back()->with('error', 'Registrasi gagal, silahkan coba lagi');
@@ -260,16 +254,22 @@ class FrontendController extends Controller
             }
         } elseif ($slug == 'kompetensi') {
             if ($request->isMethod('POST')) {
-                // upload sertifikat kompetensi
-                $file = $request->file('sertifikat');
-                $fileName = time() . '_' . Auth::guard('alumni')->user()->nama . '_' . $file->getClientOriginalName();
-                $filePath = public_path('alumni/sertifikat');
-                $file->move($filePath, $fileName);
 
+                // upload sertifikat kompetensi
+                if ($request->hasFile('sertifikat')) {
+                    $file = $request->file('sertifikat');
+
+                    $path = $file->storeAs(
+                        'alumni/sertifikat',
+                        Str::uuid() . '.' . $file->extension(),
+                        'public'
+                    );    
+                }
+                
                 $kompetensi = new SkillAlumni();
                 $kompetensi->user_id = $user->id;
                 $kompetensi->kompetensi = $request->kompetensi;
-                $kompetensi->sertifikat_kompetensi = $fileName;
+                $kompetensi->sertifikat_kompetensi = $path;
                 $kompetensi->save();
 
                 return redirect()->back()->with('success', 'Data kompetensi berhasil diperbarui');
@@ -431,20 +431,24 @@ class FrontendController extends Controller
             $this->validate($request, $rules, $customMessage);
 
             // upload profile photo
-            if($request->hasFile('foto')){
+            if ($request->hasFile('foto')) {
                 $file = $request->file('foto');
 
-                if (!is_null($file)) {
-                    File::delete(public_path('/user/foto/' . $user->foto));
-                    $fileName = $user->nama . '_' . time() . '_' . $file->getClientOriginalName();
-                    $filePath = public_path('/user/foto');
-                    $file->move($filePath, $fileName);
+                // hapus foto lama
+                if (Auth::guard('alumni')->user()->foto && Storage::exists(Auth::guard('alumni')->user()->foto)) {
+                    Storage::delete(Auth::guard('alumni')->user()->foto);
                 }
-            }
 
-            User::where('id', Auth::guard('alumni')->user()->id)->update([
-                'foto' => $fileName
-            ]);            
+                // upload foto baru
+                $path = $file->storeAs(
+                    'user/foto',
+                    Str::uuid() . '.' . $file->extension(),
+                    'public'
+                ); 
+                
+                $user->foto = $path;
+                $user->save(); 
+            }                      
 
             return redirect()->back()->with('success', 'Foto profil berhasil diperbarui');
 
@@ -473,15 +477,21 @@ class FrontendController extends Controller
                 $file = $request->file('banner');
 
                 if (!is_null($file)) {
-                    File::delete(public_path('/user/banner/' . $user->banner_img));
-                    $fileName = $user->nama . '_' . time() . '_' . $file->getClientOriginalName();
-                    $filePath = public_path('/user/banner');
-                    $file->move($filePath, $fileName);
+                    // hapus banner lama
+                    File::delete(storage_path('storage/' . $user->banner_img));
+
+                    // upload banner baru
+                    $path = $file->storeAs(
+                        'user/banner',
+                        Str::uuid() . '.' . $file->extension(),
+                        'public'
+                    );
+                    
                 }
             }
 
             Alumni::where('user_id', $user->id)->update([
-                'banner_img' => $fileName
+                'banner_img' => $path,
             ]);
 
             return redirect()->back()->with('success', 'Gambar banner berhasil diperbarui');
@@ -509,10 +519,13 @@ class FrontendController extends Controller
 
             if ($request->hasFile('post_image')) {
                 $file = $request->post_image;
-                $fileName = time() . '_postingan.' . $file->getClientOriginalExtension();
-                $filePath = public_path('/alumni/postingan');
-                $file->move($filePath, $fileName);
-                $post->media = $fileName;
+
+                $path = $file->storeAs(
+                    'alumni/postingan',
+                    Str::uuid() . '.' . $file->extension(),
+                    'public'
+                );
+                $post->media = $path;
             }
 
             $post->save();
@@ -567,16 +580,22 @@ class FrontendController extends Controller
 
     public function dataFriendAlumni()
     {
-        $data = ProfilLulusanAlumni::with('users')->where('jenjang', '=', 'S1')->get()->toArray();
+        $data = ProfilLulusanAlumni::with('users')->where('jenjang', '=', 'S1')->get();
 
         return datatables()
             ->of($data)
             ->addColumn('foto', function($data){
-                return '<img src="'.url('user/foto/'. $data['users']['foto']).'" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover" alt="Foto">';
+                if (!empty($data->users->foto)) {
+                    $path = asset('storage/' . $data->users->foto);
+                    return '<img src="'. $path .'" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover" alt="Foto">';
+                } else {
+                    return 'No Photo';
+                }
+                // return '<img src="'.url('user/foto/'. $data['users']['foto']).'" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover" alt="Foto">';
             })
             ->addColumn('aksi', function($data){
                 return '
-                    <a target="_blank" href="'.route('frontend.alumniDetail', $data['user_id']).'"><i class="bi bi-search"></i></a>
+                    <a target="_blank" href="'.route('frontend.alumniDetail', $data->user_id).'"><i class="bi bi-search"></i></a>
                 ';
                 // return '
                 //     <button onclick="viewAlumni(`' . route('frontend.alumniDetail', $data['user_id']) . '`)" class="btn btn-primary btn-sm"><i class="bi bi-search"></i></button>

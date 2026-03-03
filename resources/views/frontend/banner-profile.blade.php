@@ -10,7 +10,7 @@
         <img src="{{ url('/media/pwk.jpg') }}" class="card-img-top" alt="..." style="max-width: 100%; height: 320px; object-fit: cover; position:relative; bottom:18px;">
     @endif --}}
     @if (!empty($dataAlumni->banner_img))
-        <img src="{{ url('/user/banner/', $dataAlumni->banner_img) }}" class="card-img-top" alt="..." style="max-width: 100%; height: 320px; object-fit: cover; position:relative; bottom:18px;">
+        <img src="{{ asset('storage/' . $dataAlumni->banner_img) }}" class="card-img-top" alt="..." style="max-width: 100%; height: 320px; object-fit: cover; position:relative; bottom:18px;">
     @else
         <img src="{{ url('/media/banneralumni.jpg') }}" class="card-img-top" alt="..." style="max-width: 100%; height: 320px; object-fit: cover; position:relative; bottom:18px;">
     @endif
@@ -22,9 +22,9 @@
 
     <div class="card-body profile-banner">
         @if (!empty(Auth::guard('alumni')->user()->foto))
-            <img src="{{ asset('/user/foto/' . Auth::guard('alumni')->user()->foto ?? '') }}" class="rounded-circle" alt="">
+            <img src="{{ asset('storage/' . Auth::guard('alumni')->user()->foto ?? '') }}" class="rounded-circle" alt="">
         @else
-            <img class="rounded-circle" src="{{ asset('user/foto/user.png') }}" alt="" style="width: 300px important;">
+            <img class="rounded-circle" src="{{ asset('storage/user/foto/user.png') }}" alt="" style="width: 300px important;">
         @endif
         <div class="element-foto-profile">
             <button onclick="photoForm('{{ route('frontend.change-photo') }}')" style="margin-left: 25px; position:relative; top: 0px;" type="button" class="btn btn-sm"><i class="bi bi-pencil"></i></button>

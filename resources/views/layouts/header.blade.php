@@ -51,7 +51,7 @@
                     <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
                         <div class="avatar-sm">
                             @if(!empty(auth()->user()->foto))
-                            <img class="avatar-img rounded-circle" src="{{ route('profil.foto') }}" alt="">
+                            <img class="avatar-img rounded-circle" src="{{ asset('storage/' . auth()->user()->foto) }}" alt="">
                             @else
                             <img class="avatar-img rounded-circle" src="{{ asset('user/foto/user.png') }}" alt="">
                             @endif
@@ -68,7 +68,7 @@
                                 <div class="user-box">
                                     <div class="avatar-lg">
                                         @if(!empty(auth()->user()->foto))
-                                        <img class="avatar-img rounded-circle" src="{{ route('profil.foto') }}" alt="">
+                                        <img class="avatar-img rounded-circle" src="{{ asset('storage/' . auth()->user()->foto) }}" alt="">
                                         @else
                                         <img class="avatar-img rounded-circle" src="{{ asset('user/foto/user.png') }}" alt="">
                                         @endif

@@ -15,7 +15,7 @@
             <div class="card-body">
                 <div class="d-flex">
                     <div class="avatar avatar-xl">
-                        <img src="{{ route('user.foto', $dataSertifikat->user_skkft->id ?? '') }}" alt="..." class="avatar-img rounded-circle" />
+                        <img src="{{ asset('storage/' . $dataSertifikat->user_skkft->foto) }}" alt="..." class="avatar-img rounded-circle" />
                         {{-- <img src="{{ asset('/user/foto/' . $dataSertifikat->user_skkft->foto) }}" alt="..." class="avatar-img rounded-circle" /> --}}
                     </div>
                     <div class="info-post ms-2">

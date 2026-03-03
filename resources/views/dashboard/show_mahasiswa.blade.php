@@ -17,7 +17,7 @@
                 <div class="profile-picture">
                     <div class="avatar avatar-xxl">
                         @if(!empty($data->foto))
-                            <img class="avatar-img rounded-circle" src="{{ route('user.foto', $data->id) }}" alt="">
+                            <img class="avatar-img rounded-circle" src="{{ asset('storage/' . $data->foto) }}" alt="">
                         @else
                             <img class="avatar-img rounded-circle" src="{{ asset('user/foto/user.png') }}" alt="">
                         @endif

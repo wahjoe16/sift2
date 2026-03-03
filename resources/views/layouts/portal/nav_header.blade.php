@@ -44,9 +44,9 @@
                 <li class="nav-item dropdown">
                     <button class="btn nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         @if (!empty(Auth::guard('alumni')->user()->foto))
-                            <img src="{{ asset('/user/foto/' . Auth::guard('alumni')->user()->foto ?? '') }}" class="rounded-circle" alt="" style="width: 35px; height: 35px; object-fit: cover;">
+                            <img src="{{ asset('storage/' . Auth::guard('alumni')->user()->foto ?? '') }}" class="rounded-circle" alt="" style="width: 35px; height: 35px; object-fit: cover;">
                         @else
-                            <img class="rounded-circle" src="{{ asset('user/foto/user.png') }}" alt="" width="40px">
+                            <img class="rounded-circle" src="{{ asset('storage/user/foto/user.png') }}" alt="" width="40px">
                         @endif
                         {{-- <img src="{{ url('/media/wahyu.jpeg') }}" class="rounded-circle" alt="" width="40px"> --}}
                     </button>

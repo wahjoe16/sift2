@@ -401,7 +401,7 @@ class KegiatanSkkftController extends Controller
         $dataPoin = DB::select($sql, [$sertifikat]);
         
         $fotoDb = $sertifikat->user_skkft->foto;
-        $fotoPath = storage_path('app/'.$fotoDb);
+        $fotoPath = storage_path('app/public/'.$fotoDb);
 
         $fotoBase64 = null;
 
@@ -442,7 +442,7 @@ class KegiatanSkkftController extends Controller
         $dataPoin = DB::select($sql, [$sertifikat]);
 
         $fotoDb = $sertifikat->user_skkft->foto;
-        $fotoPath = storage_path('app/'.$fotoDb);
+        $fotoPath = storage_path('app/public/'.$fotoDb);
 
         // dd([
         //     'foto_db' => $sertifikat->user_skkft->foto,

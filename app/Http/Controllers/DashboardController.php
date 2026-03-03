@@ -40,7 +40,7 @@ class DashboardController extends Controller
             ->of($data)
             ->addColumn('foto', function($data){
                 if ($data->foto) {
-                    $path = route('user.foto', $data->user_id);
+                    $path = asset('storage/' . $data->foto);
                     return '
                         <div class="avatar-lg text-center">
                             <img src=' . $path . ' class="avatar-img rounded-circle" />
@@ -94,7 +94,7 @@ class DashboardController extends Controller
             ->addIndexColumn()
             ->addColumn('foto', function ($data) {
                 if (!empty($data->foto)) {
-                    $path = route('user.foto', $data->id);
+                    $path = asset('storage/' . $data->foto);
                     return '
                         <div class="avatar-lg text-center">
                             <img src=' . $path . ' class="avatar-img rounded-circle" />
@@ -172,7 +172,7 @@ class DashboardController extends Controller
             ->addIndexColumn()
             ->addColumn('foto', function ($data) {
                 if (!empty($data->foto)) {
-                    $path = route('user.foto', $data->id);
+                    $path = asset('storage/' . $data->foto);
                     return '
                         <div class="avatar-lg text-center">
                             <img src=' . $path . ' class="avatar-img rounded-circle" />

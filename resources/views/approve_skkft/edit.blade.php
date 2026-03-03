@@ -18,7 +18,7 @@
                 <div class="card-body">
                     <div class="d-flex">
                         <div class="avatar avatar-xl">
-                            <img src="{{ route('user.foto', $dataPengajuan->user_skkft->id) }}" alt="..." class="avatar-img rounded-circle" />
+                            <img src="{{ asset('storage/' . $dataPengajuan->user_skkft->foto) }}" alt="..." class="avatar-img rounded-circle" />
                         </div>
                         <div class="info-post ms-2">
                             <p class="username">{{ $dataPengajuan->user_skkft->nama }}</p>

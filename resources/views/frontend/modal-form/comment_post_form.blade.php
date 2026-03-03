@@ -57,22 +57,31 @@
             cache: false,
             success: function(response){
                 console.log(response);
-                $('.feed-header-modal').html('<img src="/user/foto/' + response.data.users.foto + '" class="float-start rounded" style="width: 65px; height: 65px; margin-right: 15px;">');
+                // $('.feed-header-modal').html('<img src="/user/foto/' + response.data.users.foto + '" class="float-start rounded" style="width: 65px; height: 65px; margin-right: 15px;">');
+                $('.feed-header-modal').html(`<img src="/storage/${response.data.users.foto}" class="float-start rounded" style="width:65px;height:65px;margin-right:15px;">`);
                 $('.post_user_name').text(response.data.users.nama);
                 $('.post_date').text(response.data.created_at);
                 $('#post_content').text(response.data.deskripsi);
-                $('.show-img').html('<img src="/alumni/postingan/' + response.data.media + '" class="card-img-bottom img-card">');
+                $('.show-img').html(`<img src="/storage/${response.data.media}" class="card-img-bottom img-card">`);
                 
                 var result = "";
 
                 $.each(response.comments, function(index, value){
-                    result = '<div class="d-flex text-body-secondary pt-4">' + 
-                                '<img src="/user/foto/' + value.user_comment_post.foto + '" class="float-start rounded-circle" style="width: 50px; height: 50px; margin-right: 20px;">' +
-                                '<p class="pb-3 mb-0 small lh-sm border-bottom">' +
-                                    '<strong class="d-block text-gray-dark">' + value.user_comment_post.nama + '</strong>'
-                                    + value.komentar + 
-                                '</p>' +
-                             '</div>';
+                    result = `
+                        <div class="d-flex text-body-secondary pt-4">
+                            <img 
+                                src="/storage/${value.user_comment_post.foto}" 
+                                class="float-start rounded-circle"
+                                style="width:50px;height:50px;margin-right:20px;"
+                                onerror="this.src='/images/avatar-default.png'"
+                            >
+                            <p class="pb-3 mb-0 small lh-sm border-bottom">
+                                <strong class="d-block text-gray-dark">
+                                    ${value.user_comment_post.nama}
+                                </strong>
+                                ${value.komentar}
+                            </p>
+                        </div>`;
                     $('#show_comment').append(result);
                     // $('#comments-user-img').append('<img src="/user/foto/' + value.user_comment_post.foto + '" class="float-start">');
                     // $('#comments-post').append('<div class="alert alert-secondary" role="alert">' + value.komentar + '</div>');

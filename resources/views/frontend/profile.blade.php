@@ -157,7 +157,7 @@
                                 </div>
                             </div>
 
-                            @includeIf('frontend.modal-form.create_pendidikan')
+                            @include('frontend.modal-form.create_pendidikan')
                         </div>
                     </div>
 
@@ -183,7 +183,7 @@
                                 </div>
                             </div>
 
-                            @includeIf('frontend.modal-form.create_pekerjaan')
+                            @include('frontend.modal-form.create_pekerjaan')
                             
                         </div>
                     </div>
@@ -200,7 +200,7 @@
                                                 @foreach ($skillAlumni as $sa => $value)
                                                     <li class="list-group-item" style="margin-left: 5px;">
                                                         <p class="card-text mt-3" style="font-size: 18px; font-weight: bold;"><i class="bi bi-card-list"></i>&nbsp;&nbsp;{{ $value['kompetensi'] }}<span>&nbsp;&nbsp;<button onclick="" class="btn btn-xs ms-auto"><i class="bi bi-pencil"></i></button></span></p>
-                                                        <p class="card-text" style="color: white; font-size: 15px; font-weight: 300; margin-top: -15px; margin-left: 26px""><a class="btn btn-info btn-sm" href="{{ url('/alumni/sertifikat/', $value['sertifikat_kompetensi']) }}"><i class="bi bi-link-45deg"></i> Lihat Sertifikat</a></p>
+                                                        <p class="card-text" style="color: white; font-size: 15px; font-weight: 300; margin-top: -15px; margin-left: 26px""><a class="btn btn-info btn-sm" href="{{ asset('storage/' . $value['sertifikat_kompetensi']) }}" target=_blank><i class="bi bi-link-45deg"></i> Lihat Sertifikat</a></p>
                                                     </li>
                                                 @endforeach
                                             </ul>
@@ -209,7 +209,7 @@
                                 </div>
                             </div>
 
-                            @includeIf('frontend.modal-form.create_kompetensi')
+                            @include('frontend.modal-form.create_kompetensi')
                             
                         </div>
                     </div>
@@ -234,7 +234,7 @@
                                 </div>
                             </div>
 
-                            @includeIf('frontend.modal-form.create_keahlian')
+                            @include('frontend.modal-form.create_keahlian')
                             
                         </div>
                     </div>
@@ -277,9 +277,9 @@
         </div>
     </div>
 
-    @includeIf('frontend.modal-form.banner')
+    @include('frontend.modal-form.banner')
 
-    @includeIf('frontend.modal-form.photo-profile')
+    @include('frontend.modal-form.photo-profile')
 
 @endsection
 

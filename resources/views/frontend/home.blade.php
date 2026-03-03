@@ -152,8 +152,8 @@
         ];
 
         var dataBidangValues = @json(array_values($dataBidang));
-        console.log(dataBidangValues);
-        console.log(namaBidang);
+        // console.log(dataBidangValues);
+        // console.log(namaBidang);
 
         const ctx = document.getElementById('myChartBidangPekerjaan');
 

@@ -17,9 +17,9 @@
                         <div class="card-body text-center">
 
                             @if (!empty($f['user_alumni']['foto']))
-                                <img src="{{ url('/user/foto', $f['user_alumni']['foto']) }}" alt="" class="rounded-circle foto-friend">
+                                <img src="{{ asset('storage/' . $f['user_alumni']['foto']) }}" alt="" class="rounded-circle foto-friend">
                             @else
-                                <img class="rounded-circle foto-friend" src="{{ asset('user/foto/user.png') }}" alt="">
+                                <img class="rounded-circle foto-friend" src="{{ asset('storage/user/foto/user.png') }}" alt="">
                             @endif
                             
                             <a href="{{ route('frontend.view-friend-alumni', $f['user_id']) }}"><p class="card-text" style="font-size: 14px; font-weight: 500;">{{ $f['user_alumni']['nama'] }}</p></a>

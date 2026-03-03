@@ -13,7 +13,7 @@
             @foreach ($postingan as $p)
                 <div class="card feeds-card">
                     <div class="card-header feed-header">
-                        <img src="{{ url('/user/foto', $p->users->foto) }}" class="float-start" alt="">
+                        <img src="{{ asset('storage/' . $p->users->foto) }}" class="float-start" alt="">
                         <p><a href="{{ route('frontend.view-friend-alumni', $p->user_id) }}">{{ $p->users->nama }}</a></p>
                         <p><small class="text-body-secondary">{{ tanggal_indonesia($p->created_at, false) }}</small></p>
                     </div>
@@ -26,7 +26,7 @@
                         
                     </div>
                     @if (!is_null($p['media']))
-                        <img src="{{ url('/alumni/postingan', $p->media) }}" class="card-img-bottom img-card" alt="...">
+                        <img src="{{ asset('storage/' . $p->media) }}" class="card-img-bottom img-card" alt="...">
                     @endif
                     <div class="card-footer">
                         <a href="javascript:void(0)" id="btn-comment-post" data-id="{{ $p->id }}" class="btn btn-light btn-sm ms-auto">komentar</a>
@@ -43,9 +43,9 @@
                     @foreach ($listAlumni as $la)
                         <div class="row member-card">
                             @if(!empty($la->foto))
-                                <img src="{{ asset('/user/foto/' . $la->foto ?? '') }}" class="rounded-circle" alt="">
+                                <img src="{{ asset('storage/' . $la->foto ?? '') }}" class="rounded-circle" alt="">
                             @else
-                                <img class="rounded-circle" src="{{ asset('user/foto/user.png') }}" alt="">
+                                <img class="rounded-circle" src="{{ asset('storage/user/foto/user.png') }}" alt="">
                             @endif
                             <div class="member-caption mb-5">
                                 <h6><a href="{{ route('frontend.view-friend-alumni', $la['id']) }}">{{ $la->nama }}</a></h6>

@@ -15,16 +15,16 @@
                 <img src="{{ url('/media/pwk.jpg') }}" class="card-img-top" alt="..." style="max-width: 100%; height: 200px;">
             @endif --}}
             @if (!empty($dataAlumni->banner_img))
-                <img src="{{ url('/user/banner/', $dataAlumni->banner_img) }}" class="card-img-top" alt="..." style="max-width: 100%; height: 200px; object-fit: cover;">
+                <img src="{{ asset('storage/' . $dataAlumni->banner_img) }}" class="card-img-top" alt="..." style="max-width: 100%; height: 200px; object-fit: cover;">
             @else
-                <img src="{{ url('/media/banneralumni.jpg') }}" class="card-img-top" alt="..." style="max-width: 100%; height: 200px; object-fit: cover;">
+                <img src="{{ asset('/media/banneralumni.jpg') }}" class="card-img-top" alt="..." style="max-width: 100%; height: 200px; object-fit: cover;">
             @endif
              
             <div class="card-body">
                 @if (!empty($data->foto))
-                    <img src="{{ url('/user/foto', $data->foto) }}" alt="" class="rounded-circle foto-friend" style="position: relative; top: -68px; left: 20px;">
+                    <img src="{{ asset('storage/' . $data->foto) }}" alt="" class="rounded-circle foto-friend" style="position: relative; top: -68px; left: 20px;">
                 @else
-                    <img class="rounded-circle foto-friend" src="{{ asset('user/foto/user.png') }}" alt="" style="position: relative; top: -68px; left: 20px;">
+                    <img class="rounded-circle foto-friend" src="{{ asset('storage/user/foto/user.png') }}" alt="" style="position: relative; top: -68px; left: 20px;">
                 @endif
                 
                 <p class="card-text" style="font-size: 28px; font-weight: 500; position:relative; top: -85px; left:20px;">{{ $data->nama }}</p></a>
@@ -100,7 +100,7 @@
                 @foreach ($postingan as $p)
                     <div class="card feeds-card-profile">
                         <div class="card-header feed-header-profile">
-                            <img src="{{ url('/user/foto', $p['users']['foto']) }}" class="float-start" alt="">
+                            <img src="{{ asset('storage/' . $p['users']['foto']) }}" class="float-start" alt="">
                             <p>{{ $p['users']['nama'] }}</p>
                             <p><small class="text-body-secondary">{{ tanggal_indonesia($p['created_at'], false) }}</small></p>
                         </div>
@@ -113,7 +113,7 @@
                             
                         </div>
                         @if (!is_null($p['media']))
-                            <img src="{{ url('/alumni/postingan', $p['media']) }}" class="card-img-bottom img-card" alt="...">
+                            <img src="{{ asset('storage/' . $p['media']) }}" class="card-img-bottom img-card" alt="...">
                         @endif
                         
                     </div>
