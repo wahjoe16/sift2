@@ -143,7 +143,7 @@
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <input type="file" name="syarat_6" class="dropify" id="syarat_6">
-                            <p for="exampleInputEmail2" class="col-form-label text-center" for="syarat_6">Bukti Penyerahan Draft TA (4 Eksemplar) Memakai Mika Biru</p>
+                            <p for="exampleInputEmail2" class="col-form-label text-center" for="syarat_6">Softcopy Draft TA (PDF max 10MB)</p>
                         </div>
                     </div>
                     <div class="row mb-3">

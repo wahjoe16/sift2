@@ -97,7 +97,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_1) }}">Sertifikat pesantren calon sarjana</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_1) }}" target="_blank">Sertifikat pesantren calon sarjana</a></td>
                                 <td>
                                     @if ($data->status_1 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -112,7 +112,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_2) }}">Transkrip nilai</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_2) }}" target="_blank">Transkrip nilai</a></td>
                                 <td>
                                     @if ($data->status_2 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -127,7 +127,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_3) }}">Sertifikat TOEFL</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_3) }}" target="_blank">Sertifikat TOEFL</a></td>
                                 <td>
                                     @if ($data->status_3 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -142,7 +142,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_4) }}">Sertifikat SKKFT</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_4) }}" target="_blank">Sertifikat SKKFT</a></td>
                                 <td>
                                     @if ($data->status_4 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -157,7 +157,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_5) }}">Pemeriksaan turnitin</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_5) }}" target="_blank">Pemeriksaan turnitin</a></td>
                                 <td>
                                     @if ($data->status_5 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -172,7 +172,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_6) }}">Bukti pembayaran sidang terbuka</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_6) }}" target="_blank">Bukti pembayaran sidang terbuka</a></td>
                                 <td>
                                     @if ($data->status_6 == 1)
                                     <span class="badge badge-success">Diterima</span>

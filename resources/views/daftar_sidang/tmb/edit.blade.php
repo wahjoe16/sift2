@@ -99,7 +99,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_1) }}">Transkrip Nilai</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_1) }}">Transkrip Nilai</a></td>
                                 <td>
                                     @if ($data->status_1 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -114,7 +114,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_2) }}">Sertifikat Pesantren Calon Sarjana</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_2) }}">Sertifikat Pesantren Calon Sarjana</a></td>
                                 <td>
                                     @if ($data->status_2 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -129,7 +129,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_3) }}">Sertifikat SKKFT</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_3) }}">Sertifikat SKKFT</a></td>
                                 <td>
                                     @if ($data->status_3 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -144,7 +144,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_4) }}">Bukti Pembayaran Sidang Skripsi</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_4) }}">Bukti Pembayaran Sidang Skripsi</a></td>
                                 <td>
                                     @if ($data->status_4 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -159,7 +159,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_5) }}">Sertifikat TOEFL</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_5) }}">Sertifikat TOEFL</a></td>
                                 <td>
                                     @if ($data->status_5 == 1)
                                     <span class="badge badge-success">Diterima</span>

@@ -150,11 +150,7 @@
                         <div class="row mb-3">
                             <div class="col-md-6 col-sm-12">
                                 <input type="file" name="syarat_13" class="dropify" id="syarat_13">
-                                <p class="col-form-label text-center" for="syarat_13">Draft skripsi (DOCX)</p>
-                            </div>
-                            <div class="col-md-6 col-sm-12">
-                                <input type="file" name="syarat_14" class="dropify" id="syarat_14">
-                                <p class="col-form-label text-center" for="syarat_14">Transkrip Nilai <sub>(Dicap dan ditanda tangan Operator SIAA)</sub></p>
+                                <p class="col-form-label text-center" for="syarat_13">Transkrip Nilai <sub>(Dicap dan ditanda tangan Operator SIAA)</sub></p>
                             </div>
                         </div>
                     </div>

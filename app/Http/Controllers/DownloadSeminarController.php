@@ -54,46 +54,60 @@ class DownloadSeminarController extends Controller
                 }
             })
             ->addColumn('syarat_1', function ($data) {
-                return '<a href="/mahasiswa/seminar/' . $data->syarat_1 . '" target="_blank">' . $data->syarat_1 . '</a>';
+                $path = asset('storage/' . $data->syarat_1);
+                return '<a href="' . $path . '" target="_blank">' . $data->syarat_1 . '</a>';
             })
             ->addColumn('syarat_2', function ($data) {
-                return '<a href="/mahasiswa/seminar/' . $data->syarat_2 . '" target="_blank">' . $data->syarat_2 . '</a>';
+                $path = asset('storage/' . $data->syarat_2);
+                return '<a href="' . $path . '" target="_blank">' . $data->syarat_2 . '</a>';
             })
             ->addColumn('syarat_3', function ($data) {
-                return '<a href="/mahasiswa/seminar/' . $data->syarat_3 . '" target="_blank">' . $data->syarat_3 . '</a>';
+                $path = asset('storage/' . $data->syarat_3);
+                return '<a href="' . $path . '" target="_blank">' . $data->syarat_3 . '</a>';
             })
             ->addColumn('syarat_4', function ($data) {
-                return '<a href="/mahasiswa/seminar/' . $data->syarat_4 . '" target="_blank">' . $data->syarat_4 . '</a>';
+                $path = asset('storage/' . $data->syarat_4);
+                return '<a href="' . $path . '" target="_blank">' . $data->syarat_4 . '</a>';
             })
             ->addColumn('syarat_5', function ($data) {
-                return '<a href="/mahasiswa/seminar/' . $data->syarat_5 . '" target="_blank">' . $data->syarat_5 . '</a>';
+                $path = asset('storage/' . $data->syarat_5);
+                return '<a href="' . $path . '" target="_blank">' . $data->syarat_5 . '</a>';
             })
             ->addColumn('syarat_6', function ($data) {
-                return '<a href="/mahasiswa/seminar/' . $data->syarat_6 . '" target="_blank">' . $data->syarat_6 . '</a>';
+                $path = asset('storage/' . $data->syarat_6);
+                return '<a href="' . $path . '" target="_blank">' . $data->syarat_6 . '</a>';
             })
             ->addColumn('syarat_7', function ($data) {
-                return '<a href="/mahasiswa/seminar/' . $data->syarat_7 . '" target="_blank">' . $data->syarat_7 . '</a>';
+                $path = asset('storage/' . $data->syarat_7);
+                return '<a href="' . $path . '" target="_blank">' . $data->syarat_7 . '</a>';
             })
             ->addColumn('syarat_8', function ($data) {
-                return '<a href="/mahasiswa/seminar/' . $data->syarat_8 . '" target="_blank">' . $data->syarat_8 . '</a>';
+                $path = asset('storage/' . $data->syarat_8);
+                return '<a href="' . $path . '" target="_blank">' . $data->syarat_8 . '</a>';
             })
             ->addColumn('syarat_9', function ($data) {
-                return '<a href="/mahasiswa/seminar/' . $data->syarat_9 . '" target="_blank">' . $data->syarat_9 . '</a>';
+                $path = asset('storage/' . $data->syarat_9);
+                return '<a href="' . $path . '" target="_blank">' . $data->syarat_9 . '</a>';
             })
             ->addColumn('syarat_10', function ($data) {
-                return '<a href="/mahasiswa/seminar/' . $data->syarat_10 . '" target="_blank">' . $data->syarat_10 . '</a>';
+                $path = asset('storage/' . $data->syarat_10);
+                return '<a href="' . $path . '" target="_blank">' . $data->syarat_10 . '</a>';
             })
             ->addColumn('syarat_11', function ($data) {
-                return '<a href="/mahasiswa/seminar/' . $data->syarat_11 . '" target="_blank">' . $data->syarat_11 . '</a>';
+                $path = asset('storage/' . $data->syarat_11);
+                return '<a href="' . $path . '" target="_blank">' . $data->syarat_11 . '</a>';
             })
             ->addColumn('syarat_12', function ($data) {
-                return '<a href="/mahasiswa/seminar/' . $data->syarat_12 . '" target="_blank">' . $data->syarat_12 . '</a>';
+                $path = asset('storage/' . $data->syarat_12);
+                return '<a href="' . $path . '" target="_blank">' . $data->syarat_12 . '</a>';
             })
             ->addColumn('syarat_13', function ($data) {
-                return '<a href="/mahasiswa/seminar/' . $data->syarat_13 . '" target="_blank">' . $data->syarat_13 . '</a>';
+                $path = asset('storage/' . $data->syarat_13);
+                return '<a href="' . $path . '" target="_blank">' . $data->syarat_13 . '</a>';
             })
             ->addColumn('syarat_14', function ($data) {
-                return '<a href="/mahasiswa/seminar/' . $data->syarat_14 . '" target="_blank">' . $data->syarat_14 . '</a>';
+                $path = asset('storage/' . $data->syarat_14);
+                return '<a href="' . $path . '" target="_blank">' . $data->syarat_14 . '</a>';
             })
             // ->addColumn('select_all_syarat1', function ($data) {
             //     return '<a href="' . route('downloadPwk', $data->id) . '"><i class="fa fa-download"></i></a>';
@@ -180,31 +194,31 @@ class DownloadSeminarController extends Controller
                 }
             })
             ->addColumn('syarat_1', function ($data) {
-                return '<a href="/mahasiswa/seminar/' . $data->syarat_1 . '" target="_blank">' . $data->syarat_1 . '</a>';
+                return '<a href="' . asset('storage/' . $data->syarat_1) . '" target="_blank">' . $data->syarat_1 . '</a>';
             })
             ->addColumn('syarat_2', function ($data) {
-                return '<a href="/mahasiswa/seminar/' . $data->syarat_2 . '" target="_blank">' . $data->syarat_2 . '</a>';
+                return '<a href="' . asset('storage/' . $data->syarat_2) . '" target="_blank">' . $data->syarat_2 . '</a>';
             })
             ->addColumn('syarat_3', function ($data) {
-                return '<a href="/mahasiswa/seminar/' . $data->syarat_3 . '" target="_blank">' . $data->syarat_3 . '</a>';
+                return '<a href="' . asset('storage/' . $data->syarat_3) . '" target="_blank">' . $data->syarat_3 . '</a>';
             })
             ->addColumn('syarat_4', function ($data) {
-                return '<a href="/mahasiswa/seminar/' . $data->syarat_4 . '" target="_blank">' . $data->syarat_4 . '</a>';
+                return '<a href="' . asset('storage/' . $data->syarat_4) . '" target="_blank">' . $data->syarat_4 . '</a>';
             })
             ->addColumn('syarat_5', function ($data) {
-                return '<a href="/mahasiswa/seminar/' . $data->syarat_5 . '" target="_blank">' . $data->syarat_5 . '</a>';
+                return '<a href="' . asset('storage/' . $data->syarat_5) . '" target="_blank">' . $data->syarat_5 . '</a>';
             })
             ->addColumn('syarat_6', function ($data) {
-                return '<a href="/mahasiswa/seminar/' . $data->syarat_6 . '" target="_blank">' . $data->syarat_6 . '</a>';
+                return '<a href="' . asset('storage/' . $data->syarat_6) . '" target="_blank">' . $data->syarat_6 . '</a>';
             })
             ->addColumn('syarat_7', function ($data) {
-                return '<a href="/mahasiswa/seminar/' . $data->syarat_7 . '" target="_blank">' . $data->syarat_7 . '</a>';
+                return '<a href="' . asset('storage/' . $data->syarat_7) . '" target="_blank">' . $data->syarat_7 . '</a>';
             })
             ->addColumn('syarat_8', function ($data) {
-                return '<a href="/mahasiswa/seminar/' . $data->syarat_8 . '" target="_blank">' . $data->syarat_8 . '</a>';
+                return '<a href="' . asset('storage/' . $data->syarat_8) . '" target="_blank">' . $data->syarat_8 . '</a>';
             })
             ->addColumn('syarat_9', function ($data) {
-                return '<a href="/mahasiswa/seminar/' . $data->syarat_9 . '" target="_blank">' . $data->syarat_9 . '</a>';
+                return '<a href="' . asset('storage/' . $data->syarat_9) . '" target="_blank">' . $data->syarat_9 . '</a>';
             })
             // ->addColumn('select_all_syarat1', function ($data) {
             //     return '<a href="' . route('downloadPwk', $data->id) . '"><i class="fa fa-download"></i></a>';
@@ -291,78 +305,40 @@ class DownloadSeminarController extends Controller
                 }
             })
             ->addColumn('syarat_1', function ($data) {
-                return '<a href="/mahasiswa/seminar/' . $data->syarat_1 . '" target="_blank">' . $data->syarat_1 . '</a>';
+                return '<a href="' . asset('storage/' . $data->syarat_1) . '" target="_blank">' . $data->syarat_1 . '</a>';
             })
             ->addColumn('syarat_2', function ($data) {
-                return '<a href="/mahasiswa/seminar/' . $data->syarat_2 . '" target="_blank">' . $data->syarat_2 . '</a>';
+                return '<a href="' . asset('storage/' . $data->syarat_2) . '" target="_blank">' . $data->syarat_2 . '</a>';
             })
             ->addColumn('syarat_3', function ($data) {
-                return '<a href="/mahasiswa/seminar/' . $data->syarat_3 . '" target="_blank">' . $data->syarat_3 . '</a>';
+                return '<a href="' . asset('storage/' . $data->syarat_3) . '" target="_blank">' . $data->syarat_3 . '</a>';
             })
             ->addColumn('syarat_4', function ($data) {
-                return '<a href="/mahasiswa/seminar/' . $data->syarat_4 . '" target="_blank">' . $data->syarat_4 . '</a>';
+                return '<a href="' . asset('storage/' . $data->syarat_4) . '" target="_blank">' . $data->syarat_4 . '</a>';
             })
             ->addColumn('syarat_5', function ($data) {
-                return '<a href="/mahasiswa/seminar/' . $data->syarat_5 . '" target="_blank">' . $data->syarat_5 . '</a>';
+                return '<a href="' . asset('storage/' . $data->syarat_5) . '" target="_blank">' . $data->syarat_5 . '</a>';
             })
             ->addColumn('syarat_6', function ($data) {
-                return '<a href="/mahasiswa/seminar/' . $data->syarat_6 . '" target="_blank">' . $data->syarat_6 . '</a>';
+                return '<a href="' . asset('storage/' . $data->syarat_6) . '" target="_blank">' . $data->syarat_6 . '</a>';
             })
             ->addColumn('syarat_7', function ($data) {
-                return '<a href="/mahasiswa/seminar/' . $data->syarat_7 . '" target="_blank">' . $data->syarat_7 . '</a>';
+                return '<a href="' . asset('storage/' . $data->syarat_7) . '" target="_blank">' . $data->syarat_7 . '</a>';
             })
             ->addColumn('syarat_8', function ($data) {
-                return '<a href="/mahasiswa/seminar/' . $data->syarat_8 . '" target="_blank">' . $data->syarat_8 . '</a>';
+                return '<a href="' . asset('storage/' . $data->syarat_8) . '" target="_blank">' . $data->syarat_8 . '</a>';
             })
             ->addColumn('syarat_9', function ($data) {
-                return '<a href="/mahasiswa/seminar/' . $data->syarat_9 . '" target="_blank">' . $data->syarat_9 . '</a>';
+                return '<a href="' . asset('storage/' . $data->syarat_9) . '" target="_blank">' . $data->syarat_9 . '</a>';
             })
             ->addColumn('syarat_10', function ($data) {
-                return '<a href="/mahasiswa/seminar/' . $data->syarat_10 . '" target="_blank">' . $data->syarat_10 . '</a>';
+                return '<a href="' . asset('storage/' . $data->syarat_10) . '" target="_blank">' . $data->syarat_10 . '</a>';
             })
-            // ->addColumn('select_all_syarat1', function ($data) {
-            //     return '<a href="' . route('downloadPwk', $data->id) . '"><i class="fa fa-download"></i></a>';
-            // })
-            // ->addColumn('select_all_syarat2', function ($data) {
-            //     return '<input type="checkbox" name="syarat[]" class="syarat2" value="' . $data->syarat_2 . '" />';
-            // })
-            // ->addColumn('select_all_syarat3', function ($data) {
-            //     return '<input type="checkbox" name="syarat[]" class="syarat3" value="' . $data->syarat_3 . '" />';
-            // })
-            // ->addColumn('select_all_syarat4', function ($data) {
-            //     return '<input type="checkbox" name="syarat[]" class="syarat4" value="' . $data->syarat_4 . '" />';
-            // })
-            // ->addColumn('select_all_syarat5', function ($data) {
-            //     return '<input type="checkbox" name="syarat[]" class="syarat5" value="' . $data->syarat_5 . '" />';
-            // })
-            // ->addColumn('select_all_syarat6', function ($data) {
-            //     return '<input type="checkbox" name="syarat[]" class="syarat6" value="' . $data->syarat_6 . '" />';
-            // })
-            // ->addColumn('select_all_syarat7', function ($data) {
-            //     return '<input type="checkbox" name="syarat[]" class="syarat7" value="' . $data->syarat_7 . '" />';
-            // })
-            // ->addColumn('select_all_syarat8', function ($data) {
-            //     return '<input type="checkbox" name="syarat[]" class="syarat8" value="' . $data->syarat_8 . '" />';
-            // })
-            // ->addColumn('select_all_syarat9', function ($data) {
-            //     return '<input type="checkbox" name="syarat[]" class="syarat9" value="' . $data->syarat_9 . '" />';
-            // })
-            // ->addColumn('select_all_syarat10', function ($data) {
-            //     return '<input type="checkbox" name="syarat[]" class="syarat10" value="' . $data->syarat_10 . '" />';
-            // })
+            
             ->rawColumns([
                 'status',
                 'syarat_1', 'syarat_2', 'syarat_3', 'syarat_4', 'syarat_5', 'syarat_6', 'syarat_7', 'syarat_8', 'syarat_9', 'syarat_10',
-                // 'select_all_syarat1', 
-                // 'select_all_syarat2',
-                // 'select_all_syarat3',
-                // 'select_all_syarat4',
-                // 'select_all_syarat5',
-                // 'select_all_syarat6',
-                // 'select_all_syarat7',
-                // 'select_all_syarat8',
-                // 'select_all_syarat9',
-                // 'select_all_syarat10',
+                
             ])
             ->make(true);
     }

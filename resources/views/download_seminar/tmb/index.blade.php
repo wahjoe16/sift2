@@ -78,8 +78,6 @@
                             <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat10"></th> -->
                             <th>Draft skripsi (PDF)</th>
                             <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat10"></th> -->
-                            <th>Draft skripsi (DOCX)</th>
-                            <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat10"></th> -->
                             <th>Transkrip Nilai</th>
                         </tr>
                     </thead>

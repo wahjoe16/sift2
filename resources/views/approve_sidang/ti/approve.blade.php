@@ -18,7 +18,7 @@
                 <div class="card-body">
                     <div class="d-flex">
                         <div class="avatar avatar-xl">
-                            <img src="{{ asset('/user/foto/' . $data->mahasiswa->foto) }}" alt="..." class="avatar-img rounded-circle" />
+                            <img src="{{ asset('storage/' . $data->mahasiswa->foto) }}" alt="..." class="avatar-img rounded-circle" />
                         </div>
                         <div class="info-post ms-2">
                             <p class="username">{{ $data->mahasiswa->nama }}</p>
@@ -91,7 +91,7 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_1) }}" target="_blank">Fotocopy Kwitansi Bimbingan TA</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_1) }}" target="_blank">Fotocopy Kwitansi Bimbingan TA</a></td>
                                 <td>
                                     @if ($data->status_1 == 2)
                                     <input type="radio" name="status_1" value="2" class="form-check-input" checked="checked" readonly>
@@ -112,7 +112,7 @@
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_2) }}" target="_blank">Fotocopy Kwitansi Sidang TA</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_2) }}" target="_blank">Fotocopy Kwitansi Sidang TA</a></td>
                                 <td>
                                     @if ($data->status_2 == 2)
                                     <input type="radio" name="status_2" value="2" class="form-check-input" checked="checked" readonly>
@@ -133,7 +133,7 @@
                             </tr>
                             <tr>
                                 <td>3</td>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_3) }}" target="_blank">Fotocopy Kwitansi Seminar TA</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_3) }}" target="_blank">Fotocopy Kwitansi Seminar TA</a></td>
                                 <td>
                                     @if ($data->status_3 == 2)
                                     <input type="radio" name="status_3" value="2" class="form-check-input" checked="checked" readonly>
@@ -154,7 +154,7 @@
                             </tr>
                             <tr>
                                 <td>4</td>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_4) }}" target="_blank">Fotocopy Sertifikat Pesantren Calon Sarjana</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_4) }}" target="_blank">Fotocopy Sertifikat Pesantren Calon Sarjana</a></td>
                                 <td>
                                     @if ($data->status_4 == 2)
                                     <input type="radio" name="status_4" value="2" class="form-check-input" checked="checked" readonly>
@@ -175,7 +175,7 @@
                             </tr>
                             <tr>
                                 <td>5</td>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_5) }}" target="_blank">Formulir Rencana Studi (FRS)</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_5) }}" target="_blank">Formulir Rencana Studi (FRS)</a></td>
                                 <td>
                                     @if ($data->status_5 == 2)
                                     <input type="radio" name="status_5" value="2" class="form-check-input" checked="checked" readonly>
@@ -196,7 +196,7 @@
                             </tr>
                             <tr>
                                 <td>6</td>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_6) }}" target="_blank">Bukti Penyerahan Draft TA</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_6) }}" target="_blank">Softcopy Draft TA</a></td>
                                 <td>
                                     @if ($data->status_6 == 2)
                                     <input type="radio" name="status_6" value="2" class="form-check-input" checked="checked" readonly>
@@ -217,7 +217,7 @@
                             </tr>
                             <tr>
                                 <td>7</td>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_7) }}" target="_blank">Bukti Bebas Perpustakaan Pusat UNISBA</a>
+                                <td><a href="{{ asset('storage/' . $data->syarat_7) }}" target="_blank">Bukti Bebas Perpustakaan Pusat UNISBA</a>
                                 </td>
                                 <td>
                                     @if ($data->status_7 == 2)
@@ -239,7 +239,7 @@
                             </tr>
                             <tr>
                                 <td>8</td>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_8) }}" target="_blank">Bukti Bebas Perpustakaan TI</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_8) }}" target="_blank">Bukti Bebas Perpustakaan TI</a></td>
                                 <td>
                                     @if ($data->status_8 == 2)
                                     <input type="radio" name="status_8" value="2" class="form-check-input" checked="checked" readonly>
@@ -260,7 +260,7 @@
                             </tr>
                             <tr>
                                 <td>9</td>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_9) }}" target="_blank">Transkrip Nilai Terakhir</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_9) }}" target="_blank">Transkrip Nilai Terakhir</a></td>
                                 <td>
                                     @if ($data->status_9 == 2)
                                     <input type="radio" name="status_9" value="2" class="form-check-input" checked="checked" readonly>
@@ -281,7 +281,7 @@
                             </tr>
                             <tr>
                                 <td>10</td>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_10) }}" target="_blank">Persetujuan Sidang dari Dosen Pembimbing</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_10) }}" target="_blank">Persetujuan Sidang dari Dosen Pembimbing</a></td>
                                 <td>
                                     @if ($data->status_10 == 2)
                                     <input type="radio" name="status_10" value="2" class="form-check-input" checked="checked" readonly>
@@ -302,7 +302,7 @@
                             </tr>
                             <tr>
                                 <td>11</td>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_11) }}" target="_blank">Fotocopy Sertifikat TOEFL</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_11) }}" target="_blank">Fotocopy Sertifikat TOEFL</a></td>
                                 <td>
                                     @if ($data->status_11 == 2)
                                     <input type="radio" name="status_11" value="2" class="form-check-input" checked="checked" readonly>
@@ -323,7 +323,7 @@
                             </tr>
                             <tr>
                                 <td>12</td>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_12) }}" target="_blank">Foto Berwarna</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_12) }}" target="_blank">Foto Berwarna</a></td>
                                 <td>
                                     @if ($data->status_12 == 2)
                                     <input type="radio" name="status_12" value="2" class="form-check-input" checked="checked" readonly>
@@ -344,7 +344,7 @@
                             </tr>
                             <tr>
                                 <td>13</td>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_13) }}" target="_blank">Bukti Bebas Pinjaman / Tunggakan</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_13) }}" target="_blank">Bukti Bebas Pinjaman / Tunggakan</a></td>
                                 <td>
                                     @if ($data->status_13 == 2)
                                     <input type="radio" name="status_13" value="2" class="form-check-input" checked="checked" readonly>
@@ -365,7 +365,7 @@
                             </tr>
                             <tr>
                                 <td>14</td>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_14) }}" target="_blank">Menghadiri Seminar / Sidang minimal 3 kali</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_14) }}" target="_blank">Menghadiri Seminar / Sidang minimal 3 kali</a></td>
                                 <td>
                                     @if ($data->status_14 == 2)
                                     <input type="radio" name="status_14" value="2" class="form-check-input" checked="checked" readonly>
@@ -386,7 +386,7 @@
                             </tr>
                             <tr>
                                 <td>15</td>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_15) }}" target="_blank">Form Hafalan Surat Al-Quran (minimal 25 surat)</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_15) }}" target="_blank">Form Hafalan Surat Al-Quran (minimal 25 surat)</a></td>
                                 <td>
                                     @if ($data->status_15 == 2)
                                     <input type="radio" name="status_15" value="2" class="form-check-input" checked="checked" readonly>
@@ -407,7 +407,7 @@
                             </tr>
                             <tr>
                                 <td>16</td>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_16) }}" target="_blank">Print out bukti pengecekan Plagiarisme < 25% (sebelum sidang)</a>
+                                <td><a href="{{ asset('storage/' . $data->syarat_16) }}" target="_blank">Print out bukti pengecekan Plagiarisme < 25% (sebelum sidang)</a>
                                 </td>
                                 <td>
                                     @if ($data->status_16 == 2)
@@ -429,7 +429,7 @@
                             </tr>
                             <tr>
                                 <td>17</td>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_17) }}" target="_blank">Sertifikat SKKFT yang ditandatangani oleh Wadek III</a>
+                                <td><a href="{{ asset('storage/' . $data->syarat_17) }}" target="_blank">Sertifikat SKKFT yang ditandatangani oleh Wadek III</a>
                                 </td>
                                 <td>
                                     @if ($data->status_17 == 2)

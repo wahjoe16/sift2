@@ -99,7 +99,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_1) }}">Bukti pembayaran Kolokium Skripsi</a></td>
+                                <td><a href="{{ asset('storage/' .  $data->syarat_1) }}">Bukti pembayaran Kolokium Skripsi</a></td>
                                 <td>
                                     @if ($data->status_1 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -114,7 +114,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_2) }}">Sertifikat TOEFL</a></td>
+                                <td><a href="{{ asset('storage/' .  $data->syarat_2) }}">Sertifikat TOEFL</a></td>
                                 <td>
                                     @if ($data->status_2 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -129,7 +129,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_3) }}">Formulir nilai bimbingan skripsi</a></td>
+                                <td><a href="{{ asset('storage/' .  $data->syarat_3) }}">Formulir nilai bimbingan skripsi</a></td>
                                 <td>
                                     @if ($data->status_3 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -144,7 +144,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_4) }}">Formulir kemajuan bimbingan skripsi</a></td>
+                                <td><a href="{{ asset('storage/' .  $data->syarat_4) }}">Formulir kemajuan bimbingan skripsi</a></td>
                                 <td>
                                     @if ($data->status_4 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -159,7 +159,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_5) }}">Formulir persetujuan kolokium skripsi</a></td>
+                                <td><a href="{{ asset('storage/' .  $data->syarat_5) }}">Formulir persetujuan kolokium skripsi</a></td>
                                 <td>
                                     @if ($data->status_5 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -174,7 +174,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_6) }}">Formulir kesediaan menghadiri kolokium skripsi</a></td>
+                                <td><a href="{{ asset('storage/' .  $data->syarat_6) }}">Formulir kesediaan menghadiri kolokium skripsi</a></td>
                                 <td>
                                     @if ($data->status_6 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -189,7 +189,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_7) }}">Pas foto ukuran 4 x 6 sebanyak 2 lembar</a></td>
+                                <td><a href="{{ asset('storage/' .  $data->syarat_7) }}">Pas foto ukuran 4 x 6 sebanyak 2 lembar</a></td>
                                 <td>
                                     @if ($data->status_7 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -204,7 +204,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_8) }}">Kartu Tanda Mahasiswa</a></td>
+                                <td><a href="{{ asset('storage/' .  $data->syarat_8) }}">Kartu Tanda Mahasiswa</a></td>
                                 <td>
                                     @if ($data->status_8 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -219,7 +219,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_9) }}">Bukti pembayaran kuliah</a></td>
+                                <td><a href="{{ asset('storage/' .  $data->syarat_9) }}">Bukti pembayaran kuliah</a></td>
                                 <td>
                                     @if ($data->status_9 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -234,7 +234,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_10) }}">Bukti perwalian</a></td>
+                                <td><a href="{{ asset('storage/' .  $data->syarat_10) }}">Bukti perwalian</a></td>
                                 <td>
                                     @if ($data->status_10 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -249,7 +249,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_11) }}">Bukti bebas pinjaman perpustakaan</a></td>
+                                <td><a href="{{ asset('storage/' .  $data->syarat_11) }}">Bukti bebas pinjaman perpustakaan</a></td>
                                 <td>
                                     @if ($data->status_11 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -264,7 +264,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_12) }}">Draft skripsi (PDF)</a></td>
+                                <td><a href="{{ asset('storage/' .  $data->syarat_12) }}">Draft skripsi (PDF)</a></td>
                                 <td>
                                     @if ($data->status_12 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -279,7 +279,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_13) }}">Draft skripsi (DOCX)</a></td>
+                                <td><a href="{{ asset('storage/' .  $data->syarat_13) }}">Transkrip Nilai <sub>(Dicap dan ditanda tangan Operator SIAA)</a></td>
                                 <td>
                                     @if ($data->status_13 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -290,21 +290,6 @@
                                 <td>
                                     @if ($data->status_13 == 2)
                                         <input type="file" name="syarat_13" id="syarat_13">
-                                    @endif
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_14) }}">Transkrip Nilai <sub>(Dicap dan ditanda tangan Operator SIAA)</a></td>
-                                <td>
-                                    @if ($data->status_14 == 1)
-                                    <span class="badge badge-success">Diterima</span>
-                                    @else
-                                    <span class="badge badge-danger">Ditolak</span>
-                                    @endif
-                                </td>
-                                <td>
-                                    @if ($data->status_14 == 2)
-                                        <input type="file" name="syarat_14" id="syarat_14">
                                     @endif
                                 </td>
                             </tr>

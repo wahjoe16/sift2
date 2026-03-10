@@ -103,7 +103,7 @@
 @endif
 
 {{-- Menu Pembimbingan Dosen TI --}}
-@if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Teknik Industri')
+@if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Teknik Industri' || auth()->user()->program_studi == 'Program Profesi Insinyur')
     <li class="nav-section">
         <span class="sidebar-mini-icon">
             <i class="fa fa-ellipsis-h"></i>
@@ -120,7 +120,7 @@
 @endif
 
 {{-- Menu Pembimbingan Dosen PWK --}}
-@if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Perencanaan Wilayah dan Kota')
+@if (auth()->user()->level == 2 && auth()->user()->program_studi == 'Perencanaan Wilayah dan Kota' || auth()->user()->program_studi == 'Magister Perencanaan Wilayah dan Kota')
     <li class="nav-section">
         <span class="sidebar-mini-icon">
             <i class="fa fa-ellipsis-h"></i>

@@ -15,7 +15,7 @@
             <div class="card-body">
                 <div class="d-flex">
                     <div class="avatar avatar-xl">
-                        <img src="{{ asset('/user/foto/' . $dataSidang->mahasiswa->foto) }}" alt="..." class="avatar-img rounded-circle" />
+                        <img src="{{ asset('storage/' . $dataSidang->mahasiswa->foto) }}" alt="..." class="avatar-img rounded-circle" />
                     </div>
                     <div class="info-post ms-2">
                         <p class="username">{{ $dataSidang->mahasiswa->nama }}</p>
@@ -77,48 +77,48 @@
                     <tbody>
                         <tr>
                             <td>1</td>
-                            <td><a href="{{ url('/mahasiswa/seminar', $dataSeminar->syarat_1) }}" target="_blank">Formulir pendaftaran Seminar terisi</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSeminar->syarat_1) }}" target="_blank">Formulir pendaftaran Seminar terisi</a></td>
 
                         </tr>
                         <tr>
                             <td>2</td>
-                            <td><a href="{{ url('/mahasiswa/seminar', $dataSeminar->syarat_2) }}" target="_blank">Copy Berita Acara Pembimbingan / Kartu Bimbingan</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSeminar->syarat_2) }}" target="_blank">Copy Berita Acara Pembimbingan / Kartu Bimbingan</a></td>
 
                         </tr>
                         <tr>
                             <td>3</td>
-                            <td><a href="{{ url('/mahasiswa/seminar', $dataSeminar->syarat_3) }}" target="_blank">Persetujuan Seminar dari Dosen Pembimbing</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSeminar->syarat_3) }}" target="_blank">Persetujuan Seminar dari Dosen Pembimbing</a></td>
 
                         </tr>
                         <tr>
                             <td>4</td>
-                            <td><a href="{{ url('/mahasiswa/seminar', $dataSeminar->syarat_4) }}" target="_blank">Fotocopy Kwitansi Pembayaran Seminar dan Bimbingan Tugas Akhir</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSeminar->syarat_4) }}" target="_blank">Fotocopy Kwitansi Pembayaran Seminar dan Bimbingan Tugas Akhir</a></td>
 
                         </tr>
                         <tr>
                             <td>5</td>
-                            <td><a href="{{ url('/mahasiswa/seminar', $dataSeminar->syarat_5) }}" target="_blank">Transkrip Nilai terakhir yang sudah lulus MK Semester 1-6 dan KP</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSeminar->syarat_5) }}" target="_blank">Transkrip Nilai terakhir yang sudah lulus MK Semester 1-6 dan KP</a></td>
 
                         </tr>
                         <tr>
                             <td>6</td>
-                            <td><a href="{{ url('/mahasiswa/seminar', $dataSeminar->syarat_6) }}" target="_blank">Form Bebas Tunggakan / Pinjaman</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSeminar->syarat_6) }}" target="_blank">Form Bebas Tunggakan / Pinjaman</a></td>
 
                         </tr>
                         <tr>
                             <td>7</td>
-                            <td><a href="{{ url('/mahasiswa/seminar', $dataSeminar->syarat_7) }}" target="_blank">Print out bukti pengecekan Plagiarisme <= 25%</a>
+                            <td><a href="{{ asset('storage/' . $dataSeminar->syarat_7) }}" target="_blank">Print out bukti pengecekan Plagiarisme <= 25%</a>
                             </td>
 
                         </tr>
                         <tr>
                             <td>8</td>
-                            <td><a href="{{ url('/mahasiswa/seminar', $dataSeminar->syarat_8) }}" target="_blank">Bukti Monitoring Hafalan</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSeminar->syarat_8) }}" target="_blank">Bukti Monitoring Hafalan</a></td>
 
                         </tr>
                         <tr>
                             <td>9</td>
-                            <td><a href="{{ url('/mahasiswa/seminar', $dataSeminar->syarat_9) }}" target="_blank">Bukti Penyerahan Draft</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSeminar->syarat_9) }}" target="_blank">Softcopy Draft TA</a></td>
 
                         </tr>
                     </tbody>
@@ -142,90 +142,90 @@
                     <tbody>
                         <tr>
                             <td>1</td>
-                            <td><a href="{{ url('/mahasiswa/sidang', $dataSidang->syarat_1) }}" target="_blank">Fotocopy Kwitansi Bimbingan TA</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSidang->syarat_1) }}" target="_blank">Fotocopy Kwitansi Bimbingan TA</a></td>
 
                         </tr>
                         <tr>
                             <td>2</td>
-                            <td><a href="{{ url('/mahasiswa/sidang', $dataSidang->syarat_2) }}" target="_blank">Fotocopy Kwitansi Sidang TA</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSidang->syarat_2) }}" target="_blank">Fotocopy Kwitansi Sidang TA</a></td>
 
                         </tr>
                         <tr>
                             <td>3</td>
-                            <td><a href="{{ url('/mahasiswa/sidang', $dataSidang->syarat_3) }}" target="_blank">Fotocopy Kwitansi Seminar TA</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSidang->syarat_3) }}" target="_blank">Fotocopy Kwitansi Seminar TA</a></td>
 
                         </tr>
                         <tr>
                             <td>4</td>
-                            <td><a href="{{ url('/mahasiswa/sidang', $dataSidang->syarat_4) }}" target="_blank">Fotocopy Sertifikat Pesantren Calon Sarjana</a>
+                            <td><a href="{{ asset('storage/' . $dataSidang->syarat_4) }}" target="_blank">Fotocopy Sertifikat Pesantren Calon Sarjana</a>
                             </td>
 
                         </tr>
                         <tr>
                             <td>5</td>
-                            <td><a href="{{ url('/mahasiswa/sidang', $dataSidang->syarat_5) }}" target="_blank">Formulir Rencana Studi (FRS)</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSidang->syarat_5) }}" target="_blank">Formulir Rencana Studi (FRS)</a></td>
 
                         </tr>
                         <tr>
                             <td>6</td>
-                            <td><a href="{{ url('/mahasiswa/sidang', $dataSidang->syarat_6) }}" target="_blank">Bukti Penyerahan Draft TA (4 Eksemplar)</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSidang->syarat_6) }}" target="_blank">Softcopy Draft TA</a></td>
 
                         </tr>
                         <tr>
                             <td>7</td>
-                            <td><a href="{{ url('/mahasiswa/sidang', $dataSidang->syarat_7) }}" target="_blank">Bukti Bebas Perpustakaan Pusat UNISBA</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSidang->syarat_7) }}" target="_blank">Bukti Bebas Perpustakaan Pusat UNISBA</a></td>
 
                         </tr>
                         <tr>
                             <td>8</td>
-                            <td><a href="{{ url('/mahasiswa/sidang', $dataSidang->syarat_8) }}" target="_blank">Bukti Bebas Perpustakaan TI</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSidang->syarat_8) }}" target="_blank">Bukti Bebas Perpustakaan TI</a></td>
 
                         </tr>
                         <tr>
                             <td>9</td>
-                            <td><a href="{{ url('/mahasiswa/sidang', $dataSidang->syarat_9) }}" target="_blank">Transkrip Nilai Terakhir</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSidang->syarat_9) }}" target="_blank">Transkrip Nilai Terakhir</a></td>
 
                         </tr>
                         <tr>
                             <td>10</td>
-                            <td><a href="{{ url('/mahasiswa/sidang', $dataSidang->syarat_10) }}" target="_blank">Persetujuan Sidang dari Dosen Pembimbing (Kartu Bimbingan Asli)</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSidang->syarat_10) }}" target="_blank">Persetujuan Sidang dari Dosen Pembimbing (Kartu Bimbingan Asli)</a></td>
 
                         </tr>
                         <tr>
                             <td>11</td>
-                            <td><a href="{{ url('/mahasiswa/sidang', $dataSidang->syarat_11) }}" target="_blank">Fotocopy Sertifikat TOEFL</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSidang->syarat_11) }}" target="_blank">Fotocopy Sertifikat TOEFL</a></td>
 
                         </tr>
                         <tr>
                             <td>12</td>
-                            <td><a href="{{ url('/mahasiswa/sidang', $dataSidang->syarat_12) }}" target="_blank">Foto Berwarna</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSidang->syarat_12) }}" target="_blank">Foto Berwarna</a></td>
 
                         </tr>
                         <tr>
                             <td>13</td>
-                            <td><a href="{{ url('/mahasiswa/sidang', $dataSidang->syarat_13) }}" target="_blank">Bebas Pinjaman / Tunggakan</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSidang->syarat_13) }}" target="_blank">Bebas Pinjaman / Tunggakan</a></td>
 
                         </tr>
                         <tr>
                             <td>14</td>
-                            <td><a href="{{ url('/mahasiswa/sidang', $dataSidang->syarat_14) }}" target="_blank">Menghadiri Seminar / Sidang minimal 3 kali</a>
+                            <td><a href="{{ asset('storage/' . $dataSidang->syarat_14) }}" target="_blank">Menghadiri Seminar / Sidang minimal 3 kali</a>
                             </td>
 
                         </tr>
                         <tr>
                             <td>15</td>
-                            <td><a href="{{ url('/mahasiswa/sidang', $dataSidang->syarat_15) }}" target="_blank">Form Hafalan Surat Al-Quran (minimal 25 surat)</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSidang->syarat_15) }}" target="_blank">Form Hafalan Surat Al-Quran (minimal 25 surat)</a></td>
 
                         </tr>
                         <tr>
                             <td>16</td>
-                            <td><a href="{{ url('/mahasiswa/sidang', $dataSidang->syarat_16) }}" target="_blank">Print out bukti pengecekan Plagiarisme < 25% (sebelum sidang)</a>
+                            <td><a href="{{ asset('storage/' . $dataSidang->syarat_16) }}" target="_blank">Print out bukti pengecekan Plagiarisme < 25% (sebelum sidang)</a>
                             </td>
 
                         </tr>
                         <tr>
                             <td>17</td>
-                            <td><a href="{{ url('/mahasiswa/sidang', $dataSidang->syarat_17) }}" target="_blank">Sertifikat SKKFT yang ditandatangani oleh Wadek III</a>
+                            <td><a href="{{ asset('storage/' . $dataSidang->syarat_17) }}" target="_blank">Sertifikat SKKFT yang ditandatangani oleh Wadek III</a>
                             </td>
 
                         </tr>

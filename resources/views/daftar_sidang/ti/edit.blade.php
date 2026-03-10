@@ -117,7 +117,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_1) }}">Fotocopy Kwitansi Bimbingan TA (dari awal pengambilan)</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_1) }}">Fotocopy Kwitansi Bimbingan TA (dari awal pengambilan)</a></td>
                                 <td>
                                     @if ($data->status_1 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -132,7 +132,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_2) }}">Fotocopy Kwitansi Sidang TA</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_2) }}">Fotocopy Kwitansi Sidang TA</a></td>
                                 <td>
                                     @if ($data->status_2 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -147,7 +147,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_3) }}">Fotocopy Kwitansi Seminar TA</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_3) }}">Fotocopy Kwitansi Seminar TA</a></td>
                                 <td>
                                     @if ($data->status_3 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -162,7 +162,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_4) }}">Fotocopy Sertifikat Pesantren Calon Sarjana (paling lama 1 Tahun setelah terbit)</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_4) }}">Fotocopy Sertifikat Pesantren Calon Sarjana (paling lama 1 Tahun setelah terbit)</a></td>
                                 <td>
                                     @if ($data->status_4 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -177,7 +177,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_5) }}">Formulir Rencana Studi (FRS)</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_5) }}">Formulir Rencana Studi (FRS)</a></td>
                                 <td>
                                     @if ($data->status_5 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -192,7 +192,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_6) }}">Bukti Penyerahan Draft TA (4 Eksemplar) Memakai Mika Biru</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_6) }}">Softcopy Draft TA</a></td>
                                 <td>
                                     @if ($data->status_6 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -207,7 +207,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_7) }}">Bukti Bebas Perpustakaan Pusat UNISBA</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_7) }}">Bukti Bebas Perpustakaan Pusat UNISBA</a></td>
                                 <td>
                                     @if ($data->status_7 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -222,7 +222,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_8) }}">Bukti Bebas Perpustakaan TI</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_8) }}">Bukti Bebas Perpustakaan TI</a></td>
                                 <td>
                                     @if ($data->status_8 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -237,7 +237,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_9) }}">Transkrip Nilai Terakhir</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_9) }}">Transkrip Nilai Terakhir</a></td>
                                 <td>
                                     @if ($data->status_9 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -252,7 +252,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_10) }}">Persetujuan Sidang dari Dosen Pembimbing (Kartu Bimbingan Asli)</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_10) }}">Persetujuan Sidang dari Dosen Pembimbing (Kartu Bimbingan Asli)</a></td>
                                 <td>
                                     @if ($data->status_10 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -267,7 +267,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_11) }}">Fotocopy Sertifikat TOEFL (paling lama 1 Tahun setelah terbit)</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_11) }}">Fotocopy Sertifikat TOEFL (paling lama 1 Tahun setelah terbit)</a></td>
                                 <td>
                                     @if ($data->status_11 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -282,7 +282,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_12) }}">Foto Berwarna / Latar Belakang Biru berukuran 3x4 = 4 buah</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_12) }}">Foto Berwarna / Latar Belakang Biru berukuran 3x4 = 4 buah</a></td>
                                 <td>
                                     @if ($data->status_12 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -297,7 +297,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_13) }}">Bukti Bebas Pinjaman / Tunggakan</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_13) }}">Bukti Bebas Pinjaman / Tunggakan</a></td>
                                 <td>
                                     @if ($data->status_13 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -312,7 +312,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_14) }}">Menghadiri Seminar / Sidang minimal 3 kali</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_14) }}">Menghadiri Seminar / Sidang minimal 3 kali</a></td>
                                 <td>
                                     @if ($data->status_14 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -327,7 +327,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_15) }}">Form Hafalan Surat Al-Quran (minimal 25 surat)</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_15) }}">Form Hafalan Surat Al-Quran (minimal 25 surat)</a></td>
                                 <td>
                                     @if ($data->status_15 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -342,7 +342,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_16) }}">Print out bukti pengecekan Plagiarisme < 25% (sebelum sidang)</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_16) }}">Print out bukti pengecekan Plagiarisme < 25% (sebelum sidang)</a></td>
                                 <td>
                                     @if ($data->status_16 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -357,7 +357,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/sidang', $data->syarat_17) }}">Sertifikat SKKFT yang ditandatangani oleh Wadek III</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_17) }}">Sertifikat SKKFT yang ditandatangani oleh Wadek III</a></td>
                                 <td>
                                     @if ($data->status_17 == 1)
                                     <span class="badge badge-success">Diterima</span>

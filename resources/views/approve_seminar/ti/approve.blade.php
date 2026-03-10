@@ -19,7 +19,7 @@
                 <div class="card-body">
                     <div class="d-flex">
                         <div class="avatar avatar-xl">
-                            <img src="{{ asset('/user/foto/' . $data->mahasiswa->foto) }}" alt="..." class="avatar-img rounded-circle" />
+                            <img src="{{ asset('storage/' . $data->mahasiswa->foto) }}" alt="..." class="avatar-img rounded-circle" />
                         </div>
                         <div class="info-post ms-2">
                             <p class="username">{{ $data->mahasiswa->nama }}</p>
@@ -76,7 +76,7 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_1) }}" target="_blank">Formulir pendaftaran Seminar terisi</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_1) }}" target="_blank">Formulir pendaftaran Seminar terisi</a></td>
                                 <td>
                                     @if ($data->status_1 == 2)
                                     <input type="radio" name="status_1" value="2" class="form-check-input" checked="checked" readonly>
@@ -97,7 +97,7 @@
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_2) }}" target="_blank">Copy Berita Acara Pembimbingan / Kartu Bimbingan</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_2) }}" target="_blank">Copy Berita Acara Pembimbingan / Kartu Bimbingan</a></td>
                                 <td>
                                     @if ($data->status_2 == 2)
                                     <input type="radio" name="status_2" value="2" class="form-check-input" checked="checked" readonly>
@@ -118,7 +118,7 @@
                             </tr>
                             <tr>
                                 <td>3</td>
-                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_3) }}" target="_blank">Persetujuan Seminar dari Dosen Pembimbing</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_3) }}" target="_blank">Persetujuan Seminar dari Dosen Pembimbing</a></td>
                                 <td>
                                     @if ($data->status_3 == 2)
                                     <input type="radio" name="status_3" value="2" class="form-check-input" checked="checked" readonly>
@@ -139,7 +139,7 @@
                             </tr>
                             <tr>
                                 <td>4</td>
-                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_4) }}" target="_blank">Fotocopy Kwitansi Pembayaran Seminar dan Bimbingan Tugas Akhir</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_4) }}" target="_blank">Fotocopy Kwitansi Pembayaran Seminar dan Bimbingan Tugas Akhir</a></td>
                                 <td>
                                     @if ($data->status_4 == 2)
                                     <input type="radio" name="status_4" value="2" class="form-check-input" checked="checked" readonly>
@@ -160,7 +160,7 @@
                             </tr>
                             <tr>
                                 <td>5</td>
-                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_5) }}" target="_blank">Transkrip Nilai terakhir yang sudah lulus MK Semester 1-6 dan KP</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_5) }}" target="_blank">Transkrip Nilai terakhir yang sudah lulus MK Semester 1-6 dan KP</a></td>
                                 <td>
                                     @if ($data->status_5 == 2)
                                     <input type="radio" name="status_5" value="2" class="form-check-input" checked="checked" readonly>
@@ -181,7 +181,7 @@
                             </tr>
                             <tr>
                                 <td>6</td>
-                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_6) }}" target="_blank">Form Bebas Tunggakan / Pinjaman</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_6) }}" target="_blank">Form Bebas Tunggakan / Pinjaman</a></td>
                                 <td>
                                     @if ($data->status_6 == 2)
                                     <input type="radio" name="status_6" value="2" class="form-check-input" checked="checked" readonly>
@@ -202,7 +202,7 @@
                             </tr>
                             <tr>
                                 <td>7</td>
-                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_7) }}" target="_blank">Print out bukti pengecekan Plagiarisme <= 25%</a>
+                                <td><a href="{{ asset('storage/' . $data->syarat_7) }}" target="_blank">Print out bukti pengecekan Plagiarisme <= 25%</a>
                                 </td>
                                 <td>
                                     @if ($data->status_7 == 2)
@@ -224,7 +224,7 @@
                             </tr>
                             <tr>
                                 <td>8</td>
-                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_8) }}" target="_blank">Bukti Monitoring Hafalan</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_8) }}" target="_blank">Bukti Monitoring Hafalan</a></td>
                                 <td>
                                     @if ($data->status_8 == 2)
                                     <input type="radio" name="status_8" value="2" class="form-check-input" checked="checked" readonly>
@@ -245,7 +245,7 @@
                             </tr>
                             <tr>
                                 <td>9</td>
-                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_9) }}" target="_blank">Softcopy Draft</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_9) }}" target="_blank">Softcopy Draft</a></td>
                                 <td>
                                     @if ($data->status_9 == 2)
                                     <input type="radio" name="status_9" value="2" class="form-check-input" checked="checked" readonly>

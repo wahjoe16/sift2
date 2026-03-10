@@ -64,7 +64,7 @@
                             <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat5"></th> -->
                             <th>Formulir Rencana Studi (FRS)</th>
                             <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat6"></th> -->
-                            <th>Bukti Penyerahan Draft TA</th>
+                            <th>Softcopy Draft TA</th>
                             <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat7"></th> -->
                             <th>Bukti Bebas Perpustakaan Pusat UNISBA</th>
                             <!-- <th width="5%"><input type="checkbox" name="select_all_syarat" class="select_all_syarat8"></th> -->

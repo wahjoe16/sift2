@@ -15,7 +15,7 @@
             <div class="card-body">
                 <div class="d-flex">
                     <div class="avatar avatar-xl">
-                        <img src="{{ asset('/user/foto/' . $dataSidang->mahasiswa->foto) }}" alt="..." class="avatar-img rounded-circle" />
+                        <img src="{{ asset('storage/' . $dataSidang->mahasiswa->foto) }}" alt="..." class="avatar-img rounded-circle" />
                     </div>
                     <div class="info-post ms-2">
                         <p class="username">{{ $dataSidang->mahasiswa->nama }}</p>
@@ -71,49 +71,49 @@
                     <tbody>
                         @if ($dataSeminar->syarat_1 != '')
                         <tr>
-                            <td><a href="{{ url('/mahasiswa/seminar', $dataSeminar->syarat_1) }}" target="_blank">Lembar bimbingan skripsi</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSeminar->syarat_1) }}" target="_blank">Lembar bimbingan skripsi</a></td>
 
                         </tr>
 
                         @endif
                         @if ($dataSeminar->syarat_2 != '')
                         <tr>
-                            <td><a href="{{ url('/mahasiswa/seminar', $dataSeminar->syarat_2) }}" target="_blank">Sertifikat pesantren mahasiswa baru</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSeminar->syarat_2) }}" target="_blank">Sertifikat pesantren mahasiswa baru</a></td>
 
                         </tr>
 
                         @endif
                         @if ($dataSeminar->syarat_3 != '')
                         <tr>
-                            <td><a href="{{ url('/mahasiswa/seminar', $dataSeminar->syarat_3) }}" target="_blank">Sertifikat pesantren calon sarjana</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSeminar->syarat_3) }}" target="_blank">Sertifikat pesantren calon sarjana</a></td>
 
                         </tr>
 
                         @endif
                         @if ($dataSeminar->syarat_4 != '')
                         <tr>
-                            <td><a href="{{ url('/mahasiswa/seminar', $dataSeminar->syarat_4) }}" target="_blank">Transkrip nilai</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSeminar->syarat_4) }}" target="_blank">Transkrip nilai</a></td>
 
                         </tr>
 
                         @endif
                         @if ($dataSeminar->syarat_5 != '')
                         <tr>
-                            <td><a href="{{ url('/mahasiswa/seminar', $dataSeminar->syarat_5) }}" target="_blank">Sertifikat TOEFL</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSeminar->syarat_5) }}" target="_blank">Sertifikat TOEFL</a></td>
 
                         </tr>
 
                         @endif
                         @if ($dataSeminar->syarat_6 != '')
                         <tr>
-                            <td><a href="{{ url('/mahasiswa/seminar', $dataSeminar->syarat_6) }}" target="_blank">Bukti bebas pinjaman perpustakaan</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSeminar->syarat_6) }}" target="_blank">Bukti bebas pinjaman perpustakaan</a></td>
 
                         </tr>
 
                         @endif
                         @if ($dataSeminar->syarat_7 != '')
                         <tr>
-                            <td><a href="{{ url('/mahasiswa/seminar', $dataSeminar->syarat_7) }}" target="_blank">Sertifikat SKKFT</a>
+                            <td><a href="{{ asset('storage/' . $dataSeminar->syarat_7) }}" target="_blank">Sertifikat SKKFT</a>
                             </td>
 
                         </tr>
@@ -121,21 +121,21 @@
                         @endif
                         @if ($dataSeminar->syarat_8 != '')
                         <tr>
-                            <td><a href="{{ url('/mahasiswa/seminar', $dataSeminar->syarat_8) }}" target="_blank">Bukti KRS (pengambilan MK. Skripsi)</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSeminar->syarat_8) }}" target="_blank">Bukti KRS (pengambilan MK. Skripsi)</a></td>
 
                         </tr>
 
                         @endif
                         @if ($dataSeminar->syarat_9 != '')
                         <tr>
-                            <td><a href="{{ url('/mahasiswa/seminar', $dataSeminar->syarat_9) }}" target="_blank">Bukti pembayaran DPP Mk. Skripsi</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSeminar->syarat_9) }}" target="_blank">Bukti pembayaran DPP Mk. Skripsi</a></td>
 
                         </tr>
 
                         @endif
                         @if ($dataSeminar->syarat_10 != '')
                         <tr>
-                            <td><a href="{{ url('/mahasiswa/seminar', $dataSeminar->syarat_10) }}" target="_blank">Bukti pembayaran sidang pembahasan</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSeminar->syarat_10) }}" target="_blank">Bukti pembayaran sidang pembahasan</a></td>
 
                         </tr>
 
@@ -161,32 +161,32 @@
                     <tbody>
                         <tr>
                             <td>1</td>
-                            <td><a href="{{ url('/mahasiswa/sidang', $dataSidang->syarat_1) }}" target="_blank">Sertifikat pesantren calon sarjana</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSidang->syarat_1) }}" target="_blank">Sertifikat pesantren calon sarjana</a></td>
 
                         </tr>
                         <tr>
                             <td>2</td>
-                            <td><a href="{{ url('/mahasiswa/sidang', $dataSidang->syarat_2) }}" target="_blank">Transkrip nilai</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSidang->syarat_2) }}" target="_blank">Transkrip nilai</a></td>
 
                         </tr>
                         <tr>
                             <td>3</td>
-                            <td><a href="{{ url('/mahasiswa/sidang', $dataSidang->syarat_3) }}" target="_blank">Sertifikat TOEFL</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSidang->syarat_3) }}" target="_blank">Sertifikat TOEFL</a></td>
 
                         </tr>
                         <tr>
                             <td>4</td>
-                            <td><a href="{{ url('/mahasiswa/sidang', $dataSidang->syarat_4) }}" target="_blank">Sertifikat SKKFT</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSidang->syarat_4) }}" target="_blank">Sertifikat SKKFT</a></td>
 
                         </tr>
                         <tr>
                             <td>5</td>
-                            <td><a href="{{ url('/mahasiswa/sidang', $dataSidang->syarat_5) }}" target="_blank">Pemeriksaan turnitin</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSidang->syarat_5) }}" target="_blank">Pemeriksaan turnitin</a></td>
 
                         </tr>
                         <tr>
                             <td>6</td>
-                            <td><a href="{{ url('/mahasiswa/sidang', $dataSidang->syarat_6) }}" target="_blank">Bukti pembayaran sidang terbuka</a></td>
+                            <td><a href="{{ asset('storage/' . $dataSidang->syarat_6) }}" target="_blank">Bukti pembayaran sidang terbuka</a></td>
 
                         </tr>
                     </tbody>

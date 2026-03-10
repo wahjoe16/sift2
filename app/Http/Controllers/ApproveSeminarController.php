@@ -108,7 +108,6 @@ class ApproveSeminarController extends Controller
             'status_11',
             'status_12',
             'status_13',
-            'status_14',
         ]);
 
         if ($request->isMethod('POST')) {
@@ -126,7 +125,6 @@ class ApproveSeminarController extends Controller
                 'status_11' => 'required',
                 'status_12' => 'required',
                 'status_13' => 'required',
-                'status_14' => 'required',
                 'keterangan_1' => 'required_if:status_1,2',
                 'keterangan_2' => 'required_if:status_2,2',
                 'keterangan_3' => 'required_if:status_3,2',
@@ -140,7 +138,6 @@ class ApproveSeminarController extends Controller
                 'keterangan_11' => 'required_if:status_11,2',
                 'keterangan_12' => 'required_if:status_12,2',
                 'keterangan_13' => 'required_if:status_13,2',
-                'keterangan_14' => 'required_if:status_14,2',
             ], [
                 'status_1.required' => 'Status approval harus dipilih',
                 'status_2.required' => 'Status approval harus dipilih',
@@ -155,7 +152,6 @@ class ApproveSeminarController extends Controller
                 'status_11.required' => 'Status approval harus dipilih',
                 'status_12.required' => 'Status approval harus dipilih',
                 'status_13.required' => 'Status approval harus dipilih',
-                'status_14.required' => 'Status approval harus dipilih',
                 'keterangan_1.required_if' => 'Keterangan harus diisi',
                 'keterangan_2.required_if' => 'Keterangan harus diisi',
                 'keterangan_3.required_if' => 'Keterangan harus diisi',
@@ -169,7 +165,6 @@ class ApproveSeminarController extends Controller
                 'keterangan_11.required_if' => 'Keterangan harus diisi',
                 'keterangan_12.required_if' => 'Keterangan harus diisi',
                 'keterangan_13.required_if' => 'Keterangan harus diisi',
-                'keterangan_14.required_if' => 'Keterangan harus diisi',
             ]);
 
             $data->fill($request->input());

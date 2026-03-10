@@ -15,7 +15,7 @@
             <div class="card-body">
                 <div class="d-flex">
                     <div class="avatar avatar-xl">
-                        <img src="{{ asset('/user/foto/' . $data->mahasiswa->foto) }}" alt="..." class="avatar-img rounded-circle" />
+                        <img src="{{ asset('storage/' . $data->mahasiswa->foto) }}" alt="..." class="avatar-img rounded-circle" />
                     </div>
                     <div class="info-post ms-2">
                         <p class="username">{{ $data->mahasiswa->nama }}</p>
@@ -83,72 +83,67 @@
                     <tbody>
                         <tr>
                             <td>1</td>
-                            <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_1) }}" target="_blank">Bukti pembayaran Kolokium Skripsi</a></td>
+                            <td><a href="{{ asset('storage/' . $data->syarat_1) }}" target="_blank">Bukti pembayaran Kolokium Skripsi</a></td>
 
                         </tr>
                         <tr>
                             <td>2</td>
-                            <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_2) }}" target="_blank">Sertifikat TOEFL</a></td>
+                            <td><a href="{{ asset('storage/' . $data->syarat_2) }}" target="_blank">Sertifikat TOEFL</a></td>
 
                         </tr>
                         <tr>
                             <td>3</td>
-                            <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_3) }}" target="_blank">Formulir nilai bimbingan skripsi</a></td>
+                            <td><a href="{{ asset('storage/' . $data->syarat_3) }}" target="_blank">Formulir nilai bimbingan skripsi</a></td>
 
                         </tr>
                         <tr>
                             <td>4</td>
-                            <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_4) }}" target="_blank">Formulir kemajuan bimbingan skripsi</a></td>
+                            <td><a href="{{ asset('storage/' . $data->syarat_4) }}" target="_blank">Formulir kemajuan bimbingan skripsi</a></td>
 
                         </tr>
                         <tr>
                             <td>5</td>
-                            <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_5) }}" target="_blank">Formulir persetujuan kolokium skripsi</a></td>
+                            <td><a href="{{ asset('storage/' . $data->syarat_5) }}" target="_blank">Formulir persetujuan kolokium skripsi</a></td>
 
                         </tr>
                         <tr>
                             <td>6</td>
-                            <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_6) }}" target="_blank">Formulir kesediaan menghadiri kolokium skripsi</a></td>
+                            <td><a href="{{ asset('storage/' . $data->syarat_6) }}" target="_blank">Formulir kesediaan menghadiri kolokium skripsi</a></td>
 
                         </tr>
                         <tr>
                             <td>7</td>
-                            <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_7) }}" target="_blank">Pas foto ukuran 4 x 6 sebanyak 2 lembar</a></td>
+                            <td><a href="{{ asset('storage/' . $data->syarat_7) }}" target="_blank">Pas foto ukuran 4 x 6 sebanyak 2 lembar</a></td>
 
                         </tr>
                         <tr>
                             <td>8</td>
-                            <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_8) }}" target="_blank">Kartu Tanda Mahasiswa</a></td>
+                            <td><a href="{{ asset('storage/' . $data->syarat_8) }}" target="_blank">Kartu Tanda Mahasiswa</a></td>
 
                         </tr>
                         <tr>
                             <td>9</td>
-                            <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_9) }}" target="_blank">Bukti pembayaran kuliah</a></td>
+                            <td><a href="{{ asset('storage/' . $data->syarat_9) }}" target="_blank">Bukti pembayaran kuliah</a></td>
 
                         </tr>
                         <tr>
                             <td>10</td>
-                            <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_10) }}" target="_blank">Bukti perwalian</a></td>
+                            <td><a href="{{ asset('storage/' . $data->syarat_10) }}" target="_blank">Bukti perwalian</a></td>
 
                         </tr>
                         <tr>
                             <td>11</td>
-                            <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_11) }}" target="_blank">Bukti bebas pinjaman perpustakaan</a></td>
+                            <td><a href="{{ asset('storage/' . $data->syarat_11) }}" target="_blank">Bukti bebas pinjaman perpustakaan</a></td>
 
                         </tr>
                         <tr>
                             <td>12</td>
-                            <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_12) }}" target="_blank">Draft skripsi (PDF)</a></td>
+                            <td><a href="{{ asset('storage/' . $data->syarat_12) }}" target="_blank">Draft skripsi (PDF)</a></td>
 
                         </tr>
                         <tr>
                             <td>13</td>
-                            <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_13) }}" target="_blank">Draft skripsi (DOCX)</a></td>
-
-                        </tr>
-                        <tr>
-                            <td>14</td>
-                            <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_14) }}" target="_blank">Transkrip Nilai</a></td>
+                            <td><a href="{{ asset('storage/' . $data->syarat_13) }}" target="_blank">Transkrip Nilai</a></td>
 
                         </tr>
                     </tbody>

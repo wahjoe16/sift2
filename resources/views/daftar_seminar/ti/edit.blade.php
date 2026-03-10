@@ -99,7 +99,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_1) }}">Formulir pendaftaran Seminar terisi</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_1) }}">Formulir pendaftaran Seminar terisi</a></td>
                                 <td>
                                     @if ($data->status_1 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -114,7 +114,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_2) }}">Copy Berita Acara Pembimbingan / Kartu Bimbingan</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_2) }}">Copy Berita Acara Pembimbingan / Kartu Bimbingan</a></td>
                                 <td>
                                     @if ($data->status_2 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -129,7 +129,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_3) }}">Persetujuan Seminar dari Dosen Pembimbing</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_3) }}">Persetujuan Seminar dari Dosen Pembimbing</a></td>
                                 <td>
                                     @if ($data->status_3 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -144,7 +144,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_4) }}">Fotocopy Kwitansi Pembayaran Seminar dan Bimbingan Tugas Akhir</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_4) }}">Fotocopy Kwitansi Pembayaran Seminar dan Bimbingan Tugas Akhir</a></td>
                                 <td>
                                     @if ($data->status_4 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -159,7 +159,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_5) }}">Transkrip Nilai terakhir yang sudah lulus MK Semester 1-6 dan KP</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_5) }}">Transkrip Nilai terakhir yang sudah lulus MK Semester 1-6 dan KP</a></td>
                                 <td>
                                     @if ($data->status_5 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -174,7 +174,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_6) }}">Form Bebas Tunggakan / Pinjaman</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_6) }}">Form Bebas Tunggakan / Pinjaman</a></td>
                                 <td>
                                     @if ($data->status_6 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -189,7 +189,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_7) }}">Print out bukti pengecekan Plagiarisme <= 25%</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_7) }}">Print out bukti pengecekan Plagiarisme <= 25%</a></td>
                                 <td>
                                     @if ($data->status_7 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -204,7 +204,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_8) }}">Bukti Monitoring Hafalan</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_8) }}">Bukti Monitoring Hafalan</a></td>
                                 <td>
                                     @if ($data->status_8 == 1)
                                     <span class="badge badge-success">Diterima</span>
@@ -219,7 +219,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ url('/mahasiswa/seminar', $data->syarat_9) }}">Softcopy Draft</a></td>
+                                <td><a href="{{ asset('storage/' . $data->syarat_9) }}">Softcopy Draft</a></td>
                                 <td>
                                     @if ($data->status_9 == 1)
                                     <span class="badge badge-success">Diterima</span>
